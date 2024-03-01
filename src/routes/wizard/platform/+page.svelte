@@ -1,7 +1,7 @@
 <script>
-    import EmulatorCard from "../../../components/emulatorCard.svelte";
+    import EmulatorCard from "$lib/components/emulatorCard.svelte";
     import img from '$lib/floppy.jpg';
-    import ProgressStepBar from "../../../components/progressStepBar.svelte";
+    import ProgressStepBar from "$lib/components/progressStepBar.svelte";
 
     import { currentStep, unlockedStep, steps, configSteps } from "$lib/steps";
     import { onMount } from "svelte";

@@ -1,5 +1,5 @@
 <script>
-    import ProgressStepBar from "../../../components/progressStepBar.svelte";
+    import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { currentStep, unlockedStep, steps, configSteps } from "$lib/steps";
     import { onMount } from "svelte";
 

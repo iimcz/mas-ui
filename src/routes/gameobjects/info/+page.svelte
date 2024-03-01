@@ -9,8 +9,8 @@
 <div class="container h-full mx-auto flex justify-center">
     <div class="flex w-5/6 space-y-10 flex-col m-4">
         <h1 class="text-3xl mt-4">Metadata herního objektu</h1>
-        <div class="flex gap-2">
-            <div class="card flex flex-1 p-2 flex-col">
+        <div class="grid grid-cols-[2fr_1fr] gap-2">
+            <div class="card flex p-2 flex-col">
                 <span class="text-xl font-bold p-4">Popis</span>
                 <TabGroup>
                     <Tab bind:group={tabSet} name="tab1" value={0}>
@@ -44,7 +44,7 @@
                     </svelte:fragment>
                 </TabGroup>
             </div>
-            <div class="flex flex-col flex-1 gap-2">
+            <div class="flex flex-col gap-2">
                 <div class="card flex flex-col p-2">
                     <div>
                         <span class="text-xl font-bold p-4">Zdroje dat z internetu</span>
@@ -99,45 +99,6 @@
                                 <Fa icon={faEye}/>
                             </button>
                         </div>
-                    </div>
-                </div>
-                <div class="h-full flex flex-col">
-                    <div class="flex-1"></div>
-                    <div class="flex justify-end gap-2">
-                        <a class="btn variant-filled-secondary" href="/gameobjects/artefacts">
-                            <Fa icon={faSave}/>
-                            <span>Artefakty</span>
-                        </a>
-                        <a class="btn variant-filled-primary" href="/artefacts/add">
-                            <Fa icon={faPlus}/>
-                            <span>Přidat artefakt</span>
-                        </a>
-                        <a class="btn variant-filled-secondary" href="/gameobjects/recordings">
-                            <Fa icon={faRecordVinyl}/>
-                            <span>Záznamy</span>
-                        </a>
-                        <a class="btn variant-filled-secondary" href="/gameobjects/profiles">
-                            <Fa icon={faPerson}/>
-                            <span>Profily</span>
-                        </a>
-                    </div>
-                    <div class="flex justify-end gap-2">
-                        <a class="btn variant-filled-secondary" href="/gameobjects/configurations">
-                            <Fa icon={faGear}/>
-                            <span>Konfigurace</span>
-                        </a>
-                        <a class="btn variant-filled-primary" href="/wizard/platform">
-                            <Fa icon={faPlus}/>
-                            <span>Vytvořit konfiguraci</span>
-                        </a>
-                        <a class="btn variant-filled-primary" href="/wizard/configuration">
-                            <Fa icon={faCopy}/>
-                            <span>Duplikovat defaultní konfiguraci</span>
-                        </a>
-                        <a class="btn variant-filled-primary" href="/emulator">
-                            <Fa icon={faPlay}/>
-                            <span>Spustit defaultní konfiguraci</span>
-                        </a>
                     </div>
                 </div>
             </div>

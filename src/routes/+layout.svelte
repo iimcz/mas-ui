@@ -8,10 +8,8 @@
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
-    import Sidebar from '../components/sidebar.svelte';
+    import Sidebar from '$lib/components/sidebar/sidebar.svelte';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
-
-	let currentTile = 0;
 </script>
 
 <!-- App Shell -->
@@ -19,7 +17,7 @@
 <AppShell>
 	<svelte:fragment slot="header">
 		<!-- App Bar -->
-		<AppBar>
+		<AppBar shadow="shadow-2xl">
 			<svelte:fragment slot="lead">
 				<strong class="text-xl uppercase mr-4">Akviziční stanice</strong>
 			</svelte:fragment>

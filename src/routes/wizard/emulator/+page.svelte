@@ -1,10 +1,10 @@
 <script>
-    import ProgressStepBar from "../../../components/progressStepBar.svelte";
+    import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { currentStep, unlockedStep } from "$lib/steps";
     import img from '$lib/mesen.png';
 
     import { onMount } from "svelte";
-    import MediaCard from "../../../components/mediaCard.svelte";
+    import MediaCard from "$lib/components/mediaCard.svelte";
 
     let desc = "Mesen is a multi-system emulator for Windows and Linux. It supports NES, SNES, Game Boy (Color) and PC Engine games.";
     let target = "/wizard/configuration"

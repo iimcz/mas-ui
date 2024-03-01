@@ -16,7 +16,7 @@
     })
 
     import { currentStep, unlockedStep } from "$lib/steps";
-    import ProgressStepBar from "../../components/progressStepBar.svelte";
+    import ProgressStepBar from "$lib/components/progressStepBar.svelte";
 
     onMount(() => {
         $currentStep = 2;

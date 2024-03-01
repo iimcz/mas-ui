@@ -3,7 +3,7 @@
     import Fa from "svelte-fa";
 
     import { currentStep, unlockedStep } from "$lib/steps";
-    import ProgressStepBar from "../../../components/progressStepBar.svelte";
+    import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { onMount } from "svelte";
 
     onMount(() => {

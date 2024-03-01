@@ -8,7 +8,7 @@
     import { getModalStore } from '@skeletonlabs/skeleton';
     const modalStore = getModalStore();
 
-    import PlatformInfoModal from '../components/platformInfoModal.svelte';
+    import PlatformInfoModal from '$lib/components/platformInfoModal.svelte';
     /**
      * @type {import('@skeletonlabs/skeleton').ModalComponent}
      */

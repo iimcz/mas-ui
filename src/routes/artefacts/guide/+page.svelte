@@ -2,8 +2,13 @@
     import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
 
     import { currentStep, unlockedStep } from "$lib/steps";
-    import ProgressStepBar from "../../../components/progressStepBar.svelte";
+    import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { onMount } from "svelte";
+
+    /**
+     * @type {boolean[]}
+     */
+    let checkedSteps = []
 
     onMount(() => {
         $currentStep = 1;
@@ -18,12 +23,15 @@
         <div class="flex gap-2">
             <div class="card flex flex-1 p-2 flex-col">
                 <span class="text-xl font-bold p-4">Kroky</span>
-                <div class="px-4 grid step-grid gap-3">
+                <ol class="list px-4 space-y-2">
                     {#each Array(10).fill(1).map((x, y) => x + y) as v}
-                        <span class="text-right font-bold">{v}.</span>
-                        <span>Vložte disketu do jednotky dle obrázku 1</span>
+                        <li>
+                            <input class="checkbox" type="checkbox" bind:checked={checkedSteps[v]} />
+                            <span class:variant-soft-surface={!checkedSteps[v]} class:variant-soft-primary={checkedSteps[v]} class="badge-icon p-4">{v}</span>
+                            <span>Vložte disketu do jednotky dle obrázku 1</span>
+                        </li>
                     {/each}
-                </div>
+                </ol>
                 <a class="btn variant-filled mt-4" href="/log">Simulovat vložení disku</a>
             </div>
             <div class="flex flex-col flex-1 gap-2">
@@ -51,9 +59,3 @@
         </div>
     </div>
 </div>
-
-<style lang="postcss">
-    .step-grid {
-        grid-template-columns: 1fr 10fr;
-    }
-</style>

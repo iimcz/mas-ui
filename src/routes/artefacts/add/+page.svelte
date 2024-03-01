@@ -1,8 +1,8 @@
 <script>
-    import MediaCard from "../../../components/mediaCard.svelte";
+    import MediaCard from "$lib/components/mediaCard.svelte";
     import img from '$lib/floppy.jpg';
-    import UploadCard from "../../../components/uploadCard.svelte";
-    import ProgressStepBar from "../../../components/progressStepBar.svelte";
+    import UploadCard from "$lib/components/uploadCard.svelte";
+    import ProgressStepBar from "$lib/components/progressStepBar.svelte";
 
     import { currentStep, unlockedStep, steps, artefactSteps } from "$lib/steps";
     import { onMount } from "svelte";

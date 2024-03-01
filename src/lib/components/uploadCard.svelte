@@ -2,7 +2,7 @@
     import { getModalStore } from '@skeletonlabs/skeleton';
     const modalStore = getModalStore();
 
-    import UploadModal from '../components/uploadModal.svelte';
+    import UploadModal from '$lib/components/uploadModal.svelte';
     /**
      * @type {import('@skeletonlabs/skeleton').ModalComponent}
      */
