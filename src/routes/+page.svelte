@@ -10,10 +10,16 @@
 	<div class="flex w-4/6 space-y-10 flex-col m-4">
 		<BasicSearch/>
 		<hr/>
-		<a href="gameobjects/info" class="btn variant-filled">
-			<Fa icon={faPlus} />
-			<span>Vytvořit nový objekt</span>
-		</a>
+		<div class="flex flex-col space-y-4">
+			<a href="gameobjects/info" class="btn variant-filled">
+				<Fa icon={faPlus} />
+				<span>Vytvořit nové dílo</span>
+			</a>
+			<a href="gameobjects/info" class="btn variant-filled">
+				<Fa icon={faPlus} />
+				<span>Vytvořit novou osobu / vývojáře</span>
+			</a>
+		</div>
 		<AiChat/>
 	</div>
 </div>

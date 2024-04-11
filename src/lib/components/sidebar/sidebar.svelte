@@ -1,21 +1,30 @@
 <script>
     import Fa from "svelte-fa";
-    import { faGamepad, faMagnifyingGlass, faPlus } from "@fortawesome/free-solid-svg-icons";
+    import { faGamepad, faMagnifyingGlass, faPerson, faPlus } from "@fortawesome/free-solid-svg-icons";
     import { AppRail, AppRailAnchor } from "@skeletonlabs/skeleton";
 
     import { page } from '$app/stores';
-    import { gameObjectLinks } from "./links";
+    import { workLinks, versionLinks } from "./links";
+    import { onDestroy } from "svelte";
 
     /**
-     * @type {gameObjectLinks}
+     * @type {import("./links").SidebarLink}
      */
     let currentSidebar = []
     let showSidebar = false;
 
-    page.subscribe((page) => {
-        let basePath = page.url.pathname.split('/')[1] ?? "";
-        currentSidebar = ['gameobjects', 'wizard'].includes(basePath) ? gameObjectLinks : []
+    const unsubscribe = page.subscribe((page) => {
+        let path = page.url.pathname;
+
+        if (path.includes("/version/")) currentSidebar = versionLinks
+        else if (path.includes("/work/")) currentSidebar = workLinks
+        else currentSidebar = []
+
         showSidebar = currentSidebar.length > 0
+    })
+
+    onDestroy(() => {
+        unsubscribe()
     })
 </script>
 
@@ -27,18 +36,32 @@
             </svelte:fragment>
             <span>Vyhledat</span>
         </AppRailAnchor>
+        <!-- TODO: Add work only filter -->
         <AppRailAnchor href="/search">
             <svelte:fragment slot="lead">
                 <Fa icon={faGamepad} class="mx-auto"/>
             </svelte:fragment>
-            <span>Herní objekty</span>
+            <span>Díla</span>
+        </AppRailAnchor>
+        <!-- TODO: Add person only filter -->
+        <AppRailAnchor href="/search">
+            <svelte:fragment slot="lead">
+                <Fa icon={faPerson} class="mx-auto"/>
+            </svelte:fragment>
+            <span>Osoby</span>
         </AppRailAnchor>
         <hr/>
-        <AppRailAnchor href="/gameobjects/info">
+        <AppRailAnchor href="/work/add">
             <svelte:fragment slot="lead">
                 <Fa icon={faPlus} class="mx-auto"/>
             </svelte:fragment>
-            <span>Nový objekt</span>
+            <span>Nové dílo</span>
+        </AppRailAnchor>
+        <AppRailAnchor href="/person/add">
+            <svelte:fragment slot="lead">
+                <Fa icon={faPlus} class="mx-auto"/>
+            </svelte:fragment>
+            <span>Nová osoba</span>
         </AppRailAnchor>
     </AppRail>
 

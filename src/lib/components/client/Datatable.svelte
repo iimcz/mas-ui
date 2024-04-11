@@ -1,5 +1,4 @@
 <script>
-	//Import local datatable components
 	import ThSort from '$lib/components/client/ThSort.svelte';
 	import ThFilter from '$lib/components/client/ThFilter.svelte';
 	import Search from '$lib/components/client/Search.svelte';
@@ -13,7 +12,19 @@
 	//Import handler from SSD
 	import { DataHandler } from '@vincjo/datatables';
 
+	/**
+	 * @type {{ name: string, key: string, canSort: boolean }[]}
+	 */
+	export let columns = [
+		{ name: "First name", key: "first_name", canSort: true },
+		{ name: "Last name", key: "last_name", canSort: true },
+		{ name: "Email", key: "email", canSort: true },
+	];
+
 	//Init data handler - CLIENT
+	/**
+	 * @type {DataHandler<any>}
+	 */
 	const handler = new DataHandler(data, { rowsPerPage: 5 });
 	const rows = handler.getRows();
 </script>
@@ -28,22 +39,30 @@
 	<table class="table table-hover table-compact w-full table-auto">
 		<thead>
 			<tr>
-				<ThSort {handler} orderBy="first_name">First name</ThSort>
-				<ThSort {handler} orderBy="last_name">Last name</ThSort>
-				<ThSort {handler} orderBy="email">Email</ThSort>
+				{#each columns as column}
+					{#if column.canSort}
+						<ThSort {handler} orderBy={column.key}>{column.name}</ThSort>
+					{:else}
+						<th>{column.name}</th>
+					{/if}
+				{/each}
 			</tr>
 			<tr>
-				<ThFilter {handler} filterBy="first_name" />
-				<ThFilter {handler} filterBy="last_name" />
-				<ThFilter {handler} filterBy="email" />
+				{#each columns as column}
+					{#if column.canSort}
+						<ThFilter {handler} filterBy={column.key} />
+					{:else}
+						<th></th>
+					{/if}
+				{/each}
 			</tr>
 		</thead>
 		<tbody>
 			{#each $rows as row}
 				<tr>
-					<td>{row.first_name}</td>
-					<td>{row.last_name}</td>
-					<td>{row.email}</td>
+					{#each columns as column}
+						<td>{row[column.key]}</td>
+					{/each}
 				</tr>
 			{/each}
 		</tbody>
