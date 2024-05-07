@@ -36,15 +36,13 @@
             </svelte:fragment>
             <span>Vyhledat</span>
         </AppRailAnchor>
-        <!-- TODO: Add work only filter -->
-        <AppRailAnchor href="/search">
+        <AppRailAnchor href="/search?filter=work">
             <svelte:fragment slot="lead">
                 <Fa icon={faGamepad} class="mx-auto"/>
             </svelte:fragment>
             <span>Díla</span>
         </AppRailAnchor>
-        <!-- TODO: Add person only filter -->
-        <AppRailAnchor href="/search">
+        <AppRailAnchor href="/search?filter=person">
             <svelte:fragment slot="lead">
                 <Fa icon={faPerson} class="mx-auto"/>
             </svelte:fragment>
@@ -74,7 +72,7 @@
                             {#if link.href == ""}
                                 <p class="font-bold pl-4 my-4 text-2xl">{link.name}</p>
                             {:else}
-                                <a class:active-link={$page.url.pathname.includes(link.href)} href={link.href}>
+                                <a class:active-link={$page.url.pathname.match(link.match)} href={link.href}>
                                     <span class="flex-auto">{link.name}</span>
                                 </a>
                             {/if}

@@ -3,9 +3,9 @@
     import PersonForm from "../personForm.svelte";
 </script>
 
-<HeaderContainer title="Přidat osobu">
+<HeaderContainer title="Osoba - Test">
     <div class="card flex p-2 flex-col">
         <span class="text-xl font-bold p-4">Popis</span>
-        <PersonForm isNew={true} />
+        <PersonForm />
     </div>
 </HeaderContainer>

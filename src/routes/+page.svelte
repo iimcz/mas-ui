@@ -11,11 +11,11 @@
 		<BasicSearch/>
 		<hr/>
 		<div class="flex flex-col space-y-4">
-			<a href="gameobjects/info" class="btn variant-filled">
+			<a href="work/add" class="btn variant-filled">
 				<Fa icon={faPlus} />
 				<span>Vytvořit nové dílo</span>
 			</a>
-			<a href="gameobjects/info" class="btn variant-filled">
+			<a href="person/add" class="btn variant-filled">
 				<Fa icon={faPlus} />
 				<span>Vytvořit novou osobu / vývojáře</span>
 			</a>

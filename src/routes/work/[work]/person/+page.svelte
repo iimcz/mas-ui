@@ -1,4 +1,5 @@
 <script>
+    import { goto } from "$app/navigation";
     import Datatable from "$lib/components/client/Datatable.svelte";
     import { faPlus } from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
@@ -6,7 +7,7 @@
     const tableColumns = [
         { name: "Jméno", key: "name", canSort: true },
         { name: "Počet děl", key: "work_count", canSort: false },
-        { name: "Akce", key: "name", canSort: false },
+        { name: "Zobrazit", key: "name", canSort: false, onClick: () => { goto("/person/[id]") } },
     ]
 </script>
 
