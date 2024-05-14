@@ -1,14 +1,16 @@
 <script>
     import { goto } from "$app/navigation";
     import Datatable from "$lib/components/client/Datatable.svelte";
-    import { faPlus } from "@fortawesome/free-solid-svg-icons";
-    import Fa from "svelte-fa";
 
     const tableColumns = [
         { name: "Název verze", key: "name", canSort: true },
         { name: "Akce", key: "name", canSort: false },
         { name: "Zobrazit", key: "name", canSort: false, onClick: () => { goto("/work/[id]/version/[id]") } },
     ]
+
+    import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";
+    $currentSidebar = workLinks;
+    $currentRoute = "versionList";
 </script>
 
 
@@ -16,11 +18,5 @@
     <div class="flex w-5/6 space-y-10 flex-col m-4">
         <h1 class="text-3xl mt-4">Verze</h1>
         <Datatable columns={tableColumns}/>
-        <div>
-            <a href="/artefacts/add" class="btn variant-filled-primary float-right">
-                <Fa icon={faPlus}/>
-                <span>Přidat verzi</span>
-            </a>
-        </div>
     </div>
 </div>

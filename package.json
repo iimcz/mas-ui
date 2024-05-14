@@ -27,7 +27,7 @@
   },
   "type": "module",
   "dependencies": {
-    "@floating-ui/dom": "1.6.3",
+    "@floating-ui/dom": "^1.6.3",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@vincjo/datatables": "^1.14.5",
     "svelte-fa": "^4.0.2"

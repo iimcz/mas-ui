@@ -35,6 +35,9 @@
     onDestroy(() => {
         unsubscribe()
     })
+
+    import { currentSidebar } from "$lib/components/sidebar/links";
+    $currentSidebar = [];
 </script>
 
 <div class="container h-full mx-auto flex justify-center">

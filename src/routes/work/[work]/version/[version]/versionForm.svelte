@@ -1,29 +1,9 @@
 <script>
     import { Tab, TabGroup } from "@skeletonlabs/skeleton";
-    import WorkCompare from "./workCompare.svelte";
-    import { getModalStore } from "@skeletonlabs/skeleton";
-    import WorkDataEntry from "./workDataEntry.svelte";
     import ButtonTextArea from "$lib/components/ButtonTextArea.svelte";
     import { faSearch } from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
-    const modalStore = getModalStore();
-
-    /**
-     * @type {import('@skeletonlabs/skeleton').ModalComponent}
-     */
-    const modalComponent = { ref: WorkCompare };
-
-    function openModal() {
-        /**
-         * @type {import('@skeletonlabs/skeleton').ModalSettings}
-         */
-        const modal = {
-            type: "component",
-            component: modalComponent,
-        };
-
-        modalStore.trigger(modal);
-    }
+    import VersionDataEntry from "./versionDataEntry.svelte"
 
     export let isNew = false;
     let tabSet = 0;
@@ -39,10 +19,10 @@
         <!-- Tab Panels --->
         <svelte:fragment slot="panel">
             {#if tabSet === 0}
-                <WorkDataEntry />
-                <a href="/work/[id]" type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</a>
+                <VersionDataEntry />
+                <a href="[workId]" type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</a>
             {:else if tabSet === 1}
-                <ButtonTextArea on:click={openModal} placeholder="Vložený text bude automaticky přidán do AI databáze....">
+                <ButtonTextArea on:click={() => {}} placeholder="Vložený text bude automaticky přidán do AI databáze....">
                     <Fa icon={faSearch} />
                     <span>Vyhledat v textu</span>
                 </ButtonTextArea>

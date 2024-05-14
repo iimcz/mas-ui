@@ -1,34 +1,59 @@
+import { writable } from 'svelte/store';
+
 /**
- * @typedef {{name: string, href: string, match: string}[]} SidebarLink
- * @type {SidebarLink}
+ * @typedef {{name: string, href: string, match: string}} SidebarLink
+ * @type {SidebarLink[]}
  */
 export const workLinks = [
     { name: "Dílo", href: "", match: "" },
-    { name: "Metadata", href: "/work/[id]", match: "/work/.*" },
+    { name: "Metadata", href: "/work/[id]", match: "workDetail" },
     { name: "Verze", href: "", match: "" },
-    { name: "Verze", href: "/work/[id]/version/", match: "/work/.*/version" },
-    { name: "Přidat verzi", href: "/work/[id]/version/add", match: "/work/.*/version/add" },
+    { name: "Verze", href: "/work/[id]/version/", match: "versionList" },
+    { name: "Přidat verzi", href: "/work/[id]/version/add", match: "addVersion" },
     { name: "Osoby", href: "", match: "" },
-    { name: "Osoby", href: "/work/[id]/person", match: "$/work/.*/person^" },
-    { name: "Přidat osobu", href: "/work/[id]/person/add", match: "/work/.*/person/add" },
+    { name: "Osoby", href: "/work/[id]/person", match: "personList" },
+    { name: "Přidat osobu", href: "/work/[id]/person/add", match: "addPerson" },
 ]
 
 /**
- * @type {SidebarLink}
+ * @type {SidebarLink[]}
  */
 export const versionLinks = [
     { name: "Dílo", href: "", match: "" },
-    { name: "Metadata", href: "/work/[id]", match: "/work/.*" },
+    { name: "← Zpět na dílo", href: "/work/[id]", match: "" },
     { name: "Verze", href: "", match: "" },
-    { name: "Metadata", href: "/work/[id]/version/[id]/gameobjects", match: "/work/.*/version/.*/gameobjects/.*/info" },
-    { name: "Profily", href: "/gameobjects/profiles", match: "/work/.*/version/.*/gameobjects/.*/profiles" },
-    { name: "Záznamy", href: "/gameobjects/recordings", match: "/work/.*/version/.*/gameobjects/.*/recordings" },
-    { name: "Herní objekty", href: "", match: "" },
+    { name: "Metadata", href: "/work/[id]/version/[id]", match: "versionDetail" },
+    { name: "Záznamy", href: "/work/[id]/version/[id]/recording", match: "recordingList" },
     { name: "Artefakty", href: "", match: "" },
-    { name: "Artefakty", href: "/gameobjects/artefacts", match: "/work/.*/version/.*/artefacts/" },
-    { name: "Přidat artefakt", href: "/wizard/platform", match: "/work/.*/version/.*/artefacts/add" },
-    { name: "Konfigurace", href: "", match: "" },
-    { name: "Konfigurace", href: "/gameobjects/configurations", match: "/work/.*/version/.*/gameobjects/.*/configurations" },
-    { name: "Vytvořit konfiguraci", href: "/wizard/platform", match: "/work/.*/version/.*/gameobjects/.*/configurations" },
-    { name: "Spustit defaultní konfiguraci", href: "/emulator", match: "/work/.*/version/.*/gameobjects/.*/configurations/.*/emulator" },
+    { name: "Artefakty", href: "/work/[id]/version/[id]/artefact", match: "artefactList" },
+    { name: "Přidat artefakt", href: "/work/[id]/version/[id]/artefact/add/media", match: "addArtefact" },
+    { name: "Herní objekty", href: "", match: "" },
+    { name: "Herní objekty", href: "/work/[id]/version/[id]/gameobject", match: "gameObjectList" },
+    { name: "Vytvořit herní objekt", href: "/work/[id]/version/[id]/gameobject/add/platform", match: "addGameObject" },
+    { name: "Spustit výchozí herní objekt", href: "/work/[id]/version/[id]/gameobject/[id]/emulator", match: "emulator" },
 ]
+
+/**
+ * @type {SidebarLink[]}
+ */
+export const gameObjectLinks = [
+    { name: "Verze", href: "", match: "" },
+    { name: "← Zpět na verzi", href: "/work/[id]/version/[id]", match: "" },
+    { name: "Herní objekt", href: "", match: "" },
+    { name: "Metadata", href: "/work/[id]/version/[id]/gameobject/[id]", match: "gameObjectDetail" },
+    { name: "Spustit výchozí profil", href: "/work/[id]/version/[id]/gameobject/[id]/profile/[id]/emulator", match: "emulator" },
+    { name: "Profily", href: "", match: "" },
+    { name: "Profily", href: "/work/[id]/version/[id]/gameobject/[id]/profile", match: "profileList" },
+    { name: "Vytvořit profil", href: "/work/[id]/version/[id]/gameobject/[id]/profile/add", match: "addProfile" },
+]
+
+/**
+ * @type {import('svelte/store').Writable<SidebarLink[]>}
+ */
+export const currentSidebar = writable([]);
+
+
+/**
+ * @type {import('svelte/store').Writable<string>}
+ */
+export const currentRoute = writable("");

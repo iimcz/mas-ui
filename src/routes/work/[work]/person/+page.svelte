@@ -9,6 +9,10 @@
         { name: "Počet děl", key: "work_count", canSort: false },
         { name: "Zobrazit", key: "name", canSort: false, onClick: () => { goto("/person/[id]") } },
     ]
+
+    import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";
+    $currentSidebar = workLinks;
+    $currentRoute = "personList";
 </script>
 
 

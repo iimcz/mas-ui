@@ -4,6 +4,9 @@
 
     import AiChat from "$lib/components/aiChat.svelte";
     import BasicSearch from "$lib/components/basicSearch.svelte";
+
+	import { currentSidebar } from "$lib/components/sidebar/links";
+    $currentSidebar = [];
 </script>
 
 <div class="container h-full mx-auto flex justify-center">

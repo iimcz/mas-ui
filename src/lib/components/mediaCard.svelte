@@ -2,7 +2,7 @@
     export let image = "";
     export let title = "";
     export let description = "";
-    export let target = "/artefacts/guide";
+    export let target = "";
 </script>
 
 <a href={target} class="card p-4 flex">

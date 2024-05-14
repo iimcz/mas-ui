@@ -3,6 +3,10 @@
     import Fa from "svelte-fa";
     import WorkForm from "./workForm.svelte";
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
+
+    import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";
+    $currentSidebar = workLinks;
+    $currentRoute = "workDetail";
 </script>
 
 <HeaderContainer title="Metadata díla">

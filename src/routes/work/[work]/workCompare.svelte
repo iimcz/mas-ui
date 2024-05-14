@@ -16,7 +16,13 @@
         </div>
         <div>
             <h2 class="text-center text-2xl">↔</h2>
-            <form class="flex flex-col form border border-surface-500 m-2 p-4 space-y-12 mt-11 rounded-container-token">
+            <form class="flex flex-col form border border-surface-500 p-4 space-y-12 mt-11 rounded-container-token">
+                <SlideToggle name="slide"/>
+                <SlideToggle name="slide"/>
+                <SlideToggle name="slide"/>
+                <SlideToggle name="slide"/>
+                <SlideToggle name="slide"/>
+                <SlideToggle name="slide"/>
                 <SlideToggle name="slide"/>
                 <SlideToggle name="slide"/>
                 <SlideToggle name="slide"/>

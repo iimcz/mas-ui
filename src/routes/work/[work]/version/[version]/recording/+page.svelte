@@ -1,14 +1,11 @@
 <script>
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
-    import VersionForm from "./versionForm.svelte";
-
+    import Placeholder from "$lib/components/placeholder.svelte";
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     $currentSidebar = versionLinks;
-    $currentRoute = "versionDetail";
+    $currentRoute = "recordingList";
 </script>
 
-<HeaderContainer title="Metadata verze">
-    <div class="grid grid-cols-[1_fr] gap-2">
-        <VersionForm/>
-    </div>
+<HeaderContainer title="Záznamy">
+    <Placeholder/>
 </HeaderContainer>

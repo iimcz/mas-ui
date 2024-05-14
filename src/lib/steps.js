@@ -6,19 +6,19 @@ import { writable } from 'svelte/store';
 export let artefactSteps = [
     {
         name: "Typ média",
-        href: "/artefacts/add"
+        href: "/work/[id]/version/[id]/artefact/add/media"
     },
     {
         name: "Návod pro digitalizaci",
-        href: "/artefacts/guide"
+        href: "/work/[id]/version/[id]/artefact/add/digitalizationguide"
     },
     {
         name: "Digitalizace",
-        href: "/log"
+        href: "/work/[id]/version/[id]/artefact/add/log"
     },
     {
         name: "Informace o artefaktu",
-        href: "/artefacts/info"
+        href: "/work/[id]/version/[id]/artefact/add/info"
     },
 ];
 
@@ -28,24 +28,20 @@ export let artefactSteps = [
 export let configSteps = [
     {
         name: "Platforma",
-        href: "/wizard/platform"
+        href: "/work/[id]/version/[id]/gameobject/add/platform"
     },
     {
         name: "Emulátor",
-        href: "/wizard/emulator"
+        href: "/work/[id]/version/[id]/gameobject/add/emulator"
     },
     {
         name: "Konverze artefaktů",
-        href: "/log"
+        href: "/work/[id]/version/[id]/gameobject/add/log"
     },
     {
         name: "Konfigurace",
-        href: "/wizard/configuration"
-    },
-    {
-        name: "Výběr profilu",
-        href: "/"
-    },
+        href: "/work/[id]/version/[id]/gameobject/add/configuration"
+    }
 ];
 
 export const unlockedStep = writable(0);

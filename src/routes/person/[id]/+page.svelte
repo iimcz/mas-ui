@@ -1,6 +1,9 @@
 <script>
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
     import PersonForm from "../personForm.svelte";
+
+    import { currentSidebar } from "$lib/components/sidebar/links";
+    $currentSidebar = [];
 </script>
 
 <HeaderContainer title="Osoba - Test">
