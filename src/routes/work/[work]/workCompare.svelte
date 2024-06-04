@@ -5,6 +5,18 @@
     const modalStore = getModalStore();
     const cBase = 'card p-4 w-modal-wide shadow-xl space-y-5';
 	const cHeader = 'text-2xl font-bold';
+
+    const exampleData = {
+		alternativeTitle: "",
+		classificationLocation: [],
+		classificationTime: [],
+		description: "",
+		genre: [],
+		id: "",
+		subheading: "",
+		title: "",
+		yearOfPublication: "",
+	}
 </script>
 
 <div class={cBase}>
@@ -12,7 +24,7 @@
     <div class="flex">
         <div class="flex-grow">
             <h2 class="text-center">Originál</h2>
-            <WorkDataEntry/>
+            <WorkDataEntry data={exampleData}/>
         </div>
         <div>
             <h2 class="text-center text-2xl">↔</h2>
@@ -31,7 +43,7 @@
         </div>
         <div class="flex-grow">
             <h2 class="text-center">AI Detekce</h2>
-            <WorkDataEntry/>
+            <WorkDataEntry data={exampleData}/>
         </div>
     </div>
     <div class="space-x-2 flex justify-end">

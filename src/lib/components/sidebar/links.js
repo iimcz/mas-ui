@@ -20,7 +20,7 @@ export const workLinks = [
  */
 export const versionLinks = [
     { name: "Dílo", href: "", match: "" },
-    { name: "← Zpět na dílo", href: "/work/[id]", match: "" },
+    { name: "← Zpět na dílo", href: "/work/[work]", match: "" },
     { name: "Verze", href: "", match: "" },
     { name: "Metadata", href: "/work/[id]/version/[id]", match: "versionDetail" },
     { name: "Záznamy", href: "/work/[id]/version/[id]/recording", match: "recordingList" },

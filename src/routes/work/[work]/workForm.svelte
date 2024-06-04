@@ -6,6 +6,14 @@
     import ButtonTextArea from "$lib/components/ButtonTextArea.svelte";
     import { faSearch } from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
+
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+
+    function dispatchSave() {
+        dispatch("save", data)
+    }
+
     const modalStore = getModalStore();
 
     /**
@@ -27,6 +35,19 @@
 
     export let isNew = false;
     let tabSet = 0;
+
+    /** @type {import("$lib/schemas/work").Work} */
+    export let data = {
+        id: "",
+        alternativeTitle: "",
+        classificationLocation: [],
+        classificationTime: [],
+        description: "",
+        genre: [],
+        subheading: "",
+        title: "",
+        yearOfPublication: ""
+    }
 </script>
 
 <div class="card flex p-2 flex-col">
@@ -39,10 +60,10 @@
         <!-- Tab Panels --->
         <svelte:fragment slot="panel">
             {#if tabSet === 0}
-                <WorkDataEntry />
-                <a href="/work/[id]" type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</a>
+                <WorkDataEntry data={data} />
+                <button on:click={dispatchSave} type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
             {:else if tabSet === 1}
-                <ButtonTextArea on:click={openModal} placeholder="Vložený text bude automaticky přidán do AI databáze....">
+                <ButtonTextArea on:click={openModal} placeholder="Vložený text bude automaticky zpracován pomocí AI...">
                     <Fa icon={faSearch} />
                     <span>Vyhledat v textu</span>
                 </ButtonTextArea>

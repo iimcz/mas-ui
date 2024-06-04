@@ -6,8 +6,10 @@
     import RowCount from "$lib/components/client/RowCount.svelte";
     import Pagination from "$lib/components/client/Pagination.svelte";
 
-    //Load local data
-    import data from "$lib/components/client/data";
+    /**
+     * @type {any[]}
+     */
+    export let data;
 
     //Import handler from SSD
     import { DataHandler } from "@vincjo/datatables";
@@ -21,16 +23,19 @@
         { name: "Email", key: "email", canSort: true },
     ];
 
+	/**
+     * @param {{ name: string, key: string, canSort: boolean, onClick?: function(any):void }} column
+     * @param {any} row
+     */
 	function clickHandler(column, row)
 	{
-		if (column.onClick != null) column.onClick(row)
+		if (column?.onClick != null) column.onClick(row)
 	}
 
-    //Init data handler - CLIENT
     /**
      * @type {DataHandler<any>}
      */
-    const handler = new DataHandler(data, { rowsPerPage: 5 });
+    const handler = new DataHandler(data, { rowsPerPage: 20 });
     const rows = handler.getRows();
 </script>
 
