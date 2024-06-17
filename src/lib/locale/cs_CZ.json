@@ -1,0 +1,15 @@
+{
+    "page_title": "Akviziční stanice",
+    "tool": {
+        "cd-ripper": {
+            "name": "CD Ripper",
+            "description": "Popis nástroje CD Ripper",
+            "image": "/floppy.jpg"
+        },
+        "cd-extractor": {
+            "name": "CD Extractor",
+            "description": "Popis nástroje CD extractor",
+            "image": "/floppy.jpg"
+        }
+    }
+}

@@ -24,6 +24,6 @@
 
 <HeaderContainer title="Metadata verze">
     <div class="grid grid-cols-[1_fr] gap-2">
-        <VersionForm on:save={update}/>
+        <VersionForm data={data} on:save={update}/>
     </div>
 </HeaderContainer>

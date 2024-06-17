@@ -3,6 +3,27 @@
     import { faGamepad, faMagnifyingGlass, faPerson, faPlus } from "@fortawesome/free-solid-svg-icons";
     import { AppRail, AppRailAnchor } from "@skeletonlabs/skeleton";
     import { currentRoute, currentSidebar } from "./links";
+    import { page } from '$app/stores';
+
+    /**
+     * @param {string} url
+     * @param {Object.<string, string>} data
+     */
+    function sFormat(url, data) {
+         return Object.keys(data).reduce((acc, key) => acc.replaceAll(`\[${key}\]`, data[key]), url)
+    }
+
+    /**
+     * Templated URLs
+     * @type {Object.<string, string>}
+     */
+    let links = {}
+
+    $: {
+        for (const link of $currentSidebar) {
+            links[link.href] = sFormat(link.href, $page.params)
+        }
+    }
 </script>
 
 <div class:visible-submenu={$currentSidebar.length > 0} class="grid grid-cols-[auto_1fr] h-full bg-surface-50-900-token border-r border-surface-500/30 overflow-hidden">
@@ -49,7 +70,7 @@
                             {#if link.href == ""}
                                 <p class="font-bold pl-4 my-4 text-2xl">{link.name}</p>
                             {:else}
-                                <a class:active-link={link.match == $currentRoute} href={link.href}>
+                                <a class:active-link={link.match == $currentRoute} href={links[link.href]}>
                                     <span class="flex-auto">{link.name}</span>
                                 </a>
                             {/if}

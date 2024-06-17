@@ -1,0 +1,15 @@
+{
+    "page_title": "Acquisition station",
+    "tool": {
+        "cd-ripper": {
+            "name": "CD Ripper",
+            "description": "Description of tool CD Ripper",
+            "image": "/floppy.jpg"
+        },
+        "cd-extractor": {
+            "name": "CD Extractor",
+            "description": "Description of tool CD extractor",
+            "image": "/floppy.jpg"
+        }
+    }
+}

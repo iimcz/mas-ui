@@ -1,5 +1,6 @@
 <script>
     import { goto } from "$app/navigation";
+    import HeaderContainer from "$lib/components/HeaderContainer.svelte";
     import Datatable from "$lib/components/client/Datatable.svelte";
 
     const tableColumns = [
@@ -15,10 +16,6 @@
 	export let data;
 </script>
 
-
-<div class="container h-full mx-auto flex justify-center">
-    <div class="flex w-5/6 space-y-10 flex-col m-4">
-        <h1 class="text-3xl mt-4">Verze</h1>
-        <Datatable data={data.versions} columns={tableColumns}/>
-    </div>
-</div>
+<HeaderContainer title="Verze">
+    <Datatable data={data.versions} columns={tableColumns}/>
+</HeaderContainer>

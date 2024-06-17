@@ -22,7 +22,7 @@
     }
 </script>
 
-<button on:click={openModal} class="card p-4 flex">
+<button on:click={openModal} class="card card-hover p-4 flex">
     <div class="text-left">
         <div class="text-lg font-bold">Nahrát soubor</div>
         <div>

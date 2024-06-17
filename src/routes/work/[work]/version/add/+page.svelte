@@ -5,13 +5,17 @@
     import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";
     import { API_URL } from "$lib/config";
     import { goto } from "$app/navigation";
+    import { page } from "$app/stores";
+
     $currentSidebar = workLinks;
     $currentRoute = "addVersion";
 
     /**
-     * @param {CustomEvent<import("$lib/schemas/work").Work>} data
+     * @param {CustomEvent<import("$lib/schemas/version").Version>} data
      */
      async function createNew(data) {
+        data.detail.workId = $page.params.work
+
         const res = await fetch(`${API_URL}/api/v1/versions`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
