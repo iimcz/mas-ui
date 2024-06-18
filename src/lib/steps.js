@@ -6,41 +6,41 @@ import { writable } from 'svelte/store';
 export let artefactSteps = [
     {
         name: "Typ média",
-        href: "/work/[id]/version/[id]/artefact/add/media"
+        href: "/work/[work]/version/[version]/artefact/add"
     },
     {
         name: "Návod pro digitalizaci",
-        href: "/work/[id]/version/[id]/artefact/add/digitalizationguide"
+        href: "/work/[work]/version/[version]/artefact/add/[process]/digitalizationguide"
     },
     {
         name: "Digitalizace",
-        href: "/work/[id]/version/[id]/artefact/add/log"
+        href: "/work/[work]/version/[version]/artefact/add/[process]/log"
     },
     {
         name: "Informace o artefaktu",
-        href: "/work/[id]/version/[id]/artefact/add/info"
+        href: "/work/[work]/version/[version]/artefact/add/[process]/info"
     },
 ];
 
 /**
  * @type {{name: string, href: string}[]}
  */
-export let configSteps = [
+export let configSteps = [ // TODO: Probably match same pattern as artefact?
     {
         name: "Platforma",
-        href: "/work/[id]/version/[id]/gameobject/add/platform"
+        href: "/work/[work]/version/[version]/gameobject/add/platform"
     },
     {
         name: "Emulátor",
-        href: "/work/[id]/version/[id]/gameobject/add/emulator"
+        href: "/work/[work]/version/[version]/gameobject/add/emulator"
     },
     {
         name: "Konverze artefaktů",
-        href: "/work/[id]/version/[id]/gameobject/add/log"
+        href: "/work/[work]/version/[version]/gameobject/add/log"
     },
     {
         name: "Konfigurace",
-        href: "/work/[id]/version/[id]/gameobject/add/configuration"
+        href: "/work/[work]/version/[version]/gameobject/add/configuration"
     }
 ];
 

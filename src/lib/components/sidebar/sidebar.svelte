@@ -4,14 +4,7 @@
     import { AppRail, AppRailAnchor } from "@skeletonlabs/skeleton";
     import { currentRoute, currentSidebar } from "./links";
     import { page } from '$app/stores';
-
-    /**
-     * @param {string} url
-     * @param {Object.<string, string>} data
-     */
-    function sFormat(url, data) {
-         return Object.keys(data).reduce((acc, key) => acc.replaceAll(`\[${key}\]`, data[key]), url)
-    }
+    import { stringFormat } from "$lib/stringFormat";
 
     /**
      * Templated URLs
@@ -21,7 +14,7 @@
 
     $: {
         for (const link of $currentSidebar) {
-            links[link.href] = sFormat(link.href, $page.params)
+            links[link.href] = stringFormat(link.href, $page.params)
         }
     }
 </script>
