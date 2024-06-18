@@ -5,7 +5,7 @@
 
     const tableColumns = [
         { name: "Název verze", key: "title", canSort: true },
-        { name: "Zobrazit", key: "name", canSort: false, onClick: (/** @type {import('$lib/schemas/version').Version} */ row) => goto(`/work/${row.workId}/version/${row.id}`)},
+        { name: "Zobrazit", key: "name", canSort: false, onClick: (/** @type {import('$lib/schemas/version').Version} */ row) => goto(`version/${row.id}`)},
     ]
 
     import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";

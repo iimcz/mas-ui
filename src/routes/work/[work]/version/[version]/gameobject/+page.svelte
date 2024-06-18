@@ -6,15 +6,18 @@
     const tableColumns = [
         { name: "Název", key: "name", canSort: true },
         { name: "Akce", key: "name", canSort: false },
-        { name: "Zobrazit", key: "name", canSort: false, onClick: () => { goto("/work/[id]/version/[id]/gameobject/[id]") } },
-        { name: "Spustit výchozí profil", key: "name", canSort: false, onClick: () => { goto("/work/[id]/version/[id]/gameobject/[id]/profile/[id]/emulator") } },
+        { name: "Zobrazit", key: "name", canSort: false, onClick: (/** @type {import("$lib/schemas/gamePackage").GamePackage} */ row) => { goto(`gameobject/${row.id}`) } },
+        { name: "Spustit výchozí profil", key: "name", canSort: false, onClick: (/** @type {import("$lib/schemas/gamePackage").GamePackage} */ row) => { goto(``) } }, // TODO: Get right profile
     ]
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     $currentSidebar = versionLinks;
     $currentRoute = "gameObjectList";
+
+    /** @type {import('./$types').PageData} */
+	export let data;
 </script>
 
 <HeaderContainer title="Herní objekty">
-    <Datatable columns={tableColumns}/>
+    <Datatable data={data.gameObjects} columns={tableColumns}/>
 </HeaderContainer>
