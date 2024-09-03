@@ -3,7 +3,7 @@
     import ButtonTextArea from "$lib/components/ButtonTextArea.svelte";
     import { faSearch } from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
-    import ArtefactDataEntry from "./artefactDataEntry.svelte"
+    import ArtefactDataEntry from "./ArtefactDataEntry.svelte"
 
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
@@ -38,7 +38,7 @@
         <svelte:fragment slot="panel">
             {#if tabSet === 0}
                 <ArtefactDataEntry data={data} />
-                <button on:click={dispatchSave} type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+                <button on:click={dispatchSave} type="button" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
             {:else if tabSet === 1}
                 <ButtonTextArea on:click={() => {}} placeholder="Vložený text bude automaticky přidán do AI databáze....">
                     <Fa icon={faSearch} />

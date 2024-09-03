@@ -7,9 +7,10 @@
 
 <form class="form border border-surface-500 m-2 p-4 space-y-2 rounded-container-token">
     <p>Název díla</p>
-    <div class="input-group input-group-divider">
+    <div class="input-group input-error input-group-divider">
         <input type="text" bind:value={data.title} />
     </div>
+    <span class="ml-2 text-error-500">Název díla musí obsahovat hodnotu</span>
     <p>Alternativní název</p>
     <div class="input-group input-group-divider">
         <input type="text" bind:value={data.alternativeTitle} />

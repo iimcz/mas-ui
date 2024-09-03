@@ -5,9 +5,12 @@ import { API_URL } from '$lib/config';
  * @returns {Promise<{ gameObjects: import('$lib/schemas/gamePackage').GamePackage[] }>}
 */
 export async function load({ fetch, params }) {
-    // TODO: Correct endpoint
-    const res = await fetch(`${API_URL}/api/v1/versions/${params.version}`);
+    const res = await fetch(`${API_URL}/api/v1/versions/${params.version}/packages`);
+    console.log(res)
+
     const item = await res.json();
+
+    console.log(item)
 
     return { gameObjects: item };
 }

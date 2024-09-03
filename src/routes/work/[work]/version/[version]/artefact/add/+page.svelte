@@ -13,28 +13,15 @@
     })
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
-    import { API_URL } from "$lib/config";
     import { goto } from "$app/navigation";
     $currentSidebar = versionLinks;
     $currentRoute = "addArtefact";
 
     /**
      * @param {string} toolId
-     * @param {string} versionId
      */
-    async function startProcess(toolId, versionId) {
-        const res = await fetch(`${API_URL}/api/v1/versions`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ toolId, versionId })
-        });
-
-        /**
-         * @type {import("$lib/schemas/digitalizationProcess").DigitalizationProcess}
-         */
-        const process = await res.json();
-
-        goto(`${process.processId}/digitalizationguide`);
+    async function startProcess(toolId) {
+        goto(`add/guide/${toolId}`);
     }
 
     /** @type {import('./$types').PageData} */
@@ -49,12 +36,12 @@
             {#each data.tools as tool}
                 <MediaCard
                     isAvailable={tool.isAvailable}
-                    title={$_(`tool.${tool.name}.name`)}
-                    image={$_(`tool.${tool.name}.image`)}
-                    description={$_(`tool.${tool.name}.description`)}
+                    title={$_(`tool.${tool.id}.name`)}
+                    image={$_(`tool.${tool.id}.image`)}
+                    description={$_(`tool.${tool.id}.description`)}
                     version={tool.version}
                     mediaType={$_(tool.physicalMediaType)}
-                    on:click={() => startProcess(tool.id, tool.version)}
+                    on:click={() => startProcess(tool.id)}
                 />
             {/each}
             <UploadCard />

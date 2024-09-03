@@ -14,7 +14,7 @@
     </div>
     <p>Datum archivace</p>
         <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-        <input disabled type="text" bind:value={data.archivationDate} />
+        <input type="text" bind:value={data.archivationDate} />
     </div>
     <p>Archivoval</p>
         <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">

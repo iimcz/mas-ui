@@ -1,15 +1,23 @@
 {
     "page_title": "Akviziční stanice",
     "tool": {
-        "cd-ripper": {
-            "name": "CD Ripper",
-            "description": "Popis nástroje CD Ripper",
+        "greaseweazle-35-diskette": {
+            "name": "Greaseweazle",
+            "description": "Tools for accessing a floppy drive at the raw flux level",
             "image": "/floppy.jpg"
-        },
-        "cd-extractor": {
-            "name": "CD Extractor",
-            "description": "Popis nástroje CD extractor",
-            "image": "/floppy.jpg"
+        }
+    },
+    "digitalization_guides": {
+        "greaseweazle-35-diskette": {
+            "step1": "Vložte disketu do jednotky dle obrázku 1",
+            "step2": "Vložte disketu do jednotky dle obrázku 1",
+            "step3": "Vložte disketu do jednotky dle obrázku 1",
+            "step4": "Vložte disketu do jednotky dle obrázku 1",
+            "image1": "",
+            "title1": "Disk se nevejde do mechaniky",
+            "content1": "Pro vyřešení problému zkuste...",
+            "title2": "Disk se nevejde do mechaniky",
+            "content2": "Pro vyřešení problému zkuste..."
         }
     }
 }

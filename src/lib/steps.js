@@ -1,7 +1,8 @@
 import { writable } from 'svelte/store';
 
 /**
- * @type {{name: string, href: string}[]}
+ * @typedef {{name: string, href: string}} ProgressStep
+ * @type {ProgressStep[]}
  */
 export let artefactSteps = [
     {
@@ -9,12 +10,8 @@ export let artefactSteps = [
         href: "/work/[work]/version/[version]/artefact/add"
     },
     {
-        name: "Návod pro digitalizaci",
-        href: "/work/[work]/version/[version]/artefact/add/[process]/digitalizationguide"
-    },
-    {
         name: "Digitalizace",
-        href: "/work/[work]/version/[version]/artefact/add/[process]/log"
+        href: "/work/[work]/version/[version]/artefact/add/[process]"
     },
     {
         name: "Informace o artefaktu",
@@ -23,9 +20,9 @@ export let artefactSteps = [
 ];
 
 /**
- * @type {{name: string, href: string}[]}
+ * @type {ProgressStep[]}
  */
-export let configSteps = [ // TODO: Probably match same pattern as artefact?
+export let configSteps = [
     {
         name: "Platforma",
         href: "/work/[work]/version/[version]/gameobject/add/platform"

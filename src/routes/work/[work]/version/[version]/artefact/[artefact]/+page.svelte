@@ -1,8 +1,8 @@
 <script>
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
+    import ArtefactForm from "$lib/components/process/ArtefactForm.svelte";
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     import { API_URL } from "$lib/config";
-    import ArtefactForm from "./artefactForm.svelte";
 
     /** @type {import('./$types').PageData} */
 	export let data;
