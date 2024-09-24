@@ -40,11 +40,11 @@ export const gameObjectLinks = [
     { name: "Verze", href: "", match: "" },
     { name: "← Zpět na verzi", href: "/work/[work]/version/[version]", match: "" },
     { name: "Herní objekt", href: "", match: "" },
-    { name: "Metadata", href: "/work/[work]/version/[version]/gameobject/[id]", match: "gameObjectDetail" },
-    { name: "Spustit výchozí profil", href: "/work/[work]/version/[version]/gameobject/[id]/profile/[id]/emulator", match: "emulator" },
+    { name: "Metadata", href: "/work/[work]/version/[version]/gameobject/[gameObject]", match: "gameObjectDetail" },
+    { name: "Spustit výchozí profil", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile/[id]/emulator", match: "emulator" },
     { name: "Profily", href: "", match: "" },
-    { name: "Profily", href: "/work/[work]/version/[version]/gameobject/[id]/profile", match: "profileList" },
-    { name: "Vytvořit profil", href: "/work/[work]/version/[version]/gameobject/[id]/profile/add", match: "addProfile" },
+    { name: "Profily", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile", match: "profileList" },
+    { name: "Vytvořit profil", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile/add", match: "addProfile" },
 ]
 
 /**

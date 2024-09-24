@@ -17,9 +17,9 @@
     })
 
     /**
-     * @param {string} emualtorId
+     * @param {string} emulatorId
      */
-     async function startConversion(emualtorId) {
+     async function startConversion(emulatorId) {
         const artefactIds = data.artefacts.filter((a, i) => selectedArtefacts[i] == true).map(a => a.id)
         console.log(artefactIds)
         if (artefactIds.length == 0) {
@@ -29,14 +29,14 @@
         const res = await fetch(`${API_URL}/api/v1/conversion/start`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ emualtorId, artefactIds })
+            body: JSON.stringify({ emulatorId, artefactIds })
         });
 
         /**
          * @type {import('$lib/schemas/conversionProcess').ConversionProcess}
          */
         const process = await res.json();
-        goto(`add/process/${process.processId}`);
+        goto(`process/${process.processId}`);
     }
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
