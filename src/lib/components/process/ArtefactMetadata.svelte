@@ -30,14 +30,9 @@
         /**
          * @type {import("$lib/schemas/artefact").Artefact}
          */
-        const createdArtefact = await res.json()
+        const createdArtefact = await res.json() // TODO: Didn't get redirected during testing
         goto(`/work/${$page.params.work}/version/${$page.params.version}/artefact/${createdArtefact.id}`)
     }
-
-    /**
-     * @type {ArtefactForm}
-     */
-    let form;
 </script>
 
 <ArtefactForm isNew={true} on:save={createNew}/>

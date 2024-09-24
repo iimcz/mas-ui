@@ -7,7 +7,7 @@
     $currentRoute = "artefactList";
 
     const tableColumns = [
-        { name: "Název verze", key: "title", canSort: true },
+        { name: "Název verze", key: "name", canSort: true },
         { name: "Zobrazit", key: "name", canSort: false, onClick: (/** @type {import('$lib/schemas/artefact').Artefact} */ row) => goto(`artefact/${row.id}`)},
     ]
 

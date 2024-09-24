@@ -36,9 +36,9 @@
             {#each data.tools as tool}
                 <MediaCard
                     isAvailable={tool.isAvailable}
-                    title={$_(`tool.${tool.id}.name`)}
-                    image={$_(`tool.${tool.id}.image`)}
-                    description={$_(`tool.${tool.id}.description`)}
+                    title={$_(`tool.${tool.slug}.name`)}
+                    image={$_(`tool.${tool.slug}.image`)}
+                    description={$_(`tool.${tool.slug}.description`)}
                     version={tool.version}
                     mediaType={$_(tool.physicalMediaType)}
                     on:click={() => startProcess(tool.id)}

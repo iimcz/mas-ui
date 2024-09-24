@@ -1,6 +1,7 @@
 /**
  * @typedef {{
 * id: string
+* slug: string
 * name: string
 * version: string
 * physicalMediaType: string

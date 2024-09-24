@@ -2,6 +2,7 @@
     import EmulatorCard from "$lib/components/emulatorCard.svelte";
     import img from '$lib/floppy.jpg';
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
+	import { _ } from 'svelte-i18n'
 
     import { currentStep, unlockedStep, steps, configSteps } from "$lib/steps";
     import { onMount } from "svelte";
@@ -20,6 +21,9 @@
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
+
+    /** @type {import('./$types').PageData} */
+	export let data;
 </script>
 
 <div class="container h-full mx-auto flex justify-center">
@@ -44,22 +48,19 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="w-3/4">Název</th>
-                        <th></th>
+                        <th class="w-2/4">Název</th>
+                        <th class="w-1/4">Typ média</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Atari 800</td>
-                        <td><button class="btn variant-filled">Detail</button></td>
-                        <td><a href="emulator" class="btn variant-filled">Vybrat</a></td>
-                    </tr>
-                    <tr>
-                        <td>Atari 400</td>
-                        <td><button class="btn variant-filled">Detail</button></td>
-                        <td><a href="emulator" class="btn variant-filled">Vybrat</a></td>
-                    </tr>
+                    {#each data.platforms as platform}
+                        <tr>
+                            <td>{platform.name}</td>
+                            <td>{platform.physicalMediaTypes.map(m => $_(`media_type.${m}`)).join(", ")}</td>
+                            <td><a href="{platform.name}" class="btn variant-filled">Vybrat</a></td>
+                        </tr>
+                    {/each}
                 </tbody>
             </table>
         </div>

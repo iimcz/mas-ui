@@ -15,8 +15,12 @@
 
     <div class="text-left">
         <div class="text-lg font-bold">{title}</div>
-        <span class="badge variant-filled">{mediaType}</span>
-        <span class="badge variant-filled">v{version}</span>
+        {#if mediaType != ""}
+            <span class="badge variant-filled">{mediaType}</span>
+        {/if}
+        {#if version != ""}
+            <span class="badge variant-filled">v{version}</span>
+        {/if}
         <div>
             {description}
         </div>

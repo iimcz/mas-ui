@@ -62,7 +62,11 @@
      * @type {string?}
      */
     let processId = null;
-    const guide = digitalizationGuides[$page.params.tool]
+
+    /** @type {import('./$types').PageData} */
+	export let data;
+
+    const guide = digitalizationGuides[data.slug]
 </script>
 
 <div class="container h-full mx-auto flex justify-center">

@@ -19,5 +19,17 @@
             "title2": "Disk se nevejde do mechaniky",
             "content2": "Pro vyřešení problému zkuste..."
         }
-    }
+    },
+    "media_type": {
+        "Floppy35": "Disketa 3½\"",
+        "Floppy54": "Disketa 5¼\""
+    },
+    "emulator": {
+        "DOSBox": {
+            "name": "DOSBox",
+            "description": "DOSBox is a free and open-source emulator which runs software for MS-DOS compatible disk operating systems—primarily video games.",
+            "image": ""
+        }
+    },
+    "must_select_artefact": "Musíte vybrat alespoň jeden artefakt ke konverzi"
 }

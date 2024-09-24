@@ -1,6 +1,6 @@
 <script>
 	import '../app.postcss';
-	import { AppShell, AppBar, Modal } from '@skeletonlabs/skeleton';
+	import { AppShell, AppBar, Modal, Toast } from '@skeletonlabs/skeleton';
     import Sidebar from '$lib/components/sidebar/sidebar.svelte';
 	import { _ } from 'svelte-i18n'
 
@@ -16,6 +16,7 @@
 
 <!-- App Shell -->
 <Modal />
+<Toast />
 <AppShell>
 	<svelte:fragment slot="header">
 		<!-- App Bar -->

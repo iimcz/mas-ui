@@ -28,8 +28,8 @@ export let configSteps = [
         href: "/work/[work]/version/[version]/gameobject/add/platform"
     },
     {
-        name: "Emulátor",
-        href: "/work/[work]/version/[version]/gameobject/add/emulator"
+        name: "Artefakty + Emulátor",
+        href: "/work/[work]/version/[version]/gameobject/add/[platform]"
     },
     {
         name: "Konverze artefaktů",
