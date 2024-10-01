@@ -63,7 +63,7 @@
                             {#if link.href == ""}
                                 <p class="font-bold pl-4 my-4 text-2xl">{link.name}</p>
                             {:else}
-                                <a class:active-link={link.match == $currentRoute} href={links[link.href]}>
+                                <a data-sveltekit-preload-data="tap" class:active-link={link.match == $currentRoute} href={links[link.href]}>
                                     <span class="flex-auto">{link.name}</span>
                                 </a>
                             {/if}
