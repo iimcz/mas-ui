@@ -19,29 +19,7 @@
     }
 </script>
 
-<div class:visible-submenu={$currentSidebar.length > 0} class="grid grid-cols-[auto_1fr] h-full bg-surface-50-900-token border-r border-surface-500/30 overflow-hidden">
-    <AppRail width="w-24">
-        <AppRailAnchor href="/">
-            <svelte:fragment slot="lead">
-                <Fa icon={faMagnifyingGlass} class="mx-auto"/>
-            </svelte:fragment>
-            <span>Vyhledat</span>
-        </AppRailAnchor>
-        <AppRailAnchor href="/search?filter=work">
-            <svelte:fragment slot="lead">
-                <Fa icon={faGamepad} class="mx-auto"/>
-            </svelte:fragment>
-            <span>Díla</span>
-        </AppRailAnchor>
-        <hr/>
-        <AppRailAnchor href="/work/add">
-            <svelte:fragment slot="lead">
-                <Fa icon={faPlus} class="mx-auto"/>
-            </svelte:fragment>
-            <span>Nové dílo</span>
-        </AppRailAnchor>
-    </AppRail>
-
+<div class:visible-submenu={$currentSidebar.length > 0} class="h-full bg-surface-50-900-token border-r border-surface-500/30 overflow-hidden">
     {#if $currentSidebar.length > 0}
         <section class="p-4 pb-20 space-y-4 overflow-y-auto">
             <nav class="list-nav">
@@ -65,7 +43,7 @@
 
 <style lang="postcss">
     .visible-submenu {
-        @apply w-[360px];
+        @apply w-[260px];
     }
 
     .active-link {
