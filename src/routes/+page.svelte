@@ -18,14 +18,7 @@
 				<Fa icon={faPlus} />
 				<span>Vytvořit nové dílo</span>
 			</a>
-			<a href="person/add" class="btn variant-filled">
-				<Fa icon={faPlus} />
-				<span>Vytvořit novou osobu / vývojáře</span>
-			</a>
 		</div>
 		<AiChat/>
 	</div>
 </div>
-
-<style lang="postcss">
-</style>

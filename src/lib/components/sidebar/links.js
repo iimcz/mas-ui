@@ -9,10 +9,7 @@ export const workLinks = [
     { name: "Metadata", href: "/work/[work]", match: "workDetail" },
     { name: "Verze", href: "", match: "" },
     { name: "Verze", href: "/work/[work]/version/", match: "versionList" },
-    { name: "Přidat verzi", href: "/work/[work]/version/add", match: "addVersion" },
-    { name: "Osoby", href: "", match: "" },
-    { name: "Osoby", href: "/work/[work]/person", match: "personList" },
-    { name: "Přidat osobu", href: "/work/[work]/person/add", match: "addPerson" },
+    { name: "Přidat verzi", href: "/work/[work]/version/add", match: "addVersion" }
 ]
 
 /**

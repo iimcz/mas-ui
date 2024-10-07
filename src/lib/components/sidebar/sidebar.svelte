@@ -33,24 +33,12 @@
             </svelte:fragment>
             <span>Díla</span>
         </AppRailAnchor>
-        <AppRailAnchor href="/search?filter=person">
-            <svelte:fragment slot="lead">
-                <Fa icon={faPerson} class="mx-auto"/>
-            </svelte:fragment>
-            <span>Osoby</span>
-        </AppRailAnchor>
         <hr/>
         <AppRailAnchor href="/work/add">
             <svelte:fragment slot="lead">
                 <Fa icon={faPlus} class="mx-auto"/>
             </svelte:fragment>
             <span>Nové dílo</span>
-        </AppRailAnchor>
-        <AppRailAnchor href="/person/add">
-            <svelte:fragment slot="lead">
-                <Fa icon={faPlus} class="mx-auto"/>
-            </svelte:fragment>
-            <span>Nová osoba</span>
         </AppRailAnchor>
     </AppRail>
 

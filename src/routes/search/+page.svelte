@@ -9,8 +9,7 @@
      */
     const headers = {
         "": "objekty",
-        "work": "díla",
-        "person": "osoby",
+        "work": "díla"
     }
 
     const tableColumns = [
@@ -32,7 +31,6 @@
     function navigate(id) {
         if (filter == "") goto("")
         else if (filter == "work") goto(`/work/${id}`)
-        else if (filter == "person") goto(`/person/${id}`)
     }
 
     onDestroy(() => {
