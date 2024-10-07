@@ -1,6 +1,7 @@
 /**
  * @typedef {{
 * id: string
+* name: string
 * versionId: string
 * emulatorId: string
 * conversionDate: string

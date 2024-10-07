@@ -13,6 +13,7 @@
     /** @type {import("$lib/schemas/gamePackage").GamePackage} */
     export let data = {
         id: "",
+        name: "",
         versionId: "",
         emulatorId: "",
         conversionDate: "",
