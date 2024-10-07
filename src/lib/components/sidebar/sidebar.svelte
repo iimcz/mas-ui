@@ -1,7 +1,4 @@
 <script>
-    import Fa from "svelte-fa";
-    import { faGamepad, faMagnifyingGlass, faPerson, faPlus } from "@fortawesome/free-solid-svg-icons";
-    import { AppRail, AppRailAnchor } from "@skeletonlabs/skeleton";
     import { currentRoute, currentSidebar } from "./links";
     import { page } from '$app/stores';
     import { stringFormat } from "$lib/stringFormat";
@@ -21,7 +18,7 @@
 
 <div class:visible-submenu={$currentSidebar.length > 0} class="h-full bg-surface-50-900-token border-r border-surface-500/30 overflow-hidden">
     {#if $currentSidebar.length > 0}
-        <section class="p-4 pb-20 space-y-4 overflow-y-auto">
+        <section class="h-full p-4 pb-20 space-y-4 overflow-y-auto">
             <nav class="list-nav">
                 <ul>
                     {#each $currentSidebar as link}
