@@ -10,6 +10,11 @@
      /**
      * @type {string}
      */
+     export let name = ""
+
+     /**
+     * @type {string}
+     */
      let newValue = ""
 
      /**
@@ -36,7 +41,7 @@
     <div class="flex">
         <div class="input-group input-group-divider">
             <!-- svelte-ignore a11y-autofocus -->
-            <input type="text" bind:value={value} autofocus  />
+            <input name="{name}.{index}.value" type="text" bind:value={value} autofocus  />
         </div>
         <button class="btn-icon variant-filled-error ml-2" on:click={() => removeValue(index)}>
             <Fa icon={faRemove}/>
