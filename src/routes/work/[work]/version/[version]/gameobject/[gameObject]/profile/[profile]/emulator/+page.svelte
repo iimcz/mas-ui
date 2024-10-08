@@ -38,11 +38,14 @@
     $currentRoute = "emulator";
 
     let interval = 0;
+    /** @type number */
+    let frameW, frameH = 300;
     onMount(() => {
         interval = setInterval(async () => {
-            const res = await fetch(`${API_URL}/api/v1/emulation/${data.id}/ping`);
-            data = await res.json();
+            const res = await fetch(`${API_URL}/api/v1/emulation/${data.state.id}/ping`);
+            data.state = await res.json();
         }, 1000)
+
         return () => clearInterval(interval);
     })
 
@@ -57,11 +60,13 @@
             saveMachineState: save
         }
 
-        const res = await fetch(`${API_URL}/api/v1/emulation/${data.id}/finish`, {
+        await fetch(`${API_URL}/api/v1/emulation/${data.state.id}/finish`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(finishRequest)
         });
+
+        goto("../..", { replaceState: false });
     }
 
     /** @type {import('./$types').PageData} */
@@ -73,15 +78,15 @@
 <div class="mx-4 h-full mx-auto flex justify-center">
     <div class="flex w-full space-y-10 flex-col my-4">
         <div class="ml-4 mt-4 flex space-x-4">
-            <button on:click={() => goto("/work/%5Bid%5D/version/%5Bid%5D/gameobject/[id]/profile", { replaceState: false })} use:popup={backPopup} class="btn-icon variant-filled">
+            <button on:click={async () => await finishEmulation(true)} use:popup={backPopup} class="btn-icon variant-filled">
                 <Fa icon={faArrowLeft}/>
             </button>
             <h1 class="text-3xl">Emulace</h1>
         </div>
         <div class="space-x-5 aspect-container">
             <div class="w-full h-full text-surface-50">
-                <div class="relative bg-surface-900 aspect-video w-auto h-full mx-auto">
-                    <h1 class="p-4 text-xl">Stream placeholder</h1>
+                <div bind:clientWidth={frameW} bind:clientHeight={frameH} class="relative bg-surface-900 aspect-video w-auto h-full mx-auto">
+                    <iframe class="absolute left-0 top-0" width={frameW} height={frameH} title="Stream" src={data.streamSource}></iframe>
                     <div class="absolute right-0 top-0 m-2">
                         <button use:popup={settingsPopup} class="btn-icon variant-filled">
                             <Fa icon={faCog}/>

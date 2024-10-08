@@ -9,7 +9,10 @@ export const workLinks = [
     { name: "Metadata", href: "/work/[work]", match: "workDetail" },
     { name: "Verze", href: "", match: "" },
     { name: "Verze", href: "/work/[work]/version/", match: "versionList" },
-    { name: "Přidat verzi", href: "/work/[work]/version/add", match: "addVersion" }
+    { name: "Přidat verzi", href: "/work/[work]/version/add", match: "addVersion" },
+    { name: "Paratexty", href: "", match: "" },
+    { name: "Paratexty", href: "/work/[work]/paratext/", match: "paratextList" },
+    { name: "Přidat paratext", href: "/work/[work]/paratext/add", match: "addParatext" },
 ]
 
 /**
@@ -20,10 +23,12 @@ export const versionLinks = [
     { name: "← Zpět na dílo", href: "/work/[work]", match: "" },
     { name: "Verze", href: "", match: "" },
     { name: "Metadata", href: "/work/[work]/version/[version]", match: "versionDetail" },
-    { name: "Záznamy", href: "/work/[work]/version/[version]/recording", match: "recordingList" },
     { name: "Artefakty", href: "", match: "" },
     { name: "Artefakty", href: "/work/[work]/version/[version]/artefact", match: "artefactList" },
     { name: "Přidat artefakt", href: "/work/[work]/version/[version]/artefact/add", match: "addArtefact" },
+    { name: "Paratexty", href: "", match: "" },
+    { name: "Paratexty", href: "/work/[work]/version/[version]/paratext", match: "paratextList" },
+    { name: "Přidat paratext", href: "/work/[work]/version/[version]/paratext/add", match: "addParatext" },
     { name: "Herní objekty", href: "", match: "" },
     { name: "Herní objekty", href: "/work/[work]/version/[version]/gameobject", match: "gameObjectList" },
     { name: "Vytvořit herní objekt", href: "/work/[work]/version/[version]/gameobject/add/platform", match: "addGameObject" },
@@ -42,6 +47,8 @@ export const gameObjectLinks = [
     { name: "Profily", href: "", match: "" },
     { name: "Profily", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile", match: "profileList" },
     { name: "Vytvořit profil", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile/add", match: "addProfile" },
+    { name: "Paratexty", href: "", match: "" },
+    { name: "Záznamy", href: "/work/[work]/version/[version]/gameobject/[gameObject]/paratext", match: "paratextList" },
 ]
 
 /**

@@ -2,15 +2,14 @@ import { API_URL } from '$lib/config';
 
 /**
  * @type {import('./$types').PageLoad}
- * @returns {Promise<import('$lib/schemas/emulationState').EmulationState>}
+ * @returns {Promise<{ state: import('$lib/schemas/emulationState').EmulationState, streamSource: string}>}
 */
 export async function load({ fetch, params }) {
-    console.log(`${API_URL}/api/v1/packages/${params.gameObject}/emulate`)
-    const res = await fetch(`${API_URL}/api/v1/packages/${params.gameObject}/emulate`, {
-        method: "POST"
-    });
-    console.log(res)
-    const item = await res.json();
+    const res = await fetch(`${API_URL}/api/v1/packages/${params.gameObject}/emulate`, { method: "POST" });
+    const state = await res.json();
 
-    return item;
+    const resStream = await fetch(`${API_URL}/api/v1/emulation/${state.id}/video`);
+    const streamSource = await resStream.text();
+
+    return { state, streamSource };
 }
