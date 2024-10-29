@@ -39,8 +39,7 @@
                     title={$_(`tool.${tool.slug}.name`)}
                     image={$_(`tool.${tool.slug}.image`)}
                     description={$_(`tool.${tool.slug}.description`)}
-                    version={tool.version}
-                    mediaType={$_(tool.physicalMediaType)}
+                    tags={[`v${tool.version}`, $_(`media_type.${tool.physicalMediaType}`)]}
                     on:click={() => startProcess(tool.id)}
                 />
             {/each}

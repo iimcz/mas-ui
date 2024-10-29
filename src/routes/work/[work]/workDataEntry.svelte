@@ -20,8 +20,6 @@
 </script>
 
 <form use:form class="form border border-surface-500 m-2 p-4 space-y-2 rounded-container-token">
-    <span>{JSON.stringify($errors)}</span>
-    <span>{$isValid}</span>
     <p>Název díla</p>
     <div class="input-group input-group-divider">
         <input type="text" name="title" placeholder="Povinné" bind:value={data.title} />

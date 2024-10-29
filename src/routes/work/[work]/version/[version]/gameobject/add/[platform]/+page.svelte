@@ -70,7 +70,11 @@
         <span class="text-lg font-bold">2. Vyberte emulátor</span>
         <div class="text-center grid grid-cols-3 gap-2">
             {#each data.emulators as emulator}
-                <MediaCard on:click={async () => await startConversion(emulator.id)} title={$_(`emulator.${emulator.name}.name`)} description={$_(`emulator.${emulator.name}.description`)} version={emulator.version} />
+                <MediaCard
+                    on:click={async () => await startConversion(emulator.id)}
+                    title={$_(`emulator.${emulator.name}.name`)}
+                    description={$_(`emulator.${emulator.name}.description`)}
+                    tags={[`v${emulator.version}`]} />
             {/each}
         </div>
     </div>

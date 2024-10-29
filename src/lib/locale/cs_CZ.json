@@ -31,5 +31,14 @@
             "image": ""
         }
     },
-    "must_select_artefact": "Musíte vybrat alespoň jeden artefakt ke konverzi"
+    "must_select_artefact": "Musíte vybrat alespoň jeden artefakt ke konverzi",
+    "paratext": {
+        "link": "/paratextTemplate/unknown.png",
+        "document": "/paratextTemplate/unknown.png",
+        "archive": "/paratextTemplate/unknown.png",
+        "sound": "/paratextTemplate/unknown.png",
+        "image": "/paratextTemplate/unknown.png",
+        "video": "/paratextTemplate/unknown.png",
+        "unknown": "/paratextTemplate/unknown.png"
+    }
 }
