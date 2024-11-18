@@ -29,17 +29,19 @@
     <h1>Verze</h1>
     <Accordion>
         {#each versionParatexts as version (version[0])}
-            <AccordionItem>
-                <svelte:fragment slot="summary">{data.versions.find(v => v.id == version[0])?.title}</svelte:fragment>
-                <svelte:fragment slot="content">
-                    <a class="btn variant-filled-primary" href={`/work/${$page.params.work}/version/${version[0]}/paratext`}>Zobrazit paratexty herních objektů</a>
-                    <div class="grid grid-cols-3 gap-2">
-                        {#each version[1] ?? [] as paratext (paratext.id)}
-                            <ParatextCard paratext={paratext}/>
-                        {/each}
-                    </div>
-                </svelte:fragment>
-            </AccordionItem>
+            <div class="bg-surface-300 card">
+                <AccordionItem>
+                    <svelte:fragment slot="summary">{data.versions.find(v => v.id == version[0])?.title}</svelte:fragment>
+                    <svelte:fragment slot="content">
+                        <a class="btn variant-filled-primary" href={`/work/${$page.params.work}/version/${version[0]}/paratext`}>Zobrazit paratexty herních objektů</a>
+                        <div class="grid grid-cols-3 gap-2">
+                            {#each version[1] ?? [] as paratext (paratext.id)}
+                                <ParatextCard paratext={paratext}/>
+                            {/each}
+                        </div>
+                    </svelte:fragment>
+                </AccordionItem>
+            </div>
         {/each}
         {#if versionParatexts.length == 0}
             <h2 class="text-center">Žádné paratexty</h2>

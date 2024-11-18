@@ -1,12 +1,10 @@
 <script>
+    import { enhance } from "$app/forms";
+    import { createForm } from "felte";
+    import { validator } from "@felte/validator-yup";
+    import * as yup from 'yup';
+
     import ParatextDataEntry from "./ParatextDataEntry.svelte"
-
-    import { createEventDispatcher } from 'svelte';
-    const dispatch = createEventDispatcher();
-
-    function dispatchSave() {
-        dispatch("save", data)
-    }
 
     export let isNew = false;
 
@@ -22,12 +20,21 @@
         sourceUrl: "",
         downloadable: false,
         thumbnail: ""
-
     }
+    const schema = yup.object({
+        name: yup.string().required(),
+        description: yup.string().required(),
+        source: yup.string(),
+        sourceUrl: yup.string().url(),
+    });
+
+    const { form, errors, isValid } = createForm({
+        extend: validator({ schema }),
+    });
 </script>
 
-<div class="card flex p-2 flex-col">
+<form method="post" use:form use:enhance enctype="multipart/form-data" class="card flex p-2 flex-col">
     <span class="text-xl font-bold p-4">Popis</span>
-    <ParatextDataEntry data={data} />
-    <button on:click={dispatchSave} type="button" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
-</div>
+    <ParatextDataEntry canUpload={isNew} data={data} />
+    <button type="submit" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+</form>

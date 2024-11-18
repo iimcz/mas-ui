@@ -27,6 +27,6 @@ export function getParatextThumbnail(paratext) {
 
 /** @param paratext {Paratext} */
 export function downloadParatext(paratext) {
-    if (paratext.downloadable) goto(`${API_URL}/api/v1/paratexts/${paratext.id}/download`)
-    else goto(paratext.sourceUrl)
+    if (paratext.downloadable) window.location.assign(`${API_URL}/api/v1/paratexts/${paratext.id}/download`)
+    else window.location.assign(paratext.sourceUrl)
 }

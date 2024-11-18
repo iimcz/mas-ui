@@ -27,16 +27,18 @@
     <h1>Záznamy</h1>
     <Accordion>
         {#each gamePackageParatexts as version (version[0])}
-            <AccordionItem>
-                <svelte:fragment slot="summary">{data.gamePackages.find(v => v.id == version[0])?.name}</svelte:fragment>
-                <svelte:fragment slot="content">
-                    <div class="grid grid-cols-3 gap-2">
-                        {#each version[1] ?? [] as paratext (paratext.id)}
-                            <ParatextCard paratext={paratext}/>
-                        {/each}
-                    </div>
-                </svelte:fragment>
-            </AccordionItem>
+            <div class="bg-surface-300 card">
+                <AccordionItem>
+                    <svelte:fragment slot="summary">{data.gamePackages.find(v => v.id == version[0])?.name}</svelte:fragment>
+                    <svelte:fragment slot="content">
+                        <div class="grid grid-cols-3 gap-2">
+                            {#each version[1] ?? [] as paratext (paratext.id)}
+                                <ParatextCard paratext={paratext}/>
+                            {/each}
+                        </div>
+                    </svelte:fragment>
+                </AccordionItem>
+            </div>
         {/each}
         {#if versionParatexts.length == 0}
             <h2 class="text-center">Žádné paratexty</h2>
