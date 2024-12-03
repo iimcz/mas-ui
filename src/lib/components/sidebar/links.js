@@ -61,3 +61,10 @@ export const currentSidebar = writable([]);
  * @type {import('svelte/store').Writable<string>}
  */
 export const currentRoute = writable("");
+
+/**
+ * Additional route slugs to be applied outside of the request URL
+ * Proper slugs always take precedence
+ * @type {import('svelte/store').Writable<Object<string,string>>}
+ */
+export const routeOverrides = writable({});

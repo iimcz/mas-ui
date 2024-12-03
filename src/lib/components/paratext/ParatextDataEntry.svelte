@@ -1,5 +1,11 @@
 <script>
+    import { faTrash } from '@fortawesome/free-solid-svg-icons';
     import { FileDropzone } from '@skeletonlabs/skeleton';
+    import Fa from 'svelte-fa';
+
+    function removeFile() {
+        files = undefined;
+    }
 
     /** @type {import("$lib/schemas/paratext").Paratext} */
     export let data;
@@ -35,17 +41,18 @@
     </div>
     <p>Soubor</p>
     {#if canUpload}
-        <FileDropzone bind:files={files} name="file">
+        <FileDropzone class={(files == undefined ? "" : "hidden")} bind:files={files} name="file">
             <svelte:fragment slot="message"><b>Nahrajte soubor</b> kliknutím nebo přetažením</svelte:fragment>
         </FileDropzone>
+        {#if files != undefined}
+            <div class="card textarea flex gap-2 items-center justify-center p-4">
+                <span>{files[0]?.name}</span>
+                <button on:click={removeFile} class="btn-icon bg-error-500 variant-filled"><Fa icon={faTrash}/></button>
+            </div>
+        {/if}
     {:else}
         <div class="card p-4 bg-surface-300 flex justify-center align-center">
             Po nahrání paratextu již nelze soubor změnit
         </div>
-    {/if}
-    {#if files != undefined}
-        {#each files as file}
-            {file.name}
-        {/each}
     {/if}
 </div>

@@ -1,5 +1,5 @@
 <script>
-    import { currentRoute, currentSidebar } from "./links";
+    import { currentRoute, currentSidebar, routeOverrides } from "./links";
     import { page } from '$app/stores';
     import { stringFormat } from "$lib/stringFormat";
 
@@ -11,7 +11,7 @@
 
     $: {
         for (const link of $currentSidebar) {
-            links[link.href] = stringFormat(link.href, $page.params)
+            links[link.href] = stringFormat(link.href, { ...$routeOverrides, ...$page.params })
         }
     }
 </script>
