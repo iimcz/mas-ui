@@ -21,7 +21,6 @@
      */
      async function startConversion(emulatorId) {
         const artefactIds = data.artefacts.filter((a, i) => selectedArtefacts[i] == true).map(a => a.id)
-        console.log(artefactIds)
         if (artefactIds.length == 0) {
             toastStore.trigger({message: $_("must_select_artefact"), background: 'variant-filled-error'})
             return;

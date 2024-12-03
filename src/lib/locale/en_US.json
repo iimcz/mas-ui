@@ -1,23 +1,29 @@
 {
     "page_title": "Acquisition station",
+    "language": "Language",
+    "locale_name": {
+        "cs-CZ": "Czech (Česky)",
+        "en-US": "English"
+    },
     "tool": {
         "greaseweazle-35-diskette": {
             "name": "Greaseweazle",
             "description": "Tools for accessing a floppy drive at the raw flux level",
-            "image": "/floppy.jpg"
+            "image": "/tools/greaseweasel.png"
         }
     },
     "digitalization_guides": {
         "greaseweazle-35-diskette": {
-            "step1": "Vložte disketu do jednotky dle obrázku 1",
-            "step2": "Vložte disketu do jednotky dle obrázku 1",
-            "step3": "Vložte disketu do jednotky dle obrázku 1",
-            "step4": "Vložte disketu do jednotky dle obrázku 1",
-            "image1": "",
-            "title1": "Disk se nevejde do mechaniky",
-            "content1": "Pro vyřešení problému zkuste...",
-            "title2": "Disk se nevejde do mechaniky",
-            "content2": "Pro vyřešení problému zkuste..."
+            "step1": "Vložte disketu do disketové mechaniky dle obrázku",
+            "step2": "Stiskněte tlačítko 'Spustit digitalizaci'",
+            "image1": "/digitalization/greaseweasel_help1.jpg",
+            "image2": "/digitalization/greaseweasel_help2.jpg",
+            "title1": "Disk nelze vložit do mechaniky",
+            "content1": "Ověřte, jestli se nedjná o větší, 5¼\" disketu, nebo jiný typ média.",
+            "title2": "Záleží na pozici přepínače ochrany proti zápisu?",
+            "content2": "Ne, greaseweasel v průběhu operace nijak nemění data na disku.",
+            "title3": "Je třeba mechanicky zkontrolovat některé části diskety?",
+            "content3": "Ano, ujistěte se, že lze volně pohybovat s krytkou čtecího otvoru."
         }
     },
     "media_type": {

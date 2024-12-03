@@ -20,9 +20,11 @@
 
         <div class="text-left">
             <div class="text-lg font-bold">{title}</div>
-            {#each tags as tag}
-                <span class="badge variant-filled">{tag}</span>
-            {/each}
+            <div class="flex gap-1">
+                {#each tags as tag}
+                    <span class="badge variant-filled">{tag}</span>
+                {/each}
+            </div>
             <div>
                 <slot></slot>
                 {description}

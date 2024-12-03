@@ -45,12 +45,15 @@
     <div class="text-left w-full">
         <div class="text-lg font-bold flex justify-between items-center">
             <button on:click={select}>{title}</button>
+            <!-- TODO: Re-enable once modal works properly
             <button on:click={openModal}>
                 <Fa size="lg" color={"cornflowerblue"} icon={faInfoCircle}/>
             </button>
+            -->
         </div>
         <div>
             {description}
         </div>
+        <button class="btn variant-filled mt-2" on:click={select}>Vybrat</button>
     </div>
 </div>

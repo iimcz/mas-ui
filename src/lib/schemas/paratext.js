@@ -29,3 +29,18 @@ export function downloadParatext(paratext) {
     if (paratext.downloadable) window.location.assign(`${API_URL}/api/v1/paratexts/${paratext.id}/download`)
     else window.location.assign(paratext.sourceUrl)
 }
+
+/**
+ * @param id {string} Paratext ID
+ * @param file {File}
+ * */
+export async function uploadFile(id, file) {
+    const fileName = file?.name;
+    const data = new FormData();
+    data.append("file", file)
+
+    await fetch(`${API_URL}/api/v1/paratexts/${id}/upload/${fileName}`, {
+        method: "POST",
+        body: data
+    });
+}
