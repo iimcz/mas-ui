@@ -32,8 +32,6 @@
         <ProgressStepBar/>
         <h2 class="text-xl mt-4">Doporučené</h2>
         <div class="text-center grid grid-cols-3 gap-2">
-            <EmulatorCard on:select={(e) => goto(`emulator`, { replaceState: false }) } title="Atari 800" image={img} description="Krátký popis" />
-            <EmulatorCard on:select={(e) => goto(`emulator`, { replaceState: false }) } title="Atari 400" image={img} description="Krátký popis" />
         </div>
         <h2 class="text-xl mt-4">Seznam platforem</h2>
         <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">

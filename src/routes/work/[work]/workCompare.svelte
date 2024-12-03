@@ -41,10 +41,12 @@
                 <SlideToggle name="slide"/>
             </form>
         </div>
+        <!--
         <div class="flex-grow">
             <h2 class="text-center">AI Detekce</h2>
             <WorkDataEntry data={exampleData}/>
         </div>
+        -->
     </div>
     <div class="space-x-2 flex justify-end">
         <button class="btn variant-filled-secondary" on:click={modalStore.close}>Invertovat výběr</button>

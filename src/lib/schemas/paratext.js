@@ -1,4 +1,3 @@
-import { goto } from '$app/navigation';
 import { API_URL } from '$lib/config';
 import { _ } from 'svelte-i18n'
 import { get } from 'svelte/store';

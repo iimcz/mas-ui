@@ -33,17 +33,21 @@
         <Tab bind:group={tabSet} name="tab1" value={0}>
             <span>Strukturovaný popis</span>
         </Tab>
+        <!--
         <Tab bind:group={tabSet} name="tab2" value={1}>Volný text (AI)</Tab>
+        -->
         <!-- Tab Panels --->
         <svelte:fragment slot="panel">
             {#if tabSet === 0}
                 <ArtefactDataEntry data={data} />
                 <button on:click={dispatchSave} type="button" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+                <!--
             {:else if tabSet === 1}
                 <ButtonTextArea on:click={() => {}} placeholder="Vložený text bude automaticky přidán do AI databáze....">
                     <Fa icon={faSearch} />
                     <span>Vyhledat v textu</span>
                 </ButtonTextArea>
+            -->
             {/if}
         </svelte:fragment>
     </TabGroup>
