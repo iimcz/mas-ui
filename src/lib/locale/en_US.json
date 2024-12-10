@@ -10,6 +10,11 @@
             "name": "Greaseweazle",
             "description": "Tools for accessing a floppy drive at the raw flux level",
             "image": "/tools/greaseweasel.png"
+        },
+        "ffmpeg-rec-cassette-wav": {
+            "name": "FFmpeg cassette recording",
+            "description": "Audio recording software",
+            "image": "/tools/ffmpeg.png"
         }
     },
     "digitalization_guides": {
@@ -24,16 +29,39 @@
             "content2": "Ne, greaseweasel v průběhu operace nijak nemění data na disku.",
             "title3": "Je třeba mechanicky zkontrolovat některé části diskety?",
             "content3": "Ano, ujistěte se, že lze volně pohybovat s krytkou čtecího otvoru."
+        },
+        "ffmpeg-rec-cassette-wav": {
+            "step1": "Vložte kazetu do kazetového přehrávače",
+            "step2": "Přetočte kazetu na začátek",
+            "step3": "Stiskněte tlačítko 'Spustit digitalizaci'",
+            "step4": "Spusťte přehrávání na přehrávači",
+            "step5": "Vyčkejte dokud de nepřehraje celá kazeta",
+            "step6": "Stiskněte tlačítko 'Ukončit digitalizaci'",
+            "image1": "/digitalization/cassette_help1.jpg",
+            "image2": "/digitalization/cassette_help2.jpg",
+            "title1": "Jak se vytváří artefakt druhé strany kazety?",
+            "content1": "Pro archivaci druhé strany kazety vytvořte nový artefakt stejným postupem."
         }
     },
     "media_type": {
         "Floppy35": "Floppy disk 3½\"",
-        "Floppy54": "Floppy disk 5¼\""
+        "Floppy54": "Floppy disk 5¼\"",
+        "AudioCassette": "Audio cassette"
     },
     "emulator": {
         "DOSBox": {
             "name": "DOSBox",
             "description": "DOSBox is a free and open-source emulator which runs software for MS-DOS compatible disk operating systems—primarily video games.",
+            "image": ""
+        },
+        "FS-UAE": {
+            "name": "FS-UAE",
+            "description": "FS-UAE is an Amiga emulator for Windows, Linux and Mac OS X based on UAE/WinUAE, with a focus on emulating games.",
+            "image": ""
+        },
+        "Fuse": {
+            "name": "Fuse",
+            "description": "Fuse (the Free Unix Spectrum Emulator) was originally, and somewhat unsurprisingly, an emulator of the ZX Spectrum (a popular 1980s home computer, especially in the UK) for Unix.",
             "image": ""
         }
     },

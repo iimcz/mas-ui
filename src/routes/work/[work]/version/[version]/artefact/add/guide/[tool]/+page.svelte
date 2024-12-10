@@ -53,6 +53,18 @@
         processId = process?.processId ?? null;
     }
 
+    /** @param {string} data */
+    async function input(data) {
+        const res = await fetch(`${API_URL}/api/v1/digitalization/${processId}/input`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ data })
+        });
+
+        process = await res.json();
+        processId = process?.processId ?? null;
+    }
+
     /**
      * @type {import("$lib/schemas/digitalizationProcess").DigitalizationProcess?}
      */
@@ -76,6 +88,9 @@
         <Guide on:start={() => startProcess($page.params.tool, $page.params.version)} running={processId != null} steps={guide.steps} images={guide.images} faq={guide.faq} />
         {#if processId != null}
             <hr/>
+            <h1 class="text-3xl mt-4">Status: {process?.status}</h1>
+            <h1 class="text-3xl mt-4">Detail: {process?.statusDetail}</h1>
+            <button class="btn variant-filled-primary" on:click={async() => input("")}>Pokračovat</button>
             <h1 class="text-3xl mt-4">Záznam z digitalizace</h1>
             <Log url={`${API_URL}/api/v1/digitalization/${processId}/log`}/>
             {#if process?.status == "Success"}

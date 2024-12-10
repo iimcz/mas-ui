@@ -22,5 +22,22 @@ export const digitalizationGuides = {
             { title: "greaseweazle-35-diskette.title2", content: "greaseweazle-35-diskette.content2" },
             { title: "greaseweazle-35-diskette.title3", content: "greaseweazle-35-diskette.content3" },
         ]
+    },
+    "ffmpeg-rec-cassette-wav": {
+        "steps": [
+            "ffmpeg-rec-cassette-wav.step1",
+            "ffmpeg-rec-cassette-wav.step2",
+            "ffmpeg-rec-cassette-wav.step3",
+            "ffmpeg-rec-cassette-wav.step4",
+            "ffmpeg-rec-cassette-wav.step5",
+            "ffmpeg-rec-cassette-wav.step6",
+        ],
+        "images": [
+            "ffmpeg-rec-cassette-wav.image1",
+            "ffmpeg-rec-cassette-wav.image2",
+        ],
+        "faq": [
+            { title: "ffmpeg-rec-cassette-wav.title1", content: "ffmpeg-rec-cassette-wav.content1" },
+        ]
     }
 };
