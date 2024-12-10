@@ -27,10 +27,6 @@ export const digitalizationGuides = {
         "steps": [
             "ffmpeg-rec-cassette-wav.step1",
             "ffmpeg-rec-cassette-wav.step2",
-            "ffmpeg-rec-cassette-wav.step3",
-            "ffmpeg-rec-cassette-wav.step4",
-            "ffmpeg-rec-cassette-wav.step5",
-            "ffmpeg-rec-cassette-wav.step6",
         ],
         "images": [
             "ffmpeg-rec-cassette-wav.image1",

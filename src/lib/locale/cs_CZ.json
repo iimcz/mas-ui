@@ -32,11 +32,7 @@
         },
         "ffmpeg-rec-cassette-wav": {
             "step1": "Vložte kazetu do kazetového přehrávače",
-            "step2": "Přetočte kazetu na začátek",
-            "step3": "Stiskněte tlačítko 'Spustit digitalizaci'",
-            "step4": "Spusťte přehrávání na přehrávači",
-            "step5": "Vyčkejte dokud de nepřehraje celá kazeta",
-            "step6": "Stiskněte tlačítko 'Ukončit digitalizaci'",
+            "step2": "Stiskněte tlačítko 'Spustit digitalizaci' a řiďte se zobrazenými kroky",
             "image1": "/digitalization/cassette_help1.jpg",
             "image2": "/digitalization/cassette_help2.jpg",
             "title1": "Jak se vytváří artefakt druhé strany kazety?",
@@ -94,7 +90,7 @@
             "action": "Přehrávání spuštěno"
         },
         "RequestForStopNotification": {
-            "description": "Prosím zastavte přehrávání kazety",
+            "description": "Vyčkejte na konec zvukového záznamu a zastavte přehrávání kazety",
             "action": "Přehrávání zastaveno"
         }
     }

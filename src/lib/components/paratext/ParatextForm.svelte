@@ -28,12 +28,13 @@
         sourceUrl: yup.string().url(),
     });
 
+    // TODO: Use form is broken with enhance, supposedly superform is better
     const { form, errors, isValid } = createForm({
         extend: validator({ schema }),
     });
 </script>
 
-<form method="post" use:form use:enhance enctype="multipart/form-data" class="card flex p-2 flex-col">
+<form method="post" use:enhance enctype="multipart/form-data" class="card flex p-2 flex-col">
     <span class="text-xl font-bold p-4">Popis</span>
     <ParatextDataEntry canUpload={isNew} data={data} />
     <button type="submit" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>

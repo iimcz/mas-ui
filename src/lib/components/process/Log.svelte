@@ -14,8 +14,13 @@
     onMount(() => {
         interval = setInterval(async () => {
             const res = await fetch(url);
-            log = await res.text();
-            textArea.scrollTop = textArea.scrollHeight;
+            const newLog = await res.text();
+            const isUpdated = newLog != log;
+
+            if (isUpdated) {
+                log = newLog;
+                textArea.scrollTop = textArea.scrollHeight;
+            }
         }, 1000)
 
         textArea.scrollIntoView({ behavior: 'smooth' });
