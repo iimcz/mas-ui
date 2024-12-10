@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { page } from "$app/stores";
+	import { _ } from 'svelte-i18n'
 
     import Fa from "svelte-fa";
     import { faRepeat } from "@fortawesome/free-solid-svg-icons";
@@ -88,12 +89,13 @@
         <Guide on:start={() => startProcess($page.params.tool, $page.params.version)} running={processId != null} steps={guide.steps} images={guide.images} faq={guide.faq} />
         {#if processId != null}
             <hr/>
-            <h1 class="text-3xl mt-4">Status: {process?.status}</h1>
-            <h1 class="text-3xl mt-4">Detail: {process?.statusDetail}</h1>
-            <button class="btn variant-filled-primary" on:click={async() => input("")}>Pokračovat</button>
-            <h1 class="text-3xl mt-4">Záznam z digitalizace</h1>
-            <Log url={`${API_URL}/api/v1/digitalization/${processId}/log`}/>
-            {#if process?.status == "Success"}
+            <h1 class="text-3xl mt-4">Status: {$_(`process_status.${process?.status}`)}</h1>
+            {#if process?.status == "WaitingForInput"}
+                <div class="card p-4 flex flex-col gap-4">
+                    <span class="text-3xl mt-4">{$_(`status_detail.${process?.statusDetail}.description`)}</span>
+                    <button class="btn variant-filled-primary" on:click={async() => input("")}>{$_(`status_detail.${process?.statusDetail}.action`)}</button>
+                </div>
+            {:else if process?.status == "Success"}
                 <hr/>
                 <h1 class="text-3xl mt-4">Strukturovaný popis</h1>
                 <ArtefactMetadata processId={processId} />
@@ -104,6 +106,8 @@
                     <span>Zkusit znovu</span>
                 </button>
             {/if}
+            <h1 class="text-3xl mt-4">Záznam z digitalizace</h1>
+            <Log url={`${API_URL}/api/v1/digitalization/${processId}/log`}/>
         {/if}
     </div>
 </div>

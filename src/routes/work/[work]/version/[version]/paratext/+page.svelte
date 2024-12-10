@@ -21,7 +21,7 @@
             <ParatextCard paratext={paratext}/>
         {/each}
         {#if versionParatexts.length == 0}
-            <h2 class="text-center">Žádné paratexty</h2>
+            <h2 class="text-center col-span-3">Žádné paratexty</h2>
         {/if}
     </div>
     <h1>Záznamy</h1>
@@ -40,8 +40,8 @@
                 </AccordionItem>
             </div>
         {/each}
-        {#if versionParatexts.length == 0}
-            <h2 class="text-center">Žádné paratexty</h2>
+        {#if gamePackageParatexts.length == 0}
+            <h2 class="text-center col-span-3">Žádné paratexty</h2>
         {/if}
     </Accordion>
 </HeaderContainer>

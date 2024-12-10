@@ -33,7 +33,7 @@
         .map(a => a.physicalMediaType.toLowerCase())
         .filter((value, index, array) => array.indexOf(value) === index); // Unique
 
-    let matchingMediaPlatforms = data.platforms.filter(p => p.physicalMediaTypes.some(t => artefactTypes.indexOf(t.toLowerCase()) != 0))
+    let matchingMediaPlatforms = data.platforms.filter(p => p.physicalMediaTypes.some(t => artefactTypes.indexOf(t.toLowerCase()) != -1))
 </script>
 
 <div class="container h-full mx-auto flex justify-center">

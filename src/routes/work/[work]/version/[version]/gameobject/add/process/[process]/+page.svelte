@@ -47,8 +47,6 @@
     <div class="flex w-5/6 space-y-5 flex-col m-4">
         <h1 class="text-3xl mt-4">Konverze</h1>
         <ProgressStepBar/>
-        <h1 class="text-3xl mt-4">Záznam z konverze</h1>
-        <Log url={`${API_URL}/api/v1/conversion/${data.processId}/log`}/>
         {#if data.status == "Success"}
             <hr/>
             <h1 class="text-3xl mt-4">Strukturovaný popis</h1>
@@ -60,5 +58,7 @@
                 <span>Zkusit znovu</span>
             </button>
         {/if}
+        <h1 class="text-3xl mt-4">Záznam z konverze</h1>
+        <Log url={`${API_URL}/api/v1/conversion/${data.processId}/log`}/>
     </div>
 </div>

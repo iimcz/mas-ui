@@ -1,5 +1,5 @@
 {
-    "page_title": "Acquisition station",
+    "page_title": "Multisystem acquisition station",
     "language": "Language",
     "locale_name": {
         "cs-CZ": "Czech (Česky)",
@@ -65,5 +65,37 @@
             "image": ""
         }
     },
-    "must_select_artefact": "You must select at least one artefact to convert"
+    "must_select_artefact": "You must select at least one artefact to convert",
+    "paratext": {
+        "link": "/paratextTemplate/unknown.png",
+        "document": "/paratextTemplate/unknown.png",
+        "archive": "/paratextTemplate/unknown.png",
+        "sound": "/paratextTemplate/unknown.png",
+        "image": "/paratextTemplate/unknown.png",
+        "video": "/paratextTemplate/unknown.png",
+        "unknown": "/paratextTemplate/unknown.png"
+    },
+    "process_status": {
+        "Initialization": "Initialization",
+        "Running": "Running",
+        "WaitingForInput": "Waiting for input",
+        "WaitingForProcess": "Waiting for process",
+        "Failed": "Failed",
+        "Success": "Success",
+        "Restarting": "Restarting"
+    },
+    "status_detail": {
+        "RequestForRewind": {
+            "description": "Prosím přetočte kazetu na začátek",
+            "action": "Kazeta přetočena"
+        },
+        "RequestForPlay": {
+            "description": "Prosím spusťte přehrávání",
+            "action": "Přehrávání spuštěno"
+        },
+        "RequestForStopNotification": {
+            "description": "Prosím zastavte přehrávání",
+            "action": "Přehrávání zastaveno"
+        }
+    }
 }
