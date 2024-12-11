@@ -18,7 +18,7 @@
 
 <HeaderContainer title="Paratexty">
     <h1>Dílo</h1>
-    <div class="grid grid-cols-3 gap-2">
+    <div class="grid grid-cols-2 2xl:grid-cols-3 gap-2">
         {#each workParatexts as paratext (paratext.id)}
             <ParatextCard paratext={paratext}/>
         {/each}
@@ -34,7 +34,7 @@
                     <svelte:fragment slot="summary">{data.versions.find(v => v.id == version[0])?.title}</svelte:fragment>
                     <svelte:fragment slot="content">
                         <a class="btn variant-filled-primary" href={`/work/${$page.params.work}/version/${version[0]}/paratext`}>Zobrazit paratexty herních objektů</a>
-                        <div class="grid grid-cols-3 gap-2">
+                        <div class="grid grid-cols-2 2xl:grid-cols-3 gap-2">
                             {#each version[1] ?? [] as paratext (paratext.id)}
                                 <ParatextCard paratext={paratext}/>
                             {/each}

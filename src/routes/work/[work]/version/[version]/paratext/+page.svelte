@@ -16,7 +16,7 @@
 
 <HeaderContainer title="Paratexty">
     <h1>Verze</h1>
-    <div class="grid grid-cols-3 gap-2">
+    <div class="grid grid-cols-2 2xl:grid-cols-3 gap-2">
         {#each versionParatexts as paratext (paratext.id)}
             <ParatextCard paratext={paratext}/>
         {/each}
@@ -31,7 +31,7 @@
                 <AccordionItem>
                     <svelte:fragment slot="summary">{data.gamePackages.find(v => v.id == version[0])?.name}</svelte:fragment>
                     <svelte:fragment slot="content">
-                        <div class="grid grid-cols-3 gap-2">
+                        <div class="grid grid-cols-2 2xl:grid-cols-3 gap-2">
                             {#each version[1] ?? [] as paratext (paratext.id)}
                                 <ParatextCard paratext={paratext}/>
                             {/each}
