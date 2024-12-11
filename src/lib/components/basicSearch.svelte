@@ -4,6 +4,19 @@
 
     import { Autocomplete } from '@skeletonlabs/skeleton';
     import { popup } from "@skeletonlabs/skeleton";
+    import { goto } from "$app/navigation";
+    import { API_URL } from "$lib/config";
+
+    async function downloadSearchInfo() {
+        if (works.length != 0) return;
+
+        const res = await fetch(`${API_URL}/api/v1/works`)
+        works = await res.json()
+        searchOptions = works.map(w => { return {label: w.title, value: w.id }})
+    }
+
+    /** @type {import("$lib/schemas/work").Work[]} */
+    let works = [];
 
 	/**
 	 * @type import("@skeletonlabs/skeleton").PopupSettings
@@ -17,21 +30,21 @@
 	/**
 	 * @type import("@skeletonlabs/skeleton").AutocompleteOption<string>[]
 	 */
-	let searchOptions = [
-		{ label: "Polda 1", value: "1" },
-		{ label: "Mafia", value: "2" },
-		{ label: "Vietcong", value: "2" },
-	]
-
+	let searchOptions = [];
     let search = "";
 
 	/**
      * @param { CustomEvent<import("@skeletonlabs/skeleton").AutocompleteOption<string>> } event
      */
 	function onSearchSelection(event) {
-		search = event.detail.label;
+		goto(`/work/${event.detail.value}`);
 	}
 
+    $: {
+        searchOptions = works
+            .map(w => { return {label: w.title, value: w.id }})
+            .filter(w => w.label.toLowerCase().includes(search.toLowerCase()))
+    }
 </script>
 
 <div>
@@ -42,7 +55,7 @@
                 <Fa icon={faMagnifyingGlass} />
             </div>
 
-            <input bind:value={search} use:popup={popupSettings} title="Vyhledat dle názvu" type="search" placeholder="Název objektu" />
+            <input bind:value={search} on:focus={downloadSearchInfo} use:popup={popupSettings} title="Vyhledat dle názvu" type="search" placeholder="Název objektu" />
             <button class="variant-filled-secondary">Vyhledat</button>
         </div>
         <a href="search" class="ml-1 btn variant-filled">
