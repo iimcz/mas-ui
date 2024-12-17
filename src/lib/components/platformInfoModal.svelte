@@ -16,11 +16,11 @@
     <div class="flex justify-around">
         <div>
             <span class="font-bold text-lg">Ukázka zařízení</span>
-            <img width="200" height="200" />
+            <img alt="device unit" width="200" height="200" />
         </div>
         <div>
             <span class="font-bold text-lg">Ukázka média</span>
-            <img width="200" height="200" />
+            <img alt="media example" width="200" height="200" />
         </div>
     </div>
     <span class="font-bold text-lg">Popis</span>

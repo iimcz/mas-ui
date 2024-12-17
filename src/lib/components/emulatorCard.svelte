@@ -1,7 +1,4 @@
 <script>
-    import { faInfo, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-    import Fa from "svelte-fa";
-
     import { createEventDispatcher } from 'svelte'
     const dispatch = createEventDispatcher()
 
@@ -38,7 +35,7 @@
 <div class="card p-4 flex">
     {#if image != ""}
         <button class="mr-4" on:click={select}>
-            <img width="200" height="200" src="{image}"/>
+            <img alt="emulator logo" width="200" height="200" src="{image}"/>
         </button>
     {/if}
 

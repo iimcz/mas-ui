@@ -1,8 +1,5 @@
 <script>
     import { Tab, TabGroup } from "@skeletonlabs/skeleton";
-    import ButtonTextArea from "$lib/components/ButtonTextArea.svelte";
-    import { faSearch } from "@fortawesome/free-solid-svg-icons";
-    import Fa from "svelte-fa";
     import ArtefactDataEntry from "./ArtefactDataEntry.svelte"
 
     import { createEventDispatcher } from 'svelte';
@@ -23,7 +20,11 @@
         name: "",
         note: "",
         physicalMediaState: "",
-        versionId: ""
+        versionId: "",
+        physicalMediaType: "",
+        originalFileName: "",
+        digitalizationToolId: "",
+        type: ""
     }
 </script>
 

@@ -3,9 +3,6 @@
     import WorkCompare from "./workCompare.svelte";
     import { getModalStore } from "@skeletonlabs/skeleton";
     import WorkDataEntry from "./workDataEntry.svelte";
-    import ButtonTextArea from "$lib/components/ButtonTextArea.svelte";
-    import { faSearch } from "@fortawesome/free-solid-svg-icons";
-    import Fa from "svelte-fa";
 
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();

@@ -17,7 +17,6 @@
     })
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
-    import { platform } from "@floating-ui/dom";
     import { goto } from "$app/navigation";
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
