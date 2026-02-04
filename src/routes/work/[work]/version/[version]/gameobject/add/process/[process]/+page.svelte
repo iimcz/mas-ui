@@ -4,6 +4,8 @@
     import GamePackageMetadata from "$lib/components/process/GamePackageMetadata.svelte";
     import Log from "$lib/components/process/Log.svelte";
 	import { _ } from 'svelte-i18n'
+    import { getToastStore } from '@skeletonlabs/skeleton';
+    const toastStore = getToastStore();
 
     import Fa from "svelte-fa";
     import { faRepeat } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +14,8 @@
     import { onMount } from "svelte";
 
     let interval = 0;
+    let isFinished = false;
+
     onMount(() => {
         $steps = configSteps
         $currentStep = 2;
@@ -20,6 +24,18 @@
         interval = setInterval(async () => {
             const res = await fetch(`${API_URL}/api/v1/conversion/${data.processId}/status`);
             data = await res.json();
+
+            if (isFinished) return;
+
+            if (data.status == "Success") {
+                isFinished = true;
+                toastStore.trigger({message: $_("conversion_success"), background: 'variant-filled-success'});
+            }
+
+            if (data.status == "Failed") {
+                isFinished = true;
+                toastStore.trigger({message: $_("conversion_failed"), background: 'variant-filled-error'});
+            }
         }, 1000)
 
         return () => clearInterval(interval);

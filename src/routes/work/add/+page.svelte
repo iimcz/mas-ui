@@ -5,23 +5,34 @@
     import { currentSidebar } from "$lib/components/sidebar/links";
     import { API_URL } from "$lib/config";
     import { goto } from "$app/navigation";
+    import { _ } from 'svelte-i18n'
+    import { getToastStore } from '@skeletonlabs/skeleton';
+    const toastStore = getToastStore();
     $currentSidebar = [];
 
     /**
      * @param {CustomEvent<import("$lib/schemas/work").Work>} data
      */
     async function createNew(data) {
-        const res = await fetch(`${API_URL}/api/v1/works`, {
+        const result = await fetch(`${API_URL}/api/v1/works`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data.detail)
         });
 
-        /**
-         * @type {import("$lib/schemas/work").Work}
-         */
-        const createdWork = await res.json()
-        goto(`/work/${createdWork.id}`)
+        if (result.ok) {
+            toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
+
+            /**
+             * @type {import("$lib/schemas/work").Work}
+             */
+            const createdWork = await result.json()
+            goto(`/work/${createdWork.id}`)
+        }
+        else {
+            const error = await result.text();
+            toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
+        }
     }
 </script>
 

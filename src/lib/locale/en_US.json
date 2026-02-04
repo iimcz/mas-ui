@@ -93,5 +93,12 @@
             "description": "Vyčkejte na konec zvukového záznamu a zastavte přehrávání kazety",
             "action": "Přehrávání zastaveno"
         }
-    }
+    },
+    "save_success": "Entry successfully saved",
+    "save_fail": "An error occured during save: ",
+    "table_no_entries": "No entries",
+    "conversion_failed": "An error occured during conversion. Conversion log may be helpful in diagnosing the problem.",
+    "conversion_success": "Conversion successfully finished. Please fill out metadata about the newly created game object.",
+    "artefact_success": "Digitalization successfully finished. You can now eject the medium from the digitalization device.",
+    "artefact_failed": "An error occured during digitalization. Digitalization log may be helpful in diagnosing the problem."
 }

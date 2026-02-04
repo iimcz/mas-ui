@@ -93,5 +93,12 @@
             "description": "Vyčkejte na konec zvukového záznamu a zastavte přehrávání kazety",
             "action": "Přehrávání zastaveno"
         }
-    }
+    },
+    "save_success": "Záznam úspěšně uložen",
+    "save_fail": "Při ukládání záznamu se vyskytla chyba: ",
+    "table_no_entries": "Žádné záznamy",
+    "conversion_failed": "Vyskytla se chyba při konverzi. Záznam z konverze může pomoci při diagnostice problému.",
+    "conversion_success": "Konverze úspěšně dokončena. Prosím vyplňte informace o vytvořeném herním balíčku.",
+    "artefact_success": "Digitalizace úspěšně dokončena. Nyní můžete vyndat médium z digitalizačního zařízení.",
+    "artefact_failed": "Vyskytla se chyba při digitalizaci. Záznam z digitalizace může pomoci při diagnostice problému."
 }

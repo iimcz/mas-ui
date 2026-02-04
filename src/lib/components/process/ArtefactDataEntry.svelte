@@ -12,10 +12,12 @@
         <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
         <input type="text" bind:value={data.physicalMediaState} />
     </div>
+    {#if data.archivationDate}
     <p>Datum archivace</p>
         <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-        <input type="text" bind:value={data.archivationDate} />
+        <input type="text" readonly disabled bind:value={data.archivationDate} />
     </div>
+    {/if}
     <p>Archivoval</p>
         <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
         <input type="text" bind:value={data.archiver} />

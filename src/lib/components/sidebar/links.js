@@ -32,7 +32,8 @@ export const versionLinks = [
     { name: "Herní objekty", href: "", match: "" },
     { name: "Seznam herních objektů", href: "/work/[work]/version/[version]/gameobject", match: "gameObjectList" },
     { name: "Vytvořit herní objekt", href: "/work/[work]/version/[version]/gameobject/add/platform", match: "addGameObject" },
-    { name: "Spustit výchozí herní objekt", href: "/work/[work]/version/[version]/gameobject/[id]/emulator", match: "emulator" },
+    // TODO: Implement setting a GO as default
+    //{ name: "Spustit výchozí herní objekt", href: "/work/[work]/version/[version]/gameobject/[id]/emulator", match: "emulator" },
 ]
 
 /**
@@ -43,10 +44,13 @@ export const gameObjectLinks = [
     { name: "← Zpět na verzi", href: "/work/[work]/version/[version]", match: "" },
     { name: "Herní objekt", href: "", match: "" },
     { name: "Metadata", href: "/work/[work]/version/[version]/gameobject/[gameObject]", match: "gameObjectDetail" },
+    // TODO: Implement setting a GO as default
     { name: "Spustit výchozí profil", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile/[id]/emulator", match: "emulator" },
+    /*
     { name: "Profily", href: "", match: "" },
     { name: "Seznam profilů", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile", match: "profileList" },
     { name: "Vytvořit profil", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile/add", match: "addProfile" },
+    */
     { name: "Paratexty", href: "", match: "" },
     { name: "Záznamy", href: "/work/[work]/version/[version]/gameobject/[gameObject]/paratext", match: "paratextList" },
 ]

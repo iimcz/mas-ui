@@ -6,6 +6,9 @@
     import { API_URL } from "$lib/config";
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
+    import { getToastStore } from '@skeletonlabs/skeleton';
+    import { _ } from 'svelte-i18n'
+    const toastStore = getToastStore();
 
     $currentSidebar = workLinks;
     $currentRoute = "addVersion";
@@ -16,17 +19,27 @@
      async function createNew(data) {
         data.detail.workId = $page.params.work
 
-        const res = await fetch(`${API_URL}/api/v1/versions`, {
+        const result = await fetch(`${API_URL}/api/v1/versions`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data.detail)
         });
 
-        /**
-         * @type {import("$lib/schemas/version").Version}
-         */
-        const createdVersion = await res.json()
-        goto(`/work/${createdVersion.workId}/version/${createdVersion.id}`)
+        if (result.ok) {
+            toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
+
+            /**
+             * @type {import("$lib/schemas/version").Version}
+             */
+            const createdVersion = await result.json()
+            goto(`/work/${createdVersion.workId}/version/${createdVersion.id}`)
+        }
+        else {
+            const error = await result.text();
+            toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
+        }
+
+
     }
 </script>
 

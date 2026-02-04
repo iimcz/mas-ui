@@ -3,7 +3,7 @@
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
     import { faExpand, faCog, faInfoCircle, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-    import { popup } from "@skeletonlabs/skeleton";
+    import { popup, ProgressRadial } from "@skeletonlabs/skeleton";
     import Fa from "svelte-fa";
 
     /**
@@ -38,6 +38,8 @@
     $currentRoute = "emulator";
 
     let interval = 0;
+    let saving = false;
+
     /** @type number */
     let frameW, frameH = 300;
     onMount(() => {
@@ -60,6 +62,7 @@
             saveMachineState: save
         }
 
+        saving = true;
         await fetch(`${API_URL}/api/v1/emulation/${data.state.id}/finish`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -74,6 +77,15 @@
 
     // TODO: Video
 </script>
+
+{#if saving}
+<div class="absolute inset-0 flex bg-surface-backdrop-token items-center justify-center z-[999]">
+    <div class="flex justify-center items-center gap-4 card p-4 bg-surface-100">
+        <ProgressRadial width="w-16" />
+        <span class="text-xl font-semibold">Probíhá ukládání záznamu</span>
+    </div>
+</div>
+{/if}
 
 <div class="mx-4 h-full mx-auto flex justify-center">
     <div class="flex w-full space-y-10 flex-col my-4">

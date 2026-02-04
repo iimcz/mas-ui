@@ -3,6 +3,9 @@
     import { createForm } from "felte";
     import { validator } from "@felte/validator-yup";
     import * as yup from 'yup';
+    import { _ } from 'svelte-i18n'
+    import { getToastStore } from '@skeletonlabs/skeleton';
+    const toastStore = getToastStore();
 
     import ParatextDataEntry from "./ParatextDataEntry.svelte"
 
@@ -34,7 +37,7 @@
     });
 </script>
 
-<form method="post" use:enhance enctype="multipart/form-data" class="card flex p-2 flex-col">
+<form method="post" use:enhance={() => { return async ({ update }) => {await update(); toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'}); } }} enctype="multipart/form-data" class="card flex p-2 flex-col">
     <span class="text-xl font-bold p-4">Popis</span>
     <ParatextDataEntry canUpload={isNew} data={data} />
     <button type="submit" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>

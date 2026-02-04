@@ -57,6 +57,12 @@
         <ProgressStepBar/>
         <div class="mb-4">
             <span class="text-lg font-bold">1. Vyberte artefakty ke konverzi</span>
+            {#if data.artefacts.length == 0}
+                <div class="alert variant-filled-error flex justify-around">
+                    <h1>K tomuto dílu neexistují žádné artefakty. Před vytvořením herního objektu je nutné digitalizovat kopii média, nebo nahrát soubor.</h1>
+                    <a href="../../artefact/add" class="btn variant-filled">Přidat artefakt</a>
+                </div>
+            {/if}
             <ol class="list px-4 space-y-2">
                 {#each data.artefacts as artefact, index}
                     <li>

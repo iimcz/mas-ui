@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { DataHandler } from '@vincjo/datatables';
+    import { _ } from 'svelte-i18n'
+
 	export let handler: DataHandler;
 	const rowCount = handler.getRowCount();
 </script>
@@ -10,6 +12,6 @@
 		- <b>{$rowCount.end}</b>
 		/ <b>{$rowCount.total}</b>
 	{:else}
-		No entries found
+		{$_("table_no_entries")}
 	{/if}
 </aside>
