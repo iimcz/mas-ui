@@ -1,4 +1,6 @@
 <script>
+    import { run } from 'svelte/legacy';
+
     import { page } from "$app/stores";
     import { steps, currentStep, unlockedStep } from "$lib/steps.js";
     import { stringFormat } from "$lib/stringFormat";
@@ -7,13 +9,13 @@
      * Templated URLs
      * @type {Object.<string, string>}
      */
-     let links = {}
+     let links = $state({})
 
-    $: {
+    run(() => {
         for (const link of $steps) {
             links[link.href] = stringFormat(link.href, $page.params)
         }
-    }
+    });
 </script>
 
 <div>

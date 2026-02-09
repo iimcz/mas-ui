@@ -6,22 +6,24 @@
     import RowCount from "$lib/components/client/RowCount.svelte";
     import Pagination from "$lib/components/client/Pagination.svelte";
 
-    /**
-     * @type {any[]}
-     */
-    export let data;
+    
 
     //Import handler from SSD
     import { DataHandler } from "@vincjo/datatables";
 
+    
     /**
-     * @type {{ name: string, key: string, canSort: boolean, onClick?: function(any):void }[]}
+     * @typedef {Object} Props
+     * @property {any[]} data
+     * @property {{ name: string, key: string, canSort: boolean, onClick?: function(any):void }[]} [columns]
      */
-    export let columns = [
+
+    /** @type {Props} */
+    let { data, columns = [
         { name: "First name", key: "first_name", canSort: true },
         { name: "Last name", key: "last_name", canSort: true },
         { name: "Email", key: "email", canSort: true },
-    ];
+    ] } = $props();
 
 	/**
      * @param {{ name: string, key: string, canSort: boolean, onClick?: function(any):void }} column
@@ -73,7 +75,7 @@
                     {#each columns as column}
                         {#if column.onClick}
 							<td>
-                            	<button type="button" on:click={() => clickHandler(column, row)} class="btn variant-filled">{column.name}</button>
+                            	<button type="button" onclick={() => clickHandler(column, row)} class="btn variant-filled">{column.name}</button>
 							</td>
                         {:else}
                             <td>{row[column.key]}</td>

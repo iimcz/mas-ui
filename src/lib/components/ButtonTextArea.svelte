@@ -1,18 +1,24 @@
 <script>
-    /**
-     * @type {string}
-     */
-    export let placeholder;
+    import { createBubbler } from 'svelte/legacy';
 
+    const bubble = createBubbler();
+    
+
+    
     /**
-     * @type {string}
+     * @typedef {Object} Props
+     * @property {string} placeholder
+     * @property {string} [value]
+     * @property {import('svelte').Snippet} [children]
      */
-    export let value = "";
+
+    /** @type {Props} */
+    let { placeholder, value = $bindable(""), children } = $props();
 </script>
 
 <div class="relative">
-    <textarea bind:value={value} class="textarea resize-none" rows="8" placeholder={placeholder} />
-    <button on:click class="absolute right-0 bottom-0 m-4 btn variant-filled">
-        <slot/>
+    <textarea bind:value={value} class="textarea resize-none" rows="8" placeholder={placeholder}></textarea>
+    <button onclick={bubble('click')} class="absolute right-0 bottom-0 m-4 btn variant-filled">
+        {@render children?.()}
     </button>
 </div>

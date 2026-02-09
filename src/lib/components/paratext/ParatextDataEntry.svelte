@@ -1,20 +1,26 @@
 <script>
     import { faTrash } from '@fortawesome/free-solid-svg-icons';
-    import { FileDropzone } from '@skeletonlabs/skeleton';
+    import { FileUpload } from '@skeletonlabs/skeleton-svelte';
     import Fa from 'svelte-fa';
 
     function removeFile() {
         files = undefined;
     }
 
-    /** @type {import("$lib/schemas/paratext").Paratext} */
-    export let data;
 
-    /** @type {boolean} */
-    export let canUpload;
 
-    /** @type {FileList | undefined} */
-    let files;
+
+    /**
+     * @typedef {Object} Props
+     * @property {import("$lib/schemas/paratext").Paratext} data
+     * @property {boolean} canUpload
+     */
+
+    /** @type {Props} */
+    let { data = $bindable(), canUpload } = $props();
+
+    /** @type {File[]} */
+    let files = $state([]);
 </script>
 
 <div class="form border border-surface-500 m-2 p-4 space-y-2 rounded-container-token">
@@ -41,13 +47,13 @@
     </div>
     <p>Soubor</p>
     {#if canUpload}
-        <FileDropzone class={(files == undefined ? "" : "hidden")} bind:files={files} name="file">
-            <svelte:fragment slot="message"><b>Nahrajte soubor</b> kliknutím nebo přetažením</svelte:fragment>
-        </FileDropzone>
+        <FileUpload class={(files == undefined ? "" : "hidden")} onFileAccept={f => files = f.files}  name="file">
+            <FileUpload.Label>Klikněte pro nahrání nebo přetáhněte soubor</FileUpload.Label>
+        </FileUpload>
         {#if files != undefined}
             <div class="card textarea flex gap-2 items-center justify-center p-4">
                 <span>{files[0]?.name}</span>
-                <button on:click={removeFile} class="btn-icon bg-error-500 variant-filled"><Fa icon={faTrash}/></button>
+                <button onclick={removeFile} class="btn-icon bg-error-500 variant-filled"><Fa icon={faTrash}/></button>
             </div>
         {/if}
     {:else}

@@ -1,6 +1,12 @@
 <script>
-    /** @type {import("$lib/schemas/gamePackage").GamePackage} */
-    export let data;
+    
+    /**
+     * @typedef {Object} Props
+     * @property {import("$lib/schemas/gamePackage").GamePackage} data
+     */
+
+    /** @type {Props} */
+    let { data = $bindable() } = $props();
 </script>
 
 <form class="form border border-surface-500 m-2 p-4 space-y-2 rounded-container-token">

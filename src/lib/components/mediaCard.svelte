@@ -1,19 +1,38 @@
 <script>
-    export let isAvailable = true;
+    import { createBubbler } from 'svelte/legacy';
 
-    export let image = "";
-    export let title = "";
-    export let description = "";
-    /** @type {string[]} */
-    export let tags = [];
+    const bubble = createBubbler();
+
+
+    /**
+     * @typedef {Object} Props
+     * @property {boolean} [isAvailable]
+     * @property {string} [image]
+     * @property {string} [title]
+     * @property {string} [description]
+     * @property {string[]} [tags]
+     * @property {import('svelte').Snippet} [sideIcon]
+     * @property {import('svelte').Snippet} [children]
+     */
+
+    /** @type {Props} */
+    let {
+        isAvailable = true,
+        image = "",
+        title = "",
+        description = "",
+        tags = [],
+        sideIcon,
+        children
+    } = $props();
 </script>
 
 <div class="card p-4 relative" class:card-hover={isAvailable}>
     <div class="absolute right-0">
-        <slot name="sideIcon"></slot>
+        {@render sideIcon?.()}
     </div>
 
-    <button class="flex" on:click class:disabled={!isAvailable}>
+    <button class="flex" onclick={bubble('click')} class:disabled={!isAvailable}>
         {#if image != ""}
             <img width="130" height="130" src={image} alt="Tool logo" class="mr-4 object-contain"/>
         {/if}
@@ -26,14 +45,16 @@
                 {/each}
             </div>
             <div>
-                <slot></slot>
+                {@render children?.()}
                 {description}
             </div>
         </div>
     </button>
 </div>
 
-<style lang="postcss">
+<style>
+    @reference "#layout.css";
+
     .disabled {
         pointer-events: none;
 

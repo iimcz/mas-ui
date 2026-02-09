@@ -8,21 +8,27 @@
         dispatch("save", data)
     }
 
-    export let isNew = false;
 
-    /** @type {import("$lib/schemas/gamePackage").GamePackage} */
-    export let data = {
+    
+    /**
+     * @typedef {Object} Props
+     * @property {boolean} [isNew]
+     * @property {import("$lib/schemas/gamePackage").GamePackage} [data]
+     */
+
+    /** @type {Props} */
+    let { isNew = false, data = {
         id: "",
         name: "",
         versionId: "",
         emulatorId: "",
         conversionDate: "",
         includedArtefactIds: []
-    }
+    } } = $props();
 </script>
 
 <div class="card flex p-2 flex-col">
     <span class="text-xl font-bold p-4">Popis</span>
     <GamePackageDataEntry data={data} />
-    <button on:click={dispatchSave} type="button" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+    <button onclick={dispatchSave} type="button" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
 </div>

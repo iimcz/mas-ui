@@ -4,15 +4,20 @@
 
     import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";
     import { API_URL } from "$lib/config";
-    import { getToastStore } from '@skeletonlabs/skeleton';
+    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
     import { _ } from 'svelte-i18n'
-    const toastStore = getToastStore();
-
+    // TODO: FIX const toastStore = getToastStore();
     $currentSidebar = workLinks;
     $currentRoute = "workDetail";
 
-    /** @type {import('./$types').PageData} */
-	export let data;
+
+    /**
+     * @typedef {Object} Props
+     * @property {import('./$types').PageData} data
+     */
+
+    /** @type {Props} */
+    let { data } = $props();
 
     /**
      * @param {CustomEvent<import("$lib/schemas/work").Work>} formData
@@ -24,11 +29,14 @@
             body: JSON.stringify(formData.detail)
         });
 
+        /*
+        TODO: FIX
         if (result.ok) toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
         else {
             const error = await result.text();
             toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
         }
+        */
     }
 </script>
 

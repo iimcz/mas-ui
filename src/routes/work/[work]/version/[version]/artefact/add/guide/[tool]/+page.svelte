@@ -11,9 +11,8 @@
     import Guide from "$lib/components/process/Guide.svelte";
     import Log from "$lib/components/process/Log.svelte";
 
-    import { getToastStore } from '@skeletonlabs/skeleton';
-    const toastStore = getToastStore();
-
+    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
+    // TODO: FIX const toastStore = getToastStore();
     import { API_URL } from "$lib/config";
     import { digitalizationGuides } from "$lib/digitalizationGuides";
     import { currentStep, unlockedStep, steps, artefactSteps } from "$lib/steps";
@@ -50,12 +49,14 @@
 
             if (process.status == "Success") {
                 isFinished = true;
-                toastStore.trigger({message: $_("artefact_success"), background: 'variant-filled-success'});
+                // TODO: FIX
+                //toastStore.trigger({message: $_("artefact_success"), background: 'variant-filled-success'});
             }
 
             if (process.status == "Failed") {
                 isFinished = true;
-                toastStore.trigger({message: $_("artefact_failed"), background: 'variant-filled-error'});
+                // TODO: FIX
+                //toastStore.trigger({message: $_("artefact_failed"), background: 'variant-filled-error'});
             }
         }, 1000)
     }
@@ -86,15 +87,21 @@
     /**
      * @type {import("$lib/schemas/digitalizationProcess").DigitalizationProcess?}
      */
-    let process = null;
+    let process = $state(null);
 
     /**
      * @type {string?}
      */
-    let processId = null;
+    let processId = $state(null);
 
-    /** @type {import('./$types').PageData} */
-	export let data;
+
+    /**
+     * @typedef {Object} Props
+     * @property {import('./$types').PageData} data
+     */
+
+    /** @type {Props} */
+    let { data } = $props();
 
     const guide = digitalizationGuides[data.slug]
 </script>
@@ -110,7 +117,7 @@
             {#if process?.status == "WaitingForInput"}
                 <div class="card p-4 flex flex-col gap-4">
                     <span class="text-3xl mt-4">{$_(`status_detail.${process?.statusDetail}.description`)}</span>
-                    <button class="btn variant-filled-primary" on:click={async() => input("")}>{$_(`status_detail.${process?.statusDetail}.action`)}</button>
+                    <button class="btn variant-filled-primary" onclick={async() => input("")}>{$_(`status_detail.${process?.statusDetail}.action`)}</button>
                 </div>
             {:else if process?.status == "Success"}
                 <hr/>
@@ -118,7 +125,7 @@
                 <ArtefactMetadata processId={processId} />
             {:else if process?.status == "Failed"}
                 <hr/>
-                <button on:click={restart} class="btn variant-filled-error">
+                <button onclick={restart} class="btn variant-filled-error">
                     <Fa icon={faRepeat}/>
                     <span>Zkusit znovu</span>
                 </button>

@@ -3,7 +3,7 @@
     import Fa from "svelte-fa";
     import ButtonTextArea from "./ButtonTextArea.svelte";
 
-    let message = "";
+    let message = $state("");
 
     function sendMessage() {
         message = "Zde se zobrazí odpověď";

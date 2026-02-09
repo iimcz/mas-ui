@@ -1,18 +1,22 @@
 <script>
-    import { FileDropzone, ProgressBar, getModalStore } from "@skeletonlabs/skeleton";
+    import { FileUpload , Progress } from "@skeletonlabs/skeleton-svelte";
+
 
     /**
-     * @type {import('svelte').SvelteComponent}
+     * @typedef {Object} Props
+     * @property {import('svelte').SvelteComponent} parent
      */
-    export let parent;
 
-    const modalStore = getModalStore();
+    /** @type {Props} */
+    let { parent } = $props();
+
+    //const modalStore = getModalStore();
     const cBase = 'card p-4 w-modal shadow-xl space-y-4';
 	const cHeader = 'text-2xl font-bold';
 	const cForm = 'border border-surface-500 p-4 space-y-4 rounded-container-token';
 
-    let uploaded = false;
-    let val = 0;
+    let uploaded = $state(false);
+    let val = $state(0);
 
     function onChangeHandler() {
         uploaded = true;
@@ -20,7 +24,7 @@
     }
 
     function onFormSubmit() {
-		modalStore.close();
+		//modalStore.close();
 	}
 </script>
 
@@ -29,18 +33,21 @@
     <form class="modal-form {cForm}">
         {#if uploaded}
             <div class="text-center">100%</div>
-            <ProgressBar meter="bg-primary-500" track="bg-secondary-500" height="h-4" value={val} max={100}/>
+            <Progress value={val}>
+                <Progress.Label class="text-sm">{val}%</Progress.Label>
+                <Progress.Track>
+			        <Progress.Range />
+		        </Progress.Track>
+            </Progress>
         {:else}
-            <FileDropzone name="files" on:change={onChangeHandler}>
-                <svelte:fragment slot="message">
-                    Klikněte pro nahrání nebo přetáhněte soubor
-                </svelte:fragment>
-            </FileDropzone>
+            <FileUpload name="files" onchange={onChangeHandler}>
+                <FileUpload.Label>Klikněte pro nahrání nebo přetáhněte soubor</FileUpload.Label>
+            </FileUpload>
         {/if}
     </form>
     <footer class="modal-footer {parent.regionFooter}">
-        <button class="btn {parent.buttonNeutral}" on:click={modalStore.close}>Zrušit</button>
-        <button disabled={!uploaded} class="btn {parent.buttonPositive}" on:click={onFormSubmit}>Nahrát</button>
+        <button class="btn {parent.buttonNeutral}">Zrušit</button> <!-- TODO onclick={modalStore.close} -->
+        <button disabled={!uploaded} class="btn {parent.buttonPositive}" onclick={onFormSubmit}>Nahrát</button>
     </footer>
 </div>
 

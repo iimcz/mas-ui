@@ -1,21 +1,24 @@
 <script>
+    import { run } from 'svelte/legacy';
+
     import { faRemove } from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
 
-    /** @type {string[]} */
-    export let values = [];
+    /**
+     * @typedef {Object} Props
+     * @property {string[]} [values]
+     * @property {string} [name]
+     * @property {boolean} [required]
+     */
+
+    /** @type {Props} */
+    let { values = $bindable([]), name = "", required = false } = $props();
 
     /** @type {string} */
-    export let name = "";
+    let newValue = $state("");
 
     /** @type {boolean} */
-    export let required = false;
-
-    /** @type {string} */
-    let newValue = "";
-
-    /** @type {boolean} */
-    $: showAddRequired = required && values.length == 0;
+    let showAddRequired = $derived(required && values.length == 0);
 
     /** @param {number} index*/
     function removeValue(index) {
@@ -27,21 +30,21 @@
         values = [...values, newValue];
     }
 
-    $: {
+    run(() => {
         if (newValue != "") {
             addValue();
             newValue = "";
         }
-    }
+    });
 </script>
 
 {#each values as value, index}
     <div class="flex">
         <div class="input-group input-group-divider">
-            <!-- svelte-ignore a11y-autofocus -->
-            <input name="{name}.{index}.value" type="text" placeholder={required ? "Povinné" : ""} bind:value autofocus />
+            <!-- svelte-ignore a11y_autofocus -->
+            <input name="{name}.{index}.value" type="text" placeholder={required ? "Povinné" : ""} bind:value={values[index]} autofocus />
         </div>
-        <button class="btn-icon variant-filled-error ml-2" on:click={() => removeValue(index)}>
+        <button class="btn-icon variant-filled-error ml-2" onclick={() => removeValue(index)}>
             <Fa icon={faRemove} />
         </button>
     </div>

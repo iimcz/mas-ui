@@ -1,8 +1,8 @@
 <script>
-    import { SlideToggle, getModalStore } from "@skeletonlabs/skeleton";
+    import { Switch } from "@skeletonlabs/skeleton-svelte";
     import WorkDataEntry from "./workDataEntry.svelte";
 
-    const modalStore = getModalStore();
+    //const modalStore = getModalStore();
     const cBase = 'card p-4 w-modal-wide shadow-xl space-y-5';
 	const cHeader = 'text-2xl font-bold';
 
@@ -29,16 +29,16 @@
         <div>
             <h2 class="text-center text-2xl">↔</h2>
             <form class="flex flex-col form border border-surface-500 p-4 space-y-12 mt-11 rounded-container-token">
-                <SlideToggle name="slide"/>
-                <SlideToggle name="slide"/>
-                <SlideToggle name="slide"/>
-                <SlideToggle name="slide"/>
-                <SlideToggle name="slide"/>
-                <SlideToggle name="slide"/>
-                <SlideToggle name="slide"/>
-                <SlideToggle name="slide"/>
-                <SlideToggle name="slide"/>
-                <SlideToggle name="slide"/>
+                <Switch name="slide"/>
+                <Switch name="slide"/>
+                <Switch name="slide"/>
+                <Switch name="slide"/>
+                <Switch name="slide"/>
+                <Switch name="slide"/>
+                <Switch name="slide"/>
+                <Switch name="slide"/>
+                <Switch name="slide"/>
+                <Switch name="slide"/>
             </form>
         </div>
         <!--
@@ -49,9 +49,12 @@
         -->
     </div>
     <div class="space-x-2 flex justify-end">
-        <button class="btn variant-filled-secondary" on:click={modalStore.close}>Invertovat výběr</button>
-        <button class="btn variant-filled-error" on:click={modalStore.close}>Zrušit</button>
-        <button class="btn variant-filled-secondary" on:click={modalStore.close}>Použít vybrané</button>
-        <button class="btn variant-filled-primary" on:click={modalStore.close}>Použít vše</button>
+        <!--
+        TODO: FIX or just REMOVE
+        <button class="btn variant-filled-secondary" onclick={modalStore.close}>Invertovat výběr</button>
+        <button class="btn variant-filled-error" onclick={modalStore.close}>Zrušit</button>
+        <button class="btn variant-filled-secondary" onclick={modalStore.close}>Použít vybrané</button>
+        <button class="btn variant-filled-primary" onclick={modalStore.close}>Použít vše</button>
+        -->
     </div>
 </div>

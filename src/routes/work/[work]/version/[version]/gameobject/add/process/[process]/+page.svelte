@@ -4,9 +4,8 @@
     import GamePackageMetadata from "$lib/components/process/GamePackageMetadata.svelte";
     import Log from "$lib/components/process/Log.svelte";
 	import { _ } from 'svelte-i18n'
-    import { getToastStore } from '@skeletonlabs/skeleton';
-    const toastStore = getToastStore();
-
+    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
+    // TODO: FIX const toastStore = getToastStore();
     import Fa from "svelte-fa";
     import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 
@@ -29,12 +28,14 @@
 
             if (data.status == "Success") {
                 isFinished = true;
-                toastStore.trigger({message: $_("conversion_success"), background: 'variant-filled-success'});
+                // TODO: FIX
+                //toastStore.trigger({message: $_("conversion_success"), background: 'variant-filled-success'});
             }
 
             if (data.status == "Failed") {
                 isFinished = true;
-                toastStore.trigger({message: $_("conversion_failed"), background: 'variant-filled-error'});
+                // TODO: FIX
+                //toastStore.trigger({message: $_("conversion_failed"), background: 'variant-filled-error'});
             }
         }, 1000)
 
@@ -55,8 +56,14 @@
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
-    /** @type {import('./$types').PageData} */
-	export let data;
+
+    /**
+     * @typedef {Object} Props
+     * @property {import('./$types').PageData} data
+     */
+
+    /** @type {Props} */
+    let { data = $bindable() } = $props();
 </script>
 
 <div class="container h-full mx-auto flex justify-center">
@@ -69,7 +76,7 @@
             <GamePackageMetadata processId={data.processId} />
         {:else if data.status == "Failed"}
             <hr/>
-            <button on:click={restart} class="btn variant-filled-error">
+            <button onclick={restart} class="btn variant-filled-error">
                 <Fa icon={faRepeat}/>
                 <span>Zkusit znovu</span>
             </button>

@@ -1,7 +1,5 @@
 <script>
     import StringListInput from "$lib/components/StringListInput.svelte";
-    import { createForm } from "felte";
-    import { validator } from "@felte/validator-yup";
     import * as yup from 'yup';
 
     const schema = yup.object({
@@ -11,15 +9,24 @@
         })).min(1).required(),
     });
 
+    // TODO: Just redo the validation entirely
+    /*
     const { form, errors, isValid } = createForm({
         extend: validator({ schema }),
     });
+    */
 
-    /** @type {import("$lib/schemas/work").Work} */
-    export let data;
+
+    /**
+     * @typedef {Object} Props
+     * @property {import("$lib/schemas/work").Work} data
+     */
+
+    /** @type {Props} */
+    let { data = $bindable() } = $props();
 </script>
 
-<form use:form class="form border border-surface-500 m-2 p-4 space-y-2 rounded-container-token">
+<form class="form border border-surface-500 m-2 p-4 space-y-2 rounded-container-token">
     <p>Název díla</p>
     <div class="input-group input-group-divider">
         <input type="text" name="title" placeholder="Povinné" bind:value={data.title} />

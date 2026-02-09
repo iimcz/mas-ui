@@ -5,11 +5,16 @@
     import { API_URL } from "$lib/config";
     import { _ } from 'svelte-i18n'
 
-    import { getToastStore } from '@skeletonlabs/skeleton';
-    const toastStore = getToastStore();
+    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
+    // TODO: FIX const toastStore = getToastStore();
 
-    /** @type {import('./$types').PageData} */
-	export let data;
+    /**
+     * @typedef {Object} Props
+     * @property {import('./$types').PageData} data
+     */
+
+    /** @type {Props} */
+    let { data } = $props();
 
     $currentSidebar = versionLinks;
     $currentRoute = "artefactDetail";
@@ -24,11 +29,14 @@
             body: JSON.stringify(formData.detail)
         });
 
+        /*
+        TODO: FIX
         if (result.ok) toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
         else {
             const error = await result.text();
             toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
         }
+        */
     }
 </script>
 

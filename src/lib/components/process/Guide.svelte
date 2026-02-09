@@ -1,34 +1,37 @@
 <script>
     import { createEventDispatcher } from 'svelte'
 	import { _ } from 'svelte-i18n'
-    import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
+    import { Accordion } from "@skeletonlabs/skeleton-svelte";
 
     const dispatch = createEventDispatcher()
 
-    /**
-     * @type {string[]}
-     */
-    export let steps = [];
+
+
+
+
+
+
 
     /**
-     * @type {boolean}
+     * @typedef {Object} Props
+     * @property {string[]} [steps]
+     * @property {boolean} [running]
+     * @property {string[]} [images]
+     * @property {{title: string, content: string}[]} [faq]
      */
-     export let running = false;
 
-    /**
-     * @type {string[]}
-     */
-     export let images = [];
-
-    /**
-     * @type {{title: string, content: string}[]}
-     */
-     export let faq = [];
+    /** @type {Props} */
+    let {
+        steps = [],
+        running = false,
+        images = [],
+        faq = []
+    } = $props();
 
     /**
      * @type {boolean[]}
      */
-     let checkedSteps = []
+     let checkedSteps = $state([])
 </script>
 
 <div class="flex flex-col">
@@ -58,16 +61,20 @@
                 <span class="text-xl font-bold p-4">FAQ / Řešení problémů</span>
                 <Accordion>
                     {#each faq as faqItem}
-                        <AccordionItem>
-                            <svelte:fragment slot="summary">{$_(`digitalization_guides.${faqItem.title}`)}</svelte:fragment>
-                            <svelte:fragment slot="content">{$_(`digitalization_guides.${faqItem.content}`)}</svelte:fragment>
-                        </AccordionItem>
+                        <Accordion.Item value={faqItem.title}>
+                            <Accordion.ItemTrigger>
+                                {$_(`digitalization_guides.${faqItem.title}`)}
+                            </Accordion.ItemTrigger>
+                            <Accordion.ItemContent>
+                                {$_(`digitalization_guides.${faqItem.content}`)}
+                            </Accordion.ItemContent>
+                        </Accordion.Item>
                     {/each}
                 </Accordion>
             </div>
         </div>
     </div>
     {#if running == false}
-        <button class="btn variant-filled mt-4" on:click={() => dispatch("start")}>Spustit digitalizaci</button>
+        <button class="btn variant-filled mt-4" onclick={() => dispatch("start")}>Spustit digitalizaci</button>
     {/if}
 </div>

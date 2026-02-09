@@ -5,11 +5,10 @@
     import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";
     import { API_URL } from "$lib/config";
     import { goto } from "$app/navigation";
-    import { page } from "$app/stores";
-    import { getToastStore } from '@skeletonlabs/skeleton';
+    import { page } from "$app/state";
+    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
     import { _ } from 'svelte-i18n'
-    const toastStore = getToastStore();
-
+    // TODO: FIX const toastStore = getToastStore();
     $currentSidebar = workLinks;
     $currentRoute = "addVersion";
 
@@ -17,7 +16,7 @@
      * @param {CustomEvent<import("$lib/schemas/version").Version>} data
      */
      async function createNew(data) {
-        data.detail.workId = $page.params.work
+        data.detail.workId = page.params.work
 
         const result = await fetch(`${API_URL}/api/v1/versions`, {
             method: "PUT",
@@ -26,7 +25,8 @@
         });
 
         if (result.ok) {
-            toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
+            // TODO: FIX
+            //toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
 
             /**
              * @type {import("$lib/schemas/version").Version}
@@ -36,7 +36,8 @@
         }
         else {
             const error = await result.text();
-            toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
+            // TODO: FIX
+            //toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
         }
 
 

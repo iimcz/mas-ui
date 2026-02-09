@@ -6,9 +6,8 @@
     import { API_URL } from "$lib/config";
     import { goto } from "$app/navigation";
     import { _ } from 'svelte-i18n'
-    import { getToastStore } from '@skeletonlabs/skeleton';
-    const toastStore = getToastStore();
-    $currentSidebar = [];
+    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
+    // TODO: FIX const toastStore = getToastStore();    $currentSidebar = [];
 
     /**
      * @param {CustomEvent<import("$lib/schemas/work").Work>} data
@@ -21,7 +20,8 @@
         });
 
         if (result.ok) {
-            toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
+            // TODO: FIX
+            //toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
 
             /**
              * @type {import("$lib/schemas/work").Work}
@@ -31,7 +31,8 @@
         }
         else {
             const error = await result.text();
-            toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
+            // TODO: FIX
+            //toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
         }
     }
 </script>

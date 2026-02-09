@@ -8,9 +8,8 @@
     import { onMount } from "svelte";
     import MediaCard from "$lib/components/mediaCard.svelte";
 
-    import { getToastStore } from '@skeletonlabs/skeleton';
-    const toastStore = getToastStore();
-
+    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
+    // TODO: FIX const toastStore = getToastStore();
     onMount(() => {
         $unlockedStep = 1;
         $currentStep = 1;
@@ -45,10 +44,16 @@
     /**
      * @type {boolean[]}
      */
-    const selectedArtefacts = []
+    const selectedArtefacts = $state([])
 
-    /** @type {import('./$types').PageData} */
-	export let data;
+
+    /**
+     * @typedef {Object} Props
+     * @property {import('./$types').PageData} data
+     */
+
+    /** @type {Props} */
+    let { data } = $props();
 </script>
 
 <div class="container h-full mx-auto flex justify-center">

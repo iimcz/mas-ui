@@ -6,8 +6,14 @@
     $currentRoute = "paratextList";
 
 
-    /** @type {import('./$types').PageData} */
-	export let data;
+    
+    /**
+     * @typedef {Object} Props
+     * @property {import('./$types').PageData} data
+     */
+
+    /** @type {Props} */
+    let { data } = $props();
     $routeOverrides["work"] = data.workId;
 
     if (data.versionId != null) {

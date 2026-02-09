@@ -3,12 +3,16 @@
     import { faDownload } from "@fortawesome/free-solid-svg-icons";
     import { onMount } from "svelte";
 
+    
     /**
-    * @type {string}
-    */
-    export let url;
+     * @typedef {Object} Props
+     * @property {string} url
+     */
 
-    let log = "";
+    /** @type {Props} */
+    let { url } = $props();
+
+    let log = $state("");
     let interval = 0;
 
     onMount(() => {
@@ -30,11 +34,11 @@
     /**
      * @type {HTMLTextAreaElement}
      */
-    let textArea;
+    let textArea = $state();
 </script>
 
 <div>
-    <textarea bind:this={textArea} disabled bind:value={log} class="textarea resize-none cursor-override" rows="15" />
+    <textarea bind:this={textArea} disabled bind:value={log} class="textarea resize-none cursor-override" rows="15"></textarea>
     <a target="_blank" href={url} class="btn variant-filled mt-2 float-right">
         <Fa icon={faDownload}/>
         <span>Stáhnout log</span>

@@ -1,4 +1,6 @@
 <script>
+    import { run } from 'svelte/legacy';
+
     import { currentRoute, currentSidebar, routeOverrides } from "./links";
     import { page } from '$app/stores';
     import { stringFormat } from "$lib/stringFormat";
@@ -7,13 +9,13 @@
      * Templated URLs
      * @type {Object.<string, string>}
      */
-    let links = {}
+    let links = $state({})
 
-    $: {
+    run(() => {
         for (const link of $currentSidebar) {
             links[link.href] = stringFormat(link.href, { ...$routeOverrides, ...$page.params })
         }
-    }
+    });
 </script>
 
 <div class:visible-submenu={$currentSidebar.length > 0} class="h-full bg-surface-50-900-token border-r border-surface-500/30 overflow-hidden">
@@ -38,12 +40,14 @@
     {/if}
 </div>
 
-<style lang="postcss">
+<style>
+    @reference "#layout.css";
+
     .visible-submenu {
         @apply w-[260px];
     }
 
     .active-link {
-        @apply bg-primary-500 !important;
+        @apply bg-primary-500;
     }
 </style>

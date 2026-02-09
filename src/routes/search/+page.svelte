@@ -17,7 +17,7 @@
         { name: "Zobrazit", key: "name", canSort: false, onClick: (/** @type {import("$lib/schemas/work").Work} */ row) => { navigate(row.id) } }
     ]
 
-    let header = ""
+    let header = $state("")
     let filter = ""
 
     const unsubscribe = page.subscribe((page) => {
@@ -40,8 +40,14 @@
     import { currentSidebar } from "$lib/components/sidebar/links";
     $currentSidebar = [];
 
-    /** @type {import('./$types').PageData} */
-	export let data;
+    
+    /**
+     * @typedef {Object} Props
+     * @property {import('./$types').PageData} data
+     */
+
+    /** @type {Props} */
+    let { data } = $props();
 </script>
 
 <div class="container h-full mx-auto flex justify-center">

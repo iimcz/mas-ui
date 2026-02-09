@@ -1,7 +1,7 @@
 <script>
-    import { Tab, TabGroup } from "@skeletonlabs/skeleton";
+    import { Tabs } from "@skeletonlabs/skeleton-svelte";
     import WorkCompare from "./workCompare.svelte";
-    import { getModalStore } from "@skeletonlabs/skeleton";
+    //import { getModalStore } from "@skeletonlabs/skeleton-svelte";
     import WorkDataEntry from "./workDataEntry.svelte";
 
     import { createEventDispatcher } from 'svelte';
@@ -11,30 +11,32 @@
         dispatch("save", data)
     }
 
-    const modalStore = getModalStore();
+    // TODO: FIX
+    //const modalStore = getModalStore();
 
-    /**
-     * @type {import('@skeletonlabs/skeleton').ModalComponent}
-     */
     const modalComponent = { ref: WorkCompare };
 
     function openModal() {
-        /**
-         * @type {import('@skeletonlabs/skeleton').ModalSettings}
-         */
+
         const modal = {
             type: "component",
             component: modalComponent,
         };
 
-        modalStore.trigger(modal);
+        //modalStore.trigger(modal);
     }
 
-    export let isNew = false;
-    let tabSet = 0;
+    let tabSet = $state(0);
 
-    /** @type {import("$lib/schemas/work").Work} */
-    export let data = {
+
+    /**
+     * @typedef {Object} Props
+     * @property {boolean} [isNew]
+     * @property {import("$lib/schemas/work").Work} [data]
+     */
+
+    /** @type {Props} */
+    let { isNew = false, data = {
         id: "",
         alternativeTitle: "",
         classificationLocation: [],
@@ -44,31 +46,34 @@
         subheading: "",
         title: "",
         yearOfPublication: ""
-    }
+    } } = $props();
 </script>
 
 <div class="card flex p-2 flex-col">
     <span class="text-xl font-bold p-4">Popis</span>
-    <TabGroup>
-        <Tab bind:group={tabSet} name="tab1" value={0}>
-            <span>Strukturovaný popis</span>
-        </Tab>
+    <Tabs>
+        <Tabs.List>
+            <Tabs.Trigger value="tab1">Strukturovaný popis</Tabs.Trigger>
+        </Tabs.List>
+
         <!--
         <Tab bind:group={tabSet} name="tab2" value={1}>Volný text (AI)</Tab>
         --->
         <!-- Tab Panels --->
-        <svelte:fragment slot="panel">
-            {#if tabSet === 0}
-                <WorkDataEntry data={data} />
-                <button on:click={dispatchSave} type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
-                <!--
-            {:else if tabSet === 1}
-                <ButtonTextArea on:click={openModal} placeholder="Vložený text bude automaticky zpracován pomocí AI...">
-                    <Fa icon={faSearch} />
-                    <span>Vyhledat v textu</span>
-                </ButtonTextArea>
-            --->
-            {/if}
-        </svelte:fragment>
-    </TabGroup>
+        <Tabs.Content value="tab1">
+
+                {#if tabSet === 0}
+                    <WorkDataEntry data={data} />
+                    <button onclick={dispatchSave} type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+                    <!--
+                {:else if tabSet === 1}
+                    <ButtonTextArea on:click={openModal} placeholder="Vložený text bude automaticky zpracován pomocí AI...">
+                        <Fa icon={faSearch} />
+                        <span>Vyhledat v textu</span>
+                    </ButtonTextArea>
+                --->
+                {/if}
+
+        </Tabs.Content>
+    </Tabs>
 </div>

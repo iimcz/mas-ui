@@ -1,9 +1,12 @@
 <script>
+    import { run } from 'svelte/legacy';
+
     import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
 
-    import { Autocomplete } from '@skeletonlabs/skeleton';
-    import { popup } from "@skeletonlabs/skeleton";
+    import { Combobox } from '@skeletonlabs/skeleton-svelte';
+    // TODO: Popup
+    //import { popup } from "@skeletonlabs/skeleton-svelte";
     import { goto } from "$app/navigation";
     import { API_URL } from "$lib/config";
 
@@ -12,39 +15,27 @@
 
         const res = await fetch(`${API_URL}/api/v1/works`)
         works = await res.json()
-        searchOptions = works.map(w => { return {label: w.title, value: w.id }})
+        //searchOptions = works.map(w => { return {label: w.title, value: w.id }})
     }
 
     /** @type {import("$lib/schemas/work").Work[]} */
-    let works = [];
+    let works = $state([]);
 
-	/**
-	 * @type import("@skeletonlabs/skeleton").PopupSettings
-	 */
-	let popupSettings = {
-		event: 'focus-click',
-		target: 'popupAutocomplete',
-		placement: 'bottom',
-	};
+    // TODO: FIX
+    /*
+	let searchOptions = $state([]);
+    let search = $state("");
 
-	/**
-	 * @type import("@skeletonlabs/skeleton").AutocompleteOption<string>[]
-	 */
-	let searchOptions = [];
-    let search = "";
-
-	/**
-     * @param { CustomEvent<import("@skeletonlabs/skeleton").AutocompleteOption<string>> } event
-     */
 	function onSearchSelection(event) {
 		goto(`/work/${event.detail.value}`);
 	}
 
-    $: {
+    run(() => {
         searchOptions = works
             .map(w => { return {label: w.title, value: w.id }})
             .filter(w => w.label.toLowerCase().includes(search.toLowerCase()))
-    }
+    });
+    */
 </script>
 
 <div>
@@ -55,7 +46,9 @@
                 <Fa icon={faMagnifyingGlass} />
             </div>
 
-            <input bind:value={search} on:focus={downloadSearchInfo} use:popup={popupSettings} title="Vyhledat dle názvu" type="search" placeholder="Název objektu" />
+            <!--
+            <input bind:value={search} onfocus={downloadSearchInfo} use:popup={popupSettings} title="Vyhledat dle názvu" type="search" placeholder="Název objektu" />
+            -->
             <button class="variant-filled-secondary">Vyhledat</button>
         </div>
         <a href="search" class="ml-1 btn variant-filled">
@@ -64,6 +57,8 @@
     </div>
 
     <div data-popup="popupAutocomplete" class="card w-full max-w-sm max-h-48 p-4 overflow-y-auto" tabindex="-1">
+        <!--
         <Autocomplete bind:input={search} options={searchOptions} on:selection={onSearchSelection} />
+        -->
     </div>
 </div>

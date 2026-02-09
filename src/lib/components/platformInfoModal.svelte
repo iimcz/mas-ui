@@ -1,12 +1,16 @@
 <script>
-    import { getModalStore } from "@skeletonlabs/skeleton";
+    //import { getModalStore } from "@skeletonlabs/skeleton-svelte";
+
 
     /**
-     * @type {import('svelte').SvelteComponent}
+     * @typedef {Object} Props
+     * @property {import('svelte').SvelteComponent} parent
      */
-    export let parent;
 
-    const modalStore = getModalStore();
+    /** @type {Props} */
+    let { parent } = $props();
+
+    //const modalStore = getModalStore();
     const cBase = 'card p-4 w-modal shadow-xl space-y-5';
 	const cHeader = 'text-2xl font-bold';
 </script>
@@ -28,7 +32,7 @@
         Zde bude detailní popis zařízení pro identifikaci platformy
     </div>
     <footer class="modal-footer {parent.regionFooter}">
-        <button class="btn {parent.buttonNeutral}" on:click={modalStore.close}>Zavřít</button>
+        <button class="btn {parent.buttonNeutral}" >Zavřít</button> <!-- TODO: onclick={modalStore.close} -->
     </footer>
 </div>
 

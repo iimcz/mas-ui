@@ -5,9 +5,8 @@
     import { API_URL } from "$lib/config";
     import { _ } from 'svelte-i18n'
 
-    import { getToastStore } from '@skeletonlabs/skeleton';
-    const toastStore = getToastStore();
-
+    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
+    // TODO: FIX const toastStore = getToastStore();
     import { currentSidebar, currentRoute, gameObjectLinks } from "$lib/components/sidebar/links";
     $currentSidebar = gameObjectLinks;
     $currentRoute = "gameObjectDetail";
@@ -29,8 +28,14 @@
         }
     }
 
-    /** @type {import('./$types').PageData} */
-	export let data;
+
+    /**
+     * @typedef {Object} Props
+     * @property {import('./$types').PageData} data
+     */
+
+    /** @type {Props} */
+    let { data } = $props();
 </script>
 
 <HeaderContainer title="Metadata herního balíčku">

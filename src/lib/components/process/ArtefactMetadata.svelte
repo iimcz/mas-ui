@@ -12,10 +12,14 @@
         $unlockedStep = 3;
     })
 
+    
     /**
-     * @type {string}
+     * @typedef {Object} Props
+     * @property {string} processId
      */
-    export let processId;
+
+    /** @type {Props} */
+    let { processId } = $props();
 
     /**
      * @param {CustomEvent<import("$lib/schemas/artefact").Artefact>} data

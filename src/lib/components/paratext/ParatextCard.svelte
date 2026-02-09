@@ -9,11 +9,17 @@
         goto(`/paratext/${paratext.id}`)
     }
 
-    /** @type import('$lib/schemas/paratext').Paratext */
-    export let paratext;
+    
+    /**
+     * @typedef {Object} Props
+     * @property {any} paratext
+     */
+
+    /** @type {Props} */
+    let { paratext } = $props();
 
     /** @type {string[]}*/
-    let tags = []
+    let tags = $state([])
     if (paratext.downloadable) tags = ["Stáhnutelné"]
 </script>
 
@@ -22,11 +28,13 @@
     tags={tags}
     image={getParatextThumbnail(paratext)}
     on:click={() => downloadParatext(paratext)}>
-    <svelte:fragment slot="sideIcon">
-        <button on:click={editParatext} class="btn-icon variant-filled mr-2">
-            <Fa icon={faEdit}/>
-        </button>
-    </svelte:fragment>
+    {#snippet sideIcon()}
+    
+            <button onclick={editParatext} class="btn-icon variant-filled mr-2">
+                <Fa icon={faEdit}/>
+            </button>
+        
+    {/snippet}
 
     <div>{paratext.description}</div>
     <div>Zdroj: {paratext.source}</div>

@@ -1,4 +1,6 @@
 <script>
+    import { run } from 'svelte/legacy';
+
     import EmulatorCard from "$lib/components/emulatorCard.svelte";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
 	import { _ } from 'svelte-i18n'
@@ -8,7 +10,7 @@
     import Fa from "svelte-fa";
     import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-    let searchText = ""
+    let searchText = $state("")
 
     onMount(() => {
         $steps = configSteps
@@ -21,11 +23,19 @@
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
-    /** @type {import('./$types').PageData} */
-	export let data;
+    
+    /**
+     * @typedef {Object} Props
+     * @property {import('./$types').PageData} data
+     */
 
-    let filteredPlatforms = data.platforms
-    $: filteredPlatforms = data.platforms.filter(p => p.name.toLowerCase().includes(searchText.toLowerCase()))
+    /** @type {Props} */
+    let { data } = $props();
+
+    let filteredPlatforms = $state(data.platforms)
+    run(() => {
+        filteredPlatforms = data.platforms.filter(p => p.name.toLowerCase().includes(searchText.toLowerCase()))
+    });
 
 
     const artefactTypes = data.artefacts

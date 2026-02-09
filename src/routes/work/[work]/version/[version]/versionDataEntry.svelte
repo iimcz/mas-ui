@@ -1,8 +1,14 @@
 <script>
     import StringListInput from "$lib/components/StringListInput.svelte";
 
-    /** @type {import("$lib/schemas/version").Version} */
-    export let data;
+    
+    /**
+     * @typedef {Object} Props
+     * @property {import("$lib/schemas/version").Version} data
+     */
+
+    /** @type {Props} */
+    let { data = $bindable() } = $props();
 </script>
 
 <form class="form border border-surface-500 m-2 p-4 space-y-2 rounded-container-token">

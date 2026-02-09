@@ -1,5 +1,5 @@
 <script>
-    import { Tab, TabGroup } from "@skeletonlabs/skeleton";
+    import { Tabs } from "@skeletonlabs/skeleton-svelte";
     import ArtefactDataEntry from "./ArtefactDataEntry.svelte"
 
     import { createEventDispatcher } from 'svelte';
@@ -9,11 +9,17 @@
         dispatch("save", data)
     }
 
-    export let isNew = false;
-    let tabSet = 0;
+    let tabSet = $state(0);
 
-    /** @type {import("$lib/schemas/artefact").Artefact} */
-    export let data = {
+
+    /**
+     * @typedef {Object} Props
+     * @property {boolean} [isNew]
+     * @property {import("$lib/schemas/artefact").Artefact} [data]
+     */
+
+    /** @type {Props} */
+    let { isNew = false, data = {
         id: "",
         archivationDate: "",
         archiver: "",
@@ -25,23 +31,23 @@
         originalFileName: "",
         digitalizationToolId: "",
         type: ""
-    }
+    } } = $props();
 </script>
 
 <div class="card flex p-2 flex-col">
     <span class="text-xl font-bold p-4">Popis</span>
-    <TabGroup>
-        <Tab bind:group={tabSet} name="tab1" value={0}>
-            <span>Strukturovaný popis</span>
-        </Tab>
+    <Tabs>
+        <Tabs.List>
+            <Tabs.Trigger value="tab1">Strukturovaný popis</Tabs.Trigger>
+        </Tabs.List>
         <!--
         <Tab bind:group={tabSet} name="tab2" value={1}>Volný text (AI)</Tab>
         -->
         <!-- Tab Panels --->
-        <svelte:fragment slot="panel">
+         <Tabs.Content value="tab1">
             {#if tabSet === 0}
                 <ArtefactDataEntry data={data} />
-                <button on:click={dispatchSave} type="button" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+                <button onclick={dispatchSave} type="button" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
                 <!--
             {:else if tabSet === 1}
                 <ButtonTextArea on:click={() => {}} placeholder="Vložený text bude automaticky přidán do AI databáze....">
@@ -50,6 +56,6 @@
                 </ButtonTextArea>
             -->
             {/if}
-        </svelte:fragment>
-    </TabGroup>
+        </Tabs.Content>
+    </Tabs>
 </div>
