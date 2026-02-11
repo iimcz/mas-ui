@@ -3,8 +3,9 @@
 	import { AppShell, AppBar, Modal, Toast } from '@skeletonlabs/skeleton';
     import Sidebar from '$lib/components/sidebar/sidebar.svelte';
 	import Fa from 'svelte-fa';
-    import { faSave } from '@fortawesome/free-solid-svg-icons';
+    import { faSave, faDatabase } from '@fortawesome/free-solid-svg-icons';
 	import { _ } from 'svelte-i18n'
+    import { CA_URL } from '$lib/config';
 
 	import { initializeStores } from '@skeletonlabs/skeleton';
 	initializeStores();
@@ -30,6 +31,10 @@
 				</a>
 			</svelte:fragment>
 			<svelte:fragment slot="trail">
+                <a href={CA_URL} target="_blank" class="flex items-center font-bold text-l uppercase mr-4">
+                <Fa class="mr-2" icon={faDatabase}/>
+                Collective Access
+                </a>
 				<LocaleSwitcher/>
 			</svelte:fragment>
 		</AppBar>

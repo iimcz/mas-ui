@@ -12,17 +12,17 @@
     export let isNew = false;
     let tabSet = 0;
 
-    /** @type {import("$lib/schemas/version").Version} */
+    /** @type {import("$lib/schemas/workVersion").WorkVersion} */
     export let data = {
         id: "",
-        alternativeTitle: "",
-        note: "",
-        status: [],
-        system: [],
-        systemRequirements: "",
-        title: "",
         workId: "",
-        yearOfPublication: ""
+        label: "",
+        subtitle: "",
+        description: "",
+        curatorialDescription: "",
+        copyProtection: "",
+        system: "",
+        importedAt: ""
     }
 </script>
 
@@ -39,7 +39,7 @@
         <svelte:fragment slot="panel">
             {#if tabSet === 0}
                 <VersionDataEntry data={data} />
-                <button on:click={dispatchSave} type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+                <!-- <button on:click={dispatchSave} type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button> -->
             <!--
             {:else if tabSet === 1}
                 <ButtonTextArea on:click={() => {}} placeholder="Vložený text bude automaticky přidán do AI databáze....">

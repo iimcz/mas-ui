@@ -17,11 +17,11 @@
 			<div class="flex space-x-4 mt-2">
 				<a href="search?filter=work" class="btn variant-filled grow">
 					<Fa icon={faGamepad} />
-					<span>Existující díla</span>
+					<span>Prohlížet díla</span>
 				</a>
 				<a href="work/add" class="btn variant-filled grow">
 					<Fa icon={faPlus} />
-					<span>Vytvořit nové dílo</span>
+					<span>Import nového díla</span>
 				</a>
 			</div>
 		</div>

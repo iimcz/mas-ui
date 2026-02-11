@@ -36,14 +36,10 @@
     /** @type {import("$lib/schemas/work").Work} */
     export let data = {
         id: "",
-        alternativeTitle: "",
-        classificationLocation: [],
-        classificationTime: [],
-        description: "",
-        genre: [],
-        subheading: "",
-        title: "",
-        yearOfPublication: ""
+        label: "",
+        typeOfWork: "",
+        internalNote: "",
+        importedAt: ""
     }
 </script>
 
