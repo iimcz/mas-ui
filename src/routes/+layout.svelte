@@ -1,39 +1,37 @@
-<script>
+<script lang="ts">
 	import './layout.css';
+	import { _ } from 'svelte-i18n'
 	import { AppBar, Dialog, Toast } from '@skeletonlabs/skeleton-svelte';
     import Sidebar from '$lib/components/sidebar/sidebar.svelte';
+	import LocaleSwitcher from '$lib/components/LocaleSwitcher.svelte';
 	import Fa from 'svelte-fa';
     import { faSave } from '@fortawesome/free-solid-svg-icons';
-	import { _ } from 'svelte-i18n'
 
-    import LocaleSwitcher from '$lib/components/LocaleSwitcher.svelte';
-	/**
-	 * @typedef {Object} Props
-	 * @property {import('svelte').Snippet} [children]
-	 */
-
-	/** @type {Props} */
 	let { children } = $props();
 </script>
 
-<!-- App Shell -->
 <Dialog />
 <!--
 <Toast />
 -->
-<div>
-	<AppBar>
-		<AppBar.Lead>
-			<a href="/" class="flex items-center font-bold text-xl uppercase mr-4">
-				<Fa class="mr-2" icon={faSave}/>
-				{$_('page_title')}
-			</a>
-		</AppBar.Lead>
-		<AppBar.Trail>
-			<LocaleSwitcher/>
-		</AppBar.Trail>
+<div class="grid h-screen grid-rows-[auto_1fr]">
+	<AppBar class="border-b border-surface-200-800 bg-surface-50-950/75 backdrop-blur-lg h-[70px]">
+		<AppBar.Toolbar class="grid-cols-[1fr_auto] container mx-auto">
+			<AppBar.Headline>
+				<a href="/" class="flex items-center font-bold text-xl uppercase mr-4">
+					<Fa class="mr-2" icon={faSave}/>
+					{$_('page_title')}
+				</a>
+			</AppBar.Headline>
+			<AppBar.Trail>
+				<LocaleSwitcher/>
+			</AppBar.Trail>
+		</AppBar.Toolbar>
 	</AppBar>
-	<Sidebar/>
-	<!-- Page Route Content -->
-	{@render children?.()}
+	<div class="max-w-[80vw] w-full mx-auto grid grid-cols-[240px_1fr]">
+		<Sidebar/>
+		<main>
+			{@render children?.()}
+		</main>
+	</div>
 </div>

@@ -51,10 +51,10 @@
     <div class="space-x-2 flex justify-end">
         <!--
         TODO: FIX or just REMOVE
-        <button class="btn variant-filled-secondary" onclick={modalStore.close}>Invertovat výběr</button>
-        <button class="btn variant-filled-error" onclick={modalStore.close}>Zrušit</button>
-        <button class="btn variant-filled-secondary" onclick={modalStore.close}>Použít vybrané</button>
-        <button class="btn variant-filled-primary" onclick={modalStore.close}>Použít vše</button>
+        <button class="btn preset-filled-secondary" onclick={modalStore.close}>Invertovat výběr</button>
+        <button class="btn preset-filled-error" onclick={modalStore.close}>Zrušit</button>
+        <button class="btn preset-filled-secondary" onclick={modalStore.close}>Použít vybrané</button>
+        <button class="btn preset-filled-primary" onclick={modalStore.close}>Použít vše</button>
         -->
     </div>
 </div>

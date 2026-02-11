@@ -1,34 +1,29 @@
-<script>
-    import { run } from 'svelte/legacy';
-
+<script lang="ts">
     import { currentRoute, currentSidebar, routeOverrides } from "./links";
-    import { page } from '$app/stores';
+    import { page } from '$app/state';
     import { stringFormat } from "$lib/stringFormat";
 
-    /**
-     * Templated URLs
-     * @type {Object.<string, string>}
-     */
-    let links = $state({})
-
-    run(() => {
+    let links = $derived.by(() => {
+        let templatedLinks: {[Key: string]: string} = {};
         for (const link of $currentSidebar) {
-            links[link.href] = stringFormat(link.href, { ...$routeOverrides, ...$page.params })
+            templatedLinks[link.href] = stringFormat(link.href, { ...$routeOverrides, ...page.params })
         }
+
+        return templatedLinks;
     });
 </script>
 
-<div class:visible-submenu={$currentSidebar.length > 0} class="h-full bg-surface-50-900-token border-r border-surface-500/30 overflow-hidden">
+<aside class:visible-submenu={$currentSidebar.length > 0} class="h-full bg-surface-50-900-token border-r border-surface-500/30 overflow-hidden">
     {#if $currentSidebar.length > 0}
         <section class="h-full p-4 pb-20 space-y-4 overflow-y-auto">
-            <nav class="list-nav">
-                <ul>
+            <nav>
+                <ul class="flex flex-col gap-2">
                     {#each $currentSidebar as link}
                         <li>
                             {#if link.href == ""}
-                                <p class="font-bold pl-4 my-4 text-2xl">{link.name}</p>
+                                <p class="font-bold ml-2 text-surface-600-400 mt-4">{link.name}</p>
                             {:else}
-                                <a data-sveltekit-preload-data="tap" class:active-link={link.match == $currentRoute} href={links[link.href]}>
+                                <a class="btn hover:preset-tonal" data-sveltekit-preload-data="tap" class:active-link={link.match == $currentRoute} href={links[link.href]}>
                                     <span class="flex-auto">{link.name}</span>
                                 </a>
                             {/if}
@@ -38,7 +33,7 @@
             </nav>
         </section>
     {/if}
-</div>
+</aside>
 
 <style>
     @reference "#layout.css";
@@ -48,6 +43,6 @@
     }
 
     .active-link {
-        @apply bg-primary-500;
+        @apply preset-tonal;
     }
 </style>

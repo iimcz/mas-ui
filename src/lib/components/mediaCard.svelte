@@ -41,7 +41,7 @@
             <div class="text-lg font-bold">{title}</div>
             <div class="flex gap-1">
                 {#each tags as tag}
-                    <span class="badge variant-filled">{tag}</span>
+                    <span class="badge preset-filled">{tag}</span>
                 {/each}
             </div>
             <div>

@@ -76,7 +76,7 @@
 <div class="mx-4 h-full mx-auto flex justify-center">
     <div class="flex w-full space-y-10 flex-col my-4">
         <div class="ml-4 mt-4 flex space-x-4">
-            <button onclick={async () => await finishEmulation(true)} class="btn-icon variant-filled"> <!-- TODO use:popup={backPopup} -->
+            <button onclick={async () => await finishEmulation(true)} class="btn-icon preset-filled"> <!-- TODO use:popup={backPopup} -->
                 <Fa icon={faArrowLeft}/>
             </button>
             <h1 class="text-3xl">Emulace</h1>
@@ -86,13 +86,13 @@
                 <div bind:clientWidth={frameW} bind:clientHeight={frameH} class="relative bg-surface-900 aspect-video w-auto h-full mx-auto">
                     <iframe class="absolute left-0 top-0" width={frameW} height={frameH} title="Stream" src={data.streamSource}></iframe>
                     <div class="absolute right-0 top-0 m-2">
-                        <button class="btn-icon variant-filled"> <!-- TODO use:popup={settingsPopup} -->
+                        <button class="btn-icon preset-filled"> <!-- TODO use:popup={settingsPopup} -->
                             <Fa icon={faCog}/>
                         </button>
-                        <button class="btn-icon variant-filled"> <!-- TODO use:popup={infoPopup} -->
+                        <button class="btn-icon preset-filled"> <!-- TODO use:popup={infoPopup} -->
                             <Fa icon={faInfoCircle}/>
                         </button>
-                        <button class="btn-icon variant-filled">
+                        <button class="btn-icon preset-filled">
                             <Fa icon={faExpand}/>
                         </button>
                     </div>
@@ -104,29 +104,29 @@
 
 <div data-popup="settingsPopup">
     <div class="flex flex-col space-y-2">
-        <button class="btn variant-filled-error">Reset stroje</button>
-        <button onclick={async () => await finishEmulation(true)} class="btn variant-filled-error">Ukončit</button>
-        <button onclick={async () => await finishEmulation(false)} class="btn variant-filled-error">Ukončit bez záznamu</button>
-        <button class="btn variant-filled-primary">Uložit stav</button>
-        <button class="btn variant-filled-primary">Načíst stav</button>
-        <button class="btn variant-filled-primary">Otevřít menu emulátoru</button>
-        <button class="btn variant-filled-secondary">Info o ovládání</button>
-        <button class="btn variant-filled-secondary">Uložit profil</button>
-        <button class="btn variant-filled-secondary">Načíst profil</button>
+        <button class="btn preset-filled-error">Reset stroje</button>
+        <button onclick={async () => await finishEmulation(true)} class="btn preset-filled-error">Ukončit</button>
+        <button onclick={async () => await finishEmulation(false)} class="btn preset-filled-error">Ukončit bez záznamu</button>
+        <button class="btn preset-filled-primary">Uložit stav</button>
+        <button class="btn preset-filled-primary">Načíst stav</button>
+        <button class="btn preset-filled-primary">Otevřít menu emulátoru</button>
+        <button class="btn preset-filled-secondary">Info o ovládání</button>
+        <button class="btn preset-filled-secondary">Uložit profil</button>
+        <button class="btn preset-filled-secondary">Načíst profil</button>
     </div>
 </div>
 
 <div data-popup="infoPopup">
     <div class="flex flex-col space-y-2">
-        <button class="btn variant-filled-secondary">Info o ovládání</button>
-        <button class="btn variant-filled-secondary">Info o zařízení</button>
+        <button class="btn preset-filled-secondary">Info o ovládání</button>
+        <button class="btn preset-filled-secondary">Info o zařízení</button>
     </div>
 </div>
 
-<div class="card p-4 variant-filled-secondary" data-popup="backPopup">
+<div class="card p-4 preset-filled-secondary" data-popup="backPopup">
 	<p>Zpět k verzi</p>
     <p>Záznam se tvoří automaticky</p>
-	<div class="arrow variant-filled-secondary"></div>
+	<div class="arrow preset-filled-secondary"></div>
 </div>
 
 <style>

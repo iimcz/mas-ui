@@ -31,10 +31,10 @@
 
         /*
         TODO: FIX
-        if (result.ok) toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
+        if (result.ok) toastStore.trigger({message: $_("save_success"), background: 'preset-filled-success'});
         else {
             const error = await result.text();
-            toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
+            toastStore.trigger({message: $_("save_fail") + error, background: 'preset-filled-error'});
         }
         */
     }
@@ -50,7 +50,7 @@
                     Další možnosti se nachází v levém menu.
                 </p>
                 <div>
-                    <a href="../gameobject/add/platform" class="btn variant-filled">Přidat herní balíček</a>
+                    <a href="../gameobject/add/platform" class="btn preset-filled">Přidat herní balíček</a>
                 </div>
             </div>
         </div>

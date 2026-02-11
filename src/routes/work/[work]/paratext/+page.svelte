@@ -42,7 +42,7 @@
                         {data.versions.find(v => v.id == version[0])?.title}
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
-                        <a class="btn variant-filled-primary" href={`/work/${$page.params.work}/version/${version[0]}/paratext`}>Zobrazit paratexty herních objektů</a>
+                        <a class="btn preset-filled-primary" href={`/work/${$page.params.work}/version/${version[0]}/paratext`}>Zobrazit paratexty herních objektů</a>
                         <div class="grid grid-cols-2 2xl:grid-cols-3 gap-2">
                             {#each version[1] ?? [] as paratext (paratext.id)}
                                 <ParatextCard paratext={paratext}/>

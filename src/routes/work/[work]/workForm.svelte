@@ -64,7 +64,7 @@
 
                 {#if tabSet === 0}
                     <WorkDataEntry data={data} />
-                    <button onclick={dispatchSave} type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+                    <button onclick={dispatchSave} type="button" class="btn preset-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
                     <!--
                 {:else if tabSet === 1}
                     <ButtonTextArea on:click={openModal} placeholder="Vložený text bude automaticky zpracován pomocí AI...">

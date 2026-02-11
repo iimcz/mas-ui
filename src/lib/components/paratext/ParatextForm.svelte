@@ -43,8 +43,8 @@
     */
 </script>
 
-<form method="post" use:enhance={() => { return async ({ update }) => {await update(); toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'}); } }} enctype="multipart/form-data" class="card flex p-2 flex-col">
+<form method="post" use:enhance={() => { return async ({ update }) => {await update(); toastStore.trigger({message: $_("save_success"), background: 'preset-filled-success'}); } }} enctype="multipart/form-data" class="card flex p-2 flex-col">
     <span class="text-xl font-bold p-4">Popis</span>
     <ParatextDataEntry canUpload={isNew} data={data} />
-    <button type="submit" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+    <button type="submit" class="btn float-right preset-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
 </form>

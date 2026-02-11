@@ -21,7 +21,7 @@
      async function startConversion(emulatorId) {
         const artefactIds = data.artefacts.filter((a, i) => selectedArtefacts[i] == true).map(a => a.id)
         if (artefactIds.length == 0) {
-            toastStore.trigger({message: $_("must_select_artefact"), background: 'variant-filled-error'})
+            toastStore.trigger({message: $_("must_select_artefact"), background: 'preset-filled-error'})
             return;
         }
         const res = await fetch(`${API_URL}/api/v1/conversion/start`, {
@@ -63,9 +63,9 @@
         <div class="mb-4">
             <span class="text-lg font-bold">1. Vyberte artefakty ke konverzi</span>
             {#if data.artefacts.length == 0}
-                <div class="alert variant-filled-error flex justify-around">
+                <div class="alert preset-filled-error flex justify-around">
                     <h1>K tomuto dílu neexistují žádné artefakty. Před vytvořením herního objektu je nutné digitalizovat kopii média, nebo nahrát soubor.</h1>
-                    <a href="../../artefact/add" class="btn variant-filled">Přidat artefakt</a>
+                    <a href="../../artefact/add" class="btn preset-filled">Přidat artefakt</a>
                 </div>
             {/if}
             <ol class="list px-4 space-y-2">

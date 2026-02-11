@@ -29,13 +29,13 @@
             if (data.status == "Success") {
                 isFinished = true;
                 // TODO: FIX
-                //toastStore.trigger({message: $_("conversion_success"), background: 'variant-filled-success'});
+                //toastStore.trigger({message: $_("conversion_success"), background: 'preset-filled-success'});
             }
 
             if (data.status == "Failed") {
                 isFinished = true;
                 // TODO: FIX
-                //toastStore.trigger({message: $_("conversion_failed"), background: 'variant-filled-error'});
+                //toastStore.trigger({message: $_("conversion_failed"), background: 'preset-filled-error'});
             }
         }, 1000)
 
@@ -76,7 +76,7 @@
             <GamePackageMetadata processId={data.processId} />
         {:else if data.status == "Failed"}
             <hr/>
-            <button onclick={restart} class="btn variant-filled-error">
+            <button onclick={restart} class="btn preset-filled-error">
                 <Fa icon={faRepeat}/>
                 <span>Zkusit znovu</span>
             </button>

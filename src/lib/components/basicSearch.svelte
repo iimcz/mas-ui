@@ -41,17 +41,18 @@
 <div>
     <span class="text-lg">Vyhledat podle názvu</span>
     <div class="flex mt-2">
-        <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-            <div class="input-group-shim">
+        <div class="input-group grow grid-cols-[auto_1fr_auto]">
+            <div class="ig-cell preset-tonal">
                 <Fa icon={faMagnifyingGlass} />
             </div>
 
             <!--
             <input bind:value={search} onfocus={downloadSearchInfo} use:popup={popupSettings} title="Vyhledat dle názvu" type="search" placeholder="Název objektu" />
             -->
-            <button class="variant-filled-secondary">Vyhledat</button>
+            <input class="ig-input" onfocus={downloadSearchInfo} title="Vyhledat dle názvu" type="search" placeholder="Název objektu" />
+            <button class="ig-btn preset-filled">Vyhledat</button>
         </div>
-        <a href="search" class="ml-1 btn variant-filled">
+        <a href="search" class="ml-1 btn preset-filled">
             <span>Rozšířené vyhledávání</span>
         </a>
     </div>

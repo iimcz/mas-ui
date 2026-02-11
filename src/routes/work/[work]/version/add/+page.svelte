@@ -26,7 +26,7 @@
 
         if (result.ok) {
             // TODO: FIX
-            //toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
+            //toastStore.trigger({message: $_("save_success"), background: 'preset-filled-success'});
 
             /**
              * @type {import("$lib/schemas/version").Version}
@@ -37,7 +37,7 @@
         else {
             const error = await result.text();
             // TODO: FIX
-            //toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
+            //toastStore.trigger({message: $_("save_fail") + error, background: 'preset-filled-error'});
         }
 
 

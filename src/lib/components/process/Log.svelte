@@ -3,7 +3,7 @@
     import { faDownload } from "@fortawesome/free-solid-svg-icons";
     import { onMount } from "svelte";
 
-    
+
     /**
      * @typedef {Object} Props
      * @property {string} url
@@ -39,7 +39,7 @@
 
 <div>
     <textarea bind:this={textArea} disabled bind:value={log} class="textarea resize-none cursor-override" rows="15"></textarea>
-    <a target="_blank" href={url} class="btn variant-filled mt-2 float-right">
+    <a target="_blank" href={url} class="btn preset-filled mt-2 float-right">
         <Fa icon={faDownload}/>
         <span>Stáhnout log</span>
     </a>

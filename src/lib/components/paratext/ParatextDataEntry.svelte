@@ -53,7 +53,7 @@
         {#if files != undefined}
             <div class="card textarea flex gap-2 items-center justify-center p-4">
                 <span>{files[0]?.name}</span>
-                <button onclick={removeFile} class="btn-icon bg-error-500 variant-filled"><Fa icon={faTrash}/></button>
+                <button onclick={removeFile} class="btn-icon bg-error-500 preset-filled"><Fa icon={faTrash}/></button>
             </div>
         {/if}
     {:else}

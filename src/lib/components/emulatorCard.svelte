@@ -53,6 +53,6 @@
         <div>
             {description}
         </div>
-        <button class="btn variant-filled mt-2" onclick={select}>Vybrat</button>
+        <button class="btn preset-filled mt-2" onclick={select}>Vybrat</button>
     </div>
 </div>

@@ -12,11 +12,11 @@
 <HeaderContainer title="Nový profil">
     <Placeholder/>
     <div class="flex space-x-2 justify-end">
-        <a class="btn variant-filled-primary" href="/work/[id]/version/[id]/gameobject/[id]/profile">
+        <a class="btn preset-filled-primary" href="/work/[id]/version/[id]/gameobject/[id]/profile">
             <Fa icon={faSave} />
             <span>Dokončit</span>
         </a>
-        <a class="btn variant-filled-primary" href="/work/[id]/version/[id]/gameobject/[id]/profile/[id]/emulator">
+        <a class="btn preset-filled-primary" href="/work/[id]/version/[id]/gameobject/[id]/profile/[id]/emulator">
             <Fa icon={faPlay} />
             <span>Spustit</span>
         </a>

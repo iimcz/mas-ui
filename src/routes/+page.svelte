@@ -15,11 +15,11 @@
 		<div>
 			<span class="text-lg">Díla</span>
 			<div class="flex space-x-4 mt-2">
-				<a href="search?filter=work" class="btn variant-filled grow">
+				<a href="search?filter=work" class="btn preset-filled grow">
 					<Fa icon={faGamepad} />
 					<span>Existující díla</span>
 				</a>
-				<a href="work/add" class="btn variant-filled grow">
+				<a href="work/add" class="btn preset-filled grow">
 					<Fa icon={faPlus} />
 					<span>Vytvořit nové dílo</span>
 				</a>

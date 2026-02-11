@@ -44,7 +44,7 @@
             <!-- svelte-ignore a11y_autofocus -->
             <input name="{name}.{index}.value" type="text" placeholder={required ? "Povinné" : ""} bind:value={values[index]} autofocus />
         </div>
-        <button class="btn-icon variant-filled-error ml-2" onclick={() => removeValue(index)}>
+        <button class="btn-icon preset-filled-error ml-2" onclick={() => removeValue(index)}>
             <Fa icon={faRemove} />
         </button>
     </div>

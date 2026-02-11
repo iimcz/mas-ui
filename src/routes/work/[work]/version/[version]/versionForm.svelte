@@ -45,7 +45,7 @@
          <Tabs.Content value="tab1">
             {#if tabSet === 0}
                 <VersionDataEntry data={data} />
-                <button onclick={dispatchSave} type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+                <button onclick={dispatchSave} type="button" class="btn preset-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
             <!--
             {:else if tabSet === 1}
                 <ButtonTextArea on:click={() => {}} placeholder="Vložený text bude automaticky přidán do AI databáze....">

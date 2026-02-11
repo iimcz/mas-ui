@@ -9,7 +9,7 @@
     }
 
 
-    
+
     /**
      * @typedef {Object} Props
      * @property {boolean} [isNew]
@@ -30,5 +30,5 @@
 <div class="card flex p-2 flex-col">
     <span class="text-xl font-bold p-4">Popis</span>
     <GamePackageDataEntry data={data} />
-    <button onclick={dispatchSave} type="button" class="btn float-right variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+    <button onclick={dispatchSave} type="button" class="btn float-right preset-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
 </div>

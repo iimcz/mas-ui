@@ -9,7 +9,7 @@
         goto(`/paratext/${paratext.id}`)
     }
 
-    
+
     /**
      * @typedef {Object} Props
      * @property {any} paratext
@@ -29,11 +29,11 @@
     image={getParatextThumbnail(paratext)}
     on:click={() => downloadParatext(paratext)}>
     {#snippet sideIcon()}
-    
-            <button onclick={editParatext} class="btn-icon variant-filled mr-2">
+
+            <button onclick={editParatext} class="btn-icon preset-filled mr-2">
                 <Fa icon={faEdit}/>
             </button>
-        
+
     {/snippet}
 
     <div>{paratext.description}</div>

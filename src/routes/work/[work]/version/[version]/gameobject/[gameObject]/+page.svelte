@@ -21,10 +21,10 @@
             body: JSON.stringify(formData.detail)
         });
 
-        if (result.ok) toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
+        if (result.ok) toastStore.trigger({message: $_("save_success"), background: 'preset-filled-success'});
         else {
             const error = await result.text();
-            toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
+            toastStore.trigger({message: $_("save_fail") + error, background: 'preset-filled-error'});
         }
     }
 
@@ -48,7 +48,7 @@
                     Další možnosti se nachází v levém menu.
                 </p>
                 <div>
-                    <a href="{data.id}/profile/[id]/emulator" class="btn variant-filled">Spustit emulaci</a>
+                    <a href="{data.id}/profile/[id]/emulator" class="btn preset-filled">Spustit emulaci</a>
                 </div>
             </div>
         </div>

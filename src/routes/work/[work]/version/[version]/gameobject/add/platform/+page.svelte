@@ -23,7 +23,7 @@
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
-    
+
     /**
      * @typedef {Object} Props
      * @property {import('./$types').PageData} data
@@ -77,7 +77,7 @@
                         <tr>
                             <td>{platform.name}</td>
                             <td>{platform.physicalMediaTypes.map(m => $_(`media_type.${m}`)).join(", ")}</td>
-                            <td><a href="{platform.name}" class="btn variant-filled">Vybrat</a></td>
+                            <td><a href="{platform.name}" class="btn preset-filled">Vybrat</a></td>
                         </tr>
                     {/each}
                     {#if filteredPlatforms.length == 0}

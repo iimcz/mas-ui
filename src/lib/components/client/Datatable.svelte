@@ -75,7 +75,7 @@
                     {#each columns as column}
                         {#if column.onClick}
 							<td>
-                            	<button type="button" onclick={() => clickHandler(column, row)} class="btn variant-filled">{column.name}</button>
+                            	<button type="button" onclick={() => clickHandler(column, row)} class="btn preset-filled">{column.name}</button>
 							</td>
                         {:else}
                             <td>{row[column.key]}</td>

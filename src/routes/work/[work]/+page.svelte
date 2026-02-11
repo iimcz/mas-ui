@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+    import type { PageProps } from './$types';
+    import type { Work } from '$lib/schemas/work';
     import WorkForm from "./workForm.svelte";
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
 
@@ -10,19 +12,9 @@
     $currentSidebar = workLinks;
     $currentRoute = "workDetail";
 
+    let { data }: PageProps = $props();
 
-    /**
-     * @typedef {Object} Props
-     * @property {import('./$types').PageData} data
-     */
-
-    /** @type {Props} */
-    let { data } = $props();
-
-    /**
-     * @param {CustomEvent<import("$lib/schemas/work").Work>} formData
-     */
-    async function update(formData) {
+    async function update(formData: any) {
         const result = await fetch(`${API_URL}/api/v1/works/${data.id}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -31,10 +23,10 @@
 
         /*
         TODO: FIX
-        if (result.ok) toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
+        if (result.ok) toastStore.trigger({message: $_("save_success"), background: 'preset-filled-success'});
         else {
             const error = await result.text();
-            toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
+            toastStore.trigger({message: $_("save_fail") + error, background: 'preset-filled-error'});
         }
         */
     }
@@ -50,10 +42,13 @@
                     Další možnosti se nachází v levém menu.
                 </p>
                 <div>
-                    <a href="{data.id}/version/add/" class="btn variant-filled">Přidat verzi</a>
+                    <a href="{data.id}/version/add/" class="btn preset-filled">Přidat verzi</a>
                 </div>
             </div>
         </div>
+        <div>smile</div>
+        <!--
         <WorkForm on:save={update} data={data}/>
+        -->
     </div>
 </HeaderContainer>

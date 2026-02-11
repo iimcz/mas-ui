@@ -75,6 +75,6 @@
         </div>
     </div>
     {#if running == false}
-        <button class="btn variant-filled mt-4" onclick={() => dispatch("start")}>Spustit digitalizaci</button>
+        <button class="btn preset-filled mt-4" onclick={() => dispatch("start")}>Spustit digitalizaci</button>
     {/if}
 </div>

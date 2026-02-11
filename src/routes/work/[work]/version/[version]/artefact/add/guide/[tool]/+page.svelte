@@ -50,13 +50,13 @@
             if (process.status == "Success") {
                 isFinished = true;
                 // TODO: FIX
-                //toastStore.trigger({message: $_("artefact_success"), background: 'variant-filled-success'});
+                //toastStore.trigger({message: $_("artefact_success"), background: 'preset-filled-success'});
             }
 
             if (process.status == "Failed") {
                 isFinished = true;
                 // TODO: FIX
-                //toastStore.trigger({message: $_("artefact_failed"), background: 'variant-filled-error'});
+                //toastStore.trigger({message: $_("artefact_failed"), background: 'preset-filled-error'});
             }
         }, 1000)
     }
@@ -117,7 +117,7 @@
             {#if process?.status == "WaitingForInput"}
                 <div class="card p-4 flex flex-col gap-4">
                     <span class="text-3xl mt-4">{$_(`status_detail.${process?.statusDetail}.description`)}</span>
-                    <button class="btn variant-filled-primary" onclick={async() => input("")}>{$_(`status_detail.${process?.statusDetail}.action`)}</button>
+                    <button class="btn preset-filled-primary" onclick={async() => input("")}>{$_(`status_detail.${process?.statusDetail}.action`)}</button>
                 </div>
             {:else if process?.status == "Success"}
                 <hr/>
@@ -125,7 +125,7 @@
                 <ArtefactMetadata processId={processId} />
             {:else if process?.status == "Failed"}
                 <hr/>
-                <button onclick={restart} class="btn variant-filled-error">
+                <button onclick={restart} class="btn preset-filled-error">
                     <Fa icon={faRepeat}/>
                     <span>Zkusit znovu</span>
                 </button>
