@@ -1,11 +1,14 @@
 <script lang="ts">
 	import './layout.css';
+	import { CA_URL } from '$lib/config';
 	import { _ } from 'svelte-i18n'
+
 	import { AppBar, Dialog, Toast } from '@skeletonlabs/skeleton-svelte';
     import Sidebar from '$lib/components/sidebar/sidebar.svelte';
 	import LocaleSwitcher from '$lib/components/LocaleSwitcher.svelte';
+
 	import Fa from 'svelte-fa';
-    import { faSave } from '@fortawesome/free-solid-svg-icons';
+    import { faSave, faDatabase } from '@fortawesome/free-solid-svg-icons';
 
 	let { children } = $props();
 </script>
@@ -24,6 +27,10 @@
 				</a>
 			</AppBar.Headline>
 			<AppBar.Trail>
+				<a href={CA_URL} target="_blank" class="flex items-center font-bold text-l uppercase mr-4">
+					<Fa class="mr-2" icon={faDatabase}/>
+					Collective Access
+                </a>
 				<LocaleSwitcher/>
 			</AppBar.Trail>
 		</AppBar.Toolbar>

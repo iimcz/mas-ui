@@ -4,15 +4,15 @@
     import Datatable from "$lib/components/client/Datatable.svelte";
 
     const tableColumns = [
-        { name: "Název verze", key: "title", canSort: true },
-        { name: "Zobrazit", key: "name", canSort: false, onClick: (/** @type {import('$lib/schemas/version').Version} */ row) => goto(`version/${row.id}`)},
+        { name: "Název verze", key: "label", canSort: true },
+        { name: "Zobrazit", key: "name", canSort: false, onClick: (/** @type {import('$lib/schemas/workVersion').WorkVersion} */ row) => goto(`version/${row.id}`)},
     ]
 
     import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";
     $currentSidebar = workLinks;
     $currentRoute = "versionList";
 
-    
+
     /**
      * @typedef {Object} Props
      * @property {import('./$types').PageData} data

@@ -1,39 +1,37 @@
 <script>
     import StringListInput from "$lib/components/StringListInput.svelte";
 
-    
-    /**
-     * @typedef {Object} Props
-     * @property {import("$lib/schemas/version").Version} data
-     */
-
-    /** @type {Props} */
-    let { data = $bindable() } = $props();
+    /** @type {import("$lib/schemas/workVersion").WorkVersion} */
+    export let data;
 </script>
 
 <form class="form border border-surface-500 m-2 p-4 space-y-2 rounded-container-token">
     <p>Název verze</p>
     <div class="input-group input-group-divider">
-        <input type="text" bind:value={data.title} />
+        <input type="text" readonly bind:value={data.label} />
     </div>
-    <p>Alternativní názvy</p>
+    <p>Podnázev</p>
     <div class="input-group input-group-divider">
-        <input type="text" bind:value={data.alternativeTitle} />
+        <input type="text" readonly bind:value={data.subtitle} />
     </div>
-    <p>Rok vydání</p>
+    <p>Popis</p>
     <div class="input-group input-group-divider">
-        <input type="text" bind:value={data.yearOfPublication} />
+        <input type="text" readonly bind:value={data.description} />
     </div>
-    <p>Status</p>
-    <StringListInput bind:values={data.status} />
-    <p>Systémy</p>
-    <StringListInput bind:values={data.system} />
-    <p>Systémové požadavky</p>
+    <p>Kurátorský popis</p>
     <div class="input-group input-group-divider">
-        <input type="text" bind:value={data.systemRequirements} />
+        <input type="text" readonly bind:value={data.curatorialDescription} />
     </div>
-    <p>Poznámka</p>
+    <p>Ochrana proti kopírování</p>
     <div class="input-group input-group-divider">
-        <input type="text" bind:value={data.note} />
+        <input type="text" readonly bind:value={data.copyProtection} />
+    </div>
+    <p>Systém</p>
+    <div class="input-group input-group-divider">
+        <input type="text" readonly bind:value={data.system} />
+    </div>
+    <p>Importováno</p>
+    <div class="input-group input-group-divider">
+        <input type="text" readonly bind:value={data.importedAt} />
     </div>
 </form>

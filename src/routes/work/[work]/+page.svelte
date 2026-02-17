@@ -5,9 +5,11 @@
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
 
     import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";
-    import { API_URL } from "$lib/config";
+    import { API_URL, CA_URL } from "$lib/config";
     // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
     import { _ } from 'svelte-i18n'
+    import { faDatabase } from "@fortawesome/free-solid-svg-icons";
+    import Fa from "svelte-fa";
     // TODO: FIX const toastStore = getToastStore();
     $currentSidebar = workLinks;
     $currentRoute = "workDetail";
@@ -39,10 +41,11 @@
                 <h3>← Další kroky</h3>
                 <p>
                     Po vytvoření díla je nutné vytvořit verzi.<br/>
-                    Další možnosti se nachází v levém menu.
+                    Verzi je nutné vytvořit v databázi CollectiveAccess.<br/>
+                    Následně se zde nahrají nové změny, včetně přidaných verzí.
                 </p>
                 <div>
-                    <a href="{data.id}/version/add/" class="btn preset-filled">Přidat verzi</a>
+                    <a href="{CA_URL}" target="_blank" class="btn variant-filled"><Fa class="mr-2" icon={faDatabase}/>Collective Access</a>
                 </div>
             </div>
         </div>

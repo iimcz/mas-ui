@@ -21,7 +21,7 @@
     let { data } = $props();
 
     /**
-     * @param {CustomEvent<import("$lib/schemas/version").Version>} formData
+     * @param {CustomEvent<import("$lib/schemas/workVersion").WorkVersion>} formData
      */
     async function update(formData) {
         const result = await fetch(`${API_URL}/api/v1/work/${data.workId}/version/${data.id}`, {

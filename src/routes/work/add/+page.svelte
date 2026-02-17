@@ -6,8 +6,26 @@
     import { API_URL } from "$lib/config";
     import { goto } from "$app/navigation";
     import { _ } from 'svelte-i18n'
-    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
-    // TODO: FIX const toastStore = getToastStore();    $currentSidebar = [];
+    //import { getToastStore } from '@skeletonlabs/skeleton-svelte';
+    import Datatable from "$lib/components/client/Datatable.svelte";
+    //const toastStore = getToastStore();
+    $currentSidebar = [];
+
+    /**
+     * @param {import("$lib/schemas/importableWork").ImportableWork} work
+     */
+    async function importWork(work) {
+        const result = await fetch(`${API_URL}/api/v1/import`,{
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(work)
+            });
+        if (result.ok) {
+            /** @type {import("$lib/schemas/work").Work} */
+            const work = await result.json();
+            goto(`${work.id}`);
+        }
+    }
 
     /**
      * @param {CustomEvent<import("$lib/schemas/work").Work>} data
@@ -21,7 +39,7 @@
 
         if (result.ok) {
             // TODO: FIX
-            //toastStore.trigger({message: $_("save_success"), background: 'preset-filled-success'});
+            //toastStore.trigger({message: $_("save_success"), background: 'variant-filled-success'});
 
             /**
              * @type {import("$lib/schemas/work").Work}
@@ -32,11 +50,22 @@
         else {
             const error = await result.text();
             // TODO: FIX
-            //toastStore.trigger({message: $_("save_fail") + error, background: 'preset-filled-error'});
+            //toastStore.trigger({message: $_("save_fail") + error, background: 'variant-filled-error'});
         }
     }
+
+    const columns = [
+        {name: "Název", key: "label", canSort: true},
+        {name: "Počet verzí", key: "numVersions", canSort: true},
+        {name: "Již importováno", key: "isAlreadyImported", canSort: true},
+        {name: "Importovat dílo a verze", key: "import", canSort: false, onClick: importWork}
+    ];
+
+    /** @type {import('./$types').PageData} */
+	export let data;
 </script>
 
-<HeaderContainer title="Nové dílo">
-    <WorkForm on:save={createNew} isNew={true}></WorkForm>
+<HeaderContainer title="Díla dostupná v CollectiveAccess">
+    <Datatable data={data.importableWorks} columns={columns}></Datatable>
+    <!-- <WorkForm on:save={createNew} isNew={true}></WorkForm> -->
 </HeaderContainer>

@@ -1,14 +1,10 @@
 /**
  * @typedef {{
  * id: string
- * title: string
- * alternativeTitle: ?string
- * subheading: ?string
- * description: ?string
- * yearOfPublication: ?string
- * genre: string[]
- * classificationTime: string[]
- * classificationLocation: string[]
+ * label: string
+ * typeOfWork: ?string
+ * internalNote: ?string
+ * importedAt: ?string
  * }} Work
  */
 export const unused = {};

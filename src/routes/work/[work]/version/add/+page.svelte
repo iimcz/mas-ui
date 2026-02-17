@@ -13,10 +13,11 @@
     $currentRoute = "addVersion";
 
     /**
-     * @param {CustomEvent<import("$lib/schemas/version").Version>} data
+     * @param {CustomEvent<import("$lib/schemas/workVersion").WorkVersion>} data
      */
      async function createNew(data) {
-        data.detail.workId = page.params.work
+        if (page.params.work == null) return;
+        data.detail.workId = page.params.work;
 
         const result = await fetch(`${API_URL}/api/v1/versions`, {
             method: "PUT",
@@ -29,7 +30,7 @@
             //toastStore.trigger({message: $_("save_success"), background: 'preset-filled-success'});
 
             /**
-             * @type {import("$lib/schemas/version").Version}
+             * @type {import("$lib/schemas/workVersion").WorkVersion}
              */
             const createdVersion = await result.json()
             goto(`/work/${createdVersion.workId}/version/${createdVersion.id}`)

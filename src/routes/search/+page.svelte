@@ -13,7 +13,7 @@
     }
 
     const tableColumns = [
-        { name: "Název", key: "title", canSort: true },
+        { name: "Název", key: "label", canSort: true },
         { name: "Zobrazit", key: "name", canSort: false, onClick: (/** @type {import("$lib/schemas/work").Work} */ row) => { navigate(row.id) } }
     ]
 
@@ -40,7 +40,7 @@
     import { currentSidebar } from "$lib/components/sidebar/links";
     $currentSidebar = [];
 
-    
+
     /**
      * @typedef {Object} Props
      * @property {import('./$types').PageData} data
