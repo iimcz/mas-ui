@@ -1,65 +1,65 @@
-<script>
-    import { run } from 'svelte/legacy';
-
-    import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-    import Fa from "svelte-fa";
-
-    import { Combobox } from '@skeletonlabs/skeleton-svelte';
-    // TODO: Popup
-    //import { popup } from "@skeletonlabs/skeleton-svelte";
+<script lang="ts">
     import { goto } from "$app/navigation";
     import { API_URL } from "$lib/config";
+    import type { Work } from "$lib/schemas/work";
+    import { Combobox, Portal, useListCollection, type ComboboxRootProps } from '@skeletonlabs/skeleton-svelte';
 
     async function downloadSearchInfo() {
         if (works.length != 0) return;
 
         const res = await fetch(`${API_URL}/api/v1/works`)
-        works = await res.json()
-        //searchOptions = works.map(w => { return {label: w.title, value: w.id }})
+        worksUnfiltered = await res.json()
+        works = worksUnfiltered;
     }
 
-    /** @type {import("$lib/schemas/work").Work[]} */
-    let works = $state([]);
+    let worksUnfiltered: Work[] = $state([]);
+    let works: Work[] = $state([]);
 
-    // TODO: FIX
-    /*
-	let searchOptions = $state([]);
-    let search = $state("");
+    const collection = $derived(
+		useListCollection({
+			items: works,
+			itemToString: (item) => item.label,
+			itemToValue: (item) => item.id,
+		}),
+	);
 
-	function onSearchSelection(event) {
-		goto(`/work/${event.detail.value}`);
-	}
+	const onInputValueChange: ComboboxRootProps['onInputValueChange'] = (event) => {
+        downloadSearchInfo();
+		const filtered = works.filter((item) => item.label.toLowerCase().includes(event.inputValue.toLowerCase()));
+		if (filtered.length > 0) {
+			works = filtered;
+		} else {
+			works = worksUnfiltered;
+		}
+	};
 
-    run(() => {
-        searchOptions = works
-            .map(w => { return {label: w.title, value: w.id }})
-            .filter(w => w.label.toLowerCase().includes(search.toLowerCase()))
-    });
-    */
+    const onOpenChange = () => downloadSearchInfo();
+    const onSelect = (details: any) => goto(`/work/${details.itemValue}`)
 </script>
 
 <div>
     <span class="text-lg">Vyhledat podle názvu</span>
     <div class="flex mt-2">
-        <div class="input-group grow grid-cols-[auto_1fr_auto]">
-            <div class="ig-cell preset-tonal">
-                <Fa icon={faMagnifyingGlass} />
-            </div>
-
-            <!--
-            <input bind:value={search} onfocus={downloadSearchInfo} use:popup={popupSettings} title="Vyhledat dle názvu" type="search" placeholder="Název objektu" />
-            -->
-            <input class="ig-input" onfocus={downloadSearchInfo} title="Vyhledat dle názvu" type="search" placeholder="Název objektu" />
-            <button class="ig-btn preset-filled">Vyhledat</button>
-        </div>
+        <Combobox placeholder="Název díla" {collection} {onOpenChange} {onInputValueChange} onSelect={onSelect}>
+            <Combobox.Control>
+                <Combobox.Input />
+                <Combobox.Trigger />
+            </Combobox.Control>
+            <Portal>
+                <Combobox.Positioner>
+                    <Combobox.Content>
+                        {#each works as item (item.id)}
+                            <Combobox.Item {item}>
+                                <Combobox.ItemText>{item.label}</Combobox.ItemText>
+                                <Combobox.ItemIndicator />
+                            </Combobox.Item>
+                        {/each}
+                    </Combobox.Content>
+                </Combobox.Positioner>
+            </Portal>
+        </Combobox>
         <a href="search" class="ml-1 btn preset-filled">
             <span>Rozšířené vyhledávání</span>
         </a>
-    </div>
-
-    <div data-popup="popupAutocomplete" class="card w-full max-w-sm max-h-48 p-4 overflow-y-auto" tabindex="-1">
-        <!--
-        <Autocomplete bind:input={search} options={searchOptions} on:selection={onSearchSelection} />
-        -->
     </div>
 </div>
