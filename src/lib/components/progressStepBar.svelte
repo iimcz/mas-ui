@@ -4,6 +4,8 @@
     import { page } from "$app/stores";
     import { steps, currentStep, unlockedStep } from "$lib/steps.js";
     import { stringFormat } from "$lib/stringFormat";
+    import Fa from 'svelte-fa';
+    import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
     /**
      * Templated URLs
@@ -18,11 +20,9 @@
     });
 </script>
 
-<div>
-    <div class="outline-dashed outline-1 border-black relative" style="top: 25px; z-index: -1"></div>
-    <div class="flex items-center justify-around">
-        {#each $steps as step, index}
-        <a href={$unlockedStep < index ? "" : links[step.href]} class:cursor-not-allowed={index > $unlockedStep} class="flex flex-col items-center justify-center">
+<div class="flex items-center justify-around">
+    {#each $steps as step, index}
+        <a href={$unlockedStep < index ? "" : links[step.href]} class:cursor-not-allowed={index > $unlockedStep} class="flex flex-col items-center justify-center gap-1">
             <div
                 class:bg-secondary-500={index == $currentStep}
                 class:bg-primary-500={index <= $unlockedStep}
@@ -32,8 +32,10 @@
             </div>
             <div>{step.name}</div>
         </a>
-        {/each}
-    </div>
+        {#if index != $steps.length - 1}
+            <Fa class="mb-6" scale="2" icon={faChevronRight}/>
+        {/if}
+    {/each}
 </div>
 
 <style>
