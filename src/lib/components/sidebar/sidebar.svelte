@@ -13,7 +13,7 @@
     });
 </script>
 
-<aside class:visible-submenu={$currentSidebar.length > 0} class="h-full bg-surface-50-900-token border-r border-surface-500/30 overflow-hidden">
+<aside class:hidden={$currentSidebar.length == 0} class="h-full bg-surface-50-900-token border-r border-surface-500/30 overflow-hidden">
     {#if $currentSidebar.length > 0}
         <section class="h-full p-4 pb-20 space-y-4 overflow-y-auto">
             <nav>
@@ -37,10 +37,6 @@
 
 <style>
     @reference "#layout.css";
-
-    .visible-submenu {
-        @apply w-[260px];
-    }
 
     .active-link {
         @apply preset-tonal;

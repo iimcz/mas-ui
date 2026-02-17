@@ -9,6 +9,7 @@
 
 	import Fa from 'svelte-fa';
     import { faSave, faDatabase } from '@fortawesome/free-solid-svg-icons';
+    import { currentSidebar } from '$lib/components/sidebar/links';
 
 	let { children } = $props();
 </script>
@@ -37,7 +38,7 @@
 	</AppBar>
 	<div class="max-w-[80vw] w-full mx-auto grid grid-cols-[240px_1fr]">
 		<Sidebar/>
-		<main>
+		<main class:col-span-2={$currentSidebar.length == 0} class="ml-2">
 			{@render children?.()}
 		</main>
 	</div>
