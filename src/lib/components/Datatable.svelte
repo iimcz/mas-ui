@@ -41,9 +41,9 @@
                             {#if column.canSort}
                                 <ThSort {table} field={column.key}>{column.name}</ThSort>
                             {:else if column.onClick}
-                                <th></th>
+                                <th class="empty-label">Akce</th>
                             {:else}
-                                <th>{column.name}</th>
+                                <th class="empty-label">{column.name}</th>
                             {/if}
                         {/each}
                     </tr>
@@ -52,7 +52,7 @@
                             {#if column.canSort}
                                 <ThFilter {table} field={column.key} />
                             {:else}
-                                <th></th>
+                                <th class="empty-filter"></th>
                             {/if}
                         {/each}
                     </tr>
@@ -107,6 +107,19 @@
         height: 100%;
         overflow: auto;
         background: inherit;
+    }
+
+    .empty-filter {
+        border-top: 1px solid var(--grey, #e0e0e0);
+        border-bottom: 1px solid var(--grey, #e0e0e0);
+    }
+
+    .empty-label {
+        white-space: pre-wrap;
+        font-size: 13.5px;
+        line-height: 16px;
+        text-align: left;
+        font-weight: bolder;
     }
 
     :root {

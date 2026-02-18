@@ -5,7 +5,8 @@
     import Datatable from "$lib/components/Datatable.svelte";
 
     const tableColumns = [
-        { name: "Název verze", key: "label", canSort: true }
+        { name: "Název", key: "label", canSort: true },
+        { name: "Popis", key: "description", canSort: true }
     ]
 
     import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";
