@@ -1,6 +1,6 @@
 <script lang="ts">
 	import './layout.css';
-	import { CA_URL } from '$lib/config';
+	import { API_URL } from '$lib/config';
 	import { _ } from 'svelte-i18n'
 
 	import { AppBar, Toast } from '@skeletonlabs/skeleton-svelte';
@@ -45,7 +45,7 @@
 				</a>
 			</AppBar.Headline>
 			<AppBar.Trail>
-				<a href={CA_URL} target="_blank" class="flex items-center font-bold text-l uppercase mr-4">
+				<a href="{API_URL}/api/v1/router/ca/home" target="_blank" class="flex items-center font-bold text-l uppercase mr-4">
 					<Fa class="mr-2" icon={faDatabase}/>
 					Collective Access
                 </a>

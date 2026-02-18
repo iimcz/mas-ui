@@ -32,6 +32,7 @@
     const columns = [
         {name: "Název", key: "label", canSort: true},
         {name: "Počet verzí", key: "numVersions", canSort: true},
+        {name: "Kurátorský popis", key: "curatorialDescription", canSort: true},
         {name: "Již importováno", key: "isAlreadyImported", canSort: true},
         {name: "Importovat dílo a verze", key: "import", canSort: false, onClick: importWork}
     ];

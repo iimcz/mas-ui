@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { CA_URL } from "$lib/config";
+    import { API_URL } from "$lib/config";
     import WorkForm from "./workForm.svelte";
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
     import Alert from '$lib/components/Alert.svelte';
@@ -25,7 +25,7 @@
                 Následně se zde nahrají nové změny, včetně přidaných verzí.
             </p>
             <div>
-                <a href="{CA_URL}" target="_blank" class="btn preset-filled"><Fa class="mr-2" icon={faDatabase}/>Collective Access</a>
+                <a href="{API_URL}/api/v1/router/ca/work/edit/{data.id}" target="_blank" class="btn preset-filled"><Fa class="mr-2" icon={faDatabase}/>Editovat v CA</a>
             </div>
         </Alert>
         <h2 class="text-2xl mt-4">Metadata díla</h2>
