@@ -8,8 +8,6 @@
     import { onMount } from "svelte";
     import MediaCard from "$lib/components/mediaCard.svelte";
 
-    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
-    // TODO: FIX const toastStore = getToastStore();
     onMount(() => {
         $unlockedStep = 1;
         $currentStep = 1;
@@ -21,7 +19,7 @@
      async function startConversion(emulatorId) {
         const artefactIds = data.artefacts.filter((a, i) => selectedArtefacts[i] == true).map(a => a.id)
         if (artefactIds.length == 0) {
-            toastStore.trigger({message: $_("must_select_artefact"), background: 'preset-filled-error'})
+            toaster.error({title: $_("must_select_artefact")})
             return;
         }
         const res = await fetch(`${API_URL}/api/v1/conversion/start`, {
@@ -38,6 +36,10 @@
     }
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
+    import Alert from "$lib/components/Alert.svelte";
+    import Fa from "svelte-fa";
+    import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+    import { toaster } from "$lib/toaster";
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
@@ -56,17 +58,20 @@
     let { data } = $props();
 </script>
 
-<div class="container h-full mx-auto flex justify-center">
+<div class="container h-full flex">
     <div class="flex w-5/6 space-y-5 flex-col m-4">
         <h1 class="text-3xl mt-4">Výběr artefaktů a emulátoru</h1>
         <ProgressStepBar/>
         <div class="mb-4">
             <span class="text-lg font-bold">1. Vyberte artefakty ke konverzi</span>
             {#if data.artefacts.length == 0}
-                <div class="alert preset-filled-error flex justify-around">
+                <Alert class="preset-outlined-error-500">
+                    <h3 class="flex gap-2 items-center font-semibold">
+                        <Fa icon={faExclamationTriangle}/>
+                    </h3>
                     <h1>K tomuto dílu neexistují žádné artefakty. Před vytvořením herního objektu je nutné digitalizovat kopii média, nebo nahrát soubor.</h1>
                     <a href="../../artefact/add" class="btn preset-filled">Přidat artefakt</a>
-                </div>
+                </Alert>
             {/if}
             <ol class="list px-4 space-y-2">
                 {#each data.artefacts as artefact, index}
@@ -81,7 +86,7 @@
         <div class="text-center grid grid-cols-2 2xl:grid-cols-3 gap-2">
             {#each data.emulators as emulator}
                 <MediaCard
-                    on:click={async () => await startConversion(emulator.id)}
+                    onclick={async () => await startConversion(emulator.id)}
                     title={$_(`emulator.${emulator.name}.name`)}
                     description={$_(`emulator.${emulator.name}.description`)}
                     tags={[`v${emulator.version}`]} />

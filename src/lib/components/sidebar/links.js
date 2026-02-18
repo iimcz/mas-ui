@@ -5,32 +5,30 @@ import { writable } from 'svelte/store';
  * @type {SidebarLink[]}
  */
 export const workLinks = [
+    { name: "Navigace", href: "", match: "" },
+    { name: "❮ Zpět na výběr díla", href: "/", match: "" },
     { name: "Dílo", href: "", match: "" },
-    { name: "Metadata", href: "/work/[work]", match: "workDetail" },
-    { name: "Verze", href: "", match: "" },
+    { name: "Metadata díla", href: "/work/[work]", match: "workDetail" },
     { name: "Seznam verzí", href: "/work/[work]/version/", match: "versionList" },
-    { name: "Přidat verzi", href: "/work/[work]/version/add", match: "addVersion" },
-    { name: "Paratexty", href: "", match: "" },
     { name: "Seznam paratextů", href: "/work/[work]/paratext/", match: "paratextList" },
-    { name: "Přidat paratext", href: "/work/[work]/paratext/add", match: "addParatext" },
 ]
 
 /**
  * @type {SidebarLink[]}
  */
 export const versionLinks = [
-    { name: "Dílo", href: "", match: "" },
-    { name: "← Zpět na dílo", href: "/work/[work]", match: "" },
+    { name: "Navigace", href: "", match: "" },
+    { name: "❮ Zpět na dílo", href: "/work/[work]", match: "" },
     { name: "Verze", href: "", match: "" },
-    { name: "Metadata", href: "/work/[work]/version/[version]", match: "versionDetail" },
-    { name: "Artefakty", href: "", match: "" },
-    { name: "Seznam artefaktů", href: "/work/[work]/version/[version]/artefact", match: "artefactList" },
-    { name: "Přidat artefakt", href: "/work/[work]/version/[version]/artefact/add", match: "addArtefact" },
+    { name: "Metadata verze", href: "/work/[work]/version/[version]", match: "versionDetail" },
+    { name: "Digitální objekty", href: "", match: "" },
+    { name: "Digitální objekty", href: "/work/[work]/version/[version]/artefact", match: "artefactList" },
+    { name: "Vytvořit digitální objekt", href: "/work/[work]/version/[version]/artefact/add", match: "addArtefact" },
     { name: "Paratexty", href: "", match: "" },
-    { name: "Seznam paratextů", href: "/work/[work]/version/[version]/paratext", match: "paratextList" },
+    { name: "Paratexty", href: "/work/[work]/version/[version]/paratext", match: "paratextList" },
     { name: "Přidat paratext", href: "/work/[work]/version/[version]/paratext/add", match: "addParatext" },
     { name: "Herní objekty", href: "", match: "" },
-    { name: "Seznam herních objektů", href: "/work/[work]/version/[version]/gameobject", match: "gameObjectList" },
+    { name: "Herní objekty", href: "/work/[work]/version/[version]/gameobject", match: "gameObjectList" },
     { name: "Vytvořit herní objekt", href: "/work/[work]/version/[version]/gameobject/add/platform", match: "addGameObject" },
     // TODO: Implement setting a GO as default
     //{ name: "Spustit výchozí herní objekt", href: "/work/[work]/version/[version]/gameobject/[id]/emulator", match: "emulator" },
@@ -41,7 +39,7 @@ export const versionLinks = [
  */
 export const gameObjectLinks = [
     { name: "Verze", href: "", match: "" },
-    { name: "← Zpět na verzi", href: "/work/[work]/version/[version]", match: "" },
+    { name: "❮ Zpět na verzi", href: "/work/[work]/version/[version]", match: "" },
     { name: "Herní objekt", href: "", match: "" },
     { name: "Metadata", href: "/work/[work]/version/[version]/gameobject/[gameObject]", match: "gameObjectDetail" },
     // TODO: Implement setting a GO as default

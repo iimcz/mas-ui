@@ -1,29 +1,30 @@
-<script>
-    import WorkCompare from "./workCompare.svelte";
-    import WorkDataEntry from "./workDataEntry.svelte";
-
-    import { createEventDispatcher } from 'svelte';
-    const dispatch = createEventDispatcher();
-
-    function dispatchSave() {
-        dispatch("save", data)
-    }
-
-    export let isNew = false;
-    let tabSet = 0;
-
-    /** @type {import("$lib/schemas/work").Work} */
-    export let data = {
-        id: "",
-        label: "",
-        typeOfWork: "",
-        internalNote: "",
-        importedAt: ""
-    }
+<script lang="ts">
+    import type { Work } from "$lib/schemas/work";
+    let { data }: { data: Work } = $props()
 </script>
 
-<div class="card flex p-2 flex-col">
-    <span class="text-xl font-bold p-4">Popis</span>
-    <WorkDataEntry data={data} />
-    <button on:click={dispatchSave} type="button" class="btn variant-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+<div class="form flex flex-col">
+    <div>Název díla</div>
+    <div>{data.label}</div>
+
+    <div>Typ díla</div>
+    <div>{data.typeOfWork}</div>
+
+    <div>Interní poznámka</div>
+    <div>{data.internalNote}</div>
+
+    <div>Importováno</div>
+    <div>{data.importedAt == null ? "" : new Date(data.importedAt).toLocaleString()}</div>
 </div>
+
+<style scoped>
+    @reference "#layout.css";
+
+    .form > *:nth-child(2n + 1) {
+        @apply mt-4 text-lg;
+    }
+
+    .form > *:nth-child(2n) {
+        @apply ml-2;
+    }
+</style>

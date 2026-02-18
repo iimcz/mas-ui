@@ -14,7 +14,7 @@ export let artefactSteps = [
         href: "/work/[work]/version/[version]/artefact/add/[process]"
     },
     {
-        name: "Informace o artefaktu",
+        name: "Informace o digitálním objektu",
         href: "/work/[work]/version/[version]/artefact/add/[process]/info"
     },
 ];
@@ -28,11 +28,11 @@ export let configSteps = [
         href: "/work/[work]/version/[version]/gameobject/add/platform"
     },
     {
-        name: "Artefakty + Emulátor",
+        name: "Digitální objekty + Emulátor",
         href: "/work/[work]/version/[version]/gameobject/add/[platform]"
     },
     {
-        name: "Konverze artefaktů",
+        name: "Konverze digitálních objektů",
         href: "/work/[work]/version/[version]/gameobject/add/log"
     },
     {

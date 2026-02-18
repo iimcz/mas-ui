@@ -27,7 +27,7 @@
     title={paratext.name}
     tags={tags}
     image={getParatextThumbnail(paratext)}
-    on:click={() => downloadParatext(paratext)}>
+    onclick={() => downloadParatext(paratext)}>
     {#snippet sideIcon()}
 
             <button onclick={editParatext} class="btn-icon preset-filled mr-2">

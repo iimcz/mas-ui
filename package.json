@@ -30,7 +30,7 @@
   "dependencies": {
     "@floating-ui/dom": "^1.6.3",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@vincjo/datatables": "^1.14.5",
+    "@vincjo/datatables": "^2.8.0",
     "dotenv": "^16.4.7",
     "svelte-fa": "^4.0.4",
     "svelte-i18n": "^4.0.1",

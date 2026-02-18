@@ -1,58 +1,36 @@
-<script>
-    import Datatable from "$lib/components/client/Datatable.svelte";
-    import { page } from '$app/stores'
-    import { onDestroy } from "svelte";
+<script lang="ts">
+    import Datatable from "$lib/components/Datatable.svelte";
+    import type { Work } from "$lib/schemas/work";
     import { goto } from '$app/navigation';
+    import { page } from "$app/state";
 
-    /**
-     * @type {Object.<string, string>}
-     */
-    const headers = {
+    import { currentSidebar } from "$lib/components/sidebar/links";
+    $currentSidebar = [];
+
+    const headers: any = {
         "": "objekty",
         "work": "díla"
     }
 
     const tableColumns = [
         { name: "Název", key: "label", canSort: true },
-        { name: "Zobrazit", key: "name", canSort: false, onClick: (/** @type {import("$lib/schemas/work").Work} */ row) => { navigate(row.id) } }
+        { name: "Popis", key: "description", canSort: true }
     ]
 
-    let header = $state("")
-    let filter = ""
+    let filter = $derived(page.url.searchParams.get('filter') ?? "")
+    let header = $derived(headers[filter])
 
-    const unsubscribe = page.subscribe((page) => {
-        filter = page.url.searchParams.get('filter') ?? ""
-        header = headers[filter]
-    })
-
-    /**
-     * @param {string} id
-     */
-    function navigate(id) {
+    function navigate(id: string) {
         if (filter == "") goto("")
         else if (filter == "work") goto(`/work/${id}`)
     }
 
-    onDestroy(() => {
-        unsubscribe()
-    })
-
-    import { currentSidebar } from "$lib/components/sidebar/links";
-    $currentSidebar = [];
-
-
-    /**
-     * @typedef {Object} Props
-     * @property {import('./$types').PageData} data
-     */
-
-    /** @type {Props} */
     let { data } = $props();
 </script>
 
 <div class="container h-full mx-auto flex justify-center">
     <div class="flex w-5/6 space-y-10 flex-col m-4">
         <h1 class="text-3xl mt-4">Existující {header}</h1>
-        <Datatable data={data.works} columns={tableColumns} />
+        <Datatable data={data.works} columns={tableColumns} onrowclick={(row: Work) => { navigate(row.id)}} />
     </div>
 </div>

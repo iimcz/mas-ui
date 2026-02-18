@@ -1,7 +1,7 @@
 <script>
     import { goto } from "$app/navigation";
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
-    import Datatable from "$lib/components/client/Datatable.svelte";
+    import Datatable from "$lib/components/Datatable.svelte";
 
     const tableColumns = [
         { name: "Název", key: "name", canSort: true },

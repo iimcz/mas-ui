@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { page } from "$app/stores";
+    import { page } from "$app/state";
 	import { _ } from 'svelte-i18n'
 
     import Fa from "svelte-fa";
@@ -11,11 +11,10 @@
     import Guide from "$lib/components/process/Guide.svelte";
     import Log from "$lib/components/process/Log.svelte";
 
-    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
-    // TODO: FIX const toastStore = getToastStore();
     import { API_URL } from "$lib/config";
     import { digitalizationGuides } from "$lib/digitalizationGuides";
     import { currentStep, unlockedStep, steps, artefactSteps } from "$lib/steps";
+    import { toaster } from "$lib/toaster";
 
     let interval = 0;
     let isFinished = false;
@@ -49,14 +48,13 @@
 
             if (process.status == "Success") {
                 isFinished = true;
-                // TODO: FIX
-                //toastStore.trigger({message: $_("artefact_success"), background: 'preset-filled-success'});
+                toaster.success({title: $_("artefact_success")});
+                info.scrollIntoView({ behavior: 'smooth' });
             }
 
             if (process.status == "Failed") {
                 isFinished = true;
-                // TODO: FIX
-                //toastStore.trigger({message: $_("artefact_failed"), background: 'preset-filled-error'});
+                toaster.error({title: $_("artefact_failed")});
             }
         }, 1000)
     }
@@ -102,18 +100,23 @@
 
     /** @type {Props} */
     let { data } = $props();
+    let info = $state();
 
     const guide = digitalizationGuides[data.slug]
 </script>
 
-<div class="container h-full mx-auto flex justify-center">
+<div class="container h-full flex">
     <div class="flex w-5/6 space-y-10 flex-col m-4">
-        <h1 class="text-3xl mt-4">Postup pro digitalizaci</h1>
+        <h1 class="text-3xl mt-4">1. Postup pro digitalizaci</h1>
         <ProgressStepBar/>
-        <Guide on:start={() => startProcess($page.params.tool, $page.params.version)} running={processId != null} steps={guide.steps} images={guide.images} faq={guide.faq} />
+        <Guide on:start={() => startProcess(page.params.tool ?? "", page.params.version ?? "")} running={processId != null} steps={guide.steps} images={guide.images} faq={guide.faq} />
         {#if processId != null}
             <hr/>
-            <h1 class="text-3xl mt-4">Status: {$_(`process_status.${process?.status}`)}</h1>
+            <div>
+                <h1 class="text-3xl">Status: {$_(`process_status.${process?.status}`)}</h1>
+                <h1 class="text-3xl my-4">2. Záznam z digitalizace</h1>
+                <Log url={`${API_URL}/api/v1/digitalization/${processId}/log`}/>
+            </div>
             {#if process?.status == "WaitingForInput"}
                 <div class="card p-4 flex flex-col gap-4">
                     <span class="text-3xl mt-4">{$_(`status_detail.${process?.statusDetail}.description`)}</span>
@@ -121,8 +124,11 @@
                 </div>
             {:else if process?.status == "Success"}
                 <hr/>
-                <h1 class="text-3xl mt-4">Strukturovaný popis</h1>
-                <ArtefactMetadata processId={processId} />
+                <div>
+                    <h1 bind:this={info} class="text-3xl">3. Strukturovaný popis</h1>
+                    <div>Nyní můžete vyndat médium z digitalizačního nástroje.</div>
+                    <ArtefactMetadata processId={processId} />
+                </div>
             {:else if process?.status == "Failed"}
                 <hr/>
                 <button onclick={restart} class="btn preset-filled-error">
@@ -130,8 +136,6 @@
                     <span>Zkusit znovu</span>
                 </button>
             {/if}
-            <h1 class="text-3xl mt-4">Záznam z digitalizace</h1>
-            <Log url={`${API_URL}/api/v1/digitalization/${processId}/log`}/>
         {/if}
     </div>
 </div>

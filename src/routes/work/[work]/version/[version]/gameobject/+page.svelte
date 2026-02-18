@@ -1,7 +1,7 @@
 <script>
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
     import { goto } from "$app/navigation";
-    import Datatable from "$lib/components/client/Datatable.svelte";
+    import Datatable from "$lib/components/Datatable.svelte";
 
     const tableColumns = [
         { name: "Název", key: "name", canSort: true },
@@ -13,7 +13,7 @@
     $currentSidebar = versionLinks;
     $currentRoute = "gameObjectList";
 
-    
+
     /**
      * @typedef {Object} Props
      * @property {import('./$types').PageData} data

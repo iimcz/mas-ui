@@ -19,7 +19,7 @@
     }
 </script>
 
-<button onclick={openModal} class="card card-hover p-4 flex">
+<button onclick={openModal} class="card transition-transform preset-outlined-primary-300-700 p-4 hover:scale-105 flex">
     <div class="text-left">
         <div class="text-lg font-bold">Nahrát soubor</div>
         <div>

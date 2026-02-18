@@ -2,15 +2,10 @@
     import { createEventDispatcher } from 'svelte'
 	import { _ } from 'svelte-i18n'
     import { Accordion } from "@skeletonlabs/skeleton-svelte";
+    import Fa from 'svelte-fa';
+    import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
     const dispatch = createEventDispatcher()
-
-
-
-
-
-
-
 
     /**
      * @typedef {Object} Props
@@ -40,9 +35,9 @@
             <span class="text-xl font-bold p-4">Kroky</span>
             <ol class="list px-4 space-y-2">
                 {#each steps as step, index}
-                    <li>
+                    <li class="flex gap-2 items-center">
                         <input class="checkbox" type="checkbox" bind:checked={checkedSteps[index]} />
-                        <span class:variant-soft-surface={!checkedSteps[index]} class:variant-soft-primary={checkedSteps[index]} class="badge-icon p-4">{index + 1}</span>
+                        <span class:bg-primary-50-950={!checkedSteps[index]} class:preset-filled-primary-950-50={checkedSteps[index]} class="badge-icon p-4">{index + 1}</span>
                         <span>{$_(`digitalization_guides.${step}`)}</span>
                     </li>
                 {/each}
@@ -60,10 +55,16 @@
             <div class="card flex p-2 flex-col">
                 <span class="text-xl font-bold p-4">FAQ / Řešení problémů</span>
                 <Accordion>
-                    {#each faq as faqItem}
+                    {#each faq as faqItem, i}
+                        {#if i !== 0}
+                            <hr class="hr" />
+                        {/if}
                         <Accordion.Item value={faqItem.title}>
-                            <Accordion.ItemTrigger>
+                            <Accordion.ItemTrigger class="font-bold flex items-center justify-between gap-2">
                                 {$_(`digitalization_guides.${faqItem.title}`)}
+                                <Accordion.ItemIndicator class="group">
+                                    <Fa icon={faChevronDown} class="h-5 w-5 transition group-data-[state=open]:rotate-180" />
+                                </Accordion.ItemIndicator>
                             </Accordion.ItemTrigger>
                             <Accordion.ItemContent>
                                 {$_(`digitalization_guides.${faqItem.content}`)}
@@ -75,6 +76,6 @@
         </div>
     </div>
     {#if running == false}
-        <button class="btn preset-filled mt-4" onclick={() => dispatch("start")}>Spustit digitalizaci</button>
+        <button class="btn text-lg preset-filled mt-4" onclick={() => dispatch("start")}>Spustit digitalizaci</button>
     {/if}
 </div>

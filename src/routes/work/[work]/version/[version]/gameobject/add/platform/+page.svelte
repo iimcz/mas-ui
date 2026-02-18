@@ -32,10 +32,7 @@
     /** @type {Props} */
     let { data } = $props();
 
-    let filteredPlatforms = $state(data.platforms)
-    run(() => {
-        filteredPlatforms = data.platforms.filter(p => p.name.toLowerCase().includes(searchText.toLowerCase()))
-    });
+    let filteredPlatforms = $derived(data.platforms.filter(p => p.name.toLowerCase().includes(searchText.toLowerCase())))
 
 
     const artefactTypes = data.artefacts
@@ -45,39 +42,39 @@
     let matchingMediaPlatforms = data.platforms.filter(p => p.physicalMediaTypes.some(t => artefactTypes.indexOf(t.toLowerCase()) != -1))
 </script>
 
-<div class="container h-full mx-auto flex justify-center">
+<div class="container h-full flex">
     <div class="flex w-5/6 space-y-5 flex-col m-4">
         <h1 class="text-3xl mt-4">Identifikace platformy</h1>
         <ProgressStepBar/>
-        <h2 class="text-xl mt-4">Doporučené (dle typu média)</h2>
-        <div class="text-center grid grid-cols-3 gap-2">
-            {#each matchingMediaPlatforms as platform}
-                <EmulatorCard on:select={() => goto(platform.name)} title={platform.name} description={platform.physicalMediaTypes.map(m => $_(`media_type.${m}`)).join(", ")}/>
-            {/each}
-        </div>
+        {#if matchingMediaPlatforms.length != 0}
+            <h2 class="text-xl mt-4">Doporučené (dle typu média)</h2>
+            <div class="text-center grid grid-cols-3 gap-2">
+                {#each matchingMediaPlatforms as platform}
+                    <EmulatorCard on:select={() => goto(platform.name)} title={platform.name} description={platform.physicalMediaTypes.map(m => $_(`media_type.${m}`)).join(", ")}/>
+                {/each}
+            </div>
+        {/if}
         <h2 class="text-xl mt-4">Seznam platforem</h2>
-        <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-            <div class="input-group-shim">
+        <div class="input-group grid-cols-[auto_1fr_auto]">
+            <div class="ig-cell preset-tonal">
                 <Fa icon={faMagnifyingGlass} />
             </div>
 
-            <input bind:value={searchText} title="Vyhledat dle názvu" type="search" placeholder="Název platformy" />
+            <input class="ig-input" bind:value={searchText} title="Vyhledat dle názvu" type="search" placeholder="Název platformy" />
         </div>
-        <div class="table-container">
-            <table class="table table-hover">
+        <div class="table-wrap">
+            <table class="table">
                 <thead>
                     <tr>
-                        <th class="w-2/4">Název</th>
-                        <th class="w-1/4">Typ média</th>
-                        <th></th>
+                        <th class="w-1/2">Název</th>
+                        <th class="w-1/2">Typ média</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="[&>tr]:hover:preset-tonal-primary">
                     {#each filteredPlatforms as platform}
-                        <tr>
-                            <td>{platform.name}</td>
+                        <tr class="cursor-pointer select-none" onclick={() => goto(platform.name)}>
+                            <td class="underline">{platform.name}</td>
                             <td>{platform.physicalMediaTypes.map(m => $_(`media_type.${m}`)).join(", ")}</td>
-                            <td><a href="{platform.name}" class="btn preset-filled">Vybrat</a></td>
                         </tr>
                     {/each}
                     {#if filteredPlatforms.length == 0}

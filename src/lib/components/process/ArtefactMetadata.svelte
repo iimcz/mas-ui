@@ -12,7 +12,7 @@
         $unlockedStep = 3;
     })
 
-    
+
     /**
      * @typedef {Object} Props
      * @property {string} processId
@@ -39,4 +39,4 @@
     }
 </script>
 
-<ArtefactForm isNew={true} on:save={createNew}/>
+<ArtefactForm isNew={true} onsave={createNew}/>

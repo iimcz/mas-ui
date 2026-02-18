@@ -24,7 +24,7 @@
         goto(`add/guide/${toolId}`);
     }
 
-    
+
     /**
      * @typedef {Object} Props
      * @property {import('./$types').PageData} data
@@ -34,11 +34,11 @@
     let { data } = $props();
 </script>
 
-<div class="container h-full mx-auto flex justify-center">
+<div class="container h-full flex">
     <div class="flex w-5/6 space-y-10 flex-col m-4">
         <h1 class="text-3xl mt-4">Vyberte typ média</h1>
         <ProgressStepBar/>
-        <div class="text-center grid grid-cols-2 2xl:grid-cols-3 gap-2">
+        <div class="text-center grid grid-cols-2 3xl:grid-cols-3 gap-4">
             {#each data.tools as tool}
                 <MediaCard
                     isAvailable={tool.isAvailable}
@@ -46,7 +46,7 @@
                     image={$_(`tool.${tool.slug}.image`)}
                     description={$_(`tool.${tool.slug}.description`)}
                     tags={[`v${tool.version}`, $_(`media_type.${tool.physicalMediaType}`)]}
-                    on:click={() => startProcess(tool.id)}
+                    onclick={() => startProcess(tool.id)}
                 />
             {/each}
             <UploadCard />

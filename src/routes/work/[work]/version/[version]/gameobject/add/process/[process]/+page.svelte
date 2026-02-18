@@ -4,8 +4,6 @@
     import GamePackageMetadata from "$lib/components/process/GamePackageMetadata.svelte";
     import Log from "$lib/components/process/Log.svelte";
 	import { _ } from 'svelte-i18n'
-    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
-    // TODO: FIX const toastStore = getToastStore();
     import Fa from "svelte-fa";
     import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 
@@ -28,14 +26,13 @@
 
             if (data.status == "Success") {
                 isFinished = true;
-                // TODO: FIX
-                //toastStore.trigger({message: $_("conversion_success"), background: 'preset-filled-success'});
+                toaster.success({title: $_("conversion_success")});
+                info.scrollIntoView({ behavior: 'smooth' });
             }
 
             if (data.status == "Failed") {
                 isFinished = true;
-                // TODO: FIX
-                //toastStore.trigger({message: $_("conversion_failed"), background: 'preset-filled-error'});
+                toaster.error({title: $_("conversion_failed")});
             }
         }, 1000)
 
@@ -53,6 +50,7 @@
     }
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
+    import { toaster } from "$lib/toaster";
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
@@ -64,16 +62,23 @@
 
     /** @type {Props} */
     let { data = $bindable() } = $props();
+    let info = $state();
 </script>
 
-<div class="container h-full mx-auto flex justify-center">
+<div class="container h-full flex">
     <div class="flex w-5/6 space-y-5 flex-col m-4">
         <h1 class="text-3xl mt-4">Konverze</h1>
         <ProgressStepBar/>
+        <div>
+            <h1 class="text-3xl">1. Záznam z konverze</h1>
+            <Log url={`${API_URL}/api/v1/conversion/${data.processId}/log`}/>
+        </div>
         {#if data.status == "Success"}
             <hr/>
-            <h1 class="text-3xl mt-4">Strukturovaný popis</h1>
-            <GamePackageMetadata processId={data.processId} />
+            <div>
+                <h1 bind:this={info} class="text-3xl">2. Strukturovaný popis</h1>
+                <GamePackageMetadata processId={data.processId} />
+            </div>
         {:else if data.status == "Failed"}
             <hr/>
             <button onclick={restart} class="btn preset-filled-error">
@@ -81,7 +86,5 @@
                 <span>Zkusit znovu</span>
             </button>
         {/if}
-        <h1 class="text-3xl mt-4">Záznam z konverze</h1>
-        <Log url={`${API_URL}/api/v1/conversion/${data.processId}/log`}/>
     </div>
 </div>
