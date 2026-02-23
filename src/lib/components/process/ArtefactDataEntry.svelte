@@ -4,9 +4,6 @@
 </script>
 
 <form class="form border border-surface-500 m-2 p-4 space-y-2 rounded-container">
-    <div>Název</div>
-    <input class="input" type="text" bind:value={data.name} />
-
     <div>Stav nosiče</div>
     <input class="input" type="text" bind:value={data.physicalMediaState} />
 
@@ -15,9 +12,6 @@
     <input class="input" type="text" readonly disabled bind:value={data.archivationDate} />
     {/if}
 
-    <div>Archivoval</div>
-    <input class="input" type="text" bind:value={data.archiver} />
-
     <div>Poznámka</div>
-    <input class="input" type="text" bind:value={data.note} />
+    <input class="input" type="text" bind:value={data.internalNote} />
 </form>

@@ -11,15 +11,17 @@
     /** @type {Props} */
     let { isNew = false, data = {
         id: "",
-        archivationDate: "",
-        archiver: "",
-        name: "",
-        note: "",
+        fileName: "",
+        fileSize: 0,
+        digitalObjectType: "",
+        format: "",
+        internalNote: "",
+        paratextIds: [],
+        quality: "",
+        versionIds: [],
+        websiteUrl: "",
         physicalMediaState: "",
-        versionId: "",
         physicalMediaType: "",
-        originalFileName: "",
-        digitalizationToolId: "",
         type: ""
     }, onsave = null } = $props();
 </script>

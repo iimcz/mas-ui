@@ -5,7 +5,7 @@
 * versionId: string
 * emulatorId: string
 * conversionDate: string
-* includedArtefactIds: string[]
+* includedDigitalObjectIds: string[]
 * }} GamePackage
 */
 export const unused = {};

@@ -1,16 +1,18 @@
 /**
  * @typedef {{
 *  id: string,
-*  versionId: string,
-*  name: string,
-*  physicalMediaState: string,
-*  archivationDate: string,
-*  archiver: string,
-*  note: string,
+*  fileName: string,
+*  internalNote: string,
+*  websiteUrl: string,
+*  digitalObjectType: string,
+*  format: string,
+*  fileSize: number,
+*  quality: string,
 *  type: string,
+*  physicalMediaState: string,
 *  physicalMediaType: string,
-*  originalFileName: string,
-*  digitalizationToolId: string
+*  paratextIds: string[],
+*  versionIds: string[]
 * }} Artefact
 */
 export const unused = {};
