@@ -1,30 +1,22 @@
-<script>
+<script lang="ts">
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
     import ArtefactForm from "$lib/components/process/ArtefactForm.svelte";
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     import { API_URL } from "$lib/config";
+    import type { Artefact } from "$lib/schemas/artefact";
     import { toaster } from "$lib/toaster";
     import { _ } from 'svelte-i18n'
 
-    /**
-     * @typedef {Object} Props
-     * @property {import('./$types').PageData} data
-     */
-
-    /** @type {Props} */
     let { data } = $props();
 
     $currentSidebar = versionLinks;
     $currentRoute = "artefactDetail";
 
-    /**
-     * @param {CustomEvent<import("$lib/schemas/artefact").Artefact>} formData
-     */
-     async function update(formData) {
-        const result = await fetch(`${API_URL}/api/v1/artefacts/${formData.detail.id}`, {
+     async function update(artefact: Artefact) {
+        const result = await fetch(`${API_URL}/api/v1/artefacts/${artefact.id}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData.detail)
+            body: JSON.stringify(artefact)
         });
 
         if (result.ok) toaster.success({title: $_("save_success")});

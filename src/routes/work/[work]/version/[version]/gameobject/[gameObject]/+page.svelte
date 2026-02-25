@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
     import GamePackageForm from "$lib/components/process/GamePackageForm.svelte";
 
@@ -7,17 +7,15 @@
 
     import { currentSidebar, currentRoute, gameObjectLinks } from "$lib/components/sidebar/links";
     import { toaster } from "$lib/toaster";
+    import type { GamePackage } from "$lib/schemas/gamePackage";
     $currentSidebar = gameObjectLinks;
     $currentRoute = "gameObjectDetail";
 
-    /**
-     * @param {CustomEvent<import("$lib/schemas/gamePackage").GamePackage>} formData
-     */
-     async function update(formData) {
-        const result = await fetch(`${API_URL}/api/v1/packages/${formData.detail.id}`, {
+     async function update(gamePackage: GamePackage) {
+        const result = await fetch(`${API_URL}/api/v1/packages/${gamePackage.id}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData.detail)
+            body: JSON.stringify(gamePackage)
         });
 
         if (result.ok) toaster.success({title: $_("save_success")});
@@ -27,13 +25,6 @@
         }
     }
 
-
-    /**
-     * @typedef {Object} Props
-     * @property {import('./$types').PageData} data
-     */
-
-    /** @type {Props} */
     let { data } = $props();
 </script>
 
@@ -51,6 +42,6 @@
                 </div>
             </div>
         </div>
-        <GamePackageForm data={data} on:save={update}/>
+        <GamePackageForm data={data} onsave={update}/>
     </div>
 </HeaderContainer>
