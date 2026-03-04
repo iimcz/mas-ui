@@ -1,6 +1,8 @@
 <script lang="ts">
     import type { GamePackage } from "$lib/schemas/gamePackage";
+    import Fa from "svelte-fa";
     import GamePackageDataEntry from "./GamePackageDataEntry.svelte"
+    import { faSave } from "@fortawesome/free-solid-svg-icons";
 
     let { isNew = false, data = {
         id: "",
@@ -19,5 +21,8 @@
 <div class="card flex p-2 flex-col">
     <span class="text-xl font-bold p-4">Popis</span>
     <GamePackageDataEntry data={data} />
-    <button onclick={() => onsave(data)} type="button" class="btn float-right preset-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+    <button onclick={() => onsave(data)} type="button" class="btn float-right preset-filled">
+        <Fa icon={faSave}/>
+        {isNew ? "Vytvořit" : "Uložit změny"}
+    </button>
 </div>

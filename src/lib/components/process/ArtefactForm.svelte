@@ -1,6 +1,8 @@
 <script>
     import { ArtefactTypeEnum, PhysicalMediaStateEnum, PhysicalMediaTypeEnum } from "$lib/schemas/artefact";
+    import Fa from "svelte-fa";
     import ArtefactDataEntry from "./ArtefactDataEntry.svelte"
+    import { faSave } from "@fortawesome/free-solid-svg-icons";
 
     /**
      * @typedef {Object} Props
@@ -30,5 +32,8 @@
 
 <div class="card flex flex-col">
     <ArtefactDataEntry data={data} />
-    <button onclick={() => onsave(data)} type="button" class="btn float-right preset-filled">{isNew ? "Vytvořit" : "Uložit změny"}</button>
+    <button onclick={() => onsave(data)} type="button" class="btn float-right preset-filled">
+        <Fa icon={faSave}/>
+        {isNew ? "Vytvořit" : "Uložit změny"}
+    </button>
 </div>
