@@ -32,7 +32,16 @@
 
 <HeaderContainer title={data.fileName}>
     <div class="grid grid-cols-[1_fr] gap-2">
-    <Alert class="preset-outlined-primary-500">
+        <ol class="flex items-center gap-4">
+                <li><a class="opacity-60 hover:underline" href="/">Vyhledávání</a></li>
+                <li class="opacity-50" aria-hidden="true">&rsaquo;</li>
+                <li><a class="opacity-60 hover:underline" href="../../../">Dílo</a></li>
+                <li class="opacity-50" aria-hidden="true">&rsaquo;</li>
+                <li><a class="opacity-60 hover:underline" href="../">Verze</a></li>
+                <li class="opacity-50" aria-hidden="true">&rsaquo;</li>
+                <li>Digitální objekt</li>
+        </ol>
+        <Alert class="preset-outlined-primary-500">
             <h3 class="flex gap-2 items-center font-semibold">
                 <Fa icon={faListCheck}/>
                 Další kroky

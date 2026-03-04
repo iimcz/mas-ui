@@ -8,6 +8,9 @@
     import { currentSidebar, currentRoute, gameObjectLinks } from "$lib/components/sidebar/links";
     import { toaster } from "$lib/toaster";
     import type { GamePackage } from "$lib/schemas/gamePackage";
+    import Alert from "$lib/components/Alert.svelte";
+    import Fa from "svelte-fa";
+    import { faListCheck } from "@fortawesome/free-solid-svg-icons";
     $currentSidebar = gameObjectLinks;
     $currentRoute = "gameObjectDetail";
 
@@ -30,18 +33,29 @@
 
 <HeaderContainer title="Metadata herního balíčku">
     <div class="grid grid-cols-[1_fr] gap-2">
-        <div class="alert preset-outline">
-            <div class="alert-message">
-                <h3>← Další kroky</h3>
-                <p>
-                    Po vytvoření herního balíčku je možné spustit emulaci.<br/>
-                    Další možnosti se nachází v levém menu.
-                </p>
-                <div>
-                    <a href="{data.id}/profile/[id]/emulator" class="btn preset-filled">Spustit emulaci</a>
-                </div>
+        <ol class="flex items-center gap-4">
+                <li><a class="opacity-60 hover:underline" href="/">Vyhledávání</a></li>
+                <li class="opacity-50" aria-hidden="true">&rsaquo;</li>
+                <li><a class="opacity-60 hover:underline" href="../../../">Dílo</a></li>
+                <li class="opacity-50" aria-hidden="true">&rsaquo;</li>
+                <li><a class="opacity-60 hover:underline" href="../">Verze</a></li>
+                <li class="opacity-50" aria-hidden="true">&rsaquo;</li>
+                <li>Herní objekt</li>
+        </ol>
+        <Alert class="preset-outlined-primary-500">
+            <h3 class="flex gap-2 items-center font-semibold">
+                <Fa icon={faListCheck}/>
+                Další kroky
+            </h3>
+            <p>
+                Po vytvoření herního balíčku je možné spustit emulaci.<br/>
+                Další možnosti se nachází v levém menu.
+            </p>
+            <div class="flex flex-col items-center gap-1">
+                <a href="{data.id}/profile/[id]/emulator" class="btn preset-filled">Spustit emulaci</a>
             </div>
-        </div>
+        </Alert>
+        <h2 class="text-2xl mt-4">Metadata herního objektu</h2>
         <GamePackageForm data={data} onsave={update}/>
     </div>
 </HeaderContainer>
