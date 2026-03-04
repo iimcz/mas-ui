@@ -8,16 +8,10 @@
     $currentRoute = "artefactList";
 
     const tableColumns = [
-        { name: "Název", key: "name", canSort: true },
-        { name: "Popis", key: "description", canSort: true },
+        { name: "Název", key: "label", canSort: true },
+        { name: "Interní poznámka", key: "internalNote", canSort: true },
     ]
 
-    /**
-     * @typedef {Object} Props
-     * @property {import('./$types').PageData} data
-     */
-
-    /** @type {Props} */
     let { data } = $props();
 </script>
 

@@ -1,5 +1,6 @@
 export type Artefact = {
     id: string;
+    label: string;
     fileName: string;
     internalNote: string;
     websiteUrl: string;
