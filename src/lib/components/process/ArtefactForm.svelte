@@ -12,6 +12,7 @@
     /** @type {Props} */
     let { isNew = false, data = {
         id: "",
+        label: "",
         fileName: "",
         fileSize: 0,
         digitalObjectType: "",

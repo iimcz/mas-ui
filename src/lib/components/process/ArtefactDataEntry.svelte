@@ -4,6 +4,9 @@
 </script>
 
 <form class="form border border-surface-500 m-2 p-4 space-y-2 rounded-container">
+    <div>Název</div>
+    <input class="input" type="text" bind:value={data.label} />
+
     <div>Stav nosiče</div>
     <select bind:value={data.physicalMediaState} class="select">
         {#each Object.entries(PhysicalMediaStateEnum) as enumValue}
@@ -11,7 +14,7 @@
         {/each}
     </select>
 
-    <div>Poznámka</div>
+    <div>Interní poznámka</div>
     <input class="input" type="text" bind:value={data.internalNote} />
 </form>
 
