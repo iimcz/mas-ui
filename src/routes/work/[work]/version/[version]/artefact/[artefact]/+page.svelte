@@ -51,7 +51,7 @@
                 Další možnosti se nachází v levém menu.
             </p>
             <div class="flex flex-col items-center gap-1">
-                <a href="../gameobject/add/platform" class="btn preset-filled">Přidat herní balíček</a>
+                <a href="../gameobject/add/platform" class="btn preset-filled">Vytvořit herní balíček</a>
             </div>
         </Alert>
         <h2 class="text-2xl mt-4">Metadata digitálního objektu</h2>

@@ -70,14 +70,14 @@
                         <Fa icon={faExclamationTriangle}/>
                     </h3>
                     <h1>K tomuto dílu neexistují žádné artefakty. Před vytvořením herního objektu je nutné digitalizovat kopii média, nebo nahrát soubor.</h1>
-                    <a href="../../artefact/add" class="btn preset-filled">Přidat artefakt</a>
+                    <a href="../../artefact/add" class="btn preset-filled">Vytvořit artefakt</a>
                 </Alert>
             {/if}
             <ol class="list px-4 space-y-2">
                 {#each data.artefacts as artefact, index}
                     <li>
                         <input class="checkbox" type="checkbox" bind:checked={selectedArtefacts[index]} />
-                        <span>{artefact.name}</span>
+                        <span>{artefact.label}</span>
                     </li>
                 {/each}
             </ol>
