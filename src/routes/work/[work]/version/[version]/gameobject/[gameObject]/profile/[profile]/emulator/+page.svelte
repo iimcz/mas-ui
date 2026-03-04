@@ -1,5 +1,5 @@
 <script>
-    import { API_URL } from "$lib/config";
+    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
     import { faExpand, faCog, faInfoCircle, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -129,7 +129,7 @@
 	<div class="arrow preset-filled-secondary"></div>
 </div>
 
-<style>
+<style scoped>
     .aspect-container {
         max-height: calc(100dvh - 200px);
     }

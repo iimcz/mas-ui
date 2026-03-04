@@ -1,13 +1,13 @@
 <script lang="ts">
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
-    import VersionForm from "./versionForm.svelte";
+    import VersionMetadata from "./VersionMetadata.svelte";
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     import { _ } from 'svelte-i18n'
     import Alert from "$lib/components/Alert.svelte";
-    import { faChevronLeft, faDatabase } from "@fortawesome/free-solid-svg-icons";
+    import { faDatabase, faListCheck } from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
-    import { API_URL } from "$lib/config";
+    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
 
     $currentSidebar = versionLinks;
     $currentRoute = "versionDetail";
@@ -19,7 +19,7 @@
     <div class="grid grid-cols-[1_fr] gap-2">
         <Alert class="preset-outlined-primary-500">
             <h3 class="flex gap-2 items-center font-semibold">
-                <Fa icon={faChevronLeft}/>
+                <Fa icon={faListCheck}/>
                 Další kroky
             </h3>
             <p>
@@ -33,6 +33,6 @@
             </div>
         </Alert>
         <h2 class="text-2xl mt-4">Metadata verze</h2>
-        <VersionForm data={data}/>
+        <VersionMetadata data={data}/>
     </div>
 </HeaderContainer>

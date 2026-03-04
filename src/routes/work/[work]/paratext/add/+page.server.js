@@ -1,4 +1,4 @@
-import { API_URL } from "$lib/config.js";
+import { PUBLIC_API_URL as API_URL } from '$env/static/public';
 import { formDataToJSON } from "$lib/formData.js";
 import { uploadFile } from "$lib/schemas/paratext.js";
 import { redirect } from "@sveltejs/kit";

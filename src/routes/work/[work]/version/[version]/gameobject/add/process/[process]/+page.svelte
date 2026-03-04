@@ -1,5 +1,5 @@
 <script>
-    import { API_URL } from "$lib/config";
+    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import GamePackageMetadata from "$lib/components/process/GamePackageMetadata.svelte";
     import Log from "$lib/components/process/Log.svelte";

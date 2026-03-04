@@ -1,6 +1,6 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import { API_URL } from "$lib/config";
+    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
     import type { Work } from "$lib/schemas/work";
     import { Combobox, Portal, useListCollection, type ComboboxRootProps } from '@skeletonlabs/skeleton-svelte';
 

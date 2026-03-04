@@ -1,4 +1,4 @@
-import { API_URL } from '$lib/config';
+import { PUBLIC_API_URL as API_URL } from '$env/static/public';
 import { _ } from 'svelte-i18n'
 import { get } from 'svelte/store';
 
@@ -23,7 +23,7 @@ export const unused = {};
 export function getParatextThumbnail(paratext) {
     // TODO: use maybe digital object for the thumbnail or forward there on the backend
     //if (paratext.thumbnail.startsWith("url:")) return paratext.thumbnail.substring(4)
-    //else 
+    //else
     return get(_)(`paratext.${paratext.thumbnail.substring(9)}`)
 }
 

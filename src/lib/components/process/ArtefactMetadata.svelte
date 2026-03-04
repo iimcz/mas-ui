@@ -5,7 +5,7 @@
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
     import { page } from "$app/state";
-    import { API_URL } from "$lib/config";
+    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
     import type { Artefact } from "$lib/schemas/artefact";
     import { toaster } from "$lib/toaster";
     import { _ } from 'svelte-i18n'

@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { API_URL } from "$lib/config";
-    import WorkForm from "./workForm.svelte";
+    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
+    import WorkMetadata from "./WorkMetadata.svelte";
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
     import Alert from '$lib/components/Alert.svelte';
     import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";
     import Fa from "svelte-fa";
-    import { faChevronLeft, faDatabase } from "@fortawesome/free-solid-svg-icons";
+    import { faListCheck, faDatabase } from "@fortawesome/free-solid-svg-icons";
 
     $currentSidebar = workLinks;
     $currentRoute = "workDetail";
@@ -17,7 +17,7 @@
     <div class="grid grid-cols-[1fr] gap-2">
         <Alert class="preset-outlined-primary-500">
             <h3 class="flex gap-2 items-center font-semibold">
-                <Fa icon={faChevronLeft}/>
+                <Fa icon={faListCheck}/>
                 Další kroky
             </h3>
             <p>
@@ -29,6 +29,6 @@
             </div>
         </Alert>
         <h2 class="text-2xl mt-4">Metadata díla</h2>
-        <WorkForm data={data}/>
+        <WorkMetadata data={data}/>
     </div>
 </HeaderContainer>

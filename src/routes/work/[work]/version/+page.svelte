@@ -6,7 +6,7 @@
 
     const tableColumns = [
         { name: "Název", key: "label", canSort: true },
-        { name: "Popis", key: "description", canSort: true }
+        { name: "Popis", key: "description", canSort: true, html: true }
     ]
 
     import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";

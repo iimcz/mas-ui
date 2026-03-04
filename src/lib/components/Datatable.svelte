@@ -6,6 +6,7 @@
         columns: {
             name: string,
             key: string,
+            html?: boolean
             canSort?: boolean,
             onClick?: any
         }[],
@@ -66,7 +67,11 @@
                                         <button type="button" onclick={() => clickHandler(column, row)} class="btn preset-filled">{column.name}</button>
                                     </td>
                                 {:else}
-                                    <td class:underline={onrowclick && i == 0}>{row[column.key]}</td>
+                                    {#if column.html}
+                                        <td class:underline={onrowclick && i == 0}>{@html row[column.key]}</td>
+                                    {:else}
+                                        <td class:underline={onrowclick && i == 0}>{row[column.key]}</td>
+                                    {/if}
                                 {/if}
                             {/each}
                         </tr>
@@ -82,7 +87,7 @@
     </footer>
 </section>
 
-<style>
+<style scoped>
     @reference "#layout.css";
 
     section {

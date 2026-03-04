@@ -1,7 +1,7 @@
 <script>
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
     import { currentSidebar } from "$lib/components/sidebar/links";
-    import { API_URL } from "$lib/config";
+    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
     import { goto } from "$app/navigation";
     import { _ } from 'svelte-i18n'
     import Datatable from "$lib/components/Datatable.svelte";

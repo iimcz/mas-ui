@@ -49,7 +49,7 @@
     </button>
 </div>
 
-<style>
+<style scoped>
     @reference "#layout.css";
 
     .disabled {

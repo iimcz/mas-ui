@@ -1,6 +1,6 @@
 <script lang="ts">
 	import './layout.css';
-	import { API_URL } from '$lib/config';
+	import { PUBLIC_API_URL as API_URL } from '$env/static/public';
 	import { _ } from 'svelte-i18n'
 
 	import { AppBar, Toast } from '@skeletonlabs/skeleton-svelte';

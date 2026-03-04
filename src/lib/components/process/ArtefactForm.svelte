@@ -1,4 +1,5 @@
 <script>
+    import { ArtefactTypeEnum, PhysicalMediaStateEnum, PhysicalMediaTypeEnum } from "$lib/schemas/artefact";
     import ArtefactDataEntry from "./ArtefactDataEntry.svelte"
 
     /**
@@ -20,9 +21,9 @@
         quality: "",
         versionIds: [],
         websiteUrl: "",
-        physicalMediaState: "",
-        physicalMediaType: "",
-        type: ""
+        physicalMediaState: PhysicalMediaStateEnum.Good,
+        physicalMediaType: PhysicalMediaTypeEnum.Unknow,
+        type: ArtefactTypeEnum.Unknown
     }, onsave = null } = $props();
 </script>
 

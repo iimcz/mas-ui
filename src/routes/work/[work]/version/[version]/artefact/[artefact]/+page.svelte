@@ -2,10 +2,13 @@
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
     import ArtefactForm from "$lib/components/process/ArtefactForm.svelte";
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
-    import { API_URL } from "$lib/config";
+    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
     import type { Artefact } from "$lib/schemas/artefact";
     import { toaster } from "$lib/toaster";
     import { _ } from 'svelte-i18n'
+    import Alert from "$lib/components/Alert.svelte";
+    import Fa from "svelte-fa";
+    import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 
     let { data } = $props();
 
@@ -27,20 +30,22 @@
     }
 </script>
 
-<HeaderContainer title="Metadata artefaktu">
+<HeaderContainer title={data.fileName}>
     <div class="grid grid-cols-[1_fr] gap-2">
-        <div class="alert preset-outline">
-            <div class="alert-message">
-                <h3>← Další kroky</h3>
-                <p>
-                    Po vytvoření digitálního objektu je nutné vytvořit herní balíček.<br/>
-                    Další možnosti se nachází v levém menu.
-                </p>
-                <div>
-                    <a href="../gameobject/add/platform" class="btn preset-filled">Přidat herní balíček</a>
-                </div>
+    <Alert class="preset-outlined-primary-500">
+            <h3 class="flex gap-2 items-center font-semibold">
+                <Fa icon={faListCheck}/>
+                Další kroky
+            </h3>
+            <p>
+                Po vytvoření digitálního objektu je nutné vytvořit herní objekt.<br/>
+                Další možnosti se nachází v levém menu.
+            </p>
+            <div class="flex flex-col items-center gap-1">
+                <a href="../gameobject/add/platform" class="btn preset-filled">Přidat herní balíček</a>
             </div>
-        </div>
+        </Alert>
+        <h2 class="text-2xl mt-4">Metadata digitálního objektu</h2>
         <ArtefactForm data={data} onsave={update}/>
     </div>
 </HeaderContainer>

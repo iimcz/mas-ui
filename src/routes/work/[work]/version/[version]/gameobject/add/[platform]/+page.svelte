@@ -1,5 +1,5 @@
 <script>
-    import { API_URL } from "$lib/config";
+    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { currentStep, unlockedStep } from "$lib/steps";
     import { goto } from "$app/navigation";

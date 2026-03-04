@@ -11,7 +11,7 @@
     import Guide from "$lib/components/process/Guide.svelte";
     import Log from "$lib/components/process/Log.svelte";
 
-    import { API_URL } from "$lib/config";
+    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
     import { digitalizationGuides } from "$lib/digitalizationGuides";
     import { currentStep, unlockedStep, steps, artefactSteps } from "$lib/steps";
     import { toaster } from "$lib/toaster";

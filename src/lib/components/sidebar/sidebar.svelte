@@ -35,7 +35,7 @@
     {/if}
 </aside>
 
-<style>
+<style scoped>
     @reference "#layout.css";
 
     .active-link {
