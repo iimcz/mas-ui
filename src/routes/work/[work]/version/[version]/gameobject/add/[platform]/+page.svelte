@@ -28,7 +28,7 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 emulatorId: emulatorId,
-                versionId: page.params.work,
+                versionId: page.params.version,
                 digitalObjectIds: artefactIds
              })
         });
