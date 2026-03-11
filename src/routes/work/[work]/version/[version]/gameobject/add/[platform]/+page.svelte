@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { PUBLIC_API_URL as API_URL } from '$env/static/public';
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { currentStep, unlockedStep } from "$lib/steps";
@@ -16,16 +16,21 @@
     /**
      * @param {string} emulatorId
      */
-     async function startConversion(emulatorId) {
+     async function startConversion(emulatorId: string) {
         const artefactIds = data.artefacts.filter((a, i) => selectedArtefacts[i] == true).map(a => a.id)
         if (artefactIds.length == 0) {
             toaster.error({title: $_("must_select_artefact")})
             return;
         }
+
         const res = await fetch(`${API_URL}/api/v1/conversion/start`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ emulatorId, artefactIds })
+            body: JSON.stringify({
+                emulatorId: emulatorId,
+                versionId: page.params.work,
+                digitalObjectIds: artefactIds
+             })
         });
 
         /**
@@ -40,6 +45,7 @@
     import Fa from "svelte-fa";
     import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
     import { toaster } from "$lib/toaster";
+    import { page } from '$app/state';
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
