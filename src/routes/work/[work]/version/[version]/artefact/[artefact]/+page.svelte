@@ -22,11 +22,11 @@
             body: JSON.stringify(artefact)
         });
 
-        if (result.ok) toaster.success({title: $_("save_success")});
-        else {
-            const error = await result.text();
-            toaster.error({title: $_("save_fail"), description: error});
-        }
+    async function exportArtefact() {
+        const result = await fetch(`${API_URL}/api/v1/export/artefact/${data.id}`, {
+            method: "POST"
+        });
+        data = await result.json();
     }
 </script>
 
@@ -52,6 +52,7 @@
             </p>
             <div class="flex flex-col items-center gap-1">
                 <a href="../gameobject/add/platform" class="btn preset-filled">Vytvořit herní balíček</a>
+                <button onclick={exportArtefact} class="btn preset-filled">Exportovat Digitální objekt do CA</button>
             </div>
         </Alert>
         <h2 class="text-2xl mt-4">Metadata digitálního objektu</h2>
