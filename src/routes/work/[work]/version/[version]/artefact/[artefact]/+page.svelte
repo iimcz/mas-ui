@@ -15,12 +15,13 @@
     $currentSidebar = versionLinks;
     $currentRoute = "artefactDetail";
 
-     async function update(artefact: Artefact) {
-        const result = await fetch(`${API_URL}/api/v1/artefacts/${artefact.id}`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(artefact)
-        });
+    async function update(artefact: Artefact) {
+       const result = await fetch(`${API_URL}/api/v1/artefacts/${artefact.id}`, {
+           method: "POST",
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify(artefact)
+       });
+    }
 
     async function exportArtefact() {
         const result = await fetch(`${API_URL}/api/v1/export/artefact/${data.id}`, {
