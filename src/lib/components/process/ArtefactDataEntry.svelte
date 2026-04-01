@@ -1,5 +1,6 @@
 <script lang="ts">
     import { PhysicalMediaStateEnum, type Artefact } from "$lib/schemas/artefact";
+    import Blockquote from "../Blockquote.svelte";
     let { data = $bindable() }: { data: Artefact } = $props();
 </script>
 
@@ -13,6 +14,9 @@
             <option value={enumValue[1]}>{enumValue[0]}</option>
         {/each}
     </select>
+
+    <div>Typ</div>
+    <Blockquote>{data.type}</Blockquote>
 
     <div>Interní poznámka</div>
     <input class="input" type="text" bind:value={data.internalNote} />

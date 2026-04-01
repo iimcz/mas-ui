@@ -1,20 +1,65 @@
-<script>
+<script lang="ts">
+    import { ArtefactTypeEnum, type Artefact } from '$lib/schemas/artefact';
+    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
     import { faClose, faFile, faUpload } from '@fortawesome/free-solid-svg-icons';
     import { Dialog, FileUpload, Portal, Progress } from '@skeletonlabs/skeleton-svelte';
+    import { type FileChangeDetails } from '@zag-js/file-upload';
     import Fa from 'svelte-fa';
+    import { page } from '$app/state';
+    import { goto } from '$app/navigation';
 
     const animation = 'transition transition-discrete opacity-0 translate-y-[100px] starting:data-[state=open]:opacity-0 starting:data-[state=open]:translate-y-[100px] data-[state=open]:opacity-100 data-[state=open]:translate-y-0';
 
     let selected = $state(false);
     let uploading = $state(false);
+    let label = $state("");
     let val = $state(0);
+    let artefactType: ArtefactTypeEnum = $state(ArtefactTypeEnum.IsoImage);
+    let acceptedFile: File | null = $state(null);
 
-    function onChangeHandler() {
+    function onChangeHandler(e: FileChangeDetails) {
         selected = true;
+        acceptedFile = e.acceptedFiles[0]
     }
 
-    function onFormSubmit() {
+    async function onFormSubmit() {
+        if (acceptedFile == null) return;
         uploading = true;
+
+        const formData  = new FormData();
+        formData.append("file", acceptedFile)
+
+        const headers = new Headers();
+        headers.append("VersionId", page.params.version!);
+
+        const reqStart = await fetch(`${API_URL}/api/v1/upload/start`, {
+            method: "POST",
+            body: formData,
+            headers
+        })
+
+        val = 50;
+
+        // TODO: Replace with polling the status endpoint
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        const process = await reqStart.json();
+        console.log(process);
+        const artefact: Partial<Artefact> = {
+            label,
+            type: artefactType
+        }
+
+        const reqFinish = await fetch(`${API_URL}/api/v1/upload/${process.processId}/finalize`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(artefact)
+        })
+
+        val = 100;
+
+        const result = await reqFinish.json();
+        goto(`/work/${page.params.work}/version/${page.params.version}/artefact/${result.id}`)
 	}
 </script>
 
@@ -50,7 +95,17 @@
                             </Progress.Track>
                         </Progress>
                     {:else}
-                        <FileUpload name="files" onchange={onChangeHandler}>
+                        <label class="label mb-2">
+                            <span class="label-text">Popis</span>
+                            <input class="input" type="text" placeholder="Popis" bind:value={label} />
+                        </label>
+                        <label for="ArtefactType">Typ média</label>
+                        <select name="ArtefactType" bind:value={artefactType} class="select mb-2">
+                            {#each Object.entries(ArtefactTypeEnum) as type}
+                                <option value={type[1]}>{type[0]}</option>
+                            {/each}
+                        </select>
+                        <FileUpload name="files" onFileChange={onChangeHandler}>
                             <FileUpload.Dropzone>
                                 <Fa icon={faFile} />
                                 <span>Klikněte pro nahrání nebo přetáhněte soubor.</span>

@@ -31,7 +31,7 @@
     }
 </script>
 
-<HeaderContainer title={data.fileName}>
+<HeaderContainer title={data.label ?? data.fileName}>
     <div class="grid grid-cols-[1_fr] gap-2">
         <ol class="flex items-center gap-4">
                 <li><a class="opacity-60 hover:underline" href="/">Vyhledávání</a></li>
