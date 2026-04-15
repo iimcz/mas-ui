@@ -1,7 +1,7 @@
 <script lang="ts">
     import { ArtefactTypeEnum, type Artefact } from '$lib/schemas/artefact';
     import { PUBLIC_API_URL as API_URL } from '$env/static/public';
-    import { faClose, faFile, faUpload } from '@fortawesome/free-solid-svg-icons';
+    import { faCheck, faClock, faClose, faFile, faUpload } from '@fortawesome/free-solid-svg-icons';
     import { Dialog, FileUpload, Portal, Progress } from '@skeletonlabs/skeleton-svelte';
     import { type FileChangeDetails } from '@zag-js/file-upload';
     import Fa from 'svelte-fa';
@@ -13,7 +13,7 @@
     let selected = $state(false);
     let uploading = $state(false);
     let label = $state("");
-    let val = $state(0);
+    let uploadStep = $state(0);
     let artefactType: ArtefactTypeEnum = $state(ArtefactTypeEnum.IsoImage);
     let acceptedFile: File | null = $state(null);
 
@@ -38,13 +38,10 @@
             headers
         })
 
-        val = 50;
-
-        // TODO: Replace with polling the status endpoint
+        uploadStep = 1;
         await new Promise(resolve => setTimeout(resolve, 500));
 
         const process = await reqStart.json();
-        console.log(process);
         const artefact: Partial<Artefact> = {
             label,
             type: artefactType
@@ -56,7 +53,7 @@
             body: JSON.stringify(artefact)
         })
 
-        val = 100;
+        uploadStep = 2;
 
         const result = await reqFinish.json();
         goto(`/work/${page.params.work}/version/${page.params.version}/artefact/${result.id}`)
@@ -71,7 +68,7 @@
         <div class="text-left">
             <div class="text-lg font-bold">Nahrát soubor</div>
             <div>
-                Nahrajte existující soubor s autodetekcí formátu
+                Nahrajte existující soubor
             </div>
         </div>
     </Dialog.Trigger>
@@ -88,12 +85,41 @@
             <Dialog.Description>
                 <form class="form">
                     {#if uploading}
-                        <Progress value={val} class="grid grid-cols-[auto_1fr] items-center gap-4">
-                            <Progress.Label class="text-sm">{val}%</Progress.Label>
-                            <Progress.Track>
-                                <Progress.Range />
-                            </Progress.Track>
-                        </Progress>
+                        <div class="flex font-semibold flex-col gap-4 pb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="text-nowrap">Nahrávání souboru na server</span>
+                                {#if uploadStep == 0}
+                                    <Progress value={null} class="grid grid-cols-[auto_1fr] items-center gap-4">
+                                        <Progress.Circle  class="[--size:--spacing(8)]">
+                                            <Progress.CircleTrack />
+                                            <Progress.CircleRange />
+                                        </Progress.Circle>
+                                    </Progress>
+                                {:else}
+                                    <Fa class="mx-2" scale={2} icon={faCheck}/>
+                                {/if}
+                            </div>
+                            <hr class="disabled"/>
+                            <div class:disabled={uploadStep < 1} class="flex items-center gap-2">
+                                <span class="text-nowrap">Ukládání souboru na úložiště</span>
+                                {#if uploadStep == 0}
+                                    <Fa class="mx-2" scale={2} icon={faClock}/>
+                                {/if}
+
+                                {#if uploadStep == 1}
+                                    <Progress value={null} class="grid grid-cols-[auto_1fr] items-center gap-4">
+                                        <Progress.Circle  class="[--size:--spacing(8)]">
+                                            <Progress.CircleTrack />
+                                            <Progress.CircleRange />
+                                        </Progress.Circle>
+                                    </Progress>
+                                {/if}
+
+                                {#if uploadStep == 2}
+                                    <Fa class="mx-2" scale={2} icon={faCheck}/>
+                                {/if}
+                            </div>
+                        </div>
                     {:else}
                         <label class="label mb-2">
                             <span class="label-text">Popis</span>
@@ -130,10 +156,12 @@
                     {/if}
                 </form>
             </Dialog.Description>
+            {#if !uploading}
             <footer class="flex justify-end gap-2">
                 <Dialog.CloseTrigger class="btn preset-tonal">Zrušit</Dialog.CloseTrigger>
                 <button disabled={!selected && !uploading} class="btn preset-filled" onclick={onFormSubmit}>Nahrát</button>
             </footer>
+            {/if}
             </Dialog.Content>
         </Dialog.Positioner>
     </Portal>

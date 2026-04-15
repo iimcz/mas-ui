@@ -12,6 +12,7 @@
 
     let interval = 0;
     let isFinished = false;
+    let finalizing = $state(false)
 
     onMount(() => {
         $steps = configSteps
@@ -21,6 +22,12 @@
         interval = setInterval(async () => {
             const res = await fetch(`${API_URL}/api/v1/conversion/${data.processId}/status`);
             data = await res.json();
+
+            // Status is no longer valid, just waiting for finalize
+            if (!res.ok) {
+                clearInterval(interval);
+                return;
+            }
 
             if (isFinished) return;
 
@@ -51,9 +58,9 @@
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     import { toaster } from "$lib/toaster";
+    import { Progress } from '@skeletonlabs/skeleton-svelte';
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
-
 
     /**
      * @typedef {Object} Props
@@ -64,6 +71,21 @@
     let { data = $bindable() } = $props();
     let info = $state();
 </script>
+
+{#if finalizing}
+<div class="absolute inset-0 flex bg-surface-50-950/50 items-center justify-center z-[999]">
+    <div class="flex justify-center items-center gap-4 card p-4 bg-surface-100-900">
+        <Progress class="items-center w-fit" value={null}>
+            <Progress.Circle>
+                <Progress.CircleTrack />
+                <Progress.CircleRange />
+            </Progress.Circle>
+            <Progress.ValueText />
+        </Progress>
+        <span class="text-xl font-semibold">Probíhá finalizace herního objektu</span>
+    </div>
+</div>
+{/if}
 
 <div class="container h-full flex">
     <div class="flex w-5/6 space-y-5 flex-col m-4">
@@ -76,8 +98,8 @@
         {#if data.status == "Success"}
             <hr/>
             <div>
-                <h1 bind:this={info} class="text-3xl">2. Strukturovaný popis</h1>
-                <GamePackageMetadata processId={data.processId} />
+                <h1 bind:this={info} class="text-3xl">2. Strukturovaný popis herního objektu</h1>
+                <GamePackageMetadata onCreateNew={() => finalizing = true} processId={data.processId} />
             </div>
         {:else if data.status == "Failed"}
             <hr/>

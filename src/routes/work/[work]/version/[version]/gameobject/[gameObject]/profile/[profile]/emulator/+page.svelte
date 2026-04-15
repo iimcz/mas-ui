@@ -59,9 +59,9 @@
 </script>
 
 {#if saving}
-<div class="absolute inset-0 flex bg-surface-backdrop-token items-center justify-center z-[999]">
-    <div class="flex justify-center items-center gap-4 card p-4 bg-surface-100">
-        <Progress class="items-center w-fit w-16" value={null}>
+<div class="absolute inset-0 flex bg-surface-50-950/50 items-center justify-center z-[999]">
+    <div class="flex justify-center items-center gap-4 card p-4 bg-surface-100-900">
+        <Progress class="items-center w-fit" value={null}>
             <Progress.Circle>
                 <Progress.CircleTrack />
                 <Progress.CircleRange />

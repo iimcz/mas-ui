@@ -15,9 +15,11 @@
         $unlockedStep = 4;
     })
 
-    let { processId }: { processId: string } = $props();
+    let { processId, onCreateNew }: { processId: string, onCreateNew?: (data: GamePackage) => void } = $props();
 
      async function createNew(data : GamePackage) {
+        if (onCreateNew) onCreateNew(data);
+
         const result = await fetch(`${API_URL}/api/v1/conversion/${processId}/finalize`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },

@@ -18,6 +18,14 @@
     onMount(() => {
         interval = setInterval(async () => {
             const res = await fetch(url);
+
+            // Log is no longer valid, just waiting for finalize
+            if (!res.ok) {
+
+                clearInterval(interval);
+                return;
+            }
+
             const newLog = await res.text();
             const isUpdated = newLog != log;
 
