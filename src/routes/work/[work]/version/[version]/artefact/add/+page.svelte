@@ -1,6 +1,6 @@
 <script>
     import MediaCard from "$lib/components/mediaCard.svelte";
-    import UploadCard from "$lib/components/UploadCard.svelte";
+    import UploadCard from "$lib/components/uploadCard.svelte";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
 	import { _ } from 'svelte-i18n'
 
