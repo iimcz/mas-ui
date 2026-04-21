@@ -3,8 +3,8 @@
     let { children }: { children: Snippet } = $props();
 </script>
 
-<div class="flex ml-2">
-    <div class="bg-surface-900-100 min-w-1 mr-2 min-h-lh rounded-full"></div>
+<div class="ml-2 flex">
+    <div class="mr-2 min-h-lh min-w-1 rounded-full bg-surface-900-100"></div>
     <div class="content">
         {@render children()}
     </div>

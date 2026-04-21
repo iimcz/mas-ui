@@ -2,11 +2,15 @@
     import ParatextForm from "$lib/components/paratext/ParatextForm.svelte";
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
 
-    import { currentSidebar, currentRoute, workLinks, versionLinks, routeOverrides } from "$lib/components/sidebar/links";
+    import {
+        currentSidebar,
+        currentRoute,
+        workLinks,
+        versionLinks,
+        routeOverrides
+    } from "$lib/components/sidebar/links";
     $currentRoute = "paratextList";
 
-
-    
     /**
      * @typedef {Object} Props
      * @property {import('./$types').PageData} data
@@ -19,14 +23,13 @@
     if (data.versionId != null) {
         $currentSidebar = versionLinks;
         $routeOverrides["version"] = data.versionId;
-    }
-    else {
+    } else {
         $currentSidebar = workLinks;
     }
 </script>
 
 <HeaderContainer title="Metadata paratextu">
     <div class="grid grid-cols-[1fr] gap-2">
-        <ParatextForm data={data}/>
+        <ParatextForm {data} />
     </div>
 </HeaderContainer>

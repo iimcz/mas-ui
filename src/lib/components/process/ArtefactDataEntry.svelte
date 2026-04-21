@@ -4,7 +4,7 @@
     let { data = $bindable() }: { data: Artefact } = $props();
 </script>
 
-<form class="form border border-surface-500 m-2 p-4 space-y-2 rounded-container">
+<form class="form m-2 space-y-2 rounded-container border border-surface-500 p-4">
     <div>Název</div>
     <input class="input" type="text" bind:value={data.label} />
 

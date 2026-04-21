@@ -1,7 +1,11 @@
 <script>
-    import { ArtefactTypeEnum, PhysicalMediaStateEnum, PhysicalMediaTypeEnum } from "$lib/schemas/artefact";
+    import {
+        ArtefactTypeEnum,
+        PhysicalMediaStateEnum,
+        PhysicalMediaTypeEnum
+    } from "$lib/schemas/artefact";
     import Fa from "svelte-fa";
-    import ArtefactDataEntry from "./ArtefactDataEntry.svelte"
+    import ArtefactDataEntry from "./ArtefactDataEntry.svelte";
     import { faSave } from "@fortawesome/free-solid-svg-icons";
 
     /**
@@ -12,28 +16,32 @@
      */
 
     /** @type {Props} */
-    let { isNew = false, data = {
-        id: "",
-        label: "",
-        fileName: "",
-        fileSize: 0,
-        digitalObjectType: "",
-        format: "",
-        internalNote: "",
-        paratextIds: [],
-        quality: "",
-        versionIds: [],
-        websiteUrl: "",
-        physicalMediaState: PhysicalMediaStateEnum.Good,
-        physicalMediaType: PhysicalMediaTypeEnum.Unknow,
-        type: ArtefactTypeEnum.Unknown
-    }, onsave = null } = $props();
+    let {
+        isNew = false,
+        data = {
+            id: "",
+            label: "",
+            fileName: "",
+            fileSize: 0,
+            digitalObjectType: "",
+            format: "",
+            internalNote: "",
+            paratextIds: [],
+            quality: "",
+            versionIds: [],
+            websiteUrl: "",
+            physicalMediaState: PhysicalMediaStateEnum.Good,
+            physicalMediaType: PhysicalMediaTypeEnum.Unknow,
+            type: ArtefactTypeEnum.Unknown
+        },
+        onsave = null
+    } = $props();
 </script>
 
-<div class="card flex flex-col">
-    <ArtefactDataEntry data={data} />
-    <button onclick={() => onsave(data)} type="button" class="btn float-right preset-filled">
-        <Fa icon={faSave}/>
+<div class="flex flex-col card">
+    <ArtefactDataEntry {data} />
+    <button onclick={() => onsave(data)} type="button" class="float-right btn preset-filled">
+        <Fa icon={faSave} />
         {isNew ? "Vytvořit" : "Uložit změny"}
     </button>
 </div>

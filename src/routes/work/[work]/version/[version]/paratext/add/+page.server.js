@@ -1,4 +1,4 @@
-import { PUBLIC_API_URL as API_URL } from '$env/static/public';
+import { PUBLIC_API_URL as API_URL } from "$env/static/public";
 import { formDataToJSON } from "$lib/formData";
 import { uploadFile } from "$lib/schemas/paratext.js";
 import { redirect } from "@sveltejs/kit";
@@ -19,6 +19,6 @@ export const actions = {
         // @ts-ignore FormDataEntry -> File
         await uploadFile(paratext.id, formData.get("file"));
 
-        redirect(303, `/paratext/${paratext.id}`)
+        redirect(303, `/paratext/${paratext.id}`);
     }
-}
+};

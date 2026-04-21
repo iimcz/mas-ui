@@ -1,39 +1,44 @@
 {
-  "name": "naki3-acquisition-station",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
-    "preview": "vite preview",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
-  },
-  "imports": {
-    "#layout.css": "./src/routes/layout.css"
-  },
-  "devDependencies": {
-    "@skeletonlabs/skeleton": "^4.12.0",
-    "@skeletonlabs/skeleton-svelte": "^4.12.0",
-    "@sveltejs/adapter-node": "^5.2.10",
-    "@sveltejs/kit": "^2.5.27",
-    "@sveltejs/vite-plugin-svelte": "^4.0.0",
-    "@tailwindcss/forms": "^0.5.7",
-    "@tailwindcss/vite": "^4.1.18",
-    "svelte": "^5.0.0",
-    "svelte-check": "^4.0.0",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.5.0",
-    "vite": "^5.4.4"
-  },
-  "type": "module",
-  "dependencies": {
-    "@floating-ui/dom": "^1.6.3",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@vincjo/datatables": "^2.8.0",
-    "dotenv": "^16.4.7",
-    "svelte-fa": "^4.0.4",
-    "svelte-i18n": "^4.0.1",
-    "yup": "^1.4.0"
-  }
+    "name": "naki3-acquisition-station",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "dev": "vite dev",
+        "build": "vite build",
+        "preview": "vite preview",
+        "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+        "lint": "prettier --check . && eslint src --fix",
+        "format": "prettier --write src && prettier --write ."
+    },
+    "imports": {
+        "#layout.css": "./src/routes/layout.css"
+    },
+    "devDependencies": {
+        "@skeletonlabs/skeleton": "^4.12.0",
+        "@skeletonlabs/skeleton-svelte": "^4.12.0",
+        "@sveltejs/adapter-node": "^5.2.10",
+        "@sveltejs/kit": "^2.5.27",
+        "@sveltejs/vite-plugin-svelte": "^4.0.0",
+        "@tailwindcss/forms": "^0.5.7",
+        "@tailwindcss/vite": "^4.1.18",
+        "prettier": "^3.8.1",
+        "prettier-plugin-svelte": "^3.5.1",
+        "prettier-plugin-tailwindcss": "^0.7.2",
+        "svelte": "^5.0.0",
+        "svelte-check": "^4.0.0",
+        "tailwindcss": "^4.1.18",
+        "typescript": "^5.5.0",
+        "vite": "^5.4.4"
+    },
+    "type": "module",
+    "dependencies": {
+        "@floating-ui/dom": "^1.6.3",
+        "@fortawesome/free-solid-svg-icons": "^6.5.1",
+        "@vincjo/datatables": "^2.8.0",
+        "dotenv": "^16.4.7",
+        "svelte-fa": "^4.0.4",
+        "svelte-i18n": "^4.0.1",
+        "yup": "^1.4.0"
+    }
 }

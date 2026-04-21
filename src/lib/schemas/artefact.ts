@@ -39,5 +39,5 @@ export enum ArtefactTypeEnum {
     WindowsBinary = "WindowsBinary",
     LinuxBinary = "LinuxBinary",
     WavAudio = "WavAudio",
-    Unknown = "Unknown",
+    Unknown = "Unknown"
 }

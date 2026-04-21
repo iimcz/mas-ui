@@ -1,18 +1,17 @@
 <script>
-    import { createEventDispatcher } from 'svelte'
-    const dispatch = createEventDispatcher()
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
 
     //import { getModalStore } from '@skeletonlabs/skeleton-svelte';
     //const modalStore = getModalStore();
 
-    import PlatformInfoModal from '$lib/components/platformInfoModal.svelte';
+    import PlatformInfoModal from "$lib/components/platformInfoModal.svelte";
 
     const modalComponent = { ref: PlatformInfoModal };
 
     function openModal() {
-
         const modal = {
-            type: 'component',
+            type: "component",
             component: modalComponent
         };
 
@@ -30,19 +29,19 @@
     let { image = "", title = "", description = "" } = $props();
 
     function select() {
-        dispatch('select', { title })
+        dispatch("select", { title });
     }
 </script>
 
-<div class="card p-4 flex">
+<div class="flex card p-4">
     {#if image != ""}
         <button class="mr-4" onclick={select}>
-            <img alt="emulator logo" width="200" height="200" src="{image}"/>
+            <img alt="emulator logo" width="200" height="200" src={image} />
         </button>
     {/if}
 
-    <div class="text-left w-full">
-        <div class="text-lg font-bold flex justify-between items-center">
+    <div class="w-full text-left">
+        <div class="flex items-center justify-between text-lg font-bold">
             <button onclick={select}>{title}</button>
             <!-- TODO: Re-enable once modal works properly
             <button on:click={openModal}>
@@ -53,6 +52,6 @@
         <div>
             {description}
         </div>
-        <button class="btn preset-filled mt-2" onclick={select}>Vybrat</button>
+        <button class="mt-2 btn preset-filled" onclick={select}>Vybrat</button>
     </div>
 </div>

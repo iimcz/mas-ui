@@ -1,9 +1,9 @@
-import { PUBLIC_API_URL as API_URL } from '$env/static/public';
+import { PUBLIC_API_URL as API_URL } from "$env/static/public";
 
 /**
  * @type {import('./$types').PageLoad}
  * @returns {Promise<{platforms: import('$lib/schemas/platform').Platform[], artefacts: import('$lib/schemas/artefact').Artefact[]}>}
-*/
+ */
 export async function load({ fetch, params }) {
     const resPlat = await fetch(`${API_URL}/api/v1/platforms`);
     const platforms = await resPlat.json();

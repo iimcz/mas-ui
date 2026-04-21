@@ -6,9 +6,8 @@
     import { goto } from "$app/navigation";
 
     function editParatext() {
-        goto(`/paratext/${paratext.id}`)
+        goto(`/paratext/${paratext.id}`);
     }
-
 
     /**
      * @typedef {Object} Props
@@ -19,21 +18,20 @@
     let { paratext } = $props();
 
     /** @type {string[]}*/
-    let tags = $state([])
-    if (paratext.downloadable) tags = ["Stáhnutelné"]
+    let tags = $state([]);
+    if (paratext.downloadable) tags = ["Stáhnutelné"];
 </script>
 
 <MediaCard
     title={paratext.name}
-    tags={tags}
+    {tags}
     image={getParatextThumbnail(paratext)}
-    onclick={() => downloadParatext(paratext)}>
+    onclick={() => downloadParatext(paratext)}
+>
     {#snippet sideIcon()}
-
-            <button onclick={editParatext} class="btn-icon preset-filled mr-2">
-                <Fa icon={faEdit}/>
-            </button>
-
+        <button onclick={editParatext} class="mr-2 btn-icon preset-filled">
+            <Fa icon={faEdit} />
+        </button>
     {/snippet}
 
     <div>{paratext.description}</div>

@@ -1,5 +1,5 @@
 <script>
-    import { run } from 'svelte/legacy';
+    import { run } from "svelte/legacy";
 
     import { faRemove } from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
@@ -40,16 +40,26 @@
 
 {#each values as value, index}
     <div class="flex">
-        <div class="input-group input-group-divider">
+        <div class="input-group-divider input-group">
             <!-- svelte-ignore a11y_autofocus -->
-            <input name="{name}.{index}.value" type="text" placeholder={required ? "Povinné" : ""} bind:value={values[index]} autofocus />
+            <input
+                name="{name}.{index}.value"
+                type="text"
+                placeholder={required ? "Povinné" : ""}
+                bind:value={values[index]}
+                autofocus
+            />
         </div>
-        <button class="btn-icon preset-filled-error ml-2" onclick={() => removeValue(index)}>
+        <button class="preset-filled-error ml-2 btn-icon" onclick={() => removeValue(index)}>
             <Fa icon={faRemove} />
         </button>
     </div>
 {/each}
 
-<div class="input-group input-group-divider">
-    <input type="text" placeholder="{showAddRequired ? "Povinné" : "Přidat další..."}" bind:value={newValue} />
+<div class="input-group-divider input-group">
+    <input
+        type="text"
+        placeholder={showAddRequired ? "Povinné" : "Přidat další..."}
+        bind:value={newValue}
+    />
 </div>

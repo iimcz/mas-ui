@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
 /**
  * @typedef {{name: string, href: string}} ProgressStep
@@ -16,7 +16,7 @@ export let artefactSteps = [
     {
         name: "Informace o digitálním objektu",
         href: "/work/[work]/version/[version]/artefact/add/[process]/info"
-    },
+    }
 ];
 
 /**
@@ -42,5 +42,5 @@ export let configSteps = [
 ];
 
 export const unlockedStep = writable(0);
-export const currentStep = writable(0)
-export const steps = writable(artefactSteps)
+export const currentStep = writable(0);
+export const steps = writable(artefactSteps);

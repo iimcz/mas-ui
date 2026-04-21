@@ -1,14 +1,19 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
+    import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import type { Work } from "$lib/schemas/work";
-    import { Combobox, Portal, useListCollection, type ComboboxRootProps } from '@skeletonlabs/skeleton-svelte';
+    import {
+        Combobox,
+        Portal,
+        useListCollection,
+        type ComboboxRootProps
+    } from "@skeletonlabs/skeleton-svelte";
 
     async function downloadSearchInfo() {
         if (works.length != 0) return;
 
-        const res = await fetch(`${API_URL}/api/v1/works`)
-        worksUnfiltered = await res.json()
+        const res = await fetch(`${API_URL}/api/v1/works`);
+        worksUnfiltered = await res.json();
         works = worksUnfiltered;
     }
 
@@ -16,31 +21,39 @@
     let works: Work[] = $state([]);
 
     const collection = $derived(
-		useListCollection({
-			items: works,
-			itemToString: (item) => item.label,
-			itemToValue: (item) => item.id,
-		}),
-	);
+        useListCollection({
+            items: works,
+            itemToString: (item) => item.label,
+            itemToValue: (item) => item.id
+        })
+    );
 
-	const onInputValueChange: ComboboxRootProps['onInputValueChange'] = (event) => {
+    const onInputValueChange: ComboboxRootProps["onInputValueChange"] = (event) => {
         downloadSearchInfo();
-		const filtered = works.filter((item) => item.label.toLowerCase().includes(event.inputValue.toLowerCase()));
-		if (filtered.length > 0) {
-			works = filtered;
-		} else {
-			works = worksUnfiltered;
-		}
-	};
+        const filtered = works.filter((item) =>
+            item.label.toLowerCase().includes(event.inputValue.toLowerCase())
+        );
+        if (filtered.length > 0) {
+            works = filtered;
+        } else {
+            works = worksUnfiltered;
+        }
+    };
 
     const onOpenChange = () => downloadSearchInfo();
-    const onSelect = (details: any) => goto(`/work/${details.itemValue}`)
+    const onSelect = (details: any) => goto(`/work/${details.itemValue}`);
 </script>
 
 <div>
     <span class="text-lg">Vyhledat podle názvu</span>
-    <div class="flex mt-2">
-        <Combobox placeholder="Název díla" {collection} {onOpenChange} {onInputValueChange} onSelect={onSelect}>
+    <div class="mt-2 flex">
+        <Combobox
+            placeholder="Název díla"
+            {collection}
+            {onOpenChange}
+            {onInputValueChange}
+            {onSelect}
+        >
             <Combobox.Control>
                 <Combobox.Input />
                 <Combobox.Trigger />

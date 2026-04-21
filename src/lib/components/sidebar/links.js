@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
 /**
  * @typedef {{name: string, href: string, match: string}} SidebarLink
@@ -10,8 +10,8 @@ export const workLinks = [
     { name: "Dílo", href: "", match: "" },
     { name: "Metadata díla", href: "/work/[work]", match: "workDetail" },
     { name: "Seznam verzí", href: "/work/[work]/version/", match: "versionList" },
-    { name: "Seznam paratextů", href: "/work/[work]/paratext/", match: "paratextList" },
-]
+    { name: "Seznam paratextů", href: "/work/[work]/paratext/", match: "paratextList" }
+];
 
 /**
  * @type {SidebarLink[]}
@@ -22,17 +22,37 @@ export const versionLinks = [
     { name: "Verze", href: "", match: "" },
     { name: "Metadata verze", href: "/work/[work]/version/[version]", match: "versionDetail" },
     { name: "Digitální objekty", href: "", match: "" },
-    { name: "Digitální objekty", href: "/work/[work]/version/[version]/artefact", match: "artefactList" },
-    { name: "Vytvořit digitální objekt", href: "/work/[work]/version/[version]/artefact/add", match: "addArtefact" },
+    {
+        name: "Digitální objekty",
+        href: "/work/[work]/version/[version]/artefact",
+        match: "artefactList"
+    },
+    {
+        name: "Vytvořit digitální objekt",
+        href: "/work/[work]/version/[version]/artefact/add",
+        match: "addArtefact"
+    },
     { name: "Paratexty", href: "", match: "" },
     { name: "Paratexty", href: "/work/[work]/version/[version]/paratext", match: "paratextList" },
-    { name: "Přidat paratext", href: "/work/[work]/version/[version]/paratext/add", match: "addParatext" },
+    {
+        name: "Přidat paratext",
+        href: "/work/[work]/version/[version]/paratext/add",
+        match: "addParatext"
+    },
     { name: "Herní objekty", href: "", match: "" },
-    { name: "Herní objekty", href: "/work/[work]/version/[version]/gameobject", match: "gameObjectList" },
-    { name: "Vytvořit herní objekt", href: "/work/[work]/version/[version]/gameobject/add/platform", match: "addGameObject" },
+    {
+        name: "Herní objekty",
+        href: "/work/[work]/version/[version]/gameobject",
+        match: "gameObjectList"
+    },
+    {
+        name: "Vytvořit herní objekt",
+        href: "/work/[work]/version/[version]/gameobject/add/platform",
+        match: "addGameObject"
+    }
     // TODO: Implement setting a GO as default
     //{ name: "Spustit výchozí herní objekt", href: "/work/[work]/version/[version]/gameobject/[id]/emulator", match: "emulator" },
-]
+];
 
 /**
  * @type {SidebarLink[]}
@@ -41,23 +61,34 @@ export const gameObjectLinks = [
     { name: "Verze", href: "", match: "" },
     { name: "❮ Zpět na verzi", href: "/work/[work]/version/[version]", match: "" },
     { name: "Herní objekt", href: "", match: "" },
-    { name: "Metadata", href: "/work/[work]/version/[version]/gameobject/[gameObject]", match: "gameObjectDetail" },
+    {
+        name: "Metadata",
+        href: "/work/[work]/version/[version]/gameobject/[gameObject]",
+        match: "gameObjectDetail"
+    },
     // TODO: Implement setting a GO as default
-    { name: "Spustit výchozí profil", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile/[id]/emulator", match: "emulator" },
+    {
+        name: "Spustit výchozí profil",
+        href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile/[id]/emulator",
+        match: "emulator"
+    },
     /*
     { name: "Profily", href: "", match: "" },
     { name: "Seznam profilů", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile", match: "profileList" },
     { name: "Vytvořit profil", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile/add", match: "addProfile" },
     */
     { name: "Paratexty", href: "", match: "" },
-    { name: "Záznamy", href: "/work/[work]/version/[version]/gameobject/[gameObject]/paratext", match: "paratextList" },
-]
+    {
+        name: "Záznamy",
+        href: "/work/[work]/version/[version]/gameobject/[gameObject]/paratext",
+        match: "paratextList"
+    }
+];
 
 /**
  * @type {import('svelte/store').Writable<SidebarLink[]>}
  */
 export const currentSidebar = writable([]);
-
 
 /**
  * @type {import('svelte/store').Writable<string>}

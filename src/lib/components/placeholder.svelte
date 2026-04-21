@@ -1,5 +1,5 @@
-<section class="card w-full">
-    <div class="p-4 space-y-4">
+<section class="w-full card">
+    <div class="space-y-4 p-4">
         <div class="placeholder"></div>
         <div class="grid grid-cols-3 gap-8">
             <div class="placeholder"></div>

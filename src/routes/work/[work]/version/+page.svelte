@@ -7,7 +7,7 @@
     const tableColumns = [
         { name: "Název", key: "label", canSort: true },
         { name: "Popis", key: "description", canSort: true, html: true }
-    ]
+    ];
 
     import { currentSidebar, currentRoute, workLinks } from "$lib/components/sidebar/links";
     $currentSidebar = workLinks;
@@ -17,5 +17,9 @@
 </script>
 
 <HeaderContainer title="Verze">
-    <Datatable data={data.versions} columns={tableColumns} onrowclick={(row: WorkVersion) => goto(`version/${row.id}`)}/>
+    <Datatable
+        data={data.versions}
+        columns={tableColumns}
+        onrowclick={(row: WorkVersion) => goto(`version/${row.id}`)}
+    />
 </HeaderContainer>

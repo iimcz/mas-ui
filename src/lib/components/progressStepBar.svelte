@@ -1,39 +1,44 @@
 <script>
-    import { run } from 'svelte/legacy';
+    import { run } from "svelte/legacy";
 
     import { page } from "$app/stores";
     import { steps, currentStep, unlockedStep } from "$lib/steps.js";
     import { stringFormat } from "$lib/stringFormat";
-    import Fa from 'svelte-fa';
-    import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+    import Fa from "svelte-fa";
+    import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
     /**
      * Templated URLs
      * @type {Object.<string, string>}
      */
-     let links = $state({})
+    let links = $state({});
 
     run(() => {
         for (const link of $steps) {
-            links[link.href] = stringFormat(link.href, $page.params)
+            links[link.href] = stringFormat(link.href, $page.params);
         }
     });
 </script>
 
 <div class="flex items-center justify-around">
     {#each $steps as step, index}
-        <a href={$unlockedStep < index ? "" : links[step.href]} class:cursor-not-allowed={index > $unlockedStep} class="flex flex-col items-center justify-center gap-1">
+        <a
+            href={$unlockedStep < index ? "" : links[step.href]}
+            class:cursor-not-allowed={index > $unlockedStep}
+            class="flex flex-col items-center justify-center gap-1"
+        >
             <div
                 class:bg-secondary-500={index == $currentStep}
                 class:bg-primary-500={index <= $unlockedStep}
                 class:bg-surface-400={index > $unlockedStep}
-                class="rounded-full flex items-center justify-center step-circle p-4">
+                class="step-circle flex items-center justify-center rounded-full p-4"
+            >
                 {index + 1}
             </div>
             <div>{step.name}</div>
         </a>
         {#if index != $steps.length - 1}
-            <Fa class="mb-6" scale="2" icon={faChevronRight}/>
+            <Fa class="mb-6" scale="2" icon={faChevronRight} />
         {/if}
     {/each}
 </div>

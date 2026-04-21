@@ -24,17 +24,26 @@
     } = $props();
 </script>
 
-<div class="card preset-outlined-primary-300-700 p-4 hover:scale-105 relative" class:card-hover={isAvailable}>
+<div
+    class="relative card preset-outlined-primary-300-700 p-4 hover:scale-105"
+    class:card-hover={isAvailable}
+>
     <div class="absolute right-0">
         {@render sideIcon?.()}
     </div>
 
     <button class="flex h-full" {onclick} class:disabled={!isAvailable}>
         {#if image != ""}
-            <img width="130" height="130" src={image} alt="Tool logo" class="mr-4 object-fill rounded-lg"/>
+            <img
+                width="130"
+                height="130"
+                src={image}
+                alt="Tool logo"
+                class="mr-4 rounded-lg object-fill"
+            />
         {/if}
 
-        <div class="text-left space-y-1">
+        <div class="space-y-1 text-left">
             <div class="text-lg font-bold">{title}</div>
             <div class="flex gap-1">
                 {#each tags as tag}

@@ -1,9 +1,9 @@
 <script>
-    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
+    import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import GamePackageMetadata from "$lib/components/process/GamePackageMetadata.svelte";
     import Log from "$lib/components/process/Log.svelte";
-	import { _ } from 'svelte-i18n'
+    import { _ } from "svelte-i18n";
     import Fa from "svelte-fa";
     import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,10 +12,10 @@
 
     let interval = 0;
     let isFinished = false;
-    let finalizing = $state(false)
+    let finalizing = $state(false);
 
     onMount(() => {
-        $steps = configSteps
+        $steps = configSteps;
         $currentStep = 2;
         $unlockedStep = 2;
 
@@ -33,18 +33,18 @@
 
             if (data.status == "Success") {
                 isFinished = true;
-                toaster.success({title: $_("conversion_success")});
-                info.scrollIntoView({ behavior: 'smooth' });
+                toaster.success({ title: $_("conversion_success") });
+                info.scrollIntoView({ behavior: "smooth" });
             }
 
             if (data.status == "Failed") {
                 isFinished = true;
-                toaster.error({title: $_("conversion_failed")});
+                toaster.error({ title: $_("conversion_failed") });
             }
-        }, 1000)
+        }, 1000);
 
         return () => clearInterval(interval);
-    })
+    });
 
     async function restart() {
         const res = await fetch(`${API_URL}/api/v1/conversion/${data.processId}/restart`, {
@@ -58,7 +58,7 @@
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     import { toaster } from "$lib/toaster";
-    import { Progress } from '@skeletonlabs/skeleton-svelte';
+    import { Progress } from "@skeletonlabs/skeleton-svelte";
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
@@ -73,38 +73,41 @@
 </script>
 
 {#if finalizing}
-<div class="absolute inset-0 flex bg-surface-50-950/50 items-center justify-center z-[999]">
-    <div class="flex justify-center items-center gap-4 card p-4 bg-surface-100-900">
-        <Progress class="items-center w-fit" value={null}>
-            <Progress.Circle>
-                <Progress.CircleTrack />
-                <Progress.CircleRange />
-            </Progress.Circle>
-            <Progress.ValueText />
-        </Progress>
-        <span class="text-xl font-semibold">Probíhá finalizace herního objektu</span>
+    <div class="absolute inset-0 z-[999] flex items-center justify-center bg-surface-50-950/50">
+        <div class="flex items-center justify-center gap-4 card bg-surface-100-900 p-4">
+            <Progress class="w-fit items-center" value={null}>
+                <Progress.Circle>
+                    <Progress.CircleTrack />
+                    <Progress.CircleRange />
+                </Progress.Circle>
+                <Progress.ValueText />
+            </Progress>
+            <span class="text-xl font-semibold">Probíhá finalizace herního objektu</span>
+        </div>
     </div>
-</div>
 {/if}
 
-<div class="container h-full flex">
-    <div class="flex w-5/6 space-y-5 flex-col m-4">
-        <h1 class="text-3xl mt-4">Konverze</h1>
-        <ProgressStepBar/>
+<div class="container flex h-full">
+    <div class="m-4 flex w-5/6 flex-col space-y-5">
+        <h1 class="mt-4 text-3xl">Konverze</h1>
+        <ProgressStepBar />
         <div>
             <h1 class="text-3xl">1. Záznam z konverze</h1>
-            <Log url={`${API_URL}/api/v1/conversion/${data.processId}/log`}/>
+            <Log url={`${API_URL}/api/v1/conversion/${data.processId}/log`} />
         </div>
         {#if data.status == "Success"}
-            <hr/>
+            <hr />
             <div>
                 <h1 bind:this={info} class="text-3xl">2. Strukturovaný popis herního objektu</h1>
-                <GamePackageMetadata onCreateNew={() => finalizing = true} processId={data.processId} />
+                <GamePackageMetadata
+                    onCreateNew={() => (finalizing = true)}
+                    processId={data.processId}
+                />
             </div>
         {:else if data.status == "Failed"}
-            <hr/>
-            <button onclick={restart} class="btn preset-filled-error">
-                <Fa icon={faRepeat}/>
+            <hr />
+            <button onclick={restart} class="preset-filled-error btn">
+                <Fa icon={faRepeat} />
                 <span>Zkusit znovu</span>
             </button>
         {/if}

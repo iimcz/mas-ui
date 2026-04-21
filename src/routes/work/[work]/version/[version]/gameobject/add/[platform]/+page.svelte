@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
+    import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { currentStep, unlockedStep } from "$lib/steps";
     import { goto } from "$app/navigation";
-    import { _ } from 'svelte-i18n'
+    import { _ } from "svelte-i18n";
 
     import { onMount } from "svelte";
     import MediaCard from "$lib/components/mediaCard.svelte";
@@ -11,15 +11,17 @@
     onMount(() => {
         $unlockedStep = 1;
         $currentStep = 1;
-    })
+    });
 
     /**
      * @param {string} emulatorId
      */
-     async function startConversion(emulatorId: string) {
-        const artefactIds = data.artefacts.filter((a, i) => selectedArtefacts[i] == true).map(a => a.id)
+    async function startConversion(emulatorId: string) {
+        const artefactIds = data.artefacts
+            .filter((a, i) => selectedArtefacts[i] == true)
+            .map((a) => a.id);
         if (artefactIds.length == 0) {
-            toaster.error({title: $_("must_select_artefact")})
+            toaster.error({ title: $_("must_select_artefact") });
             return;
         }
 
@@ -30,7 +32,7 @@
                 emulatorId: emulatorId,
                 versionId: page.params.version,
                 digitalObjectIds: artefactIds
-             })
+            })
         });
 
         /**
@@ -45,15 +47,14 @@
     import Fa from "svelte-fa";
     import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
     import { toaster } from "$lib/toaster";
-    import { page } from '$app/state';
+    import { page } from "$app/state";
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
     /**
      * @type {boolean[]}
      */
-    const selectedArtefacts = $state([])
-
+    const selectedArtefacts = $state([]);
 
     /**
      * @typedef {Object} Props
@@ -64,38 +65,46 @@
     let { data } = $props();
 </script>
 
-<div class="container h-full flex">
-    <div class="flex w-5/6 space-y-5 flex-col m-4">
-        <h1 class="text-3xl mt-4">Výběr artefaktů a emulátoru</h1>
-        <ProgressStepBar/>
+<div class="container flex h-full">
+    <div class="m-4 flex w-5/6 flex-col space-y-5">
+        <h1 class="mt-4 text-3xl">Výběr artefaktů a emulátoru</h1>
+        <ProgressStepBar />
         <div class="mb-4">
             <span class="text-lg font-bold">1. Vyberte artefakty ke konverzi</span>
             {#if data.artefacts.length == 0}
                 <Alert class="preset-outlined-error-500">
-                    <h3 class="flex gap-2 items-center font-semibold">
-                        <Fa icon={faExclamationTriangle}/>
+                    <h3 class="flex items-center gap-2 font-semibold">
+                        <Fa icon={faExclamationTriangle} />
                     </h3>
-                    <h1>K tomuto dílu neexistují žádné artefakty. Před vytvořením herního objektu je nutné digitalizovat kopii média, nebo nahrát soubor.</h1>
+                    <h1>
+                        K tomuto dílu neexistují žádné artefakty. Před vytvořením herního objektu je
+                        nutné digitalizovat kopii média, nebo nahrát soubor.
+                    </h1>
                     <a href="../../artefact/add" class="btn preset-filled">Vytvořit artefakt</a>
                 </Alert>
             {/if}
-            <ol class="list px-4 space-y-2">
+            <ol class="list space-y-2 px-4">
                 {#each data.artefacts as artefact, index}
                     <li>
-                        <input class="checkbox" type="checkbox" bind:checked={selectedArtefacts[index]} />
+                        <input
+                            class="checkbox"
+                            type="checkbox"
+                            bind:checked={selectedArtefacts[index]}
+                        />
                         <span>{artefact.label}</span>
                     </li>
                 {/each}
             </ol>
         </div>
         <span class="text-lg font-bold">2. Vyberte emulátor</span>
-        <div class="text-center grid grid-cols-2 2xl:grid-cols-3 gap-2">
+        <div class="grid grid-cols-2 gap-2 text-center 2xl:grid-cols-3">
             {#each data.emulators as emulator}
                 <MediaCard
                     onclick={async () => await startConversion(emulator.id)}
                     title={$_(`emulator.${emulator.name}.name`)}
                     description={$_(`emulator.${emulator.name}.description`)}
-                    tags={[`v${emulator.version}`]} />
+                    tags={[`v${emulator.version}`]}
+                />
             {/each}
         </div>
     </div>

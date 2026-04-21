@@ -3,7 +3,6 @@
     import { faDownload } from "@fortawesome/free-solid-svg-icons";
     import { onMount } from "svelte";
 
-
     /**
      * @typedef {Object} Props
      * @property {string} url
@@ -21,7 +20,6 @@
 
             // Log is no longer valid, just waiting for finalize
             if (!res.ok) {
-
                 clearInterval(interval);
                 return;
             }
@@ -33,11 +31,11 @@
                 log = newLog;
                 textArea.scrollTop = textArea.scrollHeight;
             }
-        }, 1000)
+        }, 1000);
 
-        textArea.scrollIntoView({ behavior: 'smooth' });
+        textArea.scrollIntoView({ behavior: "smooth" });
         return () => clearInterval(interval);
-    })
+    });
 
     /**
      * @type {HTMLTextAreaElement}
@@ -46,9 +44,15 @@
 </script>
 
 <div>
-    <textarea bind:this={textArea} disabled bind:value={log} class="textarea resize-none cursor-override" rows="15"></textarea>
-    <a target="_blank" href={url} class="btn preset-filled mt-2 float-right">
-        <Fa icon={faDownload}/>
+    <textarea
+        bind:this={textArea}
+        disabled
+        bind:value={log}
+        class="cursor-override textarea resize-none"
+        rows="15"
+    ></textarea>
+    <a target="_blank" href={url} class="float-right mt-2 btn preset-filled">
+        <Fa icon={faDownload} />
         <span>Stáhnout log</span>
     </a>
 </div>

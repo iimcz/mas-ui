@@ -1,5 +1,5 @@
 <script>
-    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
+    import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
     import { faExpand, faCog, faInfoCircle, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -20,10 +20,10 @@
         interval = setInterval(async () => {
             const res = await fetch(`${API_URL}/api/v1/emulation/${data.state.id}/ping`);
             data.state = await res.json();
-        }, 1000)
+        }, 1000);
 
         return () => clearInterval(interval);
-    })
+    });
 
     /**
      * @param {boolean} save
@@ -34,7 +34,7 @@
             keepScreenRecording: save,
             keepWebcamRecording: save,
             saveMachineState: save
-        }
+        };
 
         saving = true;
         await fetch(`${API_URL}/api/v1/emulation/${data.state.id}/finish`, {
@@ -46,7 +46,6 @@
         goto("../..", { replaceState: false });
     }
 
-
     /**
      * @typedef {Object} Props
      * @property {import('./$types').PageData} data - TODO: Video
@@ -54,46 +53,60 @@
 
     /** @type {Props} */
     let { data = $bindable() } = $props();
-
-
 </script>
 
 {#if saving}
-<div class="absolute inset-0 flex bg-surface-50-950/50 items-center justify-center z-[999]">
-    <div class="flex justify-center items-center gap-4 card p-4 bg-surface-100-900">
-        <Progress class="items-center w-fit" value={null}>
-            <Progress.Circle>
-                <Progress.CircleTrack />
-                <Progress.CircleRange />
-            </Progress.Circle>
-            <Progress.ValueText />
-        </Progress>
-        <span class="text-xl font-semibold">Probíhá ukládání záznamu</span>
+    <div class="absolute inset-0 z-[999] flex items-center justify-center bg-surface-50-950/50">
+        <div class="flex items-center justify-center gap-4 card bg-surface-100-900 p-4">
+            <Progress class="w-fit items-center" value={null}>
+                <Progress.Circle>
+                    <Progress.CircleTrack />
+                    <Progress.CircleRange />
+                </Progress.Circle>
+                <Progress.ValueText />
+            </Progress>
+            <span class="text-xl font-semibold">Probíhá ukládání záznamu</span>
+        </div>
     </div>
-</div>
 {/if}
 
-<div class="mx-4 h-full mx-auto flex justify-center">
-    <div class="flex w-full space-y-10 flex-col my-4">
-        <div class="ml-4 mt-4 flex space-x-4">
-            <button onclick={async () => await finishEmulation(true)} class="btn-icon preset-filled"> <!-- TODO use:popup={backPopup} -->
-                <Fa icon={faArrowLeft}/>
+<div class="mx-4 mx-auto flex h-full justify-center">
+    <div class="my-4 flex w-full flex-col space-y-10">
+        <div class="mt-4 ml-4 flex space-x-4">
+            <button
+                onclick={async () => await finishEmulation(true)}
+                class="btn-icon preset-filled"
+            >
+                <!-- TODO use:popup={backPopup} -->
+                <Fa icon={faArrowLeft} />
             </button>
             <h1 class="text-3xl">Emulace</h1>
         </div>
-        <div class="space-x-5 aspect-container">
-            <div class="w-full h-full text-surface-50">
-                <div bind:clientWidth={frameW} bind:clientHeight={frameH} class="relative bg-surface-900 aspect-video w-auto h-full mx-auto">
-                    <iframe class="absolute left-0 top-0" width={frameW} height={frameH} title="Stream" src={data.streamSource}></iframe>
-                    <div class="absolute right-0 top-0 m-2">
-                        <button class="btn-icon preset-filled"> <!-- TODO use:popup={settingsPopup} -->
-                            <Fa icon={faCog}/>
-                        </button>
-                        <button class="btn-icon preset-filled"> <!-- TODO use:popup={infoPopup} -->
-                            <Fa icon={faInfoCircle}/>
+        <div class="aspect-container space-x-5">
+            <div class="h-full w-full text-surface-50">
+                <div
+                    bind:clientWidth={frameW}
+                    bind:clientHeight={frameH}
+                    class="relative mx-auto aspect-video h-full w-auto bg-surface-900"
+                >
+                    <iframe
+                        class="absolute top-0 left-0"
+                        width={frameW}
+                        height={frameH}
+                        title="Stream"
+                        src={data.streamSource}
+                    ></iframe>
+                    <div class="absolute top-0 right-0 m-2">
+                        <button class="btn-icon preset-filled">
+                            <!-- TODO use:popup={settingsPopup} -->
+                            <Fa icon={faCog} />
                         </button>
                         <button class="btn-icon preset-filled">
-                            <Fa icon={faExpand}/>
+                            <!-- TODO use:popup={infoPopup} -->
+                            <Fa icon={faInfoCircle} />
+                        </button>
+                        <button class="btn-icon preset-filled">
+                            <Fa icon={faExpand} />
                         </button>
                     </div>
                 </div>
@@ -104,29 +117,33 @@
 
 <div data-popup="settingsPopup">
     <div class="flex flex-col space-y-2">
-        <button class="btn preset-filled-error">Reset stroje</button>
-        <button onclick={async () => await finishEmulation(true)} class="btn preset-filled-error">Ukončit</button>
-        <button onclick={async () => await finishEmulation(false)} class="btn preset-filled-error">Ukončit bez záznamu</button>
-        <button class="btn preset-filled-primary">Uložit stav</button>
-        <button class="btn preset-filled-primary">Načíst stav</button>
-        <button class="btn preset-filled-primary">Otevřít menu emulátoru</button>
-        <button class="btn preset-filled-secondary">Info o ovládání</button>
-        <button class="btn preset-filled-secondary">Uložit profil</button>
-        <button class="btn preset-filled-secondary">Načíst profil</button>
+        <button class="preset-filled-error btn">Reset stroje</button>
+        <button onclick={async () => await finishEmulation(true)} class="preset-filled-error btn"
+            >Ukončit</button
+        >
+        <button onclick={async () => await finishEmulation(false)} class="preset-filled-error btn"
+            >Ukončit bez záznamu</button
+        >
+        <button class="preset-filled-primary btn">Uložit stav</button>
+        <button class="preset-filled-primary btn">Načíst stav</button>
+        <button class="preset-filled-primary btn">Otevřít menu emulátoru</button>
+        <button class="preset-filled-secondary btn">Info o ovládání</button>
+        <button class="preset-filled-secondary btn">Uložit profil</button>
+        <button class="preset-filled-secondary btn">Načíst profil</button>
     </div>
 </div>
 
 <div data-popup="infoPopup">
     <div class="flex flex-col space-y-2">
-        <button class="btn preset-filled-secondary">Info o ovládání</button>
-        <button class="btn preset-filled-secondary">Info o zařízení</button>
+        <button class="preset-filled-secondary btn">Info o ovládání</button>
+        <button class="preset-filled-secondary btn">Info o zařízení</button>
     </div>
 </div>
 
-<div class="card p-4 preset-filled-secondary" data-popup="backPopup">
-	<p>Zpět k verzi</p>
+<div class="preset-filled-secondary card p-4" data-popup="backPopup">
+    <p>Zpět k verzi</p>
     <p>Záznam se tvoří automaticky</p>
-	<div class="arrow preset-filled-secondary"></div>
+    <div class="arrow preset-filled-secondary"></div>
 </div>
 
 <style scoped>

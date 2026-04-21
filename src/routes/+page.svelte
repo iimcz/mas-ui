@@ -4,26 +4,26 @@
 
     import BasicSearch from "$lib/components/basicSearch.svelte";
 
-	import { currentSidebar } from "$lib/components/sidebar/links";
+    import { currentSidebar } from "$lib/components/sidebar/links";
     $currentSidebar = [];
 </script>
 
-<div class="container h-full mx-auto flex items-center justify-center">
-	<div class="flex w-4/6 space-y-10 flex-col m-4">
-		<BasicSearch/>
-		<hr/>
-		<div>
-			<span class="text-lg">Díla</span>
-			<div class="flex space-x-4 mt-2">
-				<a href="search?filter=work" class="btn preset-filled grow">
-					<Fa icon={faGamepad} />
-					<span>Prohlížet díla</span>
-				</a>
-				<a href="work/add" class="btn preset-filled grow">
-					<Fa icon={faPlus} />
-					<span>Import nového díla</span>
-				</a>
-			</div>
-		</div>
-	</div>
+<div class="container mx-auto flex h-full items-center justify-center">
+    <div class="m-4 flex w-4/6 flex-col space-y-10">
+        <BasicSearch />
+        <hr />
+        <div>
+            <span class="text-lg">Díla</span>
+            <div class="mt-2 flex space-x-4">
+                <a href="search?filter=work" class="btn grow preset-filled">
+                    <Fa icon={faGamepad} />
+                    <span>Prohlížet díla</span>
+                </a>
+                <a href="work/add" class="btn grow preset-filled">
+                    <Fa icon={faPlus} />
+                    <span>Import nového díla</span>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

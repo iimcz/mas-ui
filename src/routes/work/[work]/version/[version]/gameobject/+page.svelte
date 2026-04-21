@@ -7,13 +7,19 @@
     const tableColumns = [
         { name: "Název", key: "name", canSort: true },
         { name: "Popis", key: "description", canSort: true },
-        { name: "Spustit výchozí profil", key: "", canSort: false, onClick: (row: GamePackage) => { goto(`gameobject/${row.id}/profile/test/emulator`) } },
-    ]
+        {
+            name: "Spustit výchozí profil",
+            key: "",
+            canSort: false,
+            onClick: (row: GamePackage) => {
+                goto(`gameobject/${row.id}/profile/test/emulator`);
+            }
+        }
+    ];
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     $currentSidebar = versionLinks;
     $currentRoute = "gameObjectList";
-
 
     /**
      * @typedef {Object} Props
@@ -25,5 +31,9 @@
 </script>
 
 <HeaderContainer title="Herní objekty">
-    <Datatable data={data.gameObjects} columns={tableColumns} onrowclick={(row: GamePackage) => goto(`gameobject/${row.id}`)}/>
+    <Datatable
+        data={data.gameObjects}
+        columns={tableColumns}
+        onrowclick={(row: GamePackage) => goto(`gameobject/${row.id}`)}
+    />
 </HeaderContainer>

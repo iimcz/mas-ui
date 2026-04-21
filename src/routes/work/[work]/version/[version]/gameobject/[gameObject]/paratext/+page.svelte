@@ -1,12 +1,11 @@
 <script>
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
-    import ParatextCard from '$lib/components/paratext/ParatextCard.svelte';
+    import ParatextCard from "$lib/components/paratext/ParatextCard.svelte";
 
-    import { currentSidebar, currentRoute,  gameObjectLinks } from "$lib/components/sidebar/links";
+    import { currentSidebar, currentRoute, gameObjectLinks } from "$lib/components/sidebar/links";
     $currentSidebar = gameObjectLinks;
     $currentRoute = "paratextList";
 
-    
     /**
      * @typedef {Object} Props
      * @property {import('./$types').PageData} data
@@ -17,9 +16,9 @@
 </script>
 
 <HeaderContainer title="Záznamy">
-    <div class="grid grid-cols-2 2xl:grid-cols-3 gap-2">
+    <div class="grid grid-cols-2 gap-2 2xl:grid-cols-3">
         {#each data.paratexts as paratext (paratext.id)}
-            <ParatextCard paratext={paratext}/>
+            <ParatextCard {paratext} />
         {/each}
         {#if data.paratexts.length == 0}
             <h2 class="text-center">Žádné záznamy</h2>

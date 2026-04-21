@@ -7,5 +7,5 @@
 </script>
 
 <HeaderContainer title="Nový paratext verze">
-    <ParatextForm isNew={true}/>
+    <ParatextForm isNew={true} />
 </HeaderContainer>

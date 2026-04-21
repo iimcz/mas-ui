@@ -1,22 +1,25 @@
 <script lang="ts">
     import { RowCount, TableHandler, ThFilter, ThSort, Pagination } from "@vincjo/datatables";
 
-    let { data, columns, onrowclick } : {
-        data: any[],
+    let {
+        data,
+        columns,
+        onrowclick
+    }: {
+        data: any[];
         columns: {
-            name: string,
-            key: string,
-            html?: boolean
-            canSort?: boolean,
-            onClick?: any
-        }[],
-        onrowclick?: any
+            name: string;
+            key: string;
+            html?: boolean;
+            canSort?: boolean;
+            onClick?: any;
+        }[];
+        onrowclick?: any;
     } = $props();
 
-	function clickHandler(column: any, row: any)
-	{
-		if (column?.onClick != null) column.onClick(row)
-	}
+    function clickHandler(column: any, row: any) {
+        if (column?.onClick != null) column.onClick(row);
+    }
 
     const i18n = {
         search: "Hledat...",
@@ -27,10 +30,9 @@
         noRows: "Žádné výsledky",
         previous: "Předchozí",
         next: "Další"
-    }
+    };
     const table = $derived(new TableHandler(data, { rowsPerPage: 20, i18n }));
 </script>
-
 
 <section bind:clientWidth={table.clientWidth}>
     <article bind:this={table.element} class="thin-scrollbar">
@@ -60,18 +62,26 @@
                 </thead>
                 <tbody class={onrowclick ? "[&>tr]:hover:preset-tonal-primary" : ""}>
                     {#each table.rows as row}
-                        <tr onclick={() => onrowclick(row)} class={onrowclick ? "cursor-pointer select-none" : ""}>
+                        <tr
+                            onclick={() => onrowclick(row)}
+                            class={onrowclick ? "cursor-pointer select-none" : ""}
+                        >
                             {#each columns as column, i}
                                 {#if column.onClick}
                                     <td>
-                                        <button type="button" onclick={() => clickHandler(column, row)} class="btn preset-filled">{column.name}</button>
+                                        <button
+                                            type="button"
+                                            onclick={() => clickHandler(column, row)}
+                                            class="btn preset-filled">{column.name}</button
+                                        >
                                     </td>
+                                {:else if column.html}
+                                    <td class:underline={onrowclick && i == 0}
+                                        >{@html row[column.key]}</td
+                                    >
                                 {:else}
-                                    {#if column.html}
-                                        <td class:underline={onrowclick && i == 0}>{@html row[column.key]}</td>
-                                    {:else}
-                                        <td class:underline={onrowclick && i == 0}>{row[column.key]}</td>
-                                    {/if}
+                                    <td class:underline={onrowclick && i == 0}>{row[column.key]}</td
+                                    >
                                 {/if}
                             {/each}
                         </tr>
@@ -82,8 +92,8 @@
     </article>
 
     <footer>
-        <RowCount {table}/>
-        <Pagination {table}/>
+        <RowCount {table} />
+        <Pagination {table} />
     </footer>
 </section>
 

@@ -1,10 +1,10 @@
 <script lang="ts">
     import Blockquote from "$lib/components/Blockquote.svelte";
-import type { WorkVersion } from "$lib/schemas/workVersion";
-    let { data }: { data: WorkVersion } = $props()
+    import type { WorkVersion } from "$lib/schemas/workVersion";
+    let { data }: { data: WorkVersion } = $props();
 </script>
 
-<div class="card p-4 preset-outlined-surface-300-700 form flex flex-col">
+<div class="form flex flex-col card preset-outlined-surface-300-700 p-4">
     <div>Název verze</div>
     <Blockquote>{data.label}</Blockquote>
 
@@ -24,7 +24,9 @@ import type { WorkVersion } from "$lib/schemas/workVersion";
     <Blockquote>{data.system}</Blockquote>
 
     <div>Importováno</div>
-    <Blockquote>{data.importedAt == null ? "" : new Date(data.importedAt).toLocaleString()}</Blockquote>
+    <Blockquote
+        >{data.importedAt == null ? "" : new Date(data.importedAt).toLocaleString()}</Blockquote
+    >
 </div>
 
 <style scoped>

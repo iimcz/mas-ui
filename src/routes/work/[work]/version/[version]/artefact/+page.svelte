@@ -9,12 +9,16 @@
 
     const tableColumns = [
         { name: "Název", key: "label", canSort: true },
-        { name: "Interní poznámka", key: "internalNote", canSort: true },
-    ]
+        { name: "Interní poznámka", key: "internalNote", canSort: true }
+    ];
 
     let { data } = $props();
 </script>
 
 <HeaderContainer title="Digitální objekty">
-    <Datatable data={data.artefacts} columns={tableColumns} onrowclick={(row: Artefact) => goto(`artefact/${row.id}`)}/>
+    <Datatable
+        data={data.artefacts}
+        columns={tableColumns}
+        onrowclick={(row: Artefact) => goto(`artefact/${row.id}`)}
+    />
 </HeaderContainer>

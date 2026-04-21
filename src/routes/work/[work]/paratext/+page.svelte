@@ -1,6 +1,6 @@
 <script>
     import { page } from "$app/stores";
-    import { Accordion } from '@skeletonlabs/skeleton-svelte';
+    import { Accordion } from "@skeletonlabs/skeleton-svelte";
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
     import ParatextCard from "$lib/components/paratext/ParatextCard.svelte";
 
@@ -8,7 +8,6 @@
 
     $currentSidebar = workLinks;
     $currentRoute = "paratextList";
-
 
     /**
      * @typedef {Object} Props
@@ -18,34 +17,43 @@
     /** @type {Props} */
     let { data } = $props();
 
-    const workParatexts = data.paratexts.filter(p => p.versionId == null)
-    const versionParatexts = Object.entries(Object.groupBy(data.paratexts.filter(p => p.versionId != null), (p) => p.versionId ?? ""))
+    const workParatexts = data.paratexts.filter((p) => p.versionId == null);
+    const versionParatexts = Object.entries(
+        Object.groupBy(
+            data.paratexts.filter((p) => p.versionId != null),
+            (p) => p.versionId ?? ""
+        )
+    );
 </script>
 
 <HeaderContainer title="Paratexty">
     <h1>Dílo</h1>
-    <div class="grid grid-cols-2 2xl:grid-cols-3 gap-2">
+    <div class="grid grid-cols-2 gap-2 2xl:grid-cols-3">
         {#each workParatexts as paratext (paratext.id)}
-            <ParatextCard paratext={paratext}/>
+            <ParatextCard {paratext} />
         {/each}
         {#if workParatexts.length == 0}
-            <h2 class="text-center col-span-3">Žádné paratexty</h2>
+            <h2 class="col-span-3 text-center">Žádné paratexty</h2>
         {/if}
     </div>
     <h1>Verze</h1>
     <Accordion>
         {#each versionParatexts as version (version[0])}
-            <div class="bg-surface-300 card">
+            <div class="card bg-surface-300">
                 <!-- TODO: FIX VALUE -->
                 <Accordion.Item value={"a"}>
                     <Accordion.ItemTrigger>
-                        {data.versions.find(v => v.id == version[0])?.title}
+                        {data.versions.find((v) => v.id == version[0])?.title}
                     </Accordion.ItemTrigger>
                     <Accordion.ItemContent>
-                        <a class="btn preset-filled-primary" href={`/work/${$page.params.work}/version/${version[0]}/paratext`}>Zobrazit paratexty herních objektů</a>
-                        <div class="grid grid-cols-2 2xl:grid-cols-3 gap-2">
+                        <a
+                            class="preset-filled-primary btn"
+                            href={`/work/${$page.params.work}/version/${version[0]}/paratext`}
+                            >Zobrazit paratexty herních objektů</a
+                        >
+                        <div class="grid grid-cols-2 gap-2 2xl:grid-cols-3">
                             {#each version[1] ?? [] as paratext (paratext.id)}
-                                <ParatextCard paratext={paratext}/>
+                                <ParatextCard {paratext} />
                             {/each}
                         </div>
                     </Accordion.ItemContent>
@@ -53,7 +61,7 @@
             </div>
         {/each}
         {#if versionParatexts.length == 0}
-            <h2 class="text-center col-span-3">Žádné paratexty</h2>
+            <h2 class="col-span-3 text-center">Žádné paratexty</h2>
         {/if}
     </Accordion>
 </HeaderContainer>

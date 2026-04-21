@@ -1,9 +1,7 @@
 <script>
-    import { createBubbler } from 'svelte/legacy';
+    import { createBubbler } from "svelte/legacy";
 
     const bubble = createBubbler();
-
-
 
     /**
      * @typedef {Object} Props
@@ -17,8 +15,8 @@
 </script>
 
 <div class="relative">
-    <textarea bind:value={value} class="textarea resize-none" rows="8" placeholder={placeholder}></textarea>
-    <button onclick={bubble('click')} class="absolute right-0 bottom-0 m-4 btn preset-filled">
+    <textarea bind:value class="textarea resize-none" rows="8" {placeholder}></textarea>
+    <button onclick={bubble("click")} class="absolute right-0 bottom-0 m-4 btn preset-filled">
         {@render children?.()}
     </button>
 </div>

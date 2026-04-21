@@ -5,16 +5,15 @@
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
     import { page } from "$app/state";
-    import { PUBLIC_API_URL as API_URL } from '$env/static/public';
+    import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import type { Artefact } from "$lib/schemas/artefact";
     import { toaster } from "$lib/toaster";
-    import { _ } from 'svelte-i18n'
+    import { _ } from "svelte-i18n";
 
     onMount(() => {
         $currentStep = 3;
         $unlockedStep = 3;
-    })
-
+    });
 
     /**
      * @typedef {Object} Props
@@ -27,25 +26,25 @@
     /**
      * @param {CustomEvent<import("$lib/schemas/artefact").Artefact>} data
      */
-     async function createNew(data: Artefact) {
+    async function createNew(data: Artefact) {
         const result = await fetch(`${API_URL}/api/v1/digitalization/${processId}/finalize`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
 
-        if (result.ok)
-        {
-            toaster.success({title: $_("save_success")});
+        if (result.ok) {
+            toaster.success({ title: $_("save_success") });
 
-            const createdArtefact = await result.json() as Artefact;
-            goto(`/work/${page.params.work}/version/${page.params.version}/artefact/${createdArtefact.id}`)
-        }
-        else {
+            const createdArtefact = (await result.json()) as Artefact;
+            goto(
+                `/work/${page.params.work}/version/${page.params.version}/artefact/${createdArtefact.id}`
+            );
+        } else {
             const error = await result.text();
-            toaster.error({title: $_("save_fail"), description: error});
+            toaster.error({ title: $_("save_fail"), description: error });
         }
     }
 </script>
 
-<ArtefactForm isNew={true} onsave={createNew}/>
+<ArtefactForm isNew={true} onsave={createNew} />
