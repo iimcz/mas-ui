@@ -9,16 +9,20 @@ export type Artefact = {
     fileSize: number;
     quality: string;
     type: ArtefactTypeEnum;
-    physicalMediaState: PhysicalMediaStateEnum;
     physicalMediaType: PhysicalMediaTypeEnum;
+    fedoraUrl: string;
     paratextIds: string[];
     versionIds: string[];
 };
 
-export enum PhysicalMediaStateEnum {
-    Good = "Good",
-    Damaged = "Damaged",
-    Unreadable = "Unreadable"
+export enum ArtefactTypeEnum {
+    IsoImage = "IsoImage",
+    ZipArchive = "ZipArchive",
+    SfmFloppy = "SfmFloppy",
+    WindowsBinary = "WindowsBinary",
+    LinuxBinary = "LinuxBinary",
+    WavAudio = "WavAudio",
+    Unknown = "Unknown"
 }
 
 export enum PhysicalMediaTypeEnum {
@@ -29,15 +33,5 @@ export enum PhysicalMediaTypeEnum {
     Flash = "Flash",
     AudioCassette = "AudioCassette",
     None = "None",
-    Unknow = "Unknown"
-}
-
-export enum ArtefactTypeEnum {
-    IsoImage = "IsoImage",
-    ZipArchive = "ZipArchive",
-    SfmFloppy = "SfmFloppy",
-    WindowsBinary = "WindowsBinary",
-    LinuxBinary = "LinuxBinary",
-    WavAudio = "WavAudio",
     Unknown = "Unknown"
 }

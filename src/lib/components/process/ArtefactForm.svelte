@@ -1,7 +1,6 @@
 <script>
     import {
         ArtefactTypeEnum,
-        PhysicalMediaStateEnum,
         PhysicalMediaTypeEnum
     } from "$lib/schemas/artefact";
     import Fa from "svelte-fa";
@@ -30,8 +29,8 @@
             quality: "",
             versionIds: [],
             websiteUrl: "",
-            physicalMediaState: PhysicalMediaStateEnum.Good,
-            physicalMediaType: PhysicalMediaTypeEnum.Unknow,
+            physicalMediaType: PhysicalMediaTypeEnum.Unknown,
+            fedoraUrl: "",
             type: ArtefactTypeEnum.Unknown
         },
         onsave = null

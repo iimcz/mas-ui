@@ -9,6 +9,10 @@
 
     const tableColumns = [
         { name: "Název", key: "label", canSort: true },
+        { name: "Název souboru", key: "fileName", canSort: true },
+        { name: "Typ", key: "type", canSort: true },
+        { name: "Formát", key: "format", canSort: true },
+        { name: "Velikost", key: "fileSize", canSort: true },
         { name: "Interní poznámka", key: "internalNote", canSort: true }
     ];
 
