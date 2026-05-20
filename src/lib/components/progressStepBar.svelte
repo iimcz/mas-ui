@@ -1,27 +1,26 @@
 <script>
-    import { run } from "svelte/legacy";
-
-    import { page } from "$app/stores";
     import { steps, currentStep, unlockedStep } from "$lib/steps.js";
     import { stringFormat } from "$lib/stringFormat";
     import Fa from "svelte-fa";
     import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+    import { page } from "$app/state";
 
+    // typescriptify and use props for stuff like links and steps instead of stores
     /**
      * Templated URLs
      * @type {Object.<string, string>}
      */
     let links = $state({});
-
-    run(() => {
-        for (const link of $steps) {
-            links[link.href] = stringFormat(link.href, $page.params);
-        }
-    });
+    let formattedLinks = $derived($steps.map((link) => {
+        return {
+            ...link,
+            href: stringFormat(link.href, page.params)
+        };
+    }));
 </script>
 
 <div class="flex items-center justify-around">
-    {#each $steps as step, index}
+    {#each formattedLinks as step, index}
         <a
             href={$unlockedStep < index ? "" : links[step.href]}
             class:cursor-not-allowed={index > $unlockedStep}

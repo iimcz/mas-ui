@@ -55,7 +55,7 @@
             {onSelect}
         >
             <Combobox.Control>
-                <Combobox.Input />
+                <Combobox.Input class="placeholder:text-surface-700-300" />
                 <Combobox.Trigger />
             </Combobox.Control>
             <Portal>
@@ -71,8 +71,5 @@
                 </Combobox.Positioner>
             </Portal>
         </Combobox>
-        <a href="search" class="ml-1 btn preset-filled">
-            <span>Rozšířené vyhledávání</span>
-        </a>
     </div>
 </div>

@@ -82,7 +82,7 @@
                 </Progress.Circle>
                 <Progress.ValueText />
             </Progress>
-            <span class="text-xl font-semibold">Probíhá finalizace herního objektu</span>
+            <span class="text-xl font-semibold">Probíhá finalizace herního balíčku</span>
         </div>
     </div>
 {/if}
@@ -98,7 +98,7 @@
         {#if data.status == "Success"}
             <hr />
             <div>
-                <h1 bind:this={info} class="text-3xl">2. Strukturovaný popis herního objektu</h1>
+                <h1 bind:this={info} class="text-3xl">2. Strukturovaný popis herního balíčku</h1>
                 <GamePackageMetadata
                     onCreateNew={() => (finalizing = true)}
                     processId={data.processId}

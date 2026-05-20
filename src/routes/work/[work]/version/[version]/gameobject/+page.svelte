@@ -8,11 +8,11 @@
         { name: "Název", key: "name", canSort: true },
         { name: "Popis", key: "description", canSort: true },
         {
-            name: "Spustit výchozí profil",
+            name: "Spustit emulaci",
             key: "",
             canSort: false,
             onClick: (row: GamePackage) => {
-                goto(`gameobject/${row.id}/profile/test/emulator`);
+                goto(`gameobject/${row.id}/emulator`);
             }
         }
     ];
@@ -21,16 +21,15 @@
     $currentSidebar = versionLinks;
     $currentRoute = "gameObjectList";
 
-    /**
-     * @typedef {Object} Props
-     * @property {import('./$types').PageData} data
-     */
+    interface Props {
+        data: import('./$types').PageData;
+    }
 
     /** @type {Props} */
     let { data } = $props();
 </script>
 
-<HeaderContainer title="Herní objekty">
+<HeaderContainer title="Herní balíčky">
     <Datatable
         data={data.gameObjects}
         columns={tableColumns}

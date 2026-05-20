@@ -13,6 +13,7 @@
             html?: boolean;
             canSort?: boolean;
             onClick?: any;
+            customComponent?: any;
         }[];
         onrowclick?: any;
     } = $props();
@@ -71,7 +72,7 @@
                                     <td>
                                         <button
                                             type="button"
-                                            onclick={() => clickHandler(column, row)}
+                                            onclick={(e) => { e.stopPropagation(); clickHandler(column, row); }}
                                             class="btn preset-filled">{column.name}</button
                                         >
                                     </td>
@@ -79,6 +80,10 @@
                                     <td class:underline={onrowclick && i == 0}
                                         >{@html row[column.key]}</td
                                     >
+                                {:else if column.customComponent}
+                                    <td>
+                                        <column.customComponent {...row}/>
+                                    </td>
                                 {:else}
                                     <td class:underline={onrowclick && i == 0}>{row[column.key]}</td
                                     >

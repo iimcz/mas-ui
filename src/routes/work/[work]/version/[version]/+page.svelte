@@ -30,15 +30,15 @@
                 Další kroky
             </h3>
             <p>
-                Po vytvoření verze je nutné vytvořit digitální objekt a herní objekt.<br />
+                Po vytvoření verze je nutné vytvořit digitální objekt a herní balíček.<br />
                 Další možnosti se nachází v levém menu.
             </p>
             <div class="flex flex-col items-center gap-1">
                 <a href="{data.id}/artefact/add/" class="btn w-full preset-filled"
                     >Vytvořit digitální objekt</a
                 >
-                <a href="{data.id}/gameobject/add/platform" class="btn w-full preset-filled"
-                    >Vytvořit herní objekt</a
+                <a href="{data.id}/gameobject/add/method" class="btn w-full preset-filled"
+                    >Vytvořit herní balíček</a
                 >
                 <a
                     href="{API_URL}/api/v1/router/ca/workversion/edit/{data.id}"

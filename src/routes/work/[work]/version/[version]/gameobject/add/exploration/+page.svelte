@@ -67,10 +67,10 @@
 
 <div class="container flex h-full">
     <div class="m-4 flex w-5/6 flex-col space-y-5">
-        <h1 class="mt-4 text-3xl">Výběr digitálních objektů a emulátoru</h1>
+        <h1 class="mt-4 text-3xl">Výběr digitálních objektů a explorativního prostředí</h1>
         <ProgressStepBar />
         <div class="mb-4">
-            <span class="text-lg font-bold">1. Vyberte digitální objekty ke konverzi</span>
+            <span class="text-lg font-bold">1. Vyberte digitální objekty ke exploraci</span>
             {#if data.artefacts.length == 0}
                 <Alert class="preset-outlined-error-500">
                     <h3 class="flex items-center gap-2 font-semibold">

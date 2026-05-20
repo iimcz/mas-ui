@@ -4,7 +4,6 @@
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import type { Artefact } from "$lib/schemas/artefact";
-    import { toaster } from "$lib/toaster";
     import { _ } from "svelte-i18n";
     import Alert from "$lib/components/Alert.svelte";
     import Fa from "svelte-fa";
@@ -48,11 +47,11 @@
                 Další kroky
             </h3>
             <p>
-                Po vytvoření digitálního objektu je nutné vytvořit herní objekt.<br />
+                Po vytvoření digitálního objektu je nutné vytvořit herní balíček.<br />
                 Další možnosti se nachází v levém menu.
             </p>
             <div class="flex flex-col items-center gap-1">
-                <a href="../gameobject/add/platform" class="btn preset-filled"
+                <a href="../gameobject/add/method" class="btn preset-filled"
                     >Vytvořit herní balíček</a
                 >
                 <button onclick={exportArtefact} class="btn preset-filled"

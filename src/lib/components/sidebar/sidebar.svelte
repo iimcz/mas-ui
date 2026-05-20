@@ -35,7 +35,7 @@
                                     class:active-link={link.match == $currentRoute}
                                     href={links[link.href]}
                                 >
-                                    <span class="flex-auto">{link.name}</span>
+                                    <span class="flex-auto text-wrap">{link.name}</span>
                                 </a>
                             {/if}
                         </li>

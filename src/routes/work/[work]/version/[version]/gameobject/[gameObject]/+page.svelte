@@ -40,7 +40,7 @@
             <li class="opacity-50" aria-hidden="true">&rsaquo;</li>
             <li><a class="opacity-60 hover:underline" href="../">Verze</a></li>
             <li class="opacity-50" aria-hidden="true">&rsaquo;</li>
-            <li>Herní objekt</li>
+            <li>Herní balíčky</li>
         </ol>
         <Alert class="preset-outlined-primary-500">
             <h3 class="flex items-center gap-2 font-semibold">
@@ -53,13 +53,13 @@
             </p>
             <div class="flex flex-col items-center gap-1">
                 <a
-                    href="{data.id}/profile/[id]/emulator"
+                    href="{data.id}/emulator"
                     data-sveltekit-preload-data="tap"
                     class="btn preset-filled">Spustit emulaci</a
                 >
             </div>
         </Alert>
-        <h2 class="mt-4 text-2xl">Metadata herního objektu</h2>
+        <h2 class="mt-4 text-2xl">Metadata herního balíčku</h2>
         <GamePackageForm {data} onsave={update} />
     </div>
 </HeaderContainer>

@@ -15,7 +15,7 @@
     let uploading = $state(false);
     let label = $state("");
     let uploadStep = $state(0);
-    let artefactType: ArtefactTypeEnum = $state(ArtefactTypeEnum.IsoImage);
+    let artefactType: ArtefactTypeEnum = $state(ArtefactTypeEnum.ZipArchive);
     let acceptedFile: File | null = $state(null);
 
     function onChangeHandler(e: FileChangeDetails) {
@@ -142,7 +142,8 @@
                                     bind:value={label}
                                 />
                             </label>
-                            <label for="ArtefactType">Typ média</label>
+                            <label class="label mb-2">
+                            <span class="label-text">Typ média</span>
                             <select
                                 name="ArtefactType"
                                 bind:value={artefactType}
@@ -152,6 +153,7 @@
                                     <option value={type[1]}>{type[0]}</option>
                                 {/each}
                             </select>
+                            </label>
                             <FileUpload name="files" onFileChange={onChangeHandler}>
                                 <FileUpload.Dropzone>
                                     <Fa icon={faFile} />

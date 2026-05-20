@@ -3,7 +3,7 @@
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
     import { faExpand, faCog, faInfoCircle, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-    import { Progress } from "@skeletonlabs/skeleton-svelte";
+    import { Portal, Progress, Tooltip } from "@skeletonlabs/skeleton-svelte";
     import Fa from "svelte-fa";
 
     import { currentSidebar, currentRoute } from "$lib/components/sidebar/links";
@@ -72,14 +72,23 @@
 
 <div class="mx-4 mx-auto flex h-full justify-center">
     <div class="my-4 flex w-full flex-col space-y-10">
-        <div class="mt-4 ml-4 flex space-x-4">
-            <button
-                onclick={async () => await finishEmulation(true)}
-                class="btn-icon preset-filled"
-            >
-                <!-- TODO use:popup={backPopup} -->
-                <Fa icon={faArrowLeft} />
-            </button>
+        <div class="mt-4 ml-4 flex items-center space-x-4">
+            <Tooltip>
+                <Tooltip.Trigger onclick={async () => await finishEmulation(true)} class="btn-icon preset-filled">
+                    <Fa icon={faArrowLeft} />
+                </Tooltip.Trigger>
+                <Portal>
+                    <Tooltip.Positioner>
+                        <Tooltip.Content class="card bg-surface-100-900 p-2 shadow-xl">
+                            <p>Zpět k verzi</p>
+                            <p>Záznam se tvoří automaticky</p>
+                            <Tooltip.Arrow class="[--arrow-size:--spacing(2)] [--arrow-background:var(--color-surface-100-900)]">
+                                <Tooltip.ArrowTip />
+                            </Tooltip.Arrow>
+                        </Tooltip.Content>
+                    </Tooltip.Positioner>
+                </Portal>
+            </Tooltip>
             <h1 class="text-3xl">Emulace</h1>
         </div>
         <div class="aspect-container space-x-5">
@@ -138,12 +147,6 @@
         <button class="preset-filled-secondary btn">Info o ovládání</button>
         <button class="preset-filled-secondary btn">Info o zařízení</button>
     </div>
-</div>
-
-<div class="preset-filled-secondary card p-4" data-popup="backPopup">
-    <p>Zpět k verzi</p>
-    <p>Záznam se tvoří automaticky</p>
-    <div class="arrow preset-filled-secondary"></div>
 </div>
 
 <style scoped>

@@ -5,6 +5,8 @@ import { PUBLIC_API_URL as API_URL } from "$env/static/public";
  * @returns {Promise<{ state: import('$lib/schemas/emulationState').EmulationState, streamSource: string}>}
  */
 export async function load({ fetch, params }) {
+    return { state: { }, streamSource: "asd" };
+
     const res = await fetch(`${API_URL}/api/v1/packages/${params.gameObject}/emulate`, {
         method: "POST"
     });

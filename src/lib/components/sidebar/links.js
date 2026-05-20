@@ -9,8 +9,7 @@ export const workLinks = [
     { name: "❮ Zpět na výběr díla", href: "/", match: "" },
     { name: "Dílo", href: "", match: "" },
     { name: "Metadata díla", href: "/work/[work]", match: "workDetail" },
-    { name: "Seznam verzí", href: "/work/[work]/version/", match: "versionList" },
-    { name: "Seznam paratextů", href: "/work/[work]/paratext/", match: "paratextList" }
+    { name: "Seznam verzí", href: "/work/[work]/version/", match: "versionList" }
 ];
 
 /**
@@ -34,24 +33,17 @@ export const versionLinks = [
     },
     { name: "Paratexty", href: "", match: "" },
     { name: "Paratexty", href: "/work/[work]/version/[version]/paratext", match: "paratextList" },
+    { name: "Herní balíčky", href: "", match: "" },
     {
-        name: "Přidat paratext",
-        href: "/work/[work]/version/[version]/paratext/add",
-        match: "addParatext"
-    },
-    { name: "Herní objekty", href: "", match: "" },
-    {
-        name: "Herní objekty",
+        name: "Herní balíčky",
         href: "/work/[work]/version/[version]/gameobject",
         match: "gameObjectList"
     },
     {
-        name: "Vytvořit herní objekt",
-        href: "/work/[work]/version/[version]/gameobject/add/platform",
+        name: "Vytvořit herní balíček",
+        href: "/work/[work]/version/[version]/gameobject/add/method",
         match: "addGameObject"
     }
-    // TODO: Implement setting a GO as default
-    //{ name: "Spustit výchozí herní objekt", href: "/work/[work]/version/[version]/gameobject/[id]/emulator", match: "emulator" },
 ];
 
 /**
@@ -60,23 +52,28 @@ export const versionLinks = [
 export const gameObjectLinks = [
     { name: "Verze", href: "", match: "" },
     { name: "❮ Zpět na verzi", href: "/work/[work]/version/[version]", match: "" },
-    { name: "Herní objekt", href: "", match: "" },
+    { name: "Herní balíček", href: "", match: "" },
     {
         name: "Metadata",
         href: "/work/[work]/version/[version]/gameobject/[gameObject]",
         match: "gameObjectDetail"
     },
-    // TODO: Implement setting a GO as default
+    { name: "Spustit emulaci", href: "", match: "" },
     {
-        name: "Spustit výchozí profil",
-        href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile/[id]/emulator",
+        name: "Nejnovější prostředí",
+        href: "/work/[work]/version/[version]/gameobject/[gameObject]/emulator",
         match: "emulator"
     },
-    /*
-    { name: "Profily", href: "", match: "" },
-    { name: "Seznam profilů", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile", match: "profileList" },
-    { name: "Vytvořit profil", href: "/work/[work]/version/[version]/gameobject/[gameObject]/profile/add", match: "addProfile" },
-    */
+    {
+        name: "Originální prostředí",
+        href: "/work/[work]/version/[version]/gameobject/[gameObject]/emulator",
+        match: "emulator"
+    },
+        {
+        name: "Jiná verze prostředí",
+        href: "/work/[work]/version/[version]/gameobject/[gameObject]/environments",
+        match: "environmentList"
+    },
     { name: "Paratexty", href: "", match: "" },
     {
         name: "Záznamy",
