@@ -24,7 +24,7 @@
 
     <div>Interní poznámka</div>
     <input class="input" type="text" bind:value={data.internalNote} />
-    
+
     <div>Typ objektu</div>
     {#if data.physicalMediaType === PhysicalMediaTypeEnum.None}
         <select bind:value={data.type} class="select">

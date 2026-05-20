@@ -1,10 +1,6 @@
-import { writable } from "svelte/store";
+import type { ProgressStep } from "./components/progressStepBar.svelte";
 
-/**
- * @typedef {{name: string, href: string}} ProgressStep
- * @type {ProgressStep[]}
- */
-export let artefactSteps = [
+export let artefactSteps: ProgressStep[] = [
     {
         name: "Typ média",
         href: "/work/[work]/version/[version]/artefact/add"
@@ -19,10 +15,7 @@ export let artefactSteps = [
     }
 ];
 
-/**
- * @type {ProgressStep[]}
- */
-export let configSteps = [
+export let configSteps: ProgressStep[] = [
     {
         name: "Platforma",
         href: "/work/[work]/version/[version]/gameobject/add/platform"
@@ -41,6 +34,17 @@ export let configSteps = [
     }
 ];
 
-export const unlockedStep = writable(0);
-export const currentStep = writable(0);
-export const steps = writable(artefactSteps);
+export let explorationSteps: ProgressStep[] = [
+    {
+        name: "Digitální objekty + Explorativní prostředí",
+        href: "/work/[work]/version/[version]/gameobject/add/exploration"
+    },
+    {
+        name: "Explorace",
+        href: "/work/[work]/version/[version]/gameobject/add/log"
+    },
+    {
+        name: "Export",
+        href: "/work/[work]/version/[version]/gameobject/add/configuration"
+    }
+];

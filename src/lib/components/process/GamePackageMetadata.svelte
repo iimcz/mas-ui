@@ -1,19 +1,11 @@
 <script lang="ts">
     import GamePackageForm from "./GamePackageForm.svelte";
-
-    import { currentStep, unlockedStep } from "$lib/steps";
-    import { onMount } from "svelte";
     import { goto } from "$app/navigation";
     import { page } from "$app/state";
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import { toaster } from "$lib/toaster";
     import { _ } from "svelte-i18n";
     import type { GamePackage } from "$lib/schemas/gamePackage";
-
-    onMount(() => {
-        $currentStep = 4;
-        $unlockedStep = 4;
-    });
 
     let {
         processId,

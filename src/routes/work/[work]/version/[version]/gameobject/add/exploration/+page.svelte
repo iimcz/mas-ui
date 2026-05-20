@@ -1,17 +1,9 @@
 <script lang="ts">
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
-    import { currentStep, unlockedStep } from "$lib/steps";
     import { goto } from "$app/navigation";
     import { _ } from "svelte-i18n";
-
-    import { onMount } from "svelte";
     import MediaCard from "$lib/components/mediaCard.svelte";
-
-    onMount(() => {
-        $unlockedStep = 1;
-        $currentStep = 1;
-    });
 
     /**
      * @param {string} emulatorId
@@ -48,6 +40,7 @@
     import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
     import { toaster } from "$lib/toaster";
     import { page } from "$app/state";
+    import { explorationSteps } from "$lib/steps.js";
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
@@ -68,7 +61,7 @@
 <div class="container flex h-full">
     <div class="m-4 flex w-5/6 flex-col space-y-5">
         <h1 class="mt-4 text-3xl">Výběr digitálních objektů a explorativního prostředí</h1>
-        <ProgressStepBar />
+        <ProgressStepBar steps={explorationSteps} currentStep={0} unlockedStep={0} />
         <div class="mb-4">
             <span class="text-lg font-bold">1. Vyberte digitální objekty ke exploraci</span>
             {#if data.artefacts.length == 0}
@@ -77,10 +70,12 @@
                         <Fa icon={faExclamationTriangle} />
                     </h3>
                     <h1>
-                        K tomuto dílu neexistují žádné digitální objekty. Před vytvořením herního balíčku je
-                        nutné digitalizovat kopii média, nebo nahrát soubor.
+                        K tomuto dílu neexistují žádné digitální objekty. Před vytvořením herního
+                        balíčku je nutné digitalizovat kopii média, nebo nahrát soubor.
                     </h1>
-                    <a href="../../artefact/add" class="btn preset-filled">Vytvořit digitální objekt</a>
+                    <a href="../../artefact/add" class="btn preset-filled"
+                        >Vytvořit digitální objekt</a
+                    >
                 </Alert>
             {/if}
             <ol class="list space-y-2 px-4">
@@ -96,8 +91,14 @@
                 {/each}
             </ol>
         </div>
-        <span class="text-lg font-bold">2. Vyberte emulátor</span>
+        <span class="text-lg font-bold">2. Vyberte explorativní prostředí</span>
         <div class="grid grid-cols-2 gap-2 text-center 2xl:grid-cols-3">
+            <MediaCard
+                onclick={async () => goto("exploration/explorationRun")}
+                title={"CachyOS Explorer Retro"}
+                description={"Linuxová distribuce CachyOS pro exploraci retro her"}
+                tags={["v1.0", "ZX Spectrum", "C64"]}
+            />
             {#each data.emulators as emulator}
                 <MediaCard
                     onclick={async () => await startConversion(emulator.id)}

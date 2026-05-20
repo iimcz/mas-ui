@@ -1,22 +1,13 @@
 <script>
-    import { run } from "svelte/legacy";
-
     import EmulatorCard from "$lib/components/emulatorCard.svelte";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { _ } from "svelte-i18n";
 
-    import { currentStep, unlockedStep, steps, configSteps } from "$lib/steps";
-    import { onMount } from "svelte";
+    import { configSteps } from "$lib/steps";
     import Fa from "svelte-fa";
     import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
     let searchText = $state("");
-
-    onMount(() => {
-        $steps = configSteps;
-        $currentStep = 0;
-        $unlockedStep = 0;
-    });
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     import { goto } from "$app/navigation";
@@ -31,23 +22,23 @@
     /** @type {Props} */
     let { data } = $props();
 
-    let filteredPlatforms = $derived(
+    let filteredPlatforms = $derived.by(() =>
         data.platforms.filter((p) => p.name.toLowerCase().includes(searchText.toLowerCase()))
     );
 
-    const artefactTypes = data.artefacts
+    let artefactTypes = $derived.by(() => data.artefacts
         .map((a) => a.physicalMediaType.toLowerCase())
-        .filter((value, index, array) => array.indexOf(value) === index); // Unique
+        .filter((value, index, array) => array.indexOf(value) === index)); // Unique
 
-    let matchingMediaPlatforms = data.platforms.filter((p) =>
-        p.physicalMediaTypes.some((t) => artefactTypes.indexOf(t.toLowerCase()) != -1)
+    let matchingMediaPlatforms = $derived.by(() => data.platforms.filter((p) =>
+        p.physicalMediaTypes.some((t) => artefactTypes.indexOf(t.toLowerCase()) != -1))
     );
 </script>
 
 <div class="container flex h-full">
     <div class="m-4 flex w-5/6 flex-col space-y-5">
         <h1 class="mt-4 text-3xl">Identifikace platformy</h1>
-        <ProgressStepBar />
+        <ProgressStepBar steps={configSteps} currentStep={0} unlockedStep={0} />
         {#if matchingMediaPlatforms.length != 0}
             <h2 class="mt-4 text-xl">Doporučené (dle typu média)</h2>
             <div class="grid grid-cols-3 gap-2 text-center">

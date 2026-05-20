@@ -7,18 +7,17 @@
     import Fa from "svelte-fa";
     import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 
-    import { currentStep, unlockedStep, steps, configSteps } from "$lib/steps";
+    import { configSteps } from "$lib/steps";
     import { onMount } from "svelte";
 
-    let interval = 0;
-    let isFinished = false;
+    let interval = $state(0);
+    let isFinished = $state(false);
     let finalizing = $state(false);
 
-    onMount(() => {
-        $steps = configSteps;
-        $currentStep = 2;
-        $unlockedStep = 2;
+    let currentStep = $state(2);
+    let unlockedStep = $state(2);
 
+    onMount(() => {
         interval = setInterval(async () => {
             const res = await fetch(`${API_URL}/api/v1/conversion/${data.processId}/status`);
             data = await res.json();
@@ -33,6 +32,9 @@
 
             if (data.status == "Success") {
                 isFinished = true;
+                currentStep = 3;
+                unlockedStep = 3;
+
                 toaster.success({ title: $_("conversion_success") });
                 info.scrollIntoView({ behavior: "smooth" });
             }
@@ -73,7 +75,7 @@
 </script>
 
 {#if finalizing}
-    <div class="absolute inset-0 z-[999] flex items-center justify-center bg-surface-50-950/50">
+    <div class="absolute inset-0 z-999 flex items-center justify-center bg-surface-50-950/50">
         <div class="flex items-center justify-center gap-4 card bg-surface-100-900 p-4">
             <Progress class="w-fit items-center" value={null}>
                 <Progress.Circle>
@@ -90,7 +92,7 @@
 <div class="container flex h-full">
     <div class="m-4 flex w-5/6 flex-col space-y-5">
         <h1 class="mt-4 text-3xl">Konverze</h1>
-        <ProgressStepBar />
+        <ProgressStepBar steps={configSteps} currentStep={currentStep} unlockedStep={unlockedStep} />
         <div>
             <h1 class="text-3xl">1. Záznam z konverze</h1>
             <Log url={`${API_URL}/api/v1/conversion/${data.processId}/log`} />

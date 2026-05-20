@@ -143,16 +143,16 @@
                                 />
                             </label>
                             <label class="label mb-2">
-                            <span class="label-text">Typ média</span>
-                            <select
-                                name="ArtefactType"
-                                bind:value={artefactType}
-                                class="select mb-2"
-                            >
-                                {#each Object.entries(ArtefactTypeEnum) as type}
-                                    <option value={type[1]}>{type[0]}</option>
-                                {/each}
-                            </select>
+                                <span class="label-text">Typ média</span>
+                                <select
+                                    name="ArtefactType"
+                                    bind:value={artefactType}
+                                    class="select mb-2"
+                                >
+                                    {#each Object.entries(ArtefactTypeEnum) as type}
+                                        <option value={type[1]}>{type[0]}</option>
+                                    {/each}
+                                </select>
                             </label>
                             <FileUpload name="files" onFileChange={onChangeHandler}>
                                 <FileUpload.Dropzone>

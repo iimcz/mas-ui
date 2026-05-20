@@ -72,7 +72,10 @@
                                     <td>
                                         <button
                                             type="button"
-                                            onclick={(e) => { e.stopPropagation(); clickHandler(column, row); }}
+                                            onclick={(e) => {
+                                                e.stopPropagation();
+                                                clickHandler(column, row);
+                                            }}
                                             class="btn preset-filled">{column.name}</button
                                         >
                                     </td>
@@ -82,7 +85,7 @@
                                     >
                                 {:else if column.customComponent}
                                     <td>
-                                        <column.customComponent {...row}/>
+                                        <column.customComponent {...row} />
                                     </td>
                                 {:else}
                                     <td class:underline={onrowclick && i == 0}>{row[column.key]}</td

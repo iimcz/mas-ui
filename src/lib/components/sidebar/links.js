@@ -69,7 +69,7 @@ export const gameObjectLinks = [
         href: "/work/[work]/version/[version]/gameobject/[gameObject]/emulator",
         match: "emulator"
     },
-        {
+    {
         name: "Jiná verze prostředí",
         href: "/work/[work]/version/[version]/gameobject/[gameObject]/environments",
         match: "environmentList"

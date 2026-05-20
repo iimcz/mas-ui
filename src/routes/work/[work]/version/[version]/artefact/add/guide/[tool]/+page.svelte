@@ -13,16 +13,15 @@
 
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import { digitalizationGuides } from "$lib/digitalizationGuides";
-    import { currentStep, unlockedStep, steps, artefactSteps } from "$lib/steps";
+    import { artefactSteps } from "$lib/steps";
     import { toaster } from "$lib/toaster";
 
-    let interval = 0;
-    let isFinished = false;
+    let interval = $state(0);
+    let isFinished = $state(false);
+    let currentStep = $state(2);
+    let unlockedStep = $state(2);
 
     onMount(() => {
-        $steps = artefactSteps;
-        $currentStep = 1;
-        $unlockedStep = 1;
         return () => clearInterval(interval);
     });
 
@@ -48,6 +47,9 @@
 
             if (process.status == "Success") {
                 isFinished = true;
+                currentStep = 3;
+                unlockedStep = 3;
+
                 toaster.success({ title: $_("artefact_success") });
                 info.scrollIntoView({ behavior: "smooth" });
             }
@@ -101,13 +103,13 @@
     let { data } = $props();
     let info = $state();
 
-    const guide = digitalizationGuides[data.slug];
+    let guide = $derived.by(() => digitalizationGuides[data.slug]);
 </script>
 
 <div class="container flex h-full">
     <div class="m-4 flex w-5/6 flex-col space-y-10">
         <h1 class="mt-4 text-3xl">1. Postup pro digitalizaci</h1>
-        <ProgressStepBar />
+        <ProgressStepBar steps={artefactSteps} currentStep={1} unlockedStep={1} />
         <Guide
             on:start={() => startProcess(page.params.tool ?? "", page.params.version ?? "")}
             running={processId != null}

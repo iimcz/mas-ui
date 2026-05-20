@@ -15,7 +15,7 @@
     const tableColumns = [
         { name: "Název", key: "label", canSort: true },
         { name: "Počet verzí", key: "numVersions", canSort: true },
-        { name: "Kurátorský popis", key: "description", canSort: true },
+        { name: "Kurátorský popis", key: "description", canSort: true }
     ];
 
     let filter = $derived(page.url.searchParams.get("filter") ?? "");

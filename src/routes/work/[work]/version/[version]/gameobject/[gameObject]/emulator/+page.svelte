@@ -74,7 +74,10 @@
     <div class="my-4 flex w-full flex-col space-y-10">
         <div class="mt-4 ml-4 flex items-center space-x-4">
             <Tooltip>
-                <Tooltip.Trigger onclick={async () => await finishEmulation(true)} class="btn-icon preset-filled">
+                <Tooltip.Trigger
+                    onclick={async () => await finishEmulation(true)}
+                    class="btn-icon preset-filled"
+                >
                     <Fa icon={faArrowLeft} />
                 </Tooltip.Trigger>
                 <Portal>
@@ -82,7 +85,9 @@
                         <Tooltip.Content class="card bg-surface-100-900 p-2 shadow-xl">
                             <p>Zpět k verzi</p>
                             <p>Záznam se tvoří automaticky</p>
-                            <Tooltip.Arrow class="[--arrow-size:--spacing(2)] [--arrow-background:var(--color-surface-100-900)]">
+                            <Tooltip.Arrow
+                                class="[--arrow-background:var(--color-surface-100-900)] [--arrow-size:--spacing(2)]"
+                            >
                                 <Tooltip.ArrowTip />
                             </Tooltip.Arrow>
                         </Tooltip.Content>

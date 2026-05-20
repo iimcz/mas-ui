@@ -1,8 +1,5 @@
 <script>
-    import {
-        ArtefactTypeEnum,
-        PhysicalMediaTypeEnum
-    } from "$lib/schemas/artefact";
+    import { ArtefactTypeEnum, PhysicalMediaTypeEnum } from "$lib/schemas/artefact";
     import Fa from "svelte-fa";
     import ArtefactDataEntry from "./ArtefactDataEntry.svelte";
     import { faSave } from "@fortawesome/free-solid-svg-icons";

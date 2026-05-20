@@ -1,42 +1,26 @@
-<script>
+<script lang="ts">
     import MediaCard from "$lib/components/mediaCard.svelte";
     import UploadCard from "$lib/components/uploadCard.svelte";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { _ } from "svelte-i18n";
-
-    import { currentStep, unlockedStep, steps, artefactSteps } from "$lib/steps";
-    import { onMount } from "svelte";
-    onMount(() => {
-        $steps = artefactSteps;
-        $currentStep = 0;
-        $unlockedStep = 0;
-    });
-
+    import { artefactSteps } from "$lib/steps";
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     import { goto } from "$app/navigation";
+
     $currentSidebar = versionLinks;
     $currentRoute = "addArtefact";
 
-    /**
-     * @param {string} toolId
-     */
-    async function startProcess(toolId) {
+    async function startProcess(toolId: string) {
         goto(`add/guide/${toolId}`);
     }
 
-    /**
-     * @typedef {Object} Props
-     * @property {import('./$types').PageData} data
-     */
-
-    /** @type {Props} */
     let { data } = $props();
 </script>
 
 <div class="container flex h-full">
     <div class="m-4 flex w-5/6 flex-col space-y-10">
         <h1 class="mt-4 text-3xl">Vyberte typ média</h1>
-        <ProgressStepBar />
+        <ProgressStepBar steps={artefactSteps} currentStep={0} unlockedStep={0} />
         <div class="3xl:grid-cols-3 grid grid-cols-2 gap-4 text-center">
             {#each data.tools as tool}
                 <MediaCard

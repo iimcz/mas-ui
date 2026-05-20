@@ -22,7 +22,7 @@
     $currentRoute = "gameObjectList";
 
     interface Props {
-        data: import('./$types').PageData;
+        data: import("./$types").PageData;
     }
 
     /** @type {Props} */

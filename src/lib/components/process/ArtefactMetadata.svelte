@@ -1,19 +1,11 @@
 <script lang="ts">
     import ArtefactForm from "./ArtefactForm.svelte";
-
-    import { currentStep, unlockedStep } from "$lib/steps";
-    import { onMount } from "svelte";
     import { goto } from "$app/navigation";
     import { page } from "$app/state";
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import type { Artefact } from "$lib/schemas/artefact";
     import { toaster } from "$lib/toaster";
     import { _ } from "svelte-i18n";
-
-    onMount(() => {
-        $currentStep = 3;
-        $unlockedStep = 3;
-    });
 
     /**
      * @typedef {Object} Props

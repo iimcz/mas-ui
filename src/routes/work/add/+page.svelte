@@ -1,6 +1,6 @@
 <script lang="ts">
     import { currentSidebar } from "$lib/components/sidebar/links";
-    import ImportStateTag  from "./ImportStateTag.svelte";
+    import ImportStateTag from "./ImportStateTag.svelte";
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import { goto } from "$app/navigation";
     import { _ } from "svelte-i18n";
@@ -33,7 +33,12 @@
         { name: "Název", key: "label", canSort: true },
         { name: "Počet verzí", key: "numVersions", canSort: true },
         { name: "Kurátorský popis", key: "curatorialDescription", canSort: true, html: true },
-        { name: "Již importováno", key: "isAlreadyImported", canSort: true, customComponent: ImportStateTag },
+        {
+            name: "Již importováno",
+            key: "isAlreadyImported",
+            canSort: true,
+            customComponent: ImportStateTag
+        },
         { name: "Importovat dílo a verze", key: "import", canSort: false, onClick: importWork }
     ];
 
