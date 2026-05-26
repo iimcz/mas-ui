@@ -37,7 +37,7 @@
                 <a href="{data.id}/artefact/add/" class="btn w-full preset-filled"
                     >Vytvořit digitální objekt</a
                 >
-                <a href="{data.id}/gameobject/add/method" class="btn w-full preset-filled"
+                <a href="{data.id}/gameobject/add" class="btn w-full preset-filled"
                     >Vytvořit herní balíček</a
                 >
                 <a

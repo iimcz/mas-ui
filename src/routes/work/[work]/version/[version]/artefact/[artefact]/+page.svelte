@@ -51,9 +51,7 @@
                 Další možnosti se nachází v levém menu.
             </p>
             <div class="flex flex-col items-center gap-1">
-                <a href="../gameobject/add/method" class="btn preset-filled"
-                    >Vytvořit herní balíček</a
-                >
+                <a href="../gameobject/add" class="btn preset-filled">Vytvořit herní balíček</a>
                 <button onclick={exportArtefact} class="btn preset-filled"
                     >Exportovat Digitální objekt do CA</button
                 >

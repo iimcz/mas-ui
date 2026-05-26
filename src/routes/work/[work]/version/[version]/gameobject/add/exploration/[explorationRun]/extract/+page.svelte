@@ -1,0 +1,23 @@
+<script lang="ts">
+    import { versionLinks, currentSidebar, currentRoute } from "$lib/components/sidebar/links";
+    import ProgressStepBar from "$lib/components/progressStepBar.svelte";
+    import { explorationSteps } from "$lib/steps";
+
+    $currentSidebar = versionLinks;
+    $currentRoute = "addGameObject";
+</script>
+
+<div class="container flex h-full">
+    <div class="m-4 flex w-5/6 flex-col space-y-5">
+        <h1 class="mt-4 text-3xl">Obsah exportovaného balíčku</h1>
+        <ProgressStepBar steps={explorationSteps} currentStep={2} unlockedStep={2} />
+        <div class="rounded-2xl border bg-surface-900 p-4">
+            <span class="text-lg font-bold">Zde bude zobrazen obsah exportovaného balíčku.</span>
+        </div>
+        <div class="flex justify-end gap-2">
+            <a class="btn preset-filled" href=".">Zpět k exploraci</a>
+            <a class="btn preset-filled" href="snapshot">Uložit rozpracovaný balíček</a>
+            <a class="btn preset-filled-primary-500" href="verify">Ověřit v kioskovém režimu</a>
+        </div>
+    </div>
+</div>

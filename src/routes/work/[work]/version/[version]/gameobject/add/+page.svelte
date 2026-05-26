@@ -1,7 +1,6 @@
 <script lang="ts">
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
-    import { configSteps } from "$lib/steps.js";
     import { goto } from "$app/navigation";
     import { _ } from "svelte-i18n";
     import MediaCard from "$lib/components/mediaCard.svelte";
@@ -18,6 +17,8 @@
             return;
         }
 
+        // TODO: Point to correct endpoint when ready
+        /*
         const res = await fetch(`${API_URL}/api/v1/conversion/start`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -27,12 +28,13 @@
                 digitalObjectIds: artefactIds
             })
         });
+        */
 
         /**
          * @type {import('$lib/schemas/conversionProcess').ConversionProcess}
          */
-        const process = await res.json();
-        goto(`process/${process.processId}`);
+        //const process = await res.json();
+        //goto(`process/${process.processId}`);
     }
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
@@ -41,6 +43,7 @@
     import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
     import { toaster } from "$lib/toaster";
     import { page } from "$app/state";
+    import { explorationSteps } from "$lib/steps.js";
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
@@ -60,10 +63,10 @@
 
 <div class="container flex h-full">
     <div class="m-4 flex w-5/6 flex-col space-y-5">
-        <h1 class="mt-4 text-3xl">Výběr digitálních objektů a emulátoru</h1>
-        <ProgressStepBar steps={configSteps} currentStep={1} unlockedStep={1} />
+        <h1 class="mt-4 text-3xl">Výběr digitálních objektů a explorativního prostředí</h1>
+        <ProgressStepBar steps={explorationSteps} currentStep={0} unlockedStep={0} />
         <div class="mb-4">
-            <span class="text-lg font-bold">1. Vyberte digitální objekty ke konverzi</span>
+            <span class="text-lg font-bold">1. Vyberte digitální objekty ke exploraci</span>
             {#if data.artefacts.length == 0}
                 <Alert class="preset-outlined-error-500">
                     <h3 class="flex items-center gap-2 font-semibold">
@@ -91,14 +94,21 @@
                 {/each}
             </ol>
         </div>
-        <span class="text-lg font-bold">2. Vyberte emulátor</span>
+        <span class="text-lg font-bold">2. Vyberte explorativní prostředí</span>
         <div class="grid grid-cols-2 gap-2 text-center 2xl:grid-cols-3">
-            {#each data.emulators as emulator}
+            <!-- TODO: Remove placeholder -->
+            <MediaCard
+                onclick={async () => goto("add/exploration/test")}
+                title={"CachyOS Explorer Retro"}
+                description={"Linuxová distribuce CachyOS pro exploraci retro her"}
+                tags={["v1.0", "ZX Spectrum", "C64"]}
+            />
+            {#each data.environments as environment}
                 <MediaCard
-                    onclick={async () => await startConversion(emulator.id)}
-                    title={$_(`emulator.${emulator.name}.name`)}
-                    description={$_(`emulator.${emulator.name}.description`)}
-                    tags={[`v${emulator.version}`]}
+                    onclick={async () => await startConversion(environment.id)}
+                    title={$_(`environment.${environment.name}.name`)}
+                    description={$_(`environment.${environment.name}.description`)}
+                    tags={[`v${environment.version}`]}
                 />
             {/each}
         </div>

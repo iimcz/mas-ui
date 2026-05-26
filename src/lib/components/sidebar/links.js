@@ -41,7 +41,7 @@ export const versionLinks = [
     },
     {
         name: "Vytvořit herní balíček",
-        href: "/work/[work]/version/[version]/gameobject/add/method",
+        href: "/work/[work]/version/[version]/gameobject/add",
         match: "addGameObject"
     }
 ];

@@ -36,15 +36,23 @@ export let configSteps: ProgressStep[] = [
 
 export let explorationSteps: ProgressStep[] = [
     {
-        name: "Digitální objekty + Explorativní prostředí",
-        href: "/work/[work]/version/[version]/gameobject/add/exploration"
+        name: "Výběr prostředí + obejktů",
+        href: "/work/[work]/version/[version]/gameobject/add"
     },
     {
         name: "Explorace",
-        href: "/work/[work]/version/[version]/gameobject/add/log"
+        href: "/work/[work]/version/[version]/gameobject/add/exploration/[explorationRun]"
     },
     {
-        name: "Export",
-        href: "/work/[work]/version/[version]/gameobject/add/configuration"
+        name: "Obsah balíčku",
+        href: "/work/[work]/version/[version]/gameobject/add/exploration/[explorationRun]/extract"
+    },
+    {
+        name: "Ověření",
+        href: "/work/[work]/version/[version]/gameobject/add/exploration/[explorationRun]/verify"
+    },
+    {
+        name: "Finalizace",
+        href: "/work/[work]/version/[version]/gameobject/add/exploration/[explorationRun]/finalize"
     }
 ];
