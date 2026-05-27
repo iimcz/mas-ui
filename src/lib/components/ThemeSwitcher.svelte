@@ -1,11 +1,11 @@
 <script lang="ts">
+    import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+    import { Fa } from "svelte-fa";
+
     let { theme = $bindable() }: { theme: string } = $props();
 </script>
 
-<span class="flex items-center gap-2">
-    <span>Vzhled</span>
-    <select class="select" bind:value={theme}>
-        <option value="dark">Tmavý</option>
-        <option value="light">Světlý</option>
-    </select>
-</span>
+<button class="btn py-2 hover:preset-tonal" onclick={() => theme = theme === 'dark' ? 'light' : 'dark'}>
+    <Fa icon={theme === 'dark' ? faMoon : faSun} />
+    {theme === 'dark' ? 'Dark' : 'Light'} Mode
+</button>

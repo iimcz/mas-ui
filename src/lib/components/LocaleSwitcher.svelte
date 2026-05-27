@@ -1,12 +1,25 @@
-<script>
+<script lang="ts">
+    import { faGlobe, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+    import { Menu, Portal } from "@skeletonlabs/skeleton-svelte";
+    import Fa from "svelte-fa";
     import { locale, locales, _ } from "svelte-i18n";
 </script>
 
-<span class="flex items-center gap-2">
-    {$_("language")}
-    <select class="select" bind:value={$locale}>
-        {#each $locales as locale}
-            <option value={locale}>{$_(`locale_name.${locale}`)}</option>
-        {/each}
-    </select>
-</span>
+<Menu onSelect={(e) => $locale = e.value}>
+	<Menu.Trigger class="btn py-2 hover:preset-tonal">
+        <Fa icon={faGlobe} />
+        {$_("language")}
+        <Fa icon={faCaretDown} />
+    </Menu.Trigger>
+	<Portal>
+		<Menu.Positioner>
+			<Menu.Content>
+                {#each $locales as locale}
+                    <Menu.Item value={locale}>
+                        <Menu.ItemText>{$_(`locale_name.${locale}`)}</Menu.ItemText>
+                    </Menu.Item>
+                {/each}
+			</Menu.Content>
+		</Menu.Positioner>
+	</Portal>
+</Menu>

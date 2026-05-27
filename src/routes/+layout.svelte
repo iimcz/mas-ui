@@ -48,11 +48,12 @@
                 <a
                     href="{API_URL}/api/v1/router/ca/home"
                     target="_blank"
-                    class="text-l mr-4 flex items-center font-bold uppercase"
+                    class="btn py-2 hover:preset-tonal font-semibold uppercase"
                 >
-                    <Fa class="mr-2" icon={faDatabase} />
+                    <Fa icon={faDatabase} />
                     Collective Access
                 </a>
+                <span class="vr h-auto my-1 hidden xl:inline"></span>
                 <ThemeSwitcher bind:theme />
                 <LocaleSwitcher />
             </AppBar.Trail>
