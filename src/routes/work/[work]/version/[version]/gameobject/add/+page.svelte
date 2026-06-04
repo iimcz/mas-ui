@@ -30,9 +30,6 @@
         });
         */
 
-        /**
-         * @type {import('$lib/schemas/conversionProcess').ConversionProcess}
-         */
         //const process = await res.json();
         //goto(`process/${process.processId}`);
     }

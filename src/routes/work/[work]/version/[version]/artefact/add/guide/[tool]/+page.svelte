@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+    import type { PageProps } from "./$types";
     import { onMount } from "svelte";
     import { page } from "$app/state";
     import { _ } from "svelte-i18n";
@@ -25,11 +26,7 @@
         return () => clearInterval(interval);
     });
 
-    /**
-     * @param {string} toolId
-     * @param {string} versionId
-     */
-    async function startProcess(toolId, versionId) {
+    async function startProcess(toolId: string, versionId: string) {
         const res = await fetch(`${API_URL}/api/v1/digitalization/start`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -37,7 +34,7 @@
         });
 
         process = await res.json();
-        processId = process?.processId ?? null;
+        processId = process?.id ?? null;
 
         interval = setInterval(async () => {
             const res = await fetch(`${API_URL}/api/v1/digitalization/${processId}/status`);
@@ -51,7 +48,7 @@
                 unlockedStep = 3;
 
                 toaster.success({ title: $_("artefact_success") });
-                info.scrollIntoView({ behavior: "smooth" });
+                info?.scrollIntoView({ behavior: "smooth" });
             }
 
             if (process.status == "Failed") {
@@ -69,11 +66,10 @@
         });
 
         process = await res.json();
-        processId = process?.processId ?? null;
+        processId = process?.id ?? null;
     }
 
-    /** @param {string} data */
-    async function input(data) {
+    async function input(data: string) {
         const res = await fetch(`${API_URL}/api/v1/digitalization/${processId}/input`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -81,28 +77,14 @@
         });
 
         process = await res.json();
-        processId = process?.processId ?? null;
+        processId = process?.id ?? null;
     }
 
-    /**
-     * @type {import("$lib/schemas/digitalizationProcess").DigitalizationProcess?}
-     */
-    let process = $state(null);
+    let process: Process<DigitalizationDetail> | null = $state(null);
+    let processId: string | null = $state(null);
 
-    /**
-     * @type {string?}
-     */
-    let processId = $state(null);
-
-    /**
-     * @typedef {Object} Props
-     * @property {import('./$types').PageData} data
-     */
-
-    /** @type {Props} */
-    let { data } = $props();
-    let info = $state();
-
+    let { data }: PageProps = $props();
+    let info: HTMLElement | null = $state(null);
     let guide = $derived.by(() => digitalizationGuides[data.slug]);
 </script>
 

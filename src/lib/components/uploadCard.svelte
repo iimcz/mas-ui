@@ -42,13 +42,13 @@
         uploadStep = 1;
         await new Promise((resolve) => setTimeout(resolve, 500));
 
-        const process = await reqStart.json();
+        const process = (await reqStart.json()) as Process<UploadDetail>;
         const artefact: Partial<Artefact> = {
             label,
             type: artefactType
         };
 
-        const reqFinish = await fetch(`${API_URL}/api/v1/upload/${process.processId}/finalize`, {
+        const reqFinish = await fetch(`${API_URL}/api/v1/upload/${process.id}/finalize`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(artefact)
@@ -56,7 +56,7 @@
 
         uploadStep = 2;
 
-        const result = await reqFinish.json();
+        const result = (await reqFinish.json()) as Artefact;
         goto(`/work/${page.params.work}/version/${page.params.version}/artefact/${result.id}`);
     }
 </script>

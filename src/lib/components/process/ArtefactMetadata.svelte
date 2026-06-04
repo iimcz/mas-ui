@@ -7,13 +7,7 @@
     import { toaster } from "$lib/toaster";
     import { _ } from "svelte-i18n";
 
-    /**
-     * @typedef {Object} Props
-     * @property {string} processId
-     */
-
-    /** @type {Props} */
-    let { processId } = $props();
+    let { processId }: { processId: string } = $props();
 
     /**
      * @param {CustomEvent<import("$lib/schemas/artefact").Artefact>} data
