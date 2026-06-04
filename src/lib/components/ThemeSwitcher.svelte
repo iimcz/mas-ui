@@ -5,7 +5,10 @@
     let { theme = $bindable() }: { theme: string } = $props();
 </script>
 
-<button class="btn py-2 hover:preset-tonal" onclick={() => theme = theme === 'dark' ? 'light' : 'dark'}>
-    <Fa icon={theme === 'dark' ? faMoon : faSun} />
-    {theme === 'dark' ? 'Dark' : 'Light'} Mode
+<button
+    class="btn py-2 hover:preset-tonal"
+    onclick={() => (theme = theme === "dark" ? "light" : "dark")}
+>
+    <Fa icon={theme === "dark" ? faMoon : faSun} />
+    {theme === "dark" ? "Dark" : "Light"} Mode
 </button>
