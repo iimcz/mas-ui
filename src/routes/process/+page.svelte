@@ -29,7 +29,8 @@
             ...data.conversionProcesses,
             ...data.digitalizationProcesses,
             ...data.emulationProcesses,
-            ...data.uploadProcesses
+            ...data.uploadProcesses,
+            ...data.explorationProcesses
         ];
     });
 </script>

@@ -1,3 +1,5 @@
+import type { PlayableObject } from "./playableObject";
+
 export interface Process<T extends ProcessDetail> {
     id: string;
     status: ProcessStatus;
@@ -26,13 +28,18 @@ export interface EmulationDetail extends ProcessDetail {
 
 export interface UploadDetail extends ProcessDetail {}
 
-export interface ExplorationDetail extends ProcessDetail {}
+export interface ExplorationDetail extends ProcessDetail {
+    streamUrl: string;
+    state: string;
+    latestParsedPlayable: PlayableObject;
+}
 
 export interface ProcessList {
     digitalizationProcesses: Process<DigitalizationDetail>[];
     conversionProcesses: Process<ConversionDetail>[];
     emulationProcesses: Process<EmulationDetail>[];
     uploadProcesses: Process<UploadDetail>[];
+    explorationProcesses: Process<ExplorationDetail>[];
 }
 
 export enum ProcessStatus {
