@@ -2,9 +2,22 @@
     import { versionLinks, currentSidebar, currentRoute } from "$lib/components/sidebar/links";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { explorationSteps } from "$lib/steps";
+    import { goto } from "$app/navigation";
+
+    async function gotoKiosk() {
+        //await data.process.gotoKiosk(fetch);
+        goto(`verify`);
+    }
+
+    async function gotoExploration() {
+        //await data.process.gotoExploration(fetch);
+        goto(`.`);
+    }
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
+
+    let { data } = $props();
 </script>
 
 <div class="container flex h-full">
@@ -15,9 +28,11 @@
             <span class="text-lg font-bold">Zde bude zobrazen obsah exportovaného balíčku.</span>
         </div>
         <div class="flex justify-end gap-2">
-            <a class="btn preset-filled" href=".">Zpět k exploraci</a>
+            <button class="btn preset-filled" onclick={gotoExploration}>Zpět k exploraci</button>
             <a class="btn preset-filled" href="snapshot">Uložit rozpracovaný balíček</a>
-            <a class="btn preset-filled-primary-500" href="verify">Ověřit v kioskovém režimu</a>
+            <button class="btn preset-filled-primary-500" onclick={gotoKiosk}
+                >Ověřit v kioskovém režimu</button
+            >
         </div>
     </div>
 </div>

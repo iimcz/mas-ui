@@ -1,13 +1,10 @@
-/**
- * @typedef {{
- *  steps: string[],
- *  images: string[],
- *  faq: { title: string, content: string }[]
- * }} DigitalizationGuide
- *
- * @type {Object.<string, DigitalizationGuide>}
- */
-export const digitalizationGuides = {
+interface DigitalizationGuide {
+    steps: string[];
+    images: string[];
+    faq: { title: string; content: string }[];
+}
+
+export const digitalizationGuides: Record<string, DigitalizationGuide> = {
     "greaseweazle-35-diskette": {
         steps: ["greaseweazle-35-diskette.step1", "greaseweazle-35-diskette.step2"],
         images: ["greaseweazle-35-diskette.image1", "greaseweazle-35-diskette.image2"],

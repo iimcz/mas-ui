@@ -6,7 +6,7 @@
 </script>
 
 <script lang="ts">
-    import { stringFormat } from "$lib/stringFormat";
+    import { stringFormat } from "$lib/util/stringFormat";
     import Fa from "svelte-fa";
     import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
     import { page } from "$app/state";

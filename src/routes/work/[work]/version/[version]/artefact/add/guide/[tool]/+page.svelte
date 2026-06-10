@@ -124,7 +124,7 @@
                 </div>
             {:else if process?.status == "Failed"}
                 <hr />
-                <button onclick={restart} class="preset-filled-error btn">
+                <button onclick={restart} class="btn preset-filled-error-500">
                     <Fa icon={faRepeat} />
                     <span>Zkusit znovu</span>
                 </button>

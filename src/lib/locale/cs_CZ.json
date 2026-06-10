@@ -17,6 +17,12 @@
             "image": "/tools/ffmpeg.png"
         }
     },
+    "environment": {
+        "CachyOS": {
+            "name": "CachyOS",
+            "description": "Linuxová distribuce CachyOS pro exploraci retro her"
+        }
+    },
     "digitalization_guides": {
         "greaseweazle-35-diskette": {
             "step1": "Vložte disketu do disketové mechaniky dle obrázku",

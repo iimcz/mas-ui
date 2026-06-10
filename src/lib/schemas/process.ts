@@ -1,39 +1,41 @@
-interface Process<T extends ProcessDetail> {
+export interface Process<T extends ProcessDetail> {
     id: string;
     status: ProcessStatus;
     statusDetail: T;
     startTime: string;
 }
 
-interface ProcessDetail {}
+export interface ProcessDetail {}
 
-interface DigitalizationDetail extends ProcessDetail {
+export interface DigitalizationDetail extends ProcessDetail {
     toolId: string;
     toolMessage: string;
 }
 
-interface ConversionDetail extends ProcessDetail {
+export interface ConversionDetail extends ProcessDetail {
     emulatorId: string;
     artefactIds: string[];
     toolMessage: string;
 }
 
-interface EmulationDetail extends ProcessDetail {
+export interface EmulationDetail extends ProcessDetail {
     isGpuPassthrough: boolean;
     isUsbPassthrough: boolean;
     other: string;
 }
 
-interface UploadDetail extends ProcessDetail {}
+export interface UploadDetail extends ProcessDetail {}
 
-interface ProcessList {
+export interface ExplorationDetail extends ProcessDetail {}
+
+export interface ProcessList {
     digitalizationProcesses: Process<DigitalizationDetail>[];
     conversionProcesses: Process<ConversionDetail>[];
     emulationProcesses: Process<EmulationDetail>[];
     uploadProcesses: Process<UploadDetail>[];
 }
 
-enum ProcessStatus {
+export enum ProcessStatus {
     Initialization = "Initialization",
     Running = "Running",
     WaitingForInput = "WaitingForInput",

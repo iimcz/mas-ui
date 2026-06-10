@@ -1,7 +1,7 @@
 <script lang="ts">
     import { currentRoute, currentSidebar, routeOverrides } from "./links";
     import { page } from "$app/state";
-    import { stringFormat } from "$lib/stringFormat";
+    import { stringFormat } from "$lib/util/stringFormat";
 
     let links = $derived.by(() => {
         let templatedLinks: { [Key: string]: string } = {};

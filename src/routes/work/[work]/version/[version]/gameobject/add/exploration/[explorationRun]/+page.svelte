@@ -6,6 +6,7 @@
     import { goto } from "$app/navigation";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { explorationSteps } from "$lib/steps";
+    import { onMount } from "svelte";
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
@@ -13,6 +14,25 @@
     let saving = $state(false);
     let frameW = $state(0);
     let frameH = $state(300);
+    let interval = $state(0);
+
+    onMount(() => {
+        interval = setInterval(async () => {
+            data.process = await data.process.ping(fetch);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    });
+
+    async function gotoExploration() {
+        //await data.process.gotoExploration(fetch);
+        goto(`${data.process.id}/extract`);
+    }
+
+    async function quit() {
+        //await data.process.quit(fetch);
+        goto("../../../");
+    }
 
     let { data } = $props();
 </script>
@@ -90,9 +110,7 @@
                                         <Dialog.CloseTrigger class="btn preset-tonal"
                                             >Zrušit</Dialog.CloseTrigger
                                         >
-                                        <button
-                                            class="btn preset-filled"
-                                            onclick={() => goto("test/extract")}
+                                        <button class="btn preset-filled" onclick={gotoExploration}
                                             >Vypnout a načíst exportovaný balíček</button
                                         >
                                     </footer>
@@ -132,9 +150,7 @@
                                         <Dialog.CloseTrigger class="btn preset-tonal"
                                             >Zrušit</Dialog.CloseTrigger
                                         >
-                                        <button
-                                            class="btn preset-filled"
-                                            onclick={() => goto("../../../")}
+                                        <button class="btn preset-filled" onclick={quit}
                                             >Vypnout a přerušit exploraci</button
                                         >
                                     </footer>
