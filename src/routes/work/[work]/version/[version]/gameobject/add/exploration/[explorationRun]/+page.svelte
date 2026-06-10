@@ -27,6 +27,8 @@
 
     async function gotoCheck() {
         await data.process.gotoCheck(fetch);
+
+        saving = true;
         await data.process.waitForState(fetch, ExplorationStateEnum.WaitingForCheck);
 
         goto(`${data.process.id}/check`);
@@ -34,11 +36,6 @@
 
     async function abort() {
         await data.process.abort(fetch);
-        saving = true;
-
-        while (data.process.statusDetail.latestParsedPlayable === null) {
-            data.process = await data.process.ping(fetch);
-        }
 
         goto("../../../");
     }
@@ -75,7 +72,7 @@
                     bind:clientHeight={frameH}
                     class="relative mx-auto aspect-video h-full w-auto bg-surface-900"
                 >
-                    {#if !data.process.statusDetail.streamUrl}
+                    {#if data.process.statusDetail.streamUrl === ""}
                         <Progress class="w-fit items-center" value={null}>
                             <Progress.Circle>
                                 <Progress.CircleTrack />

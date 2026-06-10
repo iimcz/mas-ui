@@ -81,7 +81,7 @@ export class ExplorationProcess implements Process<ExplorationDetail> {
     statusDetail: ExplorationDetail;
     startTime: string;
 
-    constructor(
+    public constructor(
         id: string,
         status: ProcessStatus,
         statusDetail: ExplorationDetail,
@@ -109,7 +109,7 @@ export class ExplorationProcess implements Process<ExplorationDetail> {
         );
 
         return result.ok
-            ? result.json()
+            ? ExplorationProcess.fromJson(await result.json())
             : Promise.reject(new Error(`Failed to send input: ${result.statusText}`));
     }
 
@@ -165,8 +165,17 @@ export class ExplorationProcess implements Process<ExplorationDetail> {
         });
 
         return result.ok
-            ? result.json()
+            ? ExplorationProcess.fromJson(await result.json())
             : Promise.reject(new Error(`Failed to send initial ping: ${result.statusText}`));
+    }
+
+    static fromJson(init: ExplorationProcess) {
+        return new ExplorationProcess(
+            init?.id,
+            init?.status,
+            init?.statusDetail,
+            init?.startTime
+        );
     }
 
     static async start(
