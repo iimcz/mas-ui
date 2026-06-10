@@ -1,8 +1,21 @@
 <script lang="ts">
+    import { goto } from "$app/navigation";
     import { versionLinks, currentSidebar, currentRoute } from "$lib/components/sidebar/links";
+
+    async function save() {
+        data.process.save(fetch);
+        goto("../../../");
+    }
+
+    async function gotoCheck() {
+        await data.process.gotoCheck(fetch);
+        goto(`check`);
+    }
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
+
+    let { data } = $props();
 </script>
 
 <div class="container flex h-full">
@@ -30,8 +43,8 @@
             </form>
         </div>
         <div class="flex justify-end gap-2">
-            <a class="btn preset-filled" href="../../../">Uložit a dokončit exploraci</a>
-            <a class="btn preset-filled" href="extract">Zpět k obsahu balíčku</a>
+            <button class="btn preset-filled" onclick={save}>Uložit a dokončit exploraci</button>
+            <button class="btn preset-filled" onclick={gotoCheck}>Zpět k obsahu balíčku</button>
         </div>
     </div>
 </div>

@@ -2,9 +2,25 @@
     import { versionLinks, currentSidebar, currentRoute } from "$lib/components/sidebar/links";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { explorationSteps } from "$lib/steps";
+    import { goto } from "$app/navigation";
+
+    let packageName = $state("");
+    let packageNote = $state("");
+
+    async function finish() {
+        data.process = await data.process.finish(fetch, packageName, packageNote);
+        goto(`../../../`);
+    }
+
+    async function gotoCheck() {
+        await data.process.gotoCheck(fetch);
+        goto(`check`);
+    }
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
+
+    let { data } = $props();
 </script>
 
 <div class="container flex h-full">
@@ -15,17 +31,17 @@
             <form class="space-y-4">
                 <label class="label">
                     <span class="label-text">Název herního balíčku</span>
-                    <input class="input" type="text" />
+                    <input required class="input" type="text" bind:value={packageName} />
                 </label>
                 <label class="label">
                     <span class="label-text">Poznámka</span>
-                    <input class="input" type="text" />
+                    <input class="input" type="text" bind:value={packageNote} />
                 </label>
             </form>
         </div>
         <div class="flex justify-end gap-2">
-            <a class="btn preset-filled" href="../../../">Uložit a dokončit exploraci</a>
-            <a class="btn preset-filled" href="extract">Zpět k obsahu balíčku</a>
+            <button class="btn preset-filled" onclick={finish}>Uložit a dokončit exploraci</button>
+            <button class="btn preset-filled" onclick={gotoCheck}>Zpět k obsahu balíčku</button>
         </div>
     </div>
 </div>

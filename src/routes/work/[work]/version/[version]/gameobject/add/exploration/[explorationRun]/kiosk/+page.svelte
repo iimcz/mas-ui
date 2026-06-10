@@ -6,6 +6,8 @@
     import { versionLinks } from "$lib/components/sidebar/links";
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { explorationSteps } from "$lib/steps";
+    import { onMount } from "svelte";
+    import { goto } from "$app/navigation";
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
@@ -13,6 +15,20 @@
     let saving = $state(false);
     let frameW = $state(0);
     let frameH = $state(300);
+    let interval = $state(0);
+
+    onMount(() => {
+        interval = setInterval(async () => {
+            data.process = await data.process.ping(fetch);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    });
+
+    async function gotoExploration() {
+        await data.process.gotoExploration(fetch);
+        goto(`.`);
+    }
 
     let { data } = $props();
 </script>
@@ -58,10 +74,10 @@
             <div class="flex flex-col items-center gap-4">
                 <span class="text-lg font-semibold">Ovládací panel</span>
                 <div class="flex w-full flex-col space-y-4">
-                    <a class="btn preset-filled-success-500" href="finalize"
+                    <a class="btn preset-filled-success-500" href="finish"
                         >Označit balíček jako hratelný</a
                     >
-                    <a class="btn preset-filled" href="snapshot">Uložit rozpracovaný balíček</a>
+                    <a class="btn preset-filled" href="save">Uložit rozpracovaný balíček</a>
                     <Dialog>
                         <Dialog.Trigger class="w-full">
                             <div class="btn w-full preset-filled">Přepnout HDMI Switcher</div>
@@ -100,7 +116,9 @@
                             </Dialog.Positioner>
                         </Portal>
                     </Dialog>
-                    <a class="btn preset-filled" href=".">Zpět k exploraci</a>
+                    <button class="btn preset-filled" onclick={gotoExploration}
+                        >Zpět k exploraci</button
+                    >
                 </div>
                 <span class="text-lg font-semibold">Checklist</span>
                 <ul class="w-full list-inside list-disc rounded-2xl border p-4">

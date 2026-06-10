@@ -10,20 +10,49 @@ interface ExplorationInput {
     typeName: string;
 }
 
+export enum ExplorationTypeEnum {
+    Ping = "Ping",
+    GotoExploration = "GotoExploration",
+    GotoCheck = "GotoCheck",
+    GotoKiosk = "GotoKiosk",
+    Save = "Save",
+    Finish = "Finish",
+    Abort = "Abort"
+}
+
 class Ping implements ExplorationInput {
-    typeName: string = "Ping";
+    typeName: string = ExplorationTypeEnum.Ping;
 }
 
 class GotoExploration implements ExplorationInput {
-    typeName: string = "GotoExploration";
+    typeName: string = ExplorationTypeEnum.GotoExploration;
+}
+
+class GotoCheck implements ExplorationInput {
+    typeName: string = ExplorationTypeEnum.GotoCheck;
 }
 
 class GotoKiosk implements ExplorationInput {
-    typeName: string = "GotoKiosk";
+    typeName: string = ExplorationTypeEnum.GotoKiosk;
 }
 
-class Quit implements ExplorationInput {
-    typeName: string = "Quit";
+class Save implements ExplorationInput {
+    typeName: string = ExplorationTypeEnum.Save;
+}
+
+class Finish implements ExplorationInput {
+    typeName: string = ExplorationTypeEnum.Finish;
+    packageName: string;
+    packageNote: string;
+
+    constructor(packageName: string, packageNote: string) {
+        this.packageName = packageName;
+        this.packageNote = packageNote;
+    }
+}
+
+class Abort implements ExplorationInput {
+    typeName: string = ExplorationTypeEnum.Abort;
 }
 
 export class ExplorationProcess implements Process<ExplorationDetail> {
@@ -72,12 +101,28 @@ export class ExplorationProcess implements Process<ExplorationDetail> {
         return this.input(fetch, new GotoExploration());
     }
 
+    async gotoCheck(fetch: typeof globalThis.fetch): Promise<ExplorationProcess> {
+        return this.input(fetch, new GotoCheck());
+    }
+
     async gotoKiosk(fetch: typeof globalThis.fetch): Promise<ExplorationProcess> {
         return this.input(fetch, new GotoKiosk());
     }
 
-    async quit(fetch: typeof globalThis.fetch): Promise<ExplorationProcess> {
-        return this.input(fetch, new Quit());
+    async save(fetch: typeof globalThis.fetch): Promise<ExplorationProcess> {
+        return this.input(fetch, new Save());
+    }
+
+    async finish(
+        fetch: typeof globalThis.fetch,
+        packageName: string,
+        packageNote: string
+    ): Promise<ExplorationProcess> {
+        return this.input(fetch, new Finish(packageName, packageNote));
+    }
+
+    async abort(fetch: typeof globalThis.fetch): Promise<ExplorationProcess> {
+        return this.input(fetch, new Abort());
     }
 
     static async fromId(fetch: typeof globalThis.fetch, id: string): Promise<ExplorationProcess> {

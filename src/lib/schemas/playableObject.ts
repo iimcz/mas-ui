@@ -1,3 +1,6 @@
 export interface PlayableObject {
-    // TODO: fill
+    id: string;
+    name: string;
+    note: string;
+    emulatorSlug: string;
 }

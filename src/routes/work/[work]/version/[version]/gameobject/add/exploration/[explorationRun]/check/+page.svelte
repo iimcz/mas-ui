@@ -5,12 +5,12 @@
     import { goto } from "$app/navigation";
 
     async function gotoKiosk() {
-        //await data.process.gotoKiosk(fetch);
-        goto(`verify`);
+        await data.process.gotoKiosk(fetch);
+        goto(`kiosk`);
     }
 
     async function gotoExploration() {
-        //await data.process.gotoExploration(fetch);
+        await data.process.gotoExploration(fetch);
         goto(`.`);
     }
 
@@ -29,7 +29,7 @@
         </div>
         <div class="flex justify-end gap-2">
             <button class="btn preset-filled" onclick={gotoExploration}>Zpět k exploraci</button>
-            <a class="btn preset-filled" href="snapshot">Uložit rozpracovaný balíček</a>
+            <a class="btn preset-filled" href="save">Uložit rozpracovaný balíček</a>
             <button class="btn preset-filled-primary-500" onclick={gotoKiosk}
                 >Ověřit v kioskovém režimu</button
             >

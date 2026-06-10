@@ -1,3 +1,4 @@
+import type { ExplorationTypeEnum } from "./exploration/exploration";
 import type { PlayableObject } from "./playableObject";
 
 export interface Process<T extends ProcessDetail> {
@@ -30,8 +31,8 @@ export interface UploadDetail extends ProcessDetail {}
 
 export interface ExplorationDetail extends ProcessDetail {
     streamUrl: string;
-    state: string;
-    latestParsedPlayable: PlayableObject;
+    state: ExplorationTypeEnum;
+    latestParsedPlayable: PlayableObject | null;
 }
 
 export interface ProcessList {

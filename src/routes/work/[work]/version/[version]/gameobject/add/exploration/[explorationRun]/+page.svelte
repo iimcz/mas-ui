@@ -24,13 +24,19 @@
         return () => clearInterval(interval);
     });
 
-    async function gotoExploration() {
-        //await data.process.gotoExploration(fetch);
-        goto(`${data.process.id}/extract`);
+    async function gotoCheck() {
+        await data.process.gotoCheck(fetch);
+        goto(`${data.process.id}/check`);
     }
 
-    async function quit() {
-        //await data.process.quit(fetch);
+    async function abort() {
+        await data.process.abort(fetch);
+        saving = true;
+
+        while (data.process.statusDetail.latestParsedPlayable === null) {
+            data.process = await data.process.ping(fetch);
+        }
+
         goto("../../../");
     }
 
@@ -66,13 +72,26 @@
                     bind:clientHeight={frameH}
                     class="relative mx-auto aspect-video h-full w-auto bg-surface-900"
                 >
-                    <iframe
-                        class="absolute top-0 left-0"
-                        width={frameW - 100}
-                        height={frameH}
-                        title="Stream"
-                        src={""}
-                    ></iframe>
+                    {#if !data.process.statusDetail.streamUrl}
+                        <Progress class="w-fit items-center" value={null}>
+                            <Progress.Circle>
+                                <Progress.CircleTrack />
+                                <Progress.CircleRange />
+                            </Progress.Circle>
+                            <Progress.ValueText />
+                        </Progress>
+                        <span class="text-xl font-semibold"
+                            >Probíhá start exploratiního prostředí</span
+                        >
+                    {:else}
+                        <iframe
+                            class="absolute top-0 left-0"
+                            width={frameW - 100}
+                            height={frameH}
+                            title="Stream"
+                            src={data.process.statusDetail.streamUrl}
+                        ></iframe>
+                    {/if}
                 </div>
             </div>
             <div class="flex flex-col items-center gap-4">
@@ -110,7 +129,7 @@
                                         <Dialog.CloseTrigger class="btn preset-tonal"
                                             >Zrušit</Dialog.CloseTrigger
                                         >
-                                        <button class="btn preset-filled" onclick={gotoExploration}
+                                        <button class="btn preset-filled" onclick={gotoCheck}
                                             >Vypnout a načíst exportovaný balíček</button
                                         >
                                     </footer>
@@ -150,7 +169,7 @@
                                         <Dialog.CloseTrigger class="btn preset-tonal"
                                             >Zrušit</Dialog.CloseTrigger
                                         >
-                                        <button class="btn preset-filled" onclick={quit}
+                                        <button class="btn preset-filled" onclick={abort}
                                             >Vypnout a přerušit exploraci</button
                                         >
                                     </footer>
