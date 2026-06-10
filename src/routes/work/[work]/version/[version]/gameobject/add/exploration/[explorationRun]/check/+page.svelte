@@ -3,14 +3,19 @@
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { explorationSteps } from "$lib/steps";
     import { goto } from "$app/navigation";
+    import { ExplorationStateEnum } from "$lib/schemas/exploration/exploration";
 
     async function gotoKiosk() {
         await data.process.gotoKiosk(fetch);
+        await data.process.waitForState(fetch, ExplorationStateEnum.KioskEnvironmentRunning);
+
         goto(`kiosk`);
     }
 
     async function gotoExploration() {
         await data.process.gotoExploration(fetch);
+        await data.process.waitForState(fetch, ExplorationStateEnum.ExplorationEnvironmentRunning);
+
         goto(`.`);
     }
 

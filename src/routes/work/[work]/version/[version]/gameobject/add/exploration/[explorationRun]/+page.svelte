@@ -7,6 +7,7 @@
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { explorationSteps } from "$lib/steps";
     import { onMount } from "svelte";
+    import { ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
@@ -26,6 +27,8 @@
 
     async function gotoCheck() {
         await data.process.gotoCheck(fetch);
+        await data.process.waitForState(fetch, ExplorationStateEnum.WaitingForCheck);
+
         goto(`${data.process.id}/check`);
     }
 

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { versionLinks, currentSidebar, currentRoute } from "$lib/components/sidebar/links";
+    import { ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
 
     async function save() {
         data.process.save(fetch);
@@ -9,6 +10,8 @@
 
     async function gotoCheck() {
         await data.process.gotoCheck(fetch);
+        await data.process.waitForState(fetch, ExplorationStateEnum.WaitingForCheck);
+
         goto(`check`);
     }
 

@@ -3,17 +3,21 @@
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { explorationSteps } from "$lib/steps";
     import { goto } from "$app/navigation";
+    import { ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
 
     let packageName = $state("");
     let packageNote = $state("");
 
     async function finish() {
+        // TODO: Get id
         data.process = await data.process.finish(fetch, packageName, packageNote);
         goto(`../../../`);
     }
 
     async function gotoCheck() {
         await data.process.gotoCheck(fetch);
+        await data.process.waitForState(fetch, ExplorationStateEnum.WaitingForCheck);
+
         goto(`check`);
     }
 

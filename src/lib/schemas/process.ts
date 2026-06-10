@@ -1,5 +1,4 @@
-import type { ExplorationTypeEnum } from "./exploration/exploration";
-import type { PlayableObject } from "./playableObject";
+import type { ExplorationDetail, ExplorationTypeEnum } from "./exploration/exploration";
 
 export interface Process<T extends ProcessDetail> {
     id: string;
@@ -28,12 +27,6 @@ export interface EmulationDetail extends ProcessDetail {
 }
 
 export interface UploadDetail extends ProcessDetail {}
-
-export interface ExplorationDetail extends ProcessDetail {
-    streamUrl: string;
-    state: ExplorationTypeEnum;
-    latestParsedPlayable: PlayableObject | null;
-}
 
 export interface ProcessList {
     digitalizationProcesses: Process<DigitalizationDetail>[];

@@ -1,9 +1,29 @@
 import { PUBLIC_API_URL as API_URL } from "$env/static/public";
-import type { ExplorationDetail, Process, ProcessStatus } from "../process";
+import type { PlayableObject } from "../playableObject";
+import type { Process, ProcessDetail, ProcessStatus } from "../process";
 
 interface ExplorationRequest {
     environmentId: string;
     digitalObjectIds: string[];
+}
+
+export enum ExplorationStateEnum {
+    InitialConversion = "InitialConversion",
+    InitialUpload = "InitialUpload",
+    ExplorationEnvironmentRunning = "ExplorationEnvironmentRunning",
+    DownloadExplorationData = "DownloadExplorationData",
+    ExtractingPlayableInfo = "ExtractingPlayableInfo",
+    WaitingForCheck = "WaitingForCheck",
+    UploadKioskData = "UploadKioskData",
+    KioskEnvironmentRunning = "KioskEnvironmentRunning",
+    Aborted = "Aborted",
+    Done = "Done"
+}
+
+export interface ExplorationDetail extends ProcessDetail {
+    streamUrl: string;
+    state: ExplorationStateEnum;
+    latestParsedPlayable: PlayableObject | null;
 }
 
 interface ExplorationInput {
@@ -111,6 +131,20 @@ export class ExplorationProcess implements Process<ExplorationDetail> {
 
     async save(fetch: typeof globalThis.fetch): Promise<ExplorationProcess> {
         return this.input(fetch, new Save());
+    }
+
+    async waitForState(
+        fetch: typeof globalThis.fetch,
+        desiredState: ExplorationStateEnum
+    ): Promise<ExplorationProcess> {
+        let state: ExplorationProcess = this;
+
+        while (state.statusDetail.state !== desiredState) {
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            state = await state.ping(fetch);
+        }
+
+        return state;
     }
 
     async finish(

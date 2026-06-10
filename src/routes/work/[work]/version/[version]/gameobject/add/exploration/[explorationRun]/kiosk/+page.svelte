@@ -8,6 +8,7 @@
     import { explorationSteps } from "$lib/steps";
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
+    import { ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
@@ -27,6 +28,8 @@
 
     async function gotoExploration() {
         await data.process.gotoExploration(fetch);
+        await data.process.waitForState(fetch, ExplorationStateEnum.ExplorationEnvironmentRunning);
+
         goto(`.`);
     }
 
