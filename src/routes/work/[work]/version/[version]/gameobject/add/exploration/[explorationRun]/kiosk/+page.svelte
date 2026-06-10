@@ -8,7 +8,7 @@
     import { explorationSteps } from "$lib/steps";
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
-    import { ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
+    import { ExplorationProcess, ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
@@ -20,20 +20,23 @@
 
     onMount(() => {
         interval = setInterval(async () => {
-            data.process = await data.process.ping(fetch);
+            updatedState = await process.ping(fetch);
         }, 1000);
 
         return () => clearInterval(interval);
     });
 
     async function gotoExploration() {
-        await data.process.gotoExploration(fetch);
-        await data.process.waitForState(fetch, ExplorationStateEnum.ExplorationEnvironmentRunning);
+        await process.gotoExploration(fetch);
+        await process.waitForState(fetch, ExplorationStateEnum.ExplorationEnvironmentRunning);
 
         goto(`.`);
     }
 
+    let updatedState: ExplorationProcess | null = $state(null);
     let { data } = $props();
+
+    let process = $derived(updatedState ?? data.process);
 </script>
 
 {#if saving}
@@ -65,13 +68,26 @@
                     bind:clientHeight={frameH}
                     class="relative mx-auto aspect-video h-full w-auto bg-surface-900"
                 >
-                    <iframe
-                        class="absolute top-0 left-0"
-                        width={frameW - 100}
-                        height={frameH}
-                        title="Stream"
-                        src={""}
-                    ></iframe>
+                    {#if process.statusDetail.streamUrl === ""}
+                        <Progress class="w-fit items-center" value={null}>
+                            <Progress.Circle>
+                                <Progress.CircleTrack />
+                                <Progress.CircleRange />
+                            </Progress.Circle>
+                            <Progress.ValueText />
+                        </Progress>
+                        <span class="text-xl font-semibold"
+                            >Probíhá start exploratiního prostředí</span
+                        >
+                    {:else}
+                        <iframe
+                            class="absolute top-0 left-0"
+                            width={frameW - 100}
+                            height={frameH}
+                            title="Stream"
+                            src={process.statusDetail.streamUrl}
+                        ></iframe>
+                    {/if}
                 </div>
             </div>
             <div class="flex flex-col items-center gap-4">

@@ -4,7 +4,7 @@
     import { ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
 
     async function save() {
-        data.process.save(fetch);
+        await data.process.save(fetch);
         goto("../../../");
     }
 

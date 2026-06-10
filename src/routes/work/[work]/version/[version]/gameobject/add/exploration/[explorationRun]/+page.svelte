@@ -7,7 +7,7 @@
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { explorationSteps } from "$lib/steps";
     import { onMount } from "svelte";
-    import { ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
+    import { ExplorationProcess, ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
@@ -19,28 +19,31 @@
 
     onMount(() => {
         interval = setInterval(async () => {
-            data.process = await data.process.ping(fetch);
+            updatedState = await process.ping(fetch);
         }, 1000);
 
         return () => clearInterval(interval);
     });
 
     async function gotoCheck() {
-        await data.process.gotoCheck(fetch);
+        await process.gotoCheck(fetch);
 
         saving = true;
-        await data.process.waitForState(fetch, ExplorationStateEnum.WaitingForCheck);
+        await process.waitForState(fetch, ExplorationStateEnum.WaitingForCheck);
 
-        goto(`${data.process.id}/check`);
+        goto(`${process.id}/check`);
     }
 
     async function abort() {
-        await data.process.abort(fetch);
+        await process.abort(fetch);
 
         goto("../../../");
     }
 
+    let updatedState: ExplorationProcess | null = $state(null);
     let { data } = $props();
+
+    let process = $derived(updatedState ?? data.process);
 </script>
 
 {#if saving}
@@ -72,7 +75,7 @@
                     bind:clientHeight={frameH}
                     class="relative mx-auto aspect-video h-full w-auto bg-surface-900"
                 >
-                    {#if data.process.statusDetail.streamUrl === ""}
+                    {#if process.statusDetail.streamUrl === ""}
                         <Progress class="w-fit items-center" value={null}>
                             <Progress.Circle>
                                 <Progress.CircleTrack />
@@ -89,7 +92,7 @@
                             width={frameW - 100}
                             height={frameH}
                             title="Stream"
-                            src={data.process.statusDetail.streamUrl}
+                            src={process.statusDetail.streamUrl}
                         ></iframe>
                     {/if}
                 </div>

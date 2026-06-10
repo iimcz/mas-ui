@@ -160,7 +160,7 @@ export class ExplorationProcess implements Process<ExplorationDetail> {
     }
 
     static async fromId(fetch: typeof globalThis.fetch, id: string): Promise<ExplorationProcess> {
-        const result = await fetch(`${API_URL}/api/v1/preparation/${id}/input/ping`, {
+        const result = await fetch(`${API_URL}/api/v1/preparation/${id}/input/Ping`, {
             method: "POST"
         });
 
