@@ -1,6 +1,7 @@
 <script lang="ts">
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { goto } from "$app/navigation";
+    import { page } from "$app/state";
     import { _ } from "svelte-i18n";
     import MediaCard from "$lib/components/mediaCard.svelte";
     import type { ExplorationEnvironment } from "$lib/schemas/exploration/explorationEnvironment";
@@ -27,6 +28,7 @@
         try {
             const process = await ExplorationProcess.start(fetch, {
                 environmentId: environment.id,
+                versionId: page.params.version,
                 digitalObjectIds: artefactIds
             });
 

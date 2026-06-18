@@ -4,11 +4,13 @@ import type { Process, ProcessDetail, ProcessStatus } from "../process";
 
 interface ExplorationRequest {
     environmentId: string;
+    versionId: string;
     digitalObjectIds: string[];
 }
 
 export enum ExplorationStateEnum {
     InitialConversion = "InitialConversion",
+    PrepareOutputImage = "PrepareOutputImage",
     InitialUpload = "InitialUpload",
     ExplorationEnvironmentRunning = "ExplorationEnvironmentRunning",
     DownloadExplorationData = "DownloadExplorationData",
@@ -62,11 +64,11 @@ class Save implements ExplorationInput {
 
 class Finish implements ExplorationInput {
     typeName: string = ExplorationTypeEnum.Finish;
-    packageName: string;
+    packageLabel: string;
     packageNote: string;
 
-    constructor(packageName: string, packageNote: string) {
-        this.packageName = packageName;
+    constructor(packageLabel: string, packageNote: string) {
+        this.packageLabel = packageLabel;
         this.packageNote = packageNote;
     }
 }
@@ -149,10 +151,10 @@ export class ExplorationProcess implements Process<ExplorationDetail> {
 
     async finish(
         fetch: typeof globalThis.fetch,
-        packageName: string,
+        packageLabel: string,
         packageNote: string
     ): Promise<ExplorationProcess> {
-        return this.input(fetch, new Finish(packageName, packageNote));
+        return this.input(fetch, new Finish(packageLabel, packageNote));
     }
 
     async abort(fetch: typeof globalThis.fetch): Promise<ExplorationProcess> {
@@ -170,12 +172,7 @@ export class ExplorationProcess implements Process<ExplorationDetail> {
     }
 
     static fromJson(init: ExplorationProcess) {
-        return new ExplorationProcess(
-            init?.id,
-            init?.status,
-            init?.statusDetail,
-            init?.startTime
-        );
+        return new ExplorationProcess(init?.id, init?.status, init?.statusDetail, init?.startTime);
     }
 
     static async start(

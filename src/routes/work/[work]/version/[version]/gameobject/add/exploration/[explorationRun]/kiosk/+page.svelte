@@ -8,7 +8,10 @@
     import { explorationSteps } from "$lib/steps";
     import { onMount } from "svelte";
     import { goto } from "$app/navigation";
-    import { ExplorationProcess, ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
+    import {
+        ExplorationProcess,
+        ExplorationStateEnum
+    } from "$lib/schemas/exploration/exploration.js";
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
@@ -30,7 +33,7 @@
         await process.gotoExploration(fetch);
         await process.waitForState(fetch, ExplorationStateEnum.ExplorationEnvironmentRunning);
 
-        goto(`.`);
+        goto(`../${data.process.id}`);
     }
 
     let updatedState: ExplorationProcess | null = $state(null);

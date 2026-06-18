@@ -5,12 +5,12 @@
     import { goto } from "$app/navigation";
     import { ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
 
-    let packageName = $state("");
+    let packageLabel = $state("");
     let packageNote = $state("");
 
     async function finish() {
         // TODO: Get id
-        data.process = await data.process.finish(fetch, packageName, packageNote);
+        data.process = await data.process.finish(fetch, packageLabel, packageNote);
         goto(`../../../`);
     }
 
@@ -35,7 +35,7 @@
             <form class="space-y-4">
                 <label class="label">
                     <span class="label-text">Název herního balíčku</span>
-                    <input required class="input" type="text" bind:value={packageName} />
+                    <input required class="input" type="text" bind:value={packageLabel} />
                 </label>
                 <label class="label">
                     <span class="label-text">Poznámka</span>
