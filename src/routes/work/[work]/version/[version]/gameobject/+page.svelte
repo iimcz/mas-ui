@@ -1,38 +1,33 @@
 <script lang="ts">
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
-    import { goto } from "$app/navigation";
     import Datatable from "$lib/components/Datatable.svelte";
-    import type { GamePackage } from "$lib/schemas/gamePackage";
+    import { goto } from "$app/navigation";
+    import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
+    import type { PlayableObject } from "$lib/schemas/playableObject.js";
 
     const tableColumns = [
-        { name: "Název", key: "name", canSort: true },
-        { name: "Popis", key: "description", canSort: true },
+        { name: "Název", key: "label", canSort: true },
+        { name: "Poznámka", key: "note", canSort: true },
         {
             name: "Spustit emulaci",
             key: "",
             canSort: false,
-            onClick: (row: GamePackage) => {
+            onClick: (row: PlayableObject) => {
                 goto(`gameobject/${row.id}/emulator`);
             }
         }
     ];
 
-    import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     $currentSidebar = versionLinks;
     $currentRoute = "gameObjectList";
 
-    interface Props {
-        data: import("./$types").PageData;
-    }
-
-    /** @type {Props} */
     let { data } = $props();
 </script>
 
 <HeaderContainer title="Herní balíčky">
     <Datatable
-        data={data.gameObjects}
+        data={data.playableObjects}
         columns={tableColumns}
-        onrowclick={(row: GamePackage) => goto(`gameobject/${row.id}`)}
+        onrowclick={(row: PlayableObject) => goto(`gameobject/${row.id}`)}
     />
 </HeaderContainer>

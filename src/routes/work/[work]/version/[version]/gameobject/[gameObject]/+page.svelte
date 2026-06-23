@@ -7,14 +7,14 @@
 
     import { currentSidebar, currentRoute, gameObjectLinks } from "$lib/components/sidebar/links";
     import { toaster } from "$lib/toaster";
-    import type { GamePackage } from "$lib/schemas/gamePackage";
     import Alert from "$lib/components/Alert.svelte";
     import Fa from "svelte-fa";
     import { faListCheck } from "@fortawesome/free-solid-svg-icons";
+    import type { PlayableObject } from "$lib/schemas/playableObject.js";
     $currentSidebar = gameObjectLinks;
     $currentRoute = "gameObjectDetail";
 
-    async function update(gamePackage: GamePackage) {
+    async function update(gamePackage: PlayableObject) {
         const result = await fetch(`${API_URL}/api/v1/packages/${gamePackage.id}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -53,13 +53,13 @@
             </p>
             <div class="flex flex-col items-center gap-1">
                 <a
-                    href="{data.id}/emulator"
+                    href="{data.playableObject.id}/emulator"
                     data-sveltekit-preload-data="tap"
                     class="btn preset-filled">Spustit emulaci</a
                 >
             </div>
         </Alert>
         <h2 class="mt-4 text-2xl">Metadata herního balíčku</h2>
-        <GamePackageForm {data} onsave={update} />
+        <GamePackageForm data={data.playableObject} onsave={update} />
     </div>
 </HeaderContainer>

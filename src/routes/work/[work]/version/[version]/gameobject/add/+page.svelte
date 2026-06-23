@@ -16,11 +16,15 @@
     $currentRoute = "addGameObject";
 
     async function startConversion(environment: ExplorationEnvironment) {
-        const artefactIds = data.digitalObjects
-            .filter((a, i) => selectedArtefacts[i] == true)
+        const artefactIds = data.artefactsIds
+            .filter((_, i) => selectedArtefacts[i] == true)
             .map((a) => a.id);
 
-        if (artefactIds.length == 0) {
+        const playableObjectIds = data.playableObjectsIds
+            .filter((_, i) => selectedPlayableObjects[i] == true)
+            .map((a) => a.id);
+
+        if (artefactIds.length == 0 && playableObjectIds.length == 0) {
             toaster.error({ title: $_("must_select_artefact") });
             return;
         }
@@ -28,8 +32,8 @@
         try {
             const process = await ExplorationProcess.start(fetch, {
                 environmentId: environment.id,
-                versionId: page.params.version,
-                digitalObjectIds: artefactIds
+                versionId: page.params.version!,
+                digitalObjectIds: [...artefactIds, ...playableObjectIds]
             });
 
             goto(`add/exploration/${process.id}`);
@@ -40,6 +44,7 @@
     }
 
     const selectedArtefacts: boolean[] = $state([]);
+    const selectedPlayableObjects: boolean[] = $state([]);
 
     let { data } = $props();
 </script>
@@ -48,9 +53,9 @@
     <div class="m-4 flex w-5/6 flex-col space-y-6">
         <h1 class="mt-4 text-3xl">Výběr digitálních objektů a explorativního prostředí</h1>
         <ProgressStepBar steps={explorationSteps} currentStep={0} unlockedStep={0} />
-        <div>
-            <span class="text-lg font-bold">1. Vyberte digitální objekty ke exploraci</span>
-            {#if data.digitalObjects.length == 0}
+        <div class="flex flex-col">
+            <span class="mb-4 text-lg font-bold">1. Vyberte digitální objekty ke exploraci</span>
+            {#if data.artefactsIds.length == 0 && data.playableObjectsIds.length == 0}
                 <Alert class="preset-outlined-error-500">
                     <h3 class="flex items-center gap-2 font-semibold">
                         <Fa icon={faExclamationTriangle} />
@@ -63,21 +68,38 @@
                         >Vytvořit digitální objekt</a
                     >
                 </Alert>
+            {:else}
+                <h2 class="text-lg font-bold">Digitální objekty</h2>
+                <ol class="list mb-4 space-y-2 px-4">
+                    {#each data.artefactsIds as artefact, index}
+                        <li>
+                            <label class="flex items-center space-x-2">
+                                <input
+                                    class="checkbox"
+                                    type="checkbox"
+                                    bind:checked={selectedArtefacts[index]}
+                                />
+                                <p>{artefact.label}</p>
+                            </label>
+                        </li>
+                    {/each}
+                </ol>
+                <h2 class="text-lg font-bold">Hratelné objekty</h2>
+                <ol class="list space-y-2 px-4">
+                    {#each data.playableObjectsIds as playableObject, index}
+                        <li>
+                            <label class="flex items-center space-x-2">
+                                <input
+                                    class="checkbox"
+                                    type="checkbox"
+                                    bind:checked={selectedPlayableObjects[index]}
+                                />
+                                <p>{playableObject.label}</p>
+                            </label>
+                        </li>
+                    {/each}
+                </ol>
             {/if}
-            <ol class="list space-y-2 px-4">
-                {#each data.digitalObjects as artefact, index}
-                    <li>
-                        <label class="flex items-center space-x-2">
-                            <input
-                                class="checkbox"
-                                type="checkbox"
-                                bind:checked={selectedArtefacts[index]}
-                            />
-                            <p>{artefact.label}</p>
-                        </label>
-                    </li>
-                {/each}
-            </ol>
         </div>
         <div>
             <span class="text-lg font-bold">2. Vyberte explorativní prostředí</span>

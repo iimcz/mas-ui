@@ -7,7 +7,11 @@
     import ProgressStepBar from "$lib/components/progressStepBar.svelte";
     import { explorationSteps } from "$lib/steps";
     import { onMount } from "svelte";
-    import { ExplorationProcess, ExplorationStateEnum } from "$lib/schemas/exploration/exploration.js";
+    import {
+        ExplorationProcess,
+        ExplorationStateEnum
+    } from "$lib/schemas/exploration/exploration.js";
+    import { resolveStreamUrl } from "$lib/util/streamResolver.js";
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
@@ -44,6 +48,7 @@
     let { data } = $props();
 
     let process = $derived(updatedState ?? data.process);
+    let resolvedStreamUrl = $derived(resolveStreamUrl(process.statusDetail.streamUrl));
 </script>
 
 {#if saving}
@@ -92,7 +97,7 @@
                             width={frameW - 100}
                             height={frameH}
                             title="Stream"
-                            src={process.statusDetail.streamUrl}
+                            src={resolvedStreamUrl}
                         ></iframe>
                     {/if}
                 </div>
