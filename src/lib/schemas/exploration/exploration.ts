@@ -6,6 +6,7 @@ interface ExplorationRequest {
     environmentId: string;
     versionId: string;
     digitalObjectIds: string[];
+    outputImageSize: number;
 }
 
 export enum ExplorationStateEnum {

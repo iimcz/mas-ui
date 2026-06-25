@@ -8,12 +8,17 @@ export async function load({ fetch, params }) {
 
     const artefactsRes = await fetch(`${API_URL}/api/v1/versions/${params.version}/artefacts`);
     const artefacts = (await artefactsRes.json()) as Artefact[];
-    const artefactsIds = artefacts.map((doj) => ({ id: doj.id, label: doj.label }));
+    const artefactsIds = artefacts.map((doj) => ({
+        id: doj.id,
+        label: doj.label,
+        size: doj.fileSize
+    }));
+    const recommendedSize = artefacts.map((doj) => doj.fileSize).reduce((p, c) => p + c, 0);
 
     const playableObjects = await getPlayableObjects(fetch, params.version);
     const playableObjectsIds = playableObjects
         .map((po) => po.digitalObjectIds.map((id) => ({ id, label: po.label })))
         .flat();
 
-    return { environments, artefactsIds, playableObjectsIds };
+    return { environments, artefactsIds, playableObjectsIds, recommendedSize };
 }

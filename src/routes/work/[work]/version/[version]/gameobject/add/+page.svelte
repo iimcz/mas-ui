@@ -79,7 +79,7 @@
                                     type="checkbox"
                                     bind:checked={selectedArtefacts[index]}
                                 />
-                                <p>{artefact.label}</p>
+                                <p>{artefact.label} (velikost: {artefact.size} B)</p>
                             </label>
                         </li>
                     {/each}
@@ -102,7 +102,13 @@
             {/if}
         </div>
         <div>
-            <span class="text-lg font-bold">2. Vyberte explorativní prostředí</span>
+            <span class="text-lg font-bold">2. Vyberte velikost disku hratelného balíčku</span>
+            <div class="input-group-divider input-group">
+                <input type="number" bind:value={data.recommendedSize} />
+            </div>
+        </div>
+        <div>
+            <span class="text-lg font-bold">3. Vyberte explorativní prostředí</span>
             <div class="grid grid-cols-2 gap-2 text-center 2xl:grid-cols-3">
                 {#each data.environments as environment}
                     <MediaCard
