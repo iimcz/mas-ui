@@ -12,6 +12,7 @@
         ExplorationProcess,
         ExplorationStateEnum
     } from "$lib/schemas/exploration/exploration.js";
+    import { resolveStreamUrl } from "$lib/util/streamResolver.js";
 
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
