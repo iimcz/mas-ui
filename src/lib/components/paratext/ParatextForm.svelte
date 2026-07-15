@@ -1,47 +1,15 @@
-<script>
+<script lang="ts">
     import { enhance } from "$app/forms";
-    import * as yup from "yup";
     import { _ } from "svelte-i18n";
-    // TODO: FIX import { getToastStore } from '@skeletonlabs/skeleton-svelte';
-    // TODO: FIX const toastStore = getToastStore();
+    import { toaster } from "$lib/toaster";
     import ParatextDataEntry from "./ParatextDataEntry.svelte";
 
-    /**
-     * @typedef {Object} Props
-     * @property {boolean} [isNew]
-     * @property {import("$lib/schemas/paratext").Paratext} [data]
-     */
+    import type { Paratext } from "$lib/schemas/paratext";
+    import ParatextDataView from "./ParatextDataView.svelte";
 
-    /** @type {Props} */
-    let {
-        isNew = false,
-        data = {
-            id: "",
-            workId: "",
-            versionId: null,
-            packageId: null,
-            name: "",
-            description: "",
-            source: "",
-            sourceUrl: "",
-            downloadable: false,
-            thumbnail: ""
-        }
-    } = $props();
-    const schema = yup.object({
-        name: yup.string().required(),
-        description: yup.string().required(),
-        source: yup.string(),
-        sourceUrl: yup.string().url()
-    });
+    function exportParatext(): void {}
 
-    // TODO: Just redo the validation entirely
-    // TODO: Use form is broken with enhance, supposedly superform is better
-    /*
-    const { form, errors, isValid } = createForm({
-        extend: validator({ schema }),
-    });
-    */
+    let { data }: { data: Partial<Paratext> } = $props();
 </script>
 
 <form
@@ -49,18 +17,29 @@
     use:enhance={() => {
         return async ({ update }) => {
             await update();
-            toastStore.trigger({
-                message: $_("save_success"),
-                background: "preset-filled-success"
+            toaster.success({
+                title: $_("save_success")
             });
         };
     }}
     enctype="multipart/form-data"
     class="flex flex-col card p-2"
 >
-    <span class="p-4 text-xl font-bold">Popis</span>
-    <ParatextDataEntry canUpload={isNew} {data} />
-    <button type="submit" class="float-right btn preset-filled"
-        >{isNew ? "Vytvořit" : "Uložit změny"}</button
-    >
+
+    {#if data.canExport}
+        <ParatextDataEntry {data} />
+
+        <button formaction="?/update" type="submit" class="float-right btn preset-filled"
+            >Uložit změny</button
+        >
+
+        <button
+            formaction="?/export"
+            type="button"
+            onclick={exportParatext}
+            class="float-right btn preset-filled">Exportovat do CA</button
+        >
+    {:else}
+        <ParatextDataView {data} />
+    {/if}
 </form>

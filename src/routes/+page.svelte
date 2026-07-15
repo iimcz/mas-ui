@@ -1,5 +1,5 @@
 <script>
-    import { faPlus, faGamepad } from "@fortawesome/free-solid-svg-icons";
+    import { faPlus, faGamepad, faFileText } from "@fortawesome/free-solid-svg-icons";
     import Fa from "svelte-fa";
 
     import BasicSearch from "$lib/components/basicSearch.svelte";
@@ -21,6 +21,15 @@
                 <a href="work/add" class="btn grow preset-filled">
                     <Fa icon={faPlus} />
                     <span>Import díla z Collective Access</span>
+                </a>
+            </div>
+        </div>
+        <hr />
+        <div>
+            <div class="flex space-x-4">
+                <a href="paratext" class="btn grow preset-filled">
+                    <Fa icon={faFileText} />
+                    <span>Prohlížet paratexty v CA</span>
                 </a>
             </div>
         </div>

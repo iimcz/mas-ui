@@ -1,67 +1,109 @@
-<script>
-    import { faTrash } from "@fortawesome/free-solid-svg-icons";
+<script lang="ts">
+    import type { Paratext } from "$lib/schemas/paratext";
+    import { faFile, faTrash } from "@fortawesome/free-solid-svg-icons";
     import { FileUpload } from "@skeletonlabs/skeleton-svelte";
+    import type { FileChangeDetails } from "@zag-js/file-upload";
     import Fa from "svelte-fa";
+    import Blockquote from "../Blockquote.svelte";
 
-    function removeFile() {
-        files = undefined;
+    function onChangeHandler(e: FileChangeDetails) {
+        file = e.acceptedFiles[0];
     }
 
-    /**
-     * @typedef {Object} Props
-     * @property {import("$lib/schemas/paratext").Paratext} data
-     * @property {boolean} canUpload
-     */
-
-    /** @type {Props} */
-    let { data = $bindable(), canUpload } = $props();
-
-    /** @type {File[]} */
-    let files = $state([]);
+    let { data = $bindable() }: { data: Partial<Paratext> } = $props();
+    let file = $state(null as File | null);
 </script>
 
-<div class="form rounded-container-token m-2 space-y-2 border border-surface-500 p-4">
+<div class="form m-2 flex flex-col space-y-2 card preset-outlined-surface-300-700 p-4">
     <input name="id" type="hidden" bind:value={data.id} />
-    <input name="workId" type="hidden" bind:value={data.workId} />
-    <input name="versionId" type="hidden" bind:value={data.versionId} />
-    <input name="packageId" type="hidden" bind:value={data.packageId} />
 
-    <p>Název</p>
+    <div>Kurátorský popis</div>
     <div class="input-group-divider input-group">
-        <input name="name" type="text" bind:value={data.name} />
+        <input class="input" name="name" type="text" bind:value={data.label} />
     </div>
-    <p>Popis</p>
+
+    <div>Jazyk</div>
     <div class="input-group-divider input-group">
-        <input name="description" type="text" bind:value={data.description} />
+        <input class="input" name="language" type="text" bind:value={data.language} />
     </div>
-    <p>Popis Zdroj</p>
+
+    <div>Datum</div>
     <div class="input-group-divider input-group">
-        <input name="source" type="text" bind:value={data.source} />
+        <input class="input" name="date" type="text" bind:value={data.date} />
     </div>
-    <p>URL Zdroje</p>
+
+    <div>Interní poznámka</div>
     <div class="input-group-divider input-group">
-        <input name="sourceUrl" type="text" bind:value={data.sourceUrl} />
+        <input class="input" name="internalNote" type="text" bind:value={data.internalNote} />
     </div>
-    <p>Soubor</p>
-    {#if canUpload}
-        <FileUpload
-            class={files == undefined ? "" : "hidden"}
-            onFileAccept={(f) => (files = f.files)}
-            name="file"
-        >
-            <FileUpload.Label>Klikněte pro nahrání nebo přetáhněte soubor</FileUpload.Label>
-        </FileUpload>
-        {#if files != undefined}
-            <div class="textarea flex items-center justify-center gap-2 card p-4">
-                <span>{files[0]?.name}</span>
-                <button onclick={removeFile} class="btn-icon preset-filled bg-error-500"
-                    ><Fa icon={faTrash} /></button
-                >
-            </div>
-        {/if}
-    {:else}
-        <div class="align-center flex justify-center card bg-surface-300 p-4">
-            Po nahrání paratextu již nelze soubor změnit
-        </div>
-    {/if}
+
+    <div>Vyplněno</div>
+    <div class="input-group-divider input-group">
+        <input class="input" name="filledOutBy" type="text" bind:value={data.filledOutBy} />
+    </div>
+
+    <div>URL Stránky</div>
+    <div class="input-group-divider input-group">
+        <input class="input" name="websiteUrl" type="text" bind:value={data.websiteUrl} />
+    </div>
+
+    <div>Velikost</div>
+    <div class="input-group-divider input-group">
+        <input class="input" name="emissionSize" type="text" bind:value={data.emissionSize} />
+    </div>
+
+    <div>Identifikační číslo</div>
+    <div class="input-group-divider input-group">
+        <input
+            class="input"
+            name="identificationNumber"
+            type="text"
+            bind:value={data.identificationNumber}
+        />
+    </div>
+
+    <div>Typ paratextu</div>
+    <Blockquote>{data.paratextType}</Blockquote>
+
+    <div>Importováno</div>
+    <Blockquote
+        >{data.importedAt == null ? "" : new Date(data.importedAt).toLocaleString()}</Blockquote
+    >
+
+    <div>Exportováno</div>
+    <Blockquote
+        >{data.exportedAt == null || data.exportedAt === "0001-01-01T00:00:00"
+            ? ""
+            : new Date(data.exportedAt).toLocaleString()}</Blockquote
+    >
+
+    <!--
+    <div>Soubor</div>
+    <FileUpload name="files" onFileChange={onChangeHandler}>
+        <FileUpload.Dropzone>
+            <Fa icon={faFile} />
+            <span>Klikněte pro nahrání nebo přetáhněte soubor.</span>
+            <FileUpload.Trigger>Procházet soubory</FileUpload.Trigger>
+            <FileUpload.HiddenInput />
+        </FileUpload.Dropzone>
+        <FileUpload.ItemGroup>
+            <FileUpload.Context>
+                {#snippet children(fileUpload)}
+                    {#each fileUpload().acceptedFiles as file (file.name)}
+                        <FileUpload.Item {file}>
+                            <FileUpload.ItemName
+                                >{file.name}</FileUpload.ItemName
+                            >
+                            <FileUpload.ItemSizeText
+                                >{file.size} bytes</FileUpload.ItemSizeText
+                            >
+                            <FileUpload.ItemDeleteTrigger />
+                        </FileUpload.Item>
+                    {/each}
+                {/snippet}
+            </FileUpload.Context>
+        </FileUpload.ItemGroup>
+        <FileUpload.ClearTrigger>Zrušit výběr</FileUpload.ClearTrigger>
+    </FileUpload>
+    -->
 </div>

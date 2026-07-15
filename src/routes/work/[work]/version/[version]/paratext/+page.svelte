@@ -1,60 +1,26 @@
-<script>
-    import { Accordion } from "@skeletonlabs/skeleton-svelte";
+<script lang="ts">
+    import type { Paratext } from "$lib/schemas/paratext";
+    import Datatable from "$lib/components/Datatable.svelte";
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
-    import ParatextCard from "$lib/components/paratext/ParatextCard.svelte";
 
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
+    import { goto } from "$app/navigation";
     $currentSidebar = versionLinks;
     $currentRoute = "paratextList";
 
-    /**
-     * @typedef {Object} Props
-     * @property {import('./$types').PageData} data
-     */
+    const tableColumns = [
+        { name: "Název", key: "label", canSort: true },
+        { name: "Idno", key: "idno", canSort: true },
+        { name: "Kurátorský popis", key: "note", canSort: true }
+    ];
 
-    /** @type {Props} */
     let { data } = $props();
-
-    const versionParatexts = data.paratexts.filter((p) => p.packageId == null);
-    const gamePackageParatexts = Object.entries(
-        Object.groupBy(
-            data.paratexts.filter((p) => p.packageId != null),
-            (p) => p.packageId ?? ""
-        )
-    );
 </script>
 
 <HeaderContainer title="Paratexty">
-    <h1>Verze</h1>
-    <div class="grid grid-cols-2 gap-2 2xl:grid-cols-3">
-        {#each versionParatexts as paratext (paratext.id)}
-            <ParatextCard {paratext} />
-        {/each}
-        {#if versionParatexts.length == 0}
-            <h2 class="col-span-3 text-center">Žádné paratexty</h2>
-        {/if}
-    </div>
-    <h1>Záznamy</h1>
-    <Accordion>
-        {#each gamePackageParatexts as version (version[0])}
-            <div class="card bg-surface-300">
-                <!-- TODO: FIX VALUE -->
-                <Accordion.Item value={"a"}>
-                    <Accordion.ItemTrigger>
-                        {data.gamePackages.find((v) => v.id == version[0])?.name}
-                    </Accordion.ItemTrigger>
-                    <Accordion.ItemContent>
-                        <div class="grid grid-cols-2 gap-2 2xl:grid-cols-3">
-                            {#each version[1] ?? [] as paratext (paratext.id)}
-                                <ParatextCard {paratext} />
-                            {/each}
-                        </div>
-                    </Accordion.ItemContent>
-                </Accordion.Item>
-            </div>
-        {/each}
-        {#if gamePackageParatexts.length == 0}
-            <h2 class="col-span-3 text-center">Žádné paratexty</h2>
-        {/if}
-    </Accordion>
+    <Datatable
+        data={data.paratexts}
+        columns={tableColumns}
+        onrowclick={(row: Paratext) => goto(`paratext/${row.id}`)}
+    />
 </HeaderContainer>

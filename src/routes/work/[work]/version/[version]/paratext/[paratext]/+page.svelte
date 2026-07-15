@@ -2,8 +2,9 @@
     import ParatextForm from "$lib/components/paratext/ParatextForm.svelte";
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
 
-    import { currentSidebar } from "$lib/components/sidebar/links";
-    $currentSidebar = [];
+    import { currentRoute, currentSidebar, versionLinks } from "$lib/components/sidebar/links";
+    $currentSidebar = versionLinks;
+    $currentRoute = "paratextList";
 
     let { data } = $props();
 </script>
