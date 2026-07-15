@@ -25,7 +25,6 @@
     enctype="multipart/form-data"
     class="flex flex-col card p-2"
 >
-
     {#if data.canExport}
         <ParatextDataEntry {data} />
 

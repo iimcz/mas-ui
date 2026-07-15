@@ -7,6 +7,7 @@
     import Fa from "svelte-fa";
     import { page } from "$app/state";
     import { goto } from "$app/navigation";
+    import type { Process, UploadDetail } from "$lib/schemas/process";
 
     const animation =
         "transition transition-discrete opacity-0 translate-y-[100px] starting:data-[state=open]:opacity-0 starting:data-[state=open]:translate-y-[100px] data-[state=open]:opacity-100 data-[state=open]:translate-y-0";
