@@ -14,7 +14,7 @@
         <hr />
         <div>
             <div class="flex space-x-4">
-                <a href="search?filter=work" class="btn grow preset-filled">
+                <a href="work" class="btn grow preset-filled">
                     <Fa icon={faGamepad} />
                     <span>Prohlížet díla</span>
                 </a>
