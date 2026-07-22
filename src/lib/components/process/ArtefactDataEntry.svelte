@@ -1,5 +1,10 @@
 <script lang="ts">
-    import { ArtefactTypeEnum, PhysicalMediaTypeEnum, type Artefact } from "$lib/schemas/artefact";
+    import {
+        ArtefactTypeEnum,
+        PhysicalMediaTypeEnum,
+        ArtefactFormatEnum,
+        type Artefact
+    } from "$lib/schemas/artefact";
     import Blockquote from "../Blockquote.svelte";
     let { data = $bindable() }: { data: Artefact } = $props();
 
@@ -13,16 +18,37 @@
 </script>
 
 <form class="form m-2 space-y-2 rounded-container border border-surface-500 p-4">
-    <div>Název</div>
+    <div>Preferovené označení</div>
     <input class="input" type="text" bind:value={data.label} />
 
-    <div>Kvalita</div>
-    <input class="input" type="text" bind:value={data.quality} />
+    <div>Verze</div>
+    <input class="input" type="text" bind:value={data.version} />
 
-    <div>URL webu</div>
-    <input class="input" type="text" bind:value={data.websiteUrl} />
+    <div>Název souboru</div>
+    <Blockquote>{data.fileName}</Blockquote>
 
-    <div>Interní poznámka</div>
+    {#if data.repoUrl}
+        <div>Repository object ID</div>
+        <Blockquote>{data.repoUrl}</Blockquote>
+    {/if}
+
+    <div>Typ digitálního objektu</div>
+    <Blockquote>{data.digitalObjectType}</Blockquote>
+
+    <div>Formát</div>
+    <select bind:value={data.format} class="select">
+        {#each Object.entries(ArtefactFormatEnum) as enumValue}
+            <option value={enumValue[1]}>{enumValue[0]}</option>
+        {/each}
+    </select>
+
+    <div>Velikost souboru</div>
+    <Blockquote>{formatBytes(data.fileSize)}</Blockquote>
+
+    <div>MediaInfo report</div>
+    <Blockquote>{data.mediaInfoReport}</Blockquote>
+
+    <div>Služební poznámka</div>
     <input class="input" type="text" bind:value={data.internalNote} />
 
     <div>Typ objektu</div>
@@ -38,23 +64,6 @@
 
     <div>Typ fyzického média</div>
     <Blockquote>{data.physicalMediaType}</Blockquote>
-
-    <div>Formát</div>
-    <Blockquote>{data.format}</Blockquote>
-
-    <div>Typ digitálního objektu</div>
-    <Blockquote>{data.digitalObjectType}</Blockquote>
-
-    <div>Název souboru</div>
-    <Blockquote>{data.fileName}</Blockquote>
-
-    <div>Velikost souboru</div>
-    <Blockquote>{formatBytes(data.fileSize)}</Blockquote>
-
-    {#if data.fedoraUrl}
-        <div>Fedora URL</div>
-        <Blockquote>{data.fedoraUrl}</Blockquote>
-    {/if}
 </form>
 
 <style scoped>

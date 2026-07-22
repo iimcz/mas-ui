@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ArtefactTypeEnum, type Artefact } from "$lib/schemas/artefact";
+    import { ArtefactTypeEnum, type Artefact, type ArtefactUpdate } from "$lib/schemas/artefact";
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
     import { faCheck, faClock, faClose, faFile, faUpload } from "@fortawesome/free-solid-svg-icons";
     import { Dialog, FileUpload, Portal, Progress } from "@skeletonlabs/skeleton-svelte";
@@ -44,7 +44,7 @@
         await new Promise((resolve) => setTimeout(resolve, 500));
 
         const process = (await reqStart.json()) as Process<UploadDetail>;
-        const artefact: Partial<Artefact> = {
+        const artefact: Partial<ArtefactUpdate> = {
             label,
             type: artefactType
         };
@@ -135,7 +135,7 @@
                             </div>
                         {:else}
                             <label class="label mb-2">
-                                <span class="label-text">Popis</span>
+                                <span class="label-text">Preferované označení</span>
                                 <input
                                     class="input"
                                     type="text"

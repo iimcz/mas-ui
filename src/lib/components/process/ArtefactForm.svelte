@@ -17,18 +17,18 @@
         data = {
             id: "",
             label: "",
+            version: "",
             fileName: "",
-            fileSize: 0,
+            repoUrl: "",
             digitalObjectType: "",
             format: "",
+            fileSize: 0,
+            mediaInfoReport: "",
             internalNote: "",
-            paratextIds: [],
-            quality: "",
-            versionIds: [],
-            websiteUrl: "",
+            type: ArtefactTypeEnum.Unknown,
             physicalMediaType: PhysicalMediaTypeEnum.Unknown,
-            fedoraUrl: "",
-            type: ArtefactTypeEnum.Unknown
+            paratextIds: [],
+            versionIds: []
         },
         onsave = null
     } = $props();

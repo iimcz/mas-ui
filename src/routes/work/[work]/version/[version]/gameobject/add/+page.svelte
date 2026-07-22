@@ -33,7 +33,8 @@
             const process = await ExplorationProcess.start(fetch, {
                 environmentId: environment.id,
                 versionId: page.params.version!,
-                digitalObjectIds: [...artefactIds, ...playableObjectIds]
+                digitalObjectIds: [...artefactIds, ...playableObjectIds],
+                outputImageSize: data.recommendedSize
             });
 
             goto(`add/exploration/${process.id}`);

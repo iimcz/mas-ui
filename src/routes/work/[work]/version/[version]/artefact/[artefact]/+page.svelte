@@ -3,7 +3,7 @@
     import ArtefactForm from "$lib/components/process/ArtefactForm.svelte";
     import { currentSidebar, currentRoute, versionLinks } from "$lib/components/sidebar/links";
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
-    import type { Artefact } from "$lib/schemas/artefact";
+    import type { Artefact, ArtefactUpdate } from "$lib/schemas/artefact";
     import { _ } from "svelte-i18n";
     import Alert from "$lib/components/Alert.svelte";
     import Fa from "svelte-fa";
@@ -15,10 +15,18 @@
     $currentRoute = "artefactDetail";
 
     async function update(artefact: Artefact) {
+        const artefactUpdate: ArtefactUpdate = {
+            label: artefact.label,
+            version: artefact.version,
+            format: artefact.format,
+            internalNote: artefact.internalNote,
+            type: artefact.type,
+            physicalMediaType: artefact.physicalMediaType
+        };
         const result = await fetch(`${API_URL}/api/v1/artefacts/${artefact.id}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(artefact)
+            body: JSON.stringify(artefactUpdate)
         });
     }
 

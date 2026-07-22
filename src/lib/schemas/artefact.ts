@@ -1,19 +1,44 @@
+export type ArtefactListOptions = {
+    formats: { [key: string]: string };
+};
+
+export type ArtefactUpdate = {
+    label: string;
+    version: string;
+    format: string;
+    internalNote: string;
+    type: ArtefactTypeEnum;
+    physicalMediaType: PhysicalMediaTypeEnum;
+};
+
 export type Artefact = {
     id: string;
     label: string;
+    version: string;
     fileName: string;
-    internalNote: string;
-    websiteUrl: string;
+    repoUrl: string;
     digitalObjectType: string;
     format: string;
     fileSize: number;
-    quality: string;
+    mediaInfoReport: string;
+    internalNote: string;
     type: ArtefactTypeEnum;
     physicalMediaType: PhysicalMediaTypeEnum;
-    fedoraUrl: string;
     paratextIds: string[];
     versionIds: string[];
 };
+
+// TODO: this will be later dynamically loaded from CA (via the backend)
+export enum ArtefactFormatEnum {
+    ImageGIF = "image_gif",
+    ImageJPEG = "image_jpeg",
+    ImagePJPEG = "image_pjpeg",
+    ImagePNG = "image_png",
+    ImageSVG = "image_svg_xml",
+    PDF = "pdf",
+    PNG = "png",
+    TextCSV = "csv"
+}
 
 export enum ArtefactTypeEnum {
     IsoImage = "IsoImage",

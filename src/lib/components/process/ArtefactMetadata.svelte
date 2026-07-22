@@ -3,7 +3,7 @@
     import { goto } from "$app/navigation";
     import { page } from "$app/state";
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
-    import type { Artefact } from "$lib/schemas/artefact";
+    import type { Artefact, ArtefactUpdate } from "$lib/schemas/artefact";
     import { toaster } from "$lib/toaster";
     import { _ } from "svelte-i18n";
 
@@ -13,6 +13,14 @@
      * @param {CustomEvent<import("$lib/schemas/artefact").Artefact>} data
      */
     async function createNew(data: Artefact) {
+        const artefactUpdate: ArtefactUpdate = {
+            label: data.label,
+            version: data.version,
+            format: data.format,
+            internalNote: data.internalNote,
+            type: data.type,
+            physicalMediaType: data.physicalMediaType
+        };
         const result = await fetch(`${API_URL}/api/v1/digitalization/${processId}/finalize`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
