@@ -29,6 +29,13 @@
     }
 
     let { data } = $props();
+
+    async function exportPlayable() {
+        const result = await fetch(`${API_URL}/api/v1/export/playable/${data.playableObject.id}`, {
+            method: "POST"
+        });
+        data.playableObject = await result.json();
+    }
 </script>
 
 <HeaderContainer title="Metadata herního balíčku">
@@ -56,6 +63,9 @@
                     href="{data.playableObject.id}/emulator"
                     data-sveltekit-preload-data="tap"
                     class="btn preset-filled">Spustit emulaci</a
+                >
+                <button onclick={exportPlayable} class="btn preset-filled"
+                    >Exportovat Digitální objekt do CA</button
                 >
             </div>
         </Alert>
