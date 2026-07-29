@@ -13,7 +13,7 @@
     $currentSidebar = [];
 
     async function importWork(work: ImportableWork) {
-        const result = await fetch(`${API_URL}/api/v1/import`, {
+        const result = await fetch(`${API_URL}/api/v1/import/full`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(work)
