@@ -23,20 +23,20 @@
 
 <div class="container flex h-full">
     <div class="m-4 flex w-5/6 flex-col space-y-5">
-        <h1 class="mt-4 text-3xl">Uložení rozpracovaného balíčku</h1>
+        <h1 class="mt-4 text-3xl">Uložení rozpracovaného objektu</h1>
         <p>
-            Uložením rozpracovaného balíčku se vytvoří herní balíček bez ověření. Tento balíček není
+            Uložením rozpracovaného objektu se vytvoří hratelný objekt bez ověření. Tento balíček není
             určen k nahrání do emulačního centra. Tento balíček lze kdykoliv načíst zpět do
             explorativního prostředí.
         </p>
         <p class="font-semibold">
-            Uložen bude pouze obsah exportovaného balíčku, stav explorativního prostředí nebude
+            Uložen bude pouze obsah exportovaného objektu, stav explorativního prostředí nebude
             zachován.
         </p>
         <div class="card preset-outlined-surface-300-700 p-4">
             <form class="space-y-4">
                 <label class="label">
-                    <span class="label-text">Název rozpracovaného balíčku</span>
+                    <span class="label-text">Název rozpracovaného objektu</span>
                     <input class="input" type="text" />
                 </label>
                 <label class="label">

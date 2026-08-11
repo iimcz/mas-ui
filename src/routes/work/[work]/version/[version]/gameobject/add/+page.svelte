@@ -12,19 +12,16 @@
     import { toaster } from "$lib/toaster";
     import { explorationSteps } from "$lib/steps.js";
     import { ExplorationProcess } from "$lib/schemas/exploration/exploration.js";
+
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
     async function startConversion(environment: ExplorationEnvironment) {
-        const artefactIds = data.artefactsIds
-            .filter((_, i) => selectedArtefacts[i] == true)
+        const digitalObjectIds = data.digitalObjects
+            .filter((_, i) => selectedDigitalObjects[i] == true)
             .map((a) => a.id);
 
-        const playableObjectIds = data.playableObjectsIds
-            .filter((_, i) => selectedPlayableObjects[i] == true)
-            .map((a) => a.id);
-
-        if (artefactIds.length == 0 && playableObjectIds.length == 0) {
+        if (digitalObjectIds.length == 0) {
             toaster.error({ title: $_("must_select_artefact") });
             return;
         }
@@ -33,7 +30,7 @@
             const process = await ExplorationProcess.start(fetch, {
                 environmentId: environment.id,
                 versionId: page.params.version!,
-                digitalObjectIds: [...artefactIds, ...playableObjectIds],
+                digitalObjectIds,
                 outputImageSize: data.recommendedSize
             });
 
@@ -44,8 +41,7 @@
         }
     }
 
-    const selectedArtefacts: boolean[] = $state([]);
-    const selectedPlayableObjects: boolean[] = $state([]);
+    const selectedDigitalObjects: boolean[] = $state([]);
 
     let { data } = $props();
 </script>
@@ -56,7 +52,7 @@
         <ProgressStepBar steps={explorationSteps} currentStep={0} unlockedStep={0} />
         <div class="flex flex-col">
             <span class="mb-4 text-lg font-bold">1. Vyberte digitální objekty ke exploraci</span>
-            {#if data.artefactsIds.length == 0 && data.playableObjectsIds.length == 0}
+            {#if data.digitalObjects.length == 0}
                 <Alert class="preset-outlined-error-500">
                     <h3 class="flex items-center gap-2 font-semibold">
                         <Fa icon={faExclamationTriangle} />
@@ -72,30 +68,15 @@
             {:else}
                 <h2 class="text-lg font-bold">Digitální objekty</h2>
                 <ol class="list mb-4 space-y-2 px-4">
-                    {#each data.artefactsIds as artefact, index}
+                    {#each data.digitalObjects as digitalObject, index}
                         <li>
                             <label class="flex items-center space-x-2">
                                 <input
                                     class="checkbox"
                                     type="checkbox"
-                                    bind:checked={selectedArtefacts[index]}
+                                    bind:checked={selectedDigitalObjects[index]}
                                 />
-                                <p>{artefact.label} (velikost: {artefact.size} B)</p>
-                            </label>
-                        </li>
-                    {/each}
-                </ol>
-                <h2 class="text-lg font-bold">Hratelné objekty</h2>
-                <ol class="list space-y-2 px-4">
-                    {#each data.playableObjectsIds as playableObject, index}
-                        <li>
-                            <label class="flex items-center space-x-2">
-                                <input
-                                    class="checkbox"
-                                    type="checkbox"
-                                    bind:checked={selectedPlayableObjects[index]}
-                                />
-                                <p>{playableObject.label}</p>
+                                <p>{digitalObject.label} (velikost: {digitalObject.fileSize} B)</p>
                             </label>
                         </li>
                     {/each}
@@ -104,8 +85,9 @@
         </div>
         <div>
             <span class="text-lg font-bold">2. Vyberte velikost disku hratelného balíčku</span>
-            <div class="input-group-divider input-group">
-                <input type="number" bind:value={data.recommendedSize} />
+            <div class="input-group grid-cols-[1fr_auto]">
+                <input class="ig-input" type="number" bind:value={data.recommendedSize} />
+                <div class="ig-cell preset-tonal">bytů</div>
             </div>
         </div>
         <div>

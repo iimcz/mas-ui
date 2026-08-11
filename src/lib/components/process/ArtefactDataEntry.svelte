@@ -15,6 +15,9 @@
         const i = Math.floor(Math.log(bytes) / Math.log(k));
         return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
     }
+
+    const parsedInfo = JSON.parse(data.mediaInfoReport);
+    const formattedInfo = JSON.stringify(parsedInfo, null, 2);
 </script>
 
 <form class="form m-2 space-y-2 rounded-container border border-surface-500 p-4">
@@ -46,7 +49,9 @@
     <Blockquote>{formatBytes(data.fileSize)}</Blockquote>
 
     <div>MediaInfo report</div>
-    <Blockquote>{data.mediaInfoReport}</Blockquote>
+    <Blockquote>
+        <pre>{formattedInfo}</pre>
+    </Blockquote>
 
     <div>Služební poznámka</div>
     <input class="input" type="text" bind:value={data.internalNote} />

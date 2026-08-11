@@ -1,24 +1,13 @@
 import { PUBLIC_API_URL as API_URL } from "$env/static/public";
-import type { Artefact } from "$lib/schemas/artefact";
-import { getPlayableObjects } from "$lib/schemas/playableObject";
 import { getExplorationEnvironments } from "$lib/schemas/exploration/explorationEnvironment";
+import type { DigitalObject } from "$lib/schemas/digitalObject.js";
 
 export async function load({ fetch, params }) {
     const environments = await getExplorationEnvironments(fetch);
 
-    const artefactsRes = await fetch(`${API_URL}/api/v1/versions/${params.version}/artefacts`);
-    const artefacts = (await artefactsRes.json()) as Artefact[];
-    const artefactsIds = artefacts.map((doj) => ({
-        id: doj.id,
-        label: doj.label,
-        size: doj.fileSize
-    }));
-    const recommendedSize = artefacts.map((doj) => doj.fileSize).reduce((p, c) => p + c, 0);
+    const digitalObjectsRes = await fetch(`${API_URL}/api/v1/versions/${params.version}/digitalobjects`);
+    const digitalObjects = (await digitalObjectsRes.json()) as DigitalObject[];
+    const recommendedSize = digitalObjects.map((doj) => doj.fileSize).reduce((p, c) => p + c, 0);
 
-    const playableObjects = await getPlayableObjects(fetch, params.version);
-    const playableObjectsIds = playableObjects
-        .map((po) => po.digitalObjectIds.map((id) => ({ id, label: po.label })))
-        .flat();
-
-    return { environments, artefactsIds, playableObjectsIds, recommendedSize };
+    return { environments, digitalObjects, recommendedSize };
 }

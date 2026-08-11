@@ -10,8 +10,9 @@
 
     const tableColumns = [
         { name: "Název", key: "label", canSort: true },
+        { name: "Kurátorský popis", key: "note", canSort: true },
         { name: "Idno", key: "idno", canSort: true },
-        { name: "Kurátorský popis", key: "note", canSort: true }
+        { name: "Typ", key: "type", canSort: true }
     ];
 
     let { data } = $props();

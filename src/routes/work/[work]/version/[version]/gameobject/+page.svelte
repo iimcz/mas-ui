@@ -24,7 +24,7 @@
     let { data } = $props();
 </script>
 
-<HeaderContainer title="Herní balíčky">
+<HeaderContainer title="Hratelné objekty">
     <Datatable
         data={data.playableObjects}
         columns={tableColumns}

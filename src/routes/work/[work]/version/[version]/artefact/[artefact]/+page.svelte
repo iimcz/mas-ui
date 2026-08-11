@@ -36,6 +36,8 @@
         });
         data = await result.json();
     }
+
+    const downloadLink = $derived(`${API_URL}/api/v1/artefacts/${data.id}/download`);
 </script>
 
 <HeaderContainer title={data.label ?? data.fileName}>
@@ -59,7 +61,8 @@
                 Další možnosti se nachází v levém menu.
             </p>
             <div class="flex flex-col items-center gap-1">
-                <a href="../gameobject/add" class="btn preset-filled">Vytvořit herní balíček</a>
+                <a href="../gameobject/add" class="btn preset-filled w-full">Vytvořit herní balíček</a>
+                <a href={downloadLink} class="btn preset-filled w-full">Stáhnout</a>
                 <button onclick={exportArtefact} class="btn preset-filled"
                     >Exportovat Digitální objekt do CA</button
                 >

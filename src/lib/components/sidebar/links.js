@@ -20,27 +20,28 @@ export const versionLinks = [
     { name: "❮ Zpět na dílo", href: "/work/[work]", match: "" },
     { name: "Verze", href: "", match: "" },
     { name: "Metadata verze", href: "/work/[work]/version/[version]", match: "versionDetail" },
-    { name: "Digitální objekty", href: "", match: "" },
+    { name: "Artefakty", href: "", match: "" },
     {
-        name: "Digitální objekty",
+        name: "Artefakty",
         href: "/work/[work]/version/[version]/artefact",
         match: "artefactList"
     },
     {
-        name: "Vytvořit digitální objekt",
+        name: "Vytvořit artefakt",
         href: "/work/[work]/version/[version]/artefact/add",
         match: "addArtefact"
     },
     { name: "Paratexty", href: "", match: "" },
     { name: "Paratexty", href: "/work/[work]/version/[version]/paratext", match: "paratextList" },
-    { name: "Herní balíčky", href: "", match: "" },
+    { name: "Vytvořit paratext", href: "/work/[work]/version/[version]/paratext/add", match: "paratextList" },
+    { name: "Hratelné objekty", href: "", match: "" },
     {
-        name: "Herní balíčky",
+        name: "Hratelné objekty",
         href: "/work/[work]/version/[version]/gameobject",
         match: "gameObjectList"
     },
     {
-        name: "Vytvořit herní balíček",
+        name: "Vytvořit hratelný objekt",
         href: "/work/[work]/version/[version]/gameobject/add",
         match: "addGameObject"
     }
@@ -52,7 +53,7 @@ export const versionLinks = [
 export const gameObjectLinks = [
     { name: "Verze", href: "", match: "" },
     { name: "❮ Zpět na verzi", href: "/work/[work]/version/[version]", match: "" },
-    { name: "Herní balíček", href: "", match: "" },
+    { name: "Hratelný objekt", href: "", match: "" },
     {
         name: "Metadata",
         href: "/work/[work]/version/[version]/gameobject/[gameObject]",

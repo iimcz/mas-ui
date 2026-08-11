@@ -26,18 +26,20 @@
     class="flex flex-col card p-2"
 >
     {#if data.canExport}
-        <ParatextDataEntry {data} />
+        <div class="flex flex-col justify-end gap-2">
+            <ParatextDataEntry {data} />
 
-        <button formaction="?/update" type="submit" class="float-right btn preset-filled"
-            >Uložit změny</button
-        >
+            <button formaction="?/update" type="submit" class="float-right btn preset-filled"
+                >Uložit změny</button
+            >
 
-        <button
-            formaction="?/export"
-            type="button"
-            onclick={exportParatext}
-            class="float-right btn preset-filled">Exportovat do CA</button
-        >
+            <button
+                formaction="?/export"
+                type="button"
+                onclick={exportParatext}
+                class="float-right btn preset-filled">Exportovat do CA</button
+            >
+        </div>
     {:else}
         <ParatextDataView {data} />
     {/if}
