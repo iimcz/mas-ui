@@ -2,12 +2,10 @@
     import { enhance } from "$app/forms";
     import { _ } from "svelte-i18n";
     import { toaster } from "$lib/toaster";
-    import ParatextDataEntry from "./ParatextDataEntry.svelte";
 
     import type { Paratext } from "$lib/schemas/paratext";
     import ParatextDataView from "./ParatextDataView.svelte";
-
-    function exportParatext(): void {}
+    import ParatextDataEntry from "./ParatextDataEntry.svelte";
 
     let { data }: { data: Partial<Paratext> } = $props();
 </script>
@@ -33,11 +31,8 @@
                 >Uložit změny</button
             >
 
-            <button
-                formaction="?/export"
-                type="button"
-                onclick={exportParatext}
-                class="float-right btn preset-filled">Exportovat do CA</button
+            <button formaction="?/export" type="button" class="float-right btn preset-filled"
+                >Exportovat do CA</button
             >
         </div>
     {:else}

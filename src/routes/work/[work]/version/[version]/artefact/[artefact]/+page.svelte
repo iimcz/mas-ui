@@ -61,8 +61,10 @@
                 Další možnosti se nachází v levém menu.
             </p>
             <div class="flex flex-col items-center gap-1">
-                <a href="../gameobject/add" class="btn preset-filled w-full">Vytvořit herní balíček</a>
-                <a href={downloadLink} class="btn preset-filled w-full">Stáhnout</a>
+                <a href="../gameobject/add" class="btn w-full preset-filled"
+                    >Vytvořit herní balíček</a
+                >
+                <a href={downloadLink} class="btn w-full preset-filled">Stáhnout</a>
                 <button onclick={exportArtefact} class="btn preset-filled"
                     >Exportovat Digitální objekt do CA</button
                 >

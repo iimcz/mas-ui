@@ -1,17 +1,8 @@
 <script lang="ts">
     import type { Paratext } from "$lib/schemas/paratext";
-    import { faFile, faTrash } from "@fortawesome/free-solid-svg-icons";
-    import { FileUpload } from "@skeletonlabs/skeleton-svelte";
-    import type { FileChangeDetails } from "@zag-js/file-upload";
-    import Fa from "svelte-fa";
     import Blockquote from "../Blockquote.svelte";
 
-    function onChangeHandler(e: FileChangeDetails) {
-        file = e.acceptedFiles[0];
-    }
-
     let { data = $bindable() }: { data: Partial<Paratext> } = $props();
-    let file = $state(null as File | null);
 </script>
 
 <div class="form m-2 flex flex-col space-y-2 card preset-outlined-surface-300-700 p-4">
@@ -76,34 +67,4 @@
             ? ""
             : new Date(data.exportedAt).toLocaleString()}</Blockquote
     >
-
-    <!--
-    <div>Soubor</div>
-    <FileUpload name="files" onFileChange={onChangeHandler}>
-        <FileUpload.Dropzone>
-            <Fa icon={faFile} />
-            <span>Klikněte pro nahrání nebo přetáhněte soubor.</span>
-            <FileUpload.Trigger>Procházet soubory</FileUpload.Trigger>
-            <FileUpload.HiddenInput />
-        </FileUpload.Dropzone>
-        <FileUpload.ItemGroup>
-            <FileUpload.Context>
-                {#snippet children(fileUpload)}
-                    {#each fileUpload().acceptedFiles as file (file.name)}
-                        <FileUpload.Item {file}>
-                            <FileUpload.ItemName
-                                >{file.name}</FileUpload.ItemName
-                            >
-                            <FileUpload.ItemSizeText
-                                >{file.size} bytes</FileUpload.ItemSizeText
-                            >
-                            <FileUpload.ItemDeleteTrigger />
-                        </FileUpload.Item>
-                    {/each}
-                {/snippet}
-            </FileUpload.Context>
-        </FileUpload.ItemGroup>
-        <FileUpload.ClearTrigger>Zrušit výběr</FileUpload.ClearTrigger>
-    </FileUpload>
-    -->
 </div>

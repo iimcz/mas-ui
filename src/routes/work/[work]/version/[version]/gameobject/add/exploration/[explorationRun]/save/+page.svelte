@@ -25,8 +25,8 @@
     <div class="m-4 flex w-5/6 flex-col space-y-5">
         <h1 class="mt-4 text-3xl">Uložení rozpracovaného objektu</h1>
         <p>
-            Uložením rozpracovaného objektu se vytvoří hratelný objekt bez ověření. Tento balíček není
-            určen k nahrání do emulačního centra. Tento balíček lze kdykoliv načíst zpět do
+            Uložením rozpracovaného objektu se vytvoří hratelný objekt bez ověření. Tento balíček
+            není určen k nahrání do emulačního centra. Tento balíček lze kdykoliv načíst zpět do
             explorativního prostředí.
         </p>
         <p class="font-semibold">

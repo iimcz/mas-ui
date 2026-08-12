@@ -1,5 +1,5 @@
 <script>
-    import ParatextForm from "$lib/components/paratext/ParatextForm.svelte";
+    import ParatextDataView from "$lib/components/paratext/ParatextDataView.svelte";
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
 
     import { currentSidebar } from "$lib/components/sidebar/links";
@@ -10,6 +10,6 @@
 
 <HeaderContainer title={data.paratext.label}>
     <div class="grid grid-cols-[1fr] gap-2">
-        <ParatextForm data={data.paratext} />
+        <ParatextDataView data={data.paratext} />
     </div>
 </HeaderContainer>

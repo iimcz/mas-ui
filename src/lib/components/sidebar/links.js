@@ -33,7 +33,11 @@ export const versionLinks = [
     },
     { name: "Paratexty", href: "", match: "" },
     { name: "Paratexty", href: "/work/[work]/version/[version]/paratext", match: "paratextList" },
-    { name: "Vytvořit paratext", href: "/work/[work]/version/[version]/paratext/add", match: "paratextList" },
+    {
+        name: "Vytvořit paratext",
+        href: "/work/[work]/version/[version]/paratext/add",
+        match: "addParatext"
+    },
     { name: "Hratelné objekty", href: "", match: "" },
     {
         name: "Hratelné objekty",
