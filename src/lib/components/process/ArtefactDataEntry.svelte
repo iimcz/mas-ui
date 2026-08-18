@@ -5,16 +5,9 @@
         ArtefactFormatEnum,
         type Artefact
     } from "$lib/schemas/artefact";
+    import { formatBytes } from "$lib/util/stringFormat";
     import Blockquote from "../Blockquote.svelte";
     let { data = $bindable() }: { data: Artefact } = $props();
-
-    function formatBytes(bytes: number) {
-        if (!bytes) return "0 B";
-        const k = 1024;
-        const sizes = ["B", "KB", "MB", "GB", "TB"];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-    }
 </script>
 
 <form class="form m-2 space-y-2 rounded-container border border-surface-500 p-4">

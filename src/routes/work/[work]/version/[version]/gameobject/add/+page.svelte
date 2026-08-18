@@ -12,6 +12,7 @@
     import { toaster } from "$lib/toaster";
     import { explorationSteps } from "$lib/steps.js";
     import { ExplorationProcess } from "$lib/schemas/exploration/exploration.js";
+    import { formatBytes } from "$lib/util/stringFormat.js";
     $currentSidebar = versionLinks;
     $currentRoute = "addGameObject";
 
@@ -34,7 +35,7 @@
                 environmentId: environment.id,
                 versionId: page.params.version!,
                 digitalObjectIds: [...artefactIds, ...playableObjectIds],
-                outputImageSize: data.recommendedSize
+                outputImageSize: imageSize
             });
 
             goto(`add/exploration/${process.id}`);
@@ -48,6 +49,9 @@
     const selectedPlayableObjects: boolean[] = $state([]);
 
     let { data } = $props();
+
+    // svelte-ignore state_referenced_locally
+    let imageSize: number = $state(data.recommendedSize);
 </script>
 
 <div class="container flex h-full">
@@ -80,7 +84,7 @@
                                     type="checkbox"
                                     bind:checked={selectedArtefacts[index]}
                                 />
-                                <p>{artefact.label} (velikost: {artefact.size} B)</p>
+                                <p>{artefact.label} (velikost: {formatBytes(artefact.size)})</p>
                             </label>
                         </li>
                     {/each}
@@ -105,7 +109,8 @@
         <div>
             <span class="text-lg font-bold">2. Vyberte velikost disku hratelného balíčku</span>
             <div class="input-group-divider input-group">
-                <input type="number" bind:value={data.recommendedSize} />
+                <input type="range" min="{data.recommendedSize}" max="{data.recommendedSize * 10}" bind:value={imageSize} />
+                <p>{formatBytes(imageSize)}</p>
             </div>
         </div>
         <div>
