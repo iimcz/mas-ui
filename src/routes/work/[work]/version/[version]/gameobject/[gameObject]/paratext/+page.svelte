@@ -1,6 +1,6 @@
 <script>
     import HeaderContainer from "$lib/components/HeaderContainer.svelte";
-    import ParatextCard from "$lib/components/paratext/ParatextCard.svelte";
+    //import ParatextCard from "$lib/components/paratext/ParatextCard.svelte";
 
     import { currentSidebar, currentRoute, gameObjectLinks } from "$lib/components/sidebar/links";
     $currentSidebar = gameObjectLinks;
@@ -18,7 +18,7 @@
 <HeaderContainer title="Záznamy">
     <div class="grid grid-cols-2 gap-2 2xl:grid-cols-3">
         {#each data.paratexts as paratext (paratext.id)}
-            <ParatextCard {paratext} />
+            <!-- <ParatextCard {paratext} /> -->
         {/each}
         {#if data.paratexts.length == 0}
             <h2 class="text-center">Žádné záznamy</h2>
