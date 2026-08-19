@@ -10,7 +10,7 @@
     import type { DigitalObject } from "$lib/schemas/digitalObject";
     import { invalidateAll } from "$app/navigation";
     import { Fa } from "svelte-fa";
-    import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+    import { faMinus, faPlus, faUnlink } from "@fortawesome/free-solid-svg-icons";
     import DigitalObjectDataView from "$lib/components/digitalObject/DigitalObjectDataView.svelte";
     import { Collapsible } from "@skeletonlabs/skeleton-svelte";
 
@@ -88,8 +88,8 @@
                                         class="btn preset-outlined-error-500"
                                         onclick={() => unlinkDigitalObject(obj.id)}
                                     >
+                                        <Fa icon={faUnlink} class="text-red-400" />
                                         Odpárovat
-                                        <Fa icon={faTrash} class="text-red-400" />
                                     </button>
                                 </div>
                                 <Collapsible.Content>

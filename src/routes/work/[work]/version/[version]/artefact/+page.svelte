@@ -7,16 +7,18 @@
     import type { Artefact } from "$lib/schemas/artefact";
     import ArtefactLinkModal from "$lib/components/artefact/ArtefactLinkModal.svelte";
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
+    import { faPlus } from "@fortawesome/free-solid-svg-icons";
+    import Fa from "svelte-fa";
     $currentSidebar = versionLinks;
     $currentRoute = "artefactList";
 
     async function unlinkArtefact(artefact: Artefact) {
-      await fetch(`${API_URL}/api/v1/artefacts/${artefact.id}/unlink`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ versionId: page.params.version })
-      });
-      refreshArtefacts();
+        await fetch(`${API_URL}/api/v1/artefacts/${artefact.id}/unlink`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ versionId: page.params.version })
+        });
+        refreshArtefacts();
     }
 
     const tableColumns = [
@@ -26,7 +28,7 @@
         { name: "Formát", key: "format", canSort: true },
         { name: "Velikost", key: "fileSize", canSort: true },
         { name: "Interní poznámka", key: "internalNote", canSort: true },
-        { name: "Odpojit", key: "unlink", canSort: false, onClick: unlinkArtefact}
+        { name: "Odpojit", key: "unlink", canSort: false, onClick: unlinkArtefact }
     ];
 
     let { data } = $props();
@@ -36,12 +38,18 @@
     }
 </script>
 
-<HeaderContainer title="Digitální objekty">
-    <ArtefactLinkModal
-        linkedObjects={data.artefacts}
-        versionId={page.params.version}
-        onLink={refreshArtefacts}
-    />
+<HeaderContainer title="Artefakty">
+    <div class="flex justify-end gap-2">
+        <ArtefactLinkModal
+            linkedObjects={data.artefacts}
+            versionId={page.params.version!}
+            onLink={refreshArtefacts}
+        />
+        <a href="artefact/add" class="btn preset-filled">
+            <Fa icon={faPlus} />
+            Vytvořit nový
+        </a>
+    </div>
     <Datatable
         data={data.artefacts}
         columns={tableColumns}

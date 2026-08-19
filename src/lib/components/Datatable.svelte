@@ -10,6 +10,7 @@
         columns: {
             name: string;
             key: string;
+            width?: string;
             html?: boolean;
             canSort?: boolean;
             onClick?: any;
@@ -38,7 +39,12 @@
 <section bind:clientWidth={table.clientWidth}>
     <article bind:this={table.element} class="thin-scrollbar">
         <div class="table-wrap">
-            <table class="table">
+            <table class="table" style="table-layout: fixed;">
+                <colgroup>
+                    {#each columns as column}
+                        <col style={column.width ? `width: ${column.width}` : undefined} />
+                    {/each}
+                </colgroup>
                 <thead>
                     <tr>
                         {#each columns as column}

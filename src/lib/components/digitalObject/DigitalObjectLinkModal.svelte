@@ -69,7 +69,10 @@
     onOpenChange={(open) =>
         open.open && fetchDigitalObjects().then((objs) => (digitalObjects = objs ?? []))}
 >
-    <Dialog.Trigger class="btn preset-filled">Propojit existující digitální objekt</Dialog.Trigger>
+    <Dialog.Trigger class="btn preset-filled">
+        <Fa icon={faLink} />
+        Propojit existující digitální objekt
+    </Dialog.Trigger>
     <Portal>
         <Dialog.Backdrop class="fixed inset-0 z-50 bg-surface-50-950/50" />
         <Dialog.Positioner class="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -102,10 +105,10 @@
                         {:else if filteredObjects.length === 0}
                             <p class="opacity-60">Žádné digitální objekty nenalezeny.</p>
                         {:else}
-                            <ul class="space-y-1">
+                            <ul class="space-y-1 max-h-[70vh] overflow-auto pe-1">
                                 {#each filteredObjects as obj (obj.id)}
                                     <li
-                                        class="flex items-center justify-between rounded px-2 py-2 hover:bg-surface-100-900"
+                                        class="flex items-center justify-between px-2 py-2"
                                     >
                                         <div class="min-w-0 flex-1">
                                             <div class="font-medium">{obj.label}</div>
@@ -116,12 +119,12 @@
                                             {/if}
                                         </div>
                                         {#if linkedObjects.some((linked) => linked.id === obj.id)}
-                                            <span class="text-sm font-semibold text-green-400"
+                                            <span class="text-sm mx-3 font-semibold text-green-400"
                                                 >Propojeno</span
                                             >
                                         {:else}
                                             <button
-                                                class="btn-ghost ml-2 btn btn-sm"
+                                                class="ml-2 btn preset-outlined btn-sm"
                                                 disabled={linkingId === obj.id}
                                                 onclick={() => linkDigitalObject(obj.id)}
                                             >

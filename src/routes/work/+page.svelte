@@ -7,9 +7,8 @@
     $currentSidebar = [];
 
     const tableColumns = [
-        { name: "Název", key: "label", canSort: true },
-        { name: "Počet verzí", key: "numVersions", canSort: true },
-        { name: "Kurátorský popis", key: "description", canSort: true }
+        { name: "Název", key: "label", canSort: true, width: "30%" },
+        { name: "Kurátorský popis", key: "curatorialDescription", canSort: true, html: true }
     ];
 
     let { data } = $props();

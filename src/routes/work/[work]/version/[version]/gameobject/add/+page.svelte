@@ -80,7 +80,11 @@
                                     type="checkbox"
                                     bind:checked={selectedDigitalObjects[index]}
                                 />
-                                <p>{digitalObject.label} (velikost: {formatBytes(digitalObject.fileSize)})</p>
+                                <p>
+                                    {digitalObject.label} (velikost: {formatBytes(
+                                        digitalObject.fileSize
+                                    )})
+                                </p>
                             </label>
                         </li>
                     {/each}
@@ -90,7 +94,12 @@
         <div>
             <span class="text-lg font-bold">2. Vyberte velikost disku hratelného balíčku</span>
             <div class="input-group grid-cols-[1fr_auto]">
-                <input type="range" min="{data.recommendedSize}" max="{data.recommendedSize * 10}" bind:value={imageSize} />
+                <input
+                    type="range"
+                    min={data.recommendedSize}
+                    max={data.recommendedSize * 10}
+                    bind:value={imageSize}
+                />
                 <input class="ig-input" type="number" bind:value={imageSize} />
                 <div class="ig-cell preset-tonal">{formatBytes(imageSize)}</div>
             </div>

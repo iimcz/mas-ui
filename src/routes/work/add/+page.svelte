@@ -31,15 +31,16 @@
 
     const columns = [
         { name: "Název", key: "label", canSort: true },
-        { name: "Počet verzí", key: "numVersions", canSort: true },
+        { name: "Počet verzí", key: "numVersions", canSort: true, width: "10%" },
         { name: "Kurátorský popis", key: "curatorialDescription", canSort: true, html: true },
         {
             name: "Již importováno",
             key: "isAlreadyImported",
             canSort: true,
-            customComponent: ImportStateTag
+            customComponent: ImportStateTag,
+            width: "10%"
         },
-        { name: "Importovat dílo a verze", key: "import", canSort: false, onClick: importWork }
+        { name: "Importovat dílo a verze", key: "import", canSort: false, onClick: importWork, width: "20%" }
     ];
 
     export let data: PageData;

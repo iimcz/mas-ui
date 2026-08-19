@@ -10,7 +10,7 @@ export const actions = {
         formData.forEach((value, key) => (formDataObject[key] = value));
         const json = JSON.stringify(formDataObject);
 
-        const paratextRes = await fetch(`${API_URL}/api/v1/paratexts/${params.paratext}`, {
+        const paratextRes = await fetch(`${API_URL}/api/v1/remoteparatexts/${params.paratext}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: json

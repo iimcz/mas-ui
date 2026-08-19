@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Dialog, Portal } from "@skeletonlabs/skeleton-svelte";
     import { PUBLIC_API_URL as API_URL } from "$env/static/public";
-    import { faClose, faSpinner } from "@fortawesome/free-solid-svg-icons";
+    import { faClose, faSpinner, faUpload } from "@fortawesome/free-solid-svg-icons";
     import { toaster } from "$lib/toaster";
     import { DigitalObjectType } from "$lib/schemas/digitalObject";
     import Fa from "svelte-fa";
@@ -84,7 +84,10 @@
 </script>
 
 <Dialog>
-    <Dialog.Trigger class="btn preset-filled">Nahrát nový digitální objekt</Dialog.Trigger>
+    <Dialog.Trigger class="btn preset-filled">
+        <Fa icon={faUpload} />
+        Nahrát nový digitální objekt
+    </Dialog.Trigger>
     <Portal>
         <Dialog.Backdrop class="fixed inset-0 z-50 bg-surface-50-950/50" />
         <Dialog.Positioner class="fixed inset-0 z-50 flex items-center justify-center p-4">
